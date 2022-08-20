@@ -1,0 +1,80 @@
+.card {
+  background-color: #212042;
+  border-radius: 50px;
+}
+
+.main-div {
+  height: 100vh;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.fa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 40px;
+  width: 40px;
+  transition: all 0.2s linear;
+}
+
+.fa:hover {
+  cursor: pointer;
+}
+
+.twitter {
+    color: #564bec;
+}
+
+.facebook {
+    color: #1775f1;
+}
+
+.instagram {
+    color: #fe4164;
+}
+
+.division {
+  width: 100%;
+  text-align: center;
+  margin: 30px auto 20px;
+}
+
+.division span {
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.form {
+  padding: 0 25px 0 35px;
+}
+
+
+.bn {
+  text-decoration: underline;
+}
+
+.login-btn {
+  width: 100%;
+  border-radius: 50px;
+}
+
+.left {
+  width: 50%;
+  float: left;
+}
+
+.right {
+  width: 50%;
+  float: right;
+  text-align: end;
+}
+
+.icon {
+    width: 10%;
+    text-align: end;
+}
