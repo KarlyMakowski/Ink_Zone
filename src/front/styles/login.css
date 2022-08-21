@@ -81,3 +81,7 @@ p {
   align-items: center;
   color:#5855af;
 }
+
+.svg {
+  padding-bottom: 12px;
+}

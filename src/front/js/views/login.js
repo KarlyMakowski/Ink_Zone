@@ -52,7 +52,7 @@ export const Login = () => {
               <div className="division">
                 <div className="row">
                   <div className="col-6 mx-auto">
-                    <span className="main-heading fs-5 text-capitalize"> o entra con</span>
+                    <span className="main-heading fs-5 text-uppercase"> o entra con</span>
                   </div>
                 </div>
               </div>
@@ -79,8 +79,8 @@ export const Login = () => {
                   />
                   <label className="floatingPassword" style={{ width: 88 + "%" }}>Contraseña</label>
                   <div className="form-control icon" onClick={toogleBtn}>
-                    {show ? <FaEyeSlash className="fa-2x" /> :
-                      <FaEye className="fa-2x" />
+                    {show ? <FaEyeSlash className="fa-2x svg" /> :
+                      <FaEye className="fa-2x svg" />
                     }
                   </div>
                 </div>
