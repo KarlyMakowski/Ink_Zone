@@ -7,7 +7,7 @@ import { RiSearch2Line } from "react-icons/ri";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-dark bg-dark sticky-top p-0">
+    <nav className="navbar navbar-dark bg-dark fixed-top p-0">
       <div className="container-fluid justify-content-around">
         <Link to="/" className="navbar-brand fs-1">
           <img

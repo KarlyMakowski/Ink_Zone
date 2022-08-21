@@ -83,7 +83,7 @@ export const Login = () => {
                       type={!show ? "password" : "text"}
                       className="form-control"
                       name="password"
-                      id="floatingInput"
+                      id="floatingPassword"
                       placeholder="Contraseña"
                       value={info.password}
                       onChange={handleChange}
