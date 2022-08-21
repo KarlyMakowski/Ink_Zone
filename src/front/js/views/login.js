@@ -13,25 +13,25 @@ import {
 } from "react-icons/fa";
 
 export const Login = () => {
-  const [info, setInfo] = useState({ email: "", password: "" });
+  const [info, setInfo] = useState({email: "", password: ""});
   const [show, setShow] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const handleChange = (e) => {
+  const handleChange = e => {
     setInfo({
       ...info,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
   const toogleBtn = () => {
     setShow((prevState) => !prevState);
   };
 
   return (
     <div className="container">
-      <div className="main-div row w-100 d-flex justify-content-center align-items-center">
+      <div className="main-div row w-100 m-auto d-flex justify-content-center align-items-center">
         <div className="col-12 col-lg-6 col-md-8 col-xxl-5">
           <div className="card py-3 px-2 border border-success">
             <p className="text-center my-3 pb-2 fs-3 text-uppercase">
@@ -39,19 +39,19 @@ export const Login = () => {
             </p>
             <div className="row mx-auto">
               <div className="col-4">
-                <Link to="https://twitter.com/">
+                <a href="https://twitter.com/">
                   <FaTwitterSquare className="fa mx-auto twitter" />
-                </Link>
+                </a>
               </div>
               <div className="col-4">
-                <Link to="https://www.facebook.com/">
+                <a href="https://www.facebook.com/">
                   <FaFacebookSquare className="fa mx-auto fb" />
-                </Link>
+                </a>
               </div>
               <div className="col-4">
-                <Link to="https://www.instagram.com/">
+                <a href="https://www.instagram.com/">
                   <FaInstagram className="fa mx-auto instagram" />
-                </Link>
+                </a>
               </div>
               <div className="division">
                 <div className="row">
@@ -70,6 +70,7 @@ export const Login = () => {
                     name="email"
                     placeholder="Usuario"
                     id="floatingInput"
+                    autoComplete="off"
                     value={info.email}
                     onChange={handleChange}
                   />
@@ -85,7 +86,11 @@ export const Login = () => {
                     value={info.password}
                     onChange={handleChange}
                   />
-                  <label className="floatingPassword">Contraseña</label>
+                  <label
+                    className="floatingPassword"
+                  >
+                    Contraseña
+                  </label>
                   <div className="form-control icon" onClick={toogleBtn}>
                     {show ? (
                       <FaEyeSlash className="fa-2x svg" />
@@ -111,7 +116,11 @@ export const Login = () => {
                     </Link>
                   </div>
                 </div>
-
+                <div className="text-center mt-4 pb-2">
+                    <Link to="/forgot-password" className="forgot">
+                      ¿Olvidaste la contraseña?
+                    </Link>
+                  </div>
                 <div className="my-3 mt-4 d-flex justify-content-center">
                   <button
                     type="button"

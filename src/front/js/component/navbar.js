@@ -5,22 +5,22 @@ import logo from "../../img/logo.png";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-dark bg-primary sticky-top p-0">
+    <nav className="navbar navbar-dark bg-dark fixed-top p-0">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand fs-1">
           <img
             src={logo}
             alt="ink logo"
-            width="80"
-            height="65"
-            className="rounded-circle mx-2"
+            width="60"
+            height="70"
+            className="m-2"
           />
           Sphynx Inked
         </Link>
-        <Link to="/login" type="button" className="btn btn-light ms-auto ">
+        <Link to="/login" type="button" className="btn btn-outline-light btn-lg ms-auto ">
           Entrar
         </Link>
-        <Link to="/signup" type="button" className="btn btn-light mx-4 ">
+        <Link to="/signup" type="button" className="btn btn-outline-light btn-lg mx-4 ">
           Crear cuenta
         </Link>
         <button
