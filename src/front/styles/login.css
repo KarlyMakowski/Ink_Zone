@@ -27,15 +27,15 @@ p {
 }
 
 .twitter {
-    color: #564bec;
+  color: #564bec;
 }
 
 .facebook {
-    color: #1775f1;
+  color: #1775f1;
 }
 
 .instagram {
-    color: #fe4164;
+  color: #fe4164;
 }
 
 .division {
@@ -53,7 +53,6 @@ p {
   padding: 0 25px 0 35px;
 }
 
-
 .bn {
   text-decoration: underline;
 }
@@ -66,12 +65,14 @@ p {
 .left {
   width: 50%;
   float: left;
+  margin: auto;
 }
 
 .right {
   width: 50%;
   float: right;
   text-align: end;
+  margin: auto;
 }
 
 .icon {
@@ -79,7 +80,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:#5855af;
+  color: #5855af;
 }
 
 .svg {

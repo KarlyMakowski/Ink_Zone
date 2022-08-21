@@ -1,29 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 import "../../styles/index.css";
 import "../../styles/login.css";
-import { FaInstagram, FaFacebookSquare, FaTwitterSquare, FaUserAlt, FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebookSquare,
+  FaTwitterSquare,
+  FaUserAlt,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 
 export const Login = () => {
+  const [info, setInfo] = useState({ email: "", password: "" });
+  const [show, setShow] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-    const [show, setShow] = useState(false);
-    
-    const handleSubmit = (e) => {
-      e.preventDefault();
-    }
-    const handleEmailChange = (e) => {
-      setEmail(e.target.value);
-    }
-    const handlePasswordChange = (e) => {
-      setPassword(e.target.value);
-    }
-    const toogleBtn = () => {
-       setShow(prevState => !prevState)
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const toogleBtn = () => {
+    setShow((prevState) => !prevState);
+  };
 
   return (
     <div className="container">
@@ -52,7 +56,9 @@ export const Login = () => {
               <div className="division">
                 <div className="row">
                   <div className="col-6 mx-auto">
-                    <span className="main-heading fs-5 text-uppercase"> o entra con</span>
+                    <span className="main-heading fs-5 text-uppercase">
+                      o entra con
+                    </span>
                   </div>
                 </div>
               </div>
@@ -60,11 +66,12 @@ export const Login = () => {
                 <div className="form-floating mb-3">
                   <input
                     type="email"
-                    className="form-control email"
+                    className="form-control"
+                    name="email"
                     placeholder="Usuario"
                     id="floatingInput"
-                    value={email}
-                    onChange={handleEmailChange}
+                    value={info.email}
+                    onChange={handleChange}
                   />
                   <label className="floatingInput">Usuario</label>
                 </div>
@@ -72,16 +79,19 @@ export const Login = () => {
                   <input
                     type={!show ? "password" : "text"}
                     className="form-control"
+                    name="password"
                     id="floatingInput"
                     placeholder="Contraseña"
-                    value={password}
-                    onChange={handlePasswordChange}
+                    value={info.password}
+                    onChange={handleChange}
                   />
-                  <label className="floatingPassword" style={{ width: 88 + "%" }}>Contraseña</label>
+                  <label className="floatingPassword">Contraseña</label>
                   <div className="form-control icon" onClick={toogleBtn}>
-                    {show ? <FaEyeSlash className="fa-2x svg" /> :
+                    {show ? (
+                      <FaEyeSlash className="fa-2x svg" />
+                    ) : (
                       <FaEye className="fa-2x svg" />
-                    }
+                    )}
                   </div>
                 </div>
                 <div className="row">
@@ -92,10 +102,10 @@ export const Login = () => {
                         className="form-check-input"
                         name=""
                       />
-                      <label for="form-check-label"> Recordarme</label>
+                      <label className="form-check-label"> Recordarme</label>
                     </div>
                   </div>
-                  <div className="col-md-6 col-12 right">
+                  <div className="col-md-6 col-12 mt-2 right">
                     <Link to="/signup" className="bn">
                       Regístrate
                     </Link>
