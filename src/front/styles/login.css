@@ -75,6 +75,9 @@ p {
 }
 
 .icon {
-    width: 10%;
-    text-align: end;
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#5855af;
 }

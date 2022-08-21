@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
+
 
 import "../../styles/index.css";
 import "../../styles/login.css";
@@ -8,8 +8,19 @@ import { FaInstagram, FaFacebookSquare, FaTwitterSquare, FaUserAlt, FaEye, FaEye
 
 export const Login = () => {
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
     const [show, setShow] = useState(false);
     
+    const handleSubmit = (e) => {
+      e.preventDefault();
+    }
+    const handleEmailChange = (e) => {
+      setEmail(e.target.value);
+    }
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
+    }
     const toogleBtn = () => {
        setShow(prevState => !prevState)
     }
@@ -19,8 +30,8 @@ export const Login = () => {
       <div className="main-div row w-100 d-flex justify-content-center align-items-center">
         <div className="col-12 col-lg-6 col-md-8 col-xxl-5">
           <div className="card py-3 px-2 border border-success">
-            <p className="text-center my-3 pb-2 fs-4 text-capitalize">
-              <span>connect with</span>
+            <p className="text-center my-3 pb-2 fs-3 text-uppercase">
+              <span>conéctate desde</span>
             </p>
             <div className="row mx-auto">
               <div className="col-4">
@@ -41,33 +52,41 @@ export const Login = () => {
               <div className="division">
                 <div className="row">
                   <div className="col-6 mx-auto">
-                    <span className="main-heading fs-2 text-capitalize"> login form</span>
+                    <span className="main-heading fs-5 text-capitalize"> o entra con</span>
                   </div>
                 </div>
               </div>
-              <form className="form">
-                <div className="mb-3">
+              <form className="form mt-3" onSubmit={handleSubmit}>
+                <div className="form-floating mb-3">
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control email"
                     placeholder="Usuario"
+                    id="floatingInput"
+                    value={email}
+                    onChange={handleEmailChange}
                   />
+                  <label className="floatingInput">Usuario</label>
                 </div>
-                <div className="mb-3 d-flex">
+                <div className="form-floating mb-3 d-flex">
                   <input
                     type={!show ? "password" : "text"}
                     className="form-control"
+                    id="floatingInput"
                     placeholder="Contraseña"
+                    value={password}
+                    onChange={handlePasswordChange}
                   />
-                  <span className="form-control icon" onClick={toogleBtn}>
-                    {show ? <FaEyeSlash />:
-                    <FaEye/>
+                  <label className="floatingPassword" style={{ width: 88 + "%" }}>Contraseña</label>
+                  <div className="form-control icon" onClick={toogleBtn}>
+                    {show ? <FaEyeSlash className="fa-2x" /> :
+                      <FaEye className="fa-2x" />
                     }
-                    </span>
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-md-6 col-12 left">
-                    <div className="form-group form-check">
+                    <div className="form-group form-check mt-2">
                       <input
                         type="checkbox"
                         className="form-check-input"
