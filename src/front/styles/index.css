@@ -11,5 +11,45 @@
 }
 
 .navbar, .card {
-  font-family: Changa;
+  font-family: 'Changa', sans-serif;
+}
+
+/*Search bar button included in navbar*/
+.search{
+  padding: 10px;
+  color: #eee;
+  background: linear-gradient(
+    to bottom right,
+    #B1227A, #429aee);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.search :is(input, button) {
+  color: inherit; 
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.search-input {
+  width: 0;
+  transition: width .5s;
+}
+
+.search-btn{
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.search:focus-within input {
+  width: 200px;
+}
+
+::placeholder {
+  color: inherit;
 }
