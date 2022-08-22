@@ -5,7 +5,7 @@ import logo from "../../img/logo.png";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-dark bg-dark fixed-top p-0">
+    <nav className="navbar navbar-dark bg-dark sticky-top p-0">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand fs-1">
           <img
@@ -20,7 +20,7 @@ export const Navbar = () => {
         <Link to="/login" type="button" className="btn btn-outline-light btn-lg ms-auto ">
           Entrar
         </Link>
-        <Link to="/signup" type="button" className="btn btn-outline-light btn-lg mx-4 ">
+        <Link to="/sign-up" type="button" className="btn btn-outline-light btn-lg mx-4 ">
           Crear cuenta
         </Link>
         <button

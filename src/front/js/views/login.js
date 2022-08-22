@@ -111,7 +111,7 @@ export const Login = () => {
                     </div>
                   </div>
                   <div className="col-md-6 col-12 mt-2 right">
-                    <Link to="/signup" className="bn">
+                    <Link to="/sign-up" className="bn">
                       Regístrate
                     </Link>
                   </div>

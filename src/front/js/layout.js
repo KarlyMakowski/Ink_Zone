@@ -10,7 +10,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Login } from "./views/login";
 import { Footer } from "./component/footer";
-
+import { SignUp } from "./views/signUp";
 
 const Layout = () => {
 
@@ -24,6 +24,7 @@ const Layout = () => {
                     <Routes>
                         <Route Route element = {<Home />} exact path="/" />
                         <Route element = {<Login />} path="/login" />
+                        <Route element = {<SignUp />} path="/sign-up" />
                         {/*
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
