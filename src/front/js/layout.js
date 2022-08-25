@@ -7,6 +7,8 @@ import { Navbar } from "./component/navbar";
 import { SignUp } from "./views/sign-up";
 import { Forgot } from "./views/forgot-password";
 import { ForgotConfirm } from "./views/forgot-confirm";
+import { TattooStyles } from "./component/tattooStyles";
+import { Carousel } from "./component/carousel";
 
 const Layout = () => {
 

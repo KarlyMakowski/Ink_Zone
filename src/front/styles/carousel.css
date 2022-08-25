@@ -1,0 +1,14 @@
+
+.carousel-item {
+    height: 35rem;
+    background: #777;
+    color: white;
+}
+
+.carousel-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 50px;
+}

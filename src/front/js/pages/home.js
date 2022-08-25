@@ -1,14 +1,16 @@
-import React from "react";
-import { TattooStyles } from "../component/tattooStyles.js";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "../../styles/home.css";
+import { Carousel } from "../component/carousel";
+import { TattooStyles } from "../component/tattooStyles";
 
 export const Home = () => {
-	return (
-		<div className="home">
-			<div>
-				<TattooStyles />
-			</div>
-		</div>
-	);
+
+    return (
+        <div>
+            <Carousel />
+            <TattooStyles />
+        </div>
+    );
 };
