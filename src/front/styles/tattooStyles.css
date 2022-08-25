@@ -5,6 +5,9 @@ body {
     min-height: 100vh;
     padding: 4rem 0;
 }
+.container {
+    max-width: 100%;
+}
 
 .img-box img{
     display: block;
@@ -19,7 +22,6 @@ body {
     justify-content: center;
     grid-gap: 2rem;
     text-align: center;
-    width: 90%;
     margin: auto;
 }
 
@@ -46,13 +48,13 @@ body {
 }
 
 .card-content h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 400;
     text-transform: capitalize;
 }
 
 .card-content p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 300;
     line-height: 1.5rem;
     padding: 1.2rem;
