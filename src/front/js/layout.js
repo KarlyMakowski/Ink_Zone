@@ -15,7 +15,6 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
-                    <Navbar />
                     <Routes>
                         <Route element = {<Home />} exact path="/" />
                         <Route element = {<SignUp />} path="/sign-up" />

@@ -2,9 +2,10 @@
   display: flex;
   position: fixed;
   flex-direction: column;
-  inset: 0 75% 0 0;
+  inset: 0 85% 0 0;
   background-color: hsla(0, 40%, 98%, 0.092);
   backdrop-filter: blur(0.2rem);
+  z-index: 1;
 }
 
 .header-mobile {
@@ -48,11 +49,11 @@ nav .ul-item li {
 }
 
 nav .ul-item li:hover {
-  background-color: #db89ba;
+  background-color: #898AA6;
 }
 
 nav .ul-item li .icon {
-  color: #32fbe2;
+  color: #D6EFED;
   margin-inline: 1rem;
   font-size: 30px;
 }
@@ -70,7 +71,7 @@ nav .ul-item li a {
 }
 
 .menu-icon .menu {
-  color: #32fbe2;
+  color: #D6EFED;
   margin-block: 1rem;
   cursor: pointer;
   font-size: 30px;
