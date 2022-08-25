@@ -42,7 +42,7 @@ export const SignUp = () => {
                     <div className="form-floating d-flex">
                         <input type={!show ? "password" : "text"} placeholder="Password" name="password" className="form-control" id="floatingPassword" autoComplete="off" value={info.password} onChange={handleChange} />
                         <label className="floatingPassword mt-2">Password </label>
-                        <div className="form-control icon show-password mt-2" onClick={toogleBtn}>
+                        <div className="form-control icon-eye show-password mt-2" onClick={toogleBtn}>
                             {show ? (
                                 <FaEyeSlash className="fa-2x svg" />
                             ) : (
@@ -80,7 +80,7 @@ export const SignUp = () => {
                     <div className="form-floating">
                         <input type={!show ? "password" : "text"} placeholder="Password" name="password" className="form-control" id="floatingPassword" autoComplete="off" value={info.password} onChange={handleChange} />
                         <label className="floatingPassword">Password</label>
-                        <div className="form-control icon show-password2 mt-2" onClick={toogleBtn}>
+                        <div className="form-control icon-eye show-password2 mt-2" onClick={toogleBtn}>
                             {show ? (
                                 <FaEyeSlash className="fa-2x svg" />
                             ) : (
@@ -91,7 +91,7 @@ export const SignUp = () => {
                     <div className="form-floating">
                         <input type={!show ? "password" : "text"} placeholder="Confirm Password" name="confirmPassword" className="form-control" id="floatingPassword" autoComplete="off" value={info.confirmPassword} onChange={handleChange} />
                         <label className="floatingPassword">Confirm Password</label>
-                        <div className="form-control icon show-password2 mt-2" onClick={toogleBtn}>
+                        <div className="form-control icon-eye show-password2 mt-2" onClick={toogleBtn}>
                             {show ? (
                                 <FaEyeSlash className="fa-2x svg" />
                             ) : (
