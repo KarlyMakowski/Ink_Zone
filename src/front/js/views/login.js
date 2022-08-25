@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import "../../styles/index.css";
 import "../../styles/login.css";
-import image from "../../img/login.jpg"
 import {
   FaInstagram,
   FaFacebookSquare,
