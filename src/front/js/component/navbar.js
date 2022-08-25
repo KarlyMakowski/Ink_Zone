@@ -24,7 +24,7 @@ export const Navbar = () => {
                 <ul className={active ? "ul-item" : "ul-item oicon"}>
                     <li>
                         <FaHome className="icon" />
-                        <Link to="/experts">Home</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
                         <IoMdContacts className="icon" />

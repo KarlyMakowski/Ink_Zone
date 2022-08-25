@@ -7,8 +7,6 @@ import { Navbar } from "./component/navbar";
 import { SignUp } from "./views/sign-up";
 import { Forgot } from "./views/forgot-password";
 import { ForgotConfirm } from "./views/forgot-confirm";
-import { TattooStyles } from "./component/tattooStyles";
-import { Carousel } from "./component/carousel";
 
 const Layout = () => {
 
@@ -17,6 +15,7 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
+                    <Navbar className="sidebar" />
                     <Routes>
                         <Route element = {<Home />} exact path="/" />
                         <Route element = {<SignUp />} path="/sign-up" />
