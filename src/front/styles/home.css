@@ -6,10 +6,10 @@
     on that page only (the ones not reused in other pages).
 */
 
-.home {
+/* .home {
     width: 100%;
     height: 100vh;
-    background-image: url("https://static.vecteezy.com/system/resources/previews/003/423/625/non_2x/purple-abstract-bright-background-abstract-blurred-violet-background-free-vector.jpg");
+    background-image: url("../../front/img/backgroundImage.jpg");
     background-size: cover;
     background-position: center;
-}
+} */
