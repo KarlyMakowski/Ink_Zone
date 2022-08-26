@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@700&display=swap');
 
+
 .home-margin {
     margin-right: 50px;
+}
+
+.home-searchbar{
+    padding: 0 0 20px 40px;
 }
 
 .styles-title {
