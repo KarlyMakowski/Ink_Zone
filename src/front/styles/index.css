@@ -10,11 +10,32 @@
   box-sizing: border-box;
 }
 
-body{
-  width: 100%;
- /*  height: 100vh; */
-  background-image: url("https://static.vecteezy.com/system/resources/previews/003/423/625/non_2x/purple-abstract-bright-background-abstract-blurred-violet-background-free-vector.jpg");
-  background-size: cover;
-  background-position: center;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  overflow: overlay;
+}
+
+.div1 {
+  background: grey;
+  margin-top: 200px;
+  margin-bottom: 20px;
+  height: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e997bd;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}

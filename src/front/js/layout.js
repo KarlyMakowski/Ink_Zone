@@ -7,6 +7,7 @@ import { Navbar } from "./component/navbar";
 import { SignUp } from "./views/sign-up";
 import { Forgot } from "./views/forgot-password";
 import { ForgotConfirm } from "./views/forgot-confirm";
+import { Footer } from "./component/footer";
 
 const Layout = () => {
 
@@ -23,6 +24,7 @@ const Layout = () => {
                         <Route element = {<ForgotConfirm />} path="/forgot-password" />
                         { /* <Route element={<h1>Not found!</h1>} /> */ }
                     </Routes>
+                    <Footer />
             </BrowserRouter>
         </div>
     );

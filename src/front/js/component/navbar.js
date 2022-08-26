@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "../../styles/navbar.css";
 import { FaHome, FaPaintBrush, FaQuestion, FaTeamspeak } from "react-icons/fa";
 import { IoMdContacts, IoMdMenu, IoMdClose } from "react-icons/io";
 import { GiDeathZone } from "react-icons/gi";
+
+import "../../styles/navbar.css";
 
 export const Navbar = () => {
     const [active, setActive] = useState(false);

@@ -1,5 +1,6 @@
 import React from "react";
 import { RiSearch2Line } from "react-icons/ri";
+import "../../styles/searchbar.css";
 
 export const Searchbar = () => {
 

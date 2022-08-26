@@ -7,19 +7,13 @@
 }
 
 body {
-    background: url("https://i.imgur.com/W6PAoD9.jpg") no-repeat center center/cover;
     font-family: poppins;
     font-size: 1rem;
     /*overflow: hidden;*/
 }
 
 .login-container {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width:100%; 
-    max-height:100%; 
+    margin: 40px auto 100px;
     width: 28rem;
 }
 
