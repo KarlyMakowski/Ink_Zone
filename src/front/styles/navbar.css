@@ -1,13 +1,14 @@
 /* NX = NOT EXPANDED */
 
 .side-nav-container{
-  background-color: hsla(0, 40%, 98%, 0.092);
+  background: linear-gradient(90deg,#483475,#6b4984,#855988);
   backdrop-filter: blur(0.2rem);
   width: 300px;
   height: 100vh;
-  position: relative;
+  position: fixed;
   color: #fff;
   transition: 0.4s;
+  z-index: 1;
 }
 
 .side-nav-container-NX {
@@ -103,6 +104,7 @@
   width: 16em;
   display: flex;
   color: #e997bd;
+  font-size: 17px;
   text-decoration: none;
   text-transform: uppercase;
   margin: auto 20px;
@@ -133,7 +135,7 @@
   bottom: 0;
   width: 100%;
   grid-template-columns: 2fr 1fr;
-  background-color: hsla(0, 40%, 98%, 0.092);
+  background-color: hsla(270, 74%, 22%, 0.786);
 }
 
 .nav-details {

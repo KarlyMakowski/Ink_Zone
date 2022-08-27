@@ -8,19 +8,14 @@ import "../../styles/home.css";
 
 export const Home = () => {
   return (
-    <div className="d-flex home-margin">
-      <div className="home">
-        <div>
-          <Carousel />
-        </div>
-        <div className="mt-3 d-flex">
-          <h2 className="text-start styles-title pt-5">Tattoo Styles</h2>
-          <div className="home-searchbar">
-            <Searchbar />
-          </div>
-        </div>
+    <div className="home-container container-fluid">
+      <section className="home-header container-fluid">
+        <Carousel />
+      </section>
+      <section className="home-tattooStyles container-fluid">
+        <h2>Tattoo Styles</h2>
         <TattooStyles />
-      </div>
+      </section>
     </div>
   );
 };

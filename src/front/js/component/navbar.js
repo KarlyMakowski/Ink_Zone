@@ -11,7 +11,6 @@ import { AiOutlineForm } from "react-icons/ai";
 
 import "../../styles/navbar.css";
 
-
 export const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
 
