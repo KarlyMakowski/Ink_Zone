@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import injectContext from "./store/appContext";
 
 import { Home } from "./pages/home";
-import { Navbar } from "./component/navbar";
+import { Navbar } from "./component/navbar.js";
 import { SignUp } from "./views/sign-up";
 import { Forgot } from "./views/forgot-password";
 import { ForgotConfirm } from "./views/forgot-confirm";
@@ -15,7 +15,7 @@ const Layout = () => {
   return (
     <div>
       <BrowserRouter basename={basename}>
-        <Navbar className="sidebar" />
+        <Navbar />
         <Routes>
           <Route element={<Home />} exact path="/" />
           <Route element={<SignUp />} path="/sign-up" />
@@ -23,7 +23,7 @@ const Layout = () => {
           <Route element={<ForgotConfirm />} path="/forgot-password" />
           {/* <Route element={<h1>Not found!</h1>} /> */}
         </Routes>
-        <Footer />
+{/*         <Footer /> */}
       </BrowserRouter>
     </div>
   );
