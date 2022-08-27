@@ -9,8 +9,7 @@ import "../../styles/home.css";
 export const Home = () => {
   return (
     <div className="d-flex home-margin">
-      <div className="sidebar" style={{ width: 16 + "%" }}></div>
-      <div className="home" style={{ width: 84 + "%" }}>
+      <div className="home">
         <div>
           <Carousel />
         </div>
