@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import {Context} from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "../../styles/signUp.css";
 
 export const SignUp = () => {
+  const {actions} = useContext (Context)
   const [info, setInfo] = useState({
     email: "",
     password: "",
@@ -189,11 +190,12 @@ export const SignUp = () => {
                 )}
               </div>
             </div>
-            <input
+            <button
               type="submit"
               value="Create Account"
               className="btn btn-info"
-            />
+              onClick={()=>{actions.singup(info)}}
+            ></button>
             <small>
               Already have an account? <label for="toggle">Sign In</label>
             </small>

@@ -21,14 +21,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: async () => {
+			singup: async (user) => {
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch(process.env.BACKEND_URL + "/api/singup",{
+						method:"POST", 
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(user)
+					})
 					const data = await resp.json()
-					setStore({ message: data.message })
+					//setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
-					return data;
+					
 				}catch(error){
 					console.log("Error loading message from backend", error)
 				}
