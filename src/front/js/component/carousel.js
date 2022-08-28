@@ -1,4 +1,5 @@
 import React from "react";
+
 import "../../styles/carousel.css";
 
 export const Carousel = () => {
@@ -66,6 +67,7 @@ export const Carousel = () => {
         </div>
       </div>
       <button
+        style={{ width: 30 + "px" }}
         className="carousel-control-prev"
         type="button"
         data-bs-target="#carouselExampleIndicators"
@@ -75,6 +77,7 @@ export const Carousel = () => {
         <span className="visually-hidden">Previous</span>
       </button>
       <button
+        style={{ width: 30 + "px" }}
         className="carousel-control-next"
         type="button"
         data-bs-target="#carouselExampleIndicators"

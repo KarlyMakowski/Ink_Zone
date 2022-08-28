@@ -1,15 +1,15 @@
 import React from "react";
 
+import "../../styles/tattooStyles.css";
+
 import Image1 from "../../img/realism.jpg";
 import Image2 from "../../img/Neotraditional.jpg";
 import Image3 from "../../img/japanese.jpg";
 import Image4 from "../../img/oldSchool.jpg";
 
-import "../../styles/tattooStyles.css";
-
 export const TattooStyles = () => {
   return (
-    <div className="card-container mb-5">
+    <div className="card-container">
       <div className="cards grid">
         <div className="card">
           <div className="img-box">
@@ -24,7 +24,6 @@ export const TattooStyles = () => {
             </p>
           </div>
         </div>
-
         <div className="card">
           <div className="img-box">
             <img src={Image2} alt="Neotraditional Sketch" />
@@ -38,7 +37,6 @@ export const TattooStyles = () => {
             </p>
           </div>
         </div>
-
         <div className="card">
           <div className="img-box">
             <img src={Image3} alt="Neotraditional Sketch" />
@@ -52,7 +50,6 @@ export const TattooStyles = () => {
             </p>
           </div>
         </div>
-
         <div className="card">
           <div className="img-box">
             <img src={Image4} alt="Neotraditional Sketch" />

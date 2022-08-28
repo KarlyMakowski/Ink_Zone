@@ -1,21 +1,28 @@
 import React from "react";
 
+import "../../styles/home.css";
+
 import { TattooStyles } from "../component/tattooStyles.js";
 import { Searchbar } from "../component/searchbar.js";
 import { Carousel } from "../component/carousel";
 
-import "../../styles/home.css";
-
 export const Home = () => {
   return (
-    <div className="home-container container-fluid">
-      <section className="home-header container-fluid">
+    <>
+      <section className="home-header">
         <Carousel />
       </section>
-      <section className="home-tattooStyles container-fluid">
-        <h2>Tattoo Styles</h2>
-        <TattooStyles />
-      </section>
-    </div>
+      <div className="home-tattooStyles">
+        <div className="container-styles">
+          <div className="styles-components">
+            <p className="search-style-expert">
+              <Searchbar />
+            </p>
+            <h2 className="styles-title">Styles</h2>
+          </div>
+          <TattooStyles />
+        </div>
+      </div>
+    </>
   );
 };
