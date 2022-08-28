@@ -1,8 +1,8 @@
 .search {
   padding: 10px;
-  color: #eee;
+  color: #e997bd;
   max-width: fit-content;
-  background: linear-gradient(to bottom right, #700a49, #3275b4);
+  background: hsla(270, 74%, 22%, 0.786);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@
 }
 
 .search:focus-within input {
-  width: 200px;
+  width: 150px;
 }
 
 ::placeholder {

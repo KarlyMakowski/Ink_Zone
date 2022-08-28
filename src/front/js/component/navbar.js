@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import "../../styles/navbar.css";
+
+import brandLogo from "../../img/brandLogo.png";
+
 import { FaHome, FaTeamspeak } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
 import { GiDeathZone } from "react-icons/gi";
@@ -8,9 +12,7 @@ import { BsFillPaletteFill, BsChatDotsFill } from "react-icons/bs";
 import { GoOctoface } from "react-icons/go";
 import { CgLogOut } from "react-icons/cg";
 import { AiOutlineForm } from "react-icons/ai";
-
-import "../../styles/navbar.css";
-
+import { RiSearch2Line } from "react-icons/ri";
 
 export const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
@@ -31,8 +33,7 @@ export const Navbar = () => {
         <div className="nav-heading">
           {expanded && (
             <div className="nav-brand">
-              <img src="" alt="Inked Zone Logo Brand" />
-              <h2>Inked Zone</h2>
+              <img src={brandLogo} alt="Inked Zone Logo Brand" />
             </div>
           )}
           <button
@@ -119,6 +120,15 @@ export const Navbar = () => {
             />
             {expanded && <p className="navViews">faq</p>}
           </Link>
+          <form className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
+            <i className="searchIcon">
+              <RiSearch2Line
+                style={{ height: "57px", width: "35px" }}
+                className="navIcon"
+              />
+            </i>
+            <input type="search" placeholder="Search..." />
+          </form>
         </div>
       </div>
       <div className="nav-footer">

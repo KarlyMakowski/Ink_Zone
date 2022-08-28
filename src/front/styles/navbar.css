@@ -1,20 +1,21 @@
 /* NX = NOT EXPANDED */
 
-.side-nav-container{
-  background-color: hsla(0, 40%, 98%, 0.092);
+.side-nav-container {
+  background: linear-gradient(90deg, #483475, #6b4984, #855988);
   backdrop-filter: blur(0.2rem);
   width: 300px;
   height: 100vh;
-  position: relative;
+  position: fixed;
   color: #fff;
   transition: 0.4s;
+  z-index: 1;
 }
 
 .side-nav-container-NX {
   width: 85px;
 }
 
-.nav-upper, 
+.nav-upper,
 .nav-heading,
 .nav-menu,
 .nav-footer {
@@ -27,13 +28,9 @@
   height: 75px;
 }
 
-.nav-brand {
-  display: flex;
-}
-
 .nav-brand img {
-  width: 40px;
-  padding: 0 10px;
+  width: 250px;
+  margin-left: 15px;
 }
 
 .hamburguer {
@@ -65,30 +62,30 @@
   margin: auto;
 }
 
-.hamburguer-in:hover span:nth-child(1){
+.hamburguer-in:hover span:nth-child(1) {
   width: 25px;
   transform: translate(-3px, 8px) rotate(30deg);
 }
 
-.hamburguer-in:hover span:nth-child(2){
+.hamburguer-in:hover span:nth-child(2) {
   display: none;
 }
 
-.hamburguer-in:hover span:nth-child(3){
+.hamburguer-in:hover span:nth-child(3) {
   width: 25px;
   transform: translate(-3px, -8px) rotate(-30deg);
 }
 
-.hamburguer-out:hover span:nth-child(1){
+.hamburguer-out:hover span:nth-child(1) {
   width: 25px;
   transform: translate(0, 8px) rotate(-30deg);
 }
 
-.hamburguer-out:hover span:nth-child(2){
+.hamburguer-out:hover span:nth-child(2) {
   display: none;
 }
 
-.hamburguer-out:hover span:nth-child(3){
+.hamburguer-out:hover span:nth-child(3) {
   width: 25px;
   transform: translate(0, -8px) rotate(30deg);
 }
@@ -98,11 +95,13 @@
   margin-top: 60px;
 }
 
-.menu-item{
+.menu-item {
   height: 57px;
   width: 16em;
   display: flex;
   color: #e997bd;
+  font-family: "Carter One", cursive;
+  font-size: 17px;
   text-decoration: none;
   text-transform: uppercase;
   margin: auto 20px;
@@ -133,7 +132,7 @@
   bottom: 0;
   width: 100%;
   grid-template-columns: 2fr 1fr;
-  background-color: hsla(0, 40%, 98%, 0.092);
+  background-color: hsla(270, 74%, 22%, 0.786);
 }
 
 .nav-details {
@@ -159,14 +158,16 @@
   margin-left: 30px;
 }
 
-.logOut:hover{
+.logOut:hover {
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
+.nav-menu input {
+  width: 100%;
+  height: 100%;
+  padding: 0 25px;
+  color: inherit;
+  border: none;
+  background: transparent;
+  outline: none;
+}

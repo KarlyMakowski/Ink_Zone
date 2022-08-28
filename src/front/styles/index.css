@@ -1,26 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Rajdhani&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-*::after, *::before {
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
 body {
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: overlay;
-    background: linear-gradient(90deg,#483475,#6b4984,#855988);
-}
-
-.div1 {
-  background: grey;
-  margin-top: 200px;
-  margin-bottom: 20px;
-  height: 20px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(90deg, #483475, #6b4984, #855988);
 }
 
 ::-webkit-scrollbar {
