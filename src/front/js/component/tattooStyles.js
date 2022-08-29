@@ -3,7 +3,7 @@ import React from "react";
 import "../../styles/tattooStyles.css";
 
 import Image1 from "../../img/realism.jpg";
-import Image2 from "../../img/Neotraditional.jpg";
+import Image2 from "../../img/neotraditional.jpg";
 import Image3 from "../../img/japanese.jpg";
 import Image4 from "../../img/oldSchool.jpg";
 
