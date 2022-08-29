@@ -1,7 +1,7 @@
 /* NX = NOT EXPANDED */
 
 .side-nav-container {
-  background: linear-gradient(90deg, #483475, #6b4984, #855988);
+  background: #17143D;
   backdrop-filter: blur(0.2rem);
   width: 300px;
   height: 100vh;
@@ -29,8 +29,9 @@
 }
 
 .nav-brand img {
-  width: 250px;
-  margin-left: 15px;
+  width: 270px;
+  margin-left: 10px;
+  margin-top: -40px;
 }
 
 .hamburguer {
@@ -40,7 +41,7 @@
   border: none;
   cursor: pointer;
   margin: auto -35px;
-  background-color: #e997bd;
+  background-color: #8099E9;
   border: 2px solid #fff;
   padding: 20px;
   border-radius: 90px;
@@ -91,15 +92,15 @@
 }
 
 .nav-menu {
-  grid-template-rows: repeat(7, 1fr);
-  margin-top: 60px;
+  grid-template-rows: repeat(8, 1fr);
+  margin-top: 110px;
 }
 
 .menu-item {
   height: 57px;
   width: 16em;
   display: flex;
-  color: #e997bd;
+  color: #FFFFFF;
   font-family: "Carter One", cursive;
   font-size: 17px;
   text-decoration: none;
@@ -115,8 +116,8 @@
 }
 
 .menu-item:hover {
-  background-color: #947c91;
-  color: #e997bd;
+  background-color: #8099E9;
+  color: #FFFFFF;
 }
 
 .navViews {
@@ -132,7 +133,7 @@
   bottom: 0;
   width: 100%;
   grid-template-columns: 2fr 1fr;
-  background-color: hsla(270, 74%, 22%, 0.786);
+  background-color: #8099E9;
 }
 
 .nav-details {

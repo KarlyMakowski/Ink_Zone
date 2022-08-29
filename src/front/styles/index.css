@@ -11,11 +11,18 @@
   box-sizing: border-box;
 }
 
+.palette {
+  background: #8099E9;
+  background: #17143D;
+  background: #E99DC8;
+  background: #FFFFFF;
+}
+
 body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(90deg, #483475, #6b4984, #855988);
+  background: linear-gradient(90deg, #17143D, #8099E9, #E99DC8);
 }
 
 ::-webkit-scrollbar {
@@ -24,10 +31,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e997bd;
+  background: #8099E9;
   opacity: 0.5;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(134, 134, 134, 0.2);
 }

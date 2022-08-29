@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../../styles/navbar.css";
 
-import brandLogo from "../../img/brandLogo.png";
+import logo from "../../img/ink-zone.png";
 
 import { FaHome, FaTeamspeak } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
@@ -33,7 +33,7 @@ export const Navbar = () => {
         <div className="nav-heading">
           {expanded && (
             <div className="nav-brand">
-              <img src={brandLogo} alt="Inked Zone Logo Brand" />
+              <img src={logo} alt="Inked Zone Logo Brand" />
             </div>
           )}
           <button

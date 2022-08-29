@@ -17,12 +17,8 @@
 
 .styles-components {
   display: flex;
-  text-align: end;
+  text-align: start;
   width: 100%;
-}
-
-.search-style-expert {
-  width: 20%;
 }
 
 .styles-title {
@@ -32,40 +28,42 @@
   font-size: 3.5em;
   font-family: "Carter One", cursive;
   letter-spacing: 5px;
-  color: #e997bd;
+  color: white;
   text-transform: uppercase;
   width: 80%;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
-  animation: animate 5s linear infinite;
+  text-shadow: 
+  0 0 7px #f403e0, 
+  0 0 10px #f403e0, 
+  0 0 21px #f403e0, 
+  0 0 102px #f403e0, 
+  0 0 151px #f403e0;
 }
 
-@keyframes animate {
-  0%,
-  18%,
-  20%,
-  50.1%,
-  60%,
-  65.1%,
-  80%,
-  90.1%,
-  92% {
-    color: #22042e;
-    text-shadow: none;
-  }
-  18.1%,
-  20.1%,
-  30%,
-  50%,
-  60.1%,
-  65%,
-  80.1%,
-  90%,
-  92.1%,
-  100% {
-    color: #fff;
-    text-shadow: 0 0 10px #f403e0, 0 0 20px #22042e, 0 0 40px #22042e,
-      0 0 80px #22042e, 0 0 160px #22042e;
-  }
+.styles-button {
+  font-family: "Carter One";
+  padding: 13px;
+  width: 140px;
+  height: 50px;
+  margin-top: 20px;
+  margin-left: 150px;
+  cursor: pointer;
+  background: #17143D;
+  color: white;
+  transition: .5s ease;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.styles-button:hover {
+  color: white;
+  border: 2px solid #f403e0;
+  box-shadow: 
+  0 0 10px 0 #f403e0 inset,
+  0 0 10px 4px #f403e0;
+  border-radius: 10px;
 }
