@@ -23,6 +23,7 @@ def signup():
     else: 
         return jsonify({"created":False, "msg":"Something went wrong"})
 
+
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()

@@ -1,7 +1,7 @@
 /* NX = NOT EXPANDED */
 
 .side-nav-container {
-  background: #17143D;
+  background: #17143d;
   backdrop-filter: blur(0.2rem);
   width: 300px;
   height: 100vh;
@@ -40,7 +40,7 @@
   border: none;
   cursor: pointer;
   margin: auto -35px;
-  background-color: #8099E9;
+  background-color: #8099e9;
   border: 2px solid #fff;
   padding: 20px;
   border-radius: 90px;
@@ -99,7 +99,7 @@
   height: 57px;
   width: 16em;
   display: flex;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: "Carter One", cursive;
   font-size: 17px;
   text-decoration: none;
@@ -115,8 +115,8 @@
 }
 
 .menu-item:hover {
-  background-color: #8099E9;
-  color: #FFFFFF;
+  background-color: #8099e9;
+  color: #ffffff;
 }
 
 .navViews {
@@ -142,7 +142,7 @@
   bottom: 0;
   width: 100%;
   grid-template-columns: 2fr 1fr;
-  background-color: #8099E9;
+  background-color: #8099e9;
 }
 
 .nav-details {
