@@ -1,8 +1,10 @@
 .search {
-  padding: 10px;
-  color: #FFFFFF;
+  height: 50px;
   max-width: fit-content;
-  background: #17143D;
+  padding: 10px;
+  margin-top: 20px;
+  background: #17143d;
+  color: #ffffff;
   border-radius: 4px;
   display: flex;
   align-items: center;

@@ -4,21 +4,13 @@
 }
 
 .home-tattooStyles {
-  width: 100%;
-  display: flex;
+  display: block;
   justify-content: center;
-  padding: 80px 0;
-}
-
-.container-styles {
-  width: 70%;
-  margin-left: 80px;
 }
 
 .styles-components {
-  display: flex;
-  text-align: start;
-  width: 100%;
+  margin-top: 120px;
+  margin-left: 120px;;
 }
 
 .styles-title {
@@ -34,36 +26,14 @@
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
-  text-shadow: 
-  0 0 7px #f403e0, 
-  0 0 10px #f403e0, 
-  0 0 21px #f403e0, 
-  0 0 102px #f403e0, 
-  0 0 151px #f403e0;
+  text-shadow: 0 0 7px #f403e0, 0 0 10px #f403e0, 0 0 21px #f403e0,
+    0 0 102px #f403e0, 0 0 151px #f403e0;
 }
 
-.styles-button {
-  font-family: "Carter One";
-  padding: 13px;
-  width: 140px;
-  height: 50px;
-  margin-top: 20px;
-  margin-left: 150px;
-  cursor: pointer;
-  background: #17143D;
-  color: white;
-  transition: .5s ease;
-  border-radius: 10px;
-  text-decoration: none;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  justify-content: center;
+  grid-gap: 2.8rem;
   text-align: center;
-  text-transform: uppercase;
-}
-
-.styles-button:hover {
-  color: white;
-  border: 2px solid #f403e0;
-  box-shadow: 
-  0 0 10px 0 #f403e0 inset,
-  0 0 10px 4px #f403e0;
-  border-radius: 10px;
 }

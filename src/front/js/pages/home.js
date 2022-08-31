@@ -1,28 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "../../styles/home.css";
 
-import { TattooStyles } from "../component/tattooStyles.js";
 import { Carousel } from "../component/carousel";
+import { TattooStyles } from "../component/tattooStyles";
 
 export const Home = () => {
-    return (
-        <>
-            <section className="home-header">
-                <Carousel />
-            </section>
-            <div className="home-tattooStyles">
-                <div className="container-styles">
-                    <div className="styles-components">
-                        <h2 className="styles-title">Styles</h2>
-                        <Link to="/styles" className="styles-button align-items-end">
-                            Learn More
-                        </Link>
-                    </div>
-                    <TattooStyles />
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <section className="home-header">
+        <Carousel />
+      </section>
+      <div className="container-fluid">
+        <div className="home-tattooStyles">
+          <div className="styles-components">
+            <h2 className="styles-title">Styles</h2>
+          </div>
+          <div className="grid">
+            <TattooStyles />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
