@@ -1,7 +1,8 @@
 .carousel-item {
-  height: 40rem;
+  height: 30rem;
   background: #777;
   color: white;
+  background-size: contain;
 }
 
 .carousel-container {
@@ -13,6 +14,11 @@
 }
 
 .carousel-inner {
-  border-radius: 0.6rem;
-  box-shadow: 0 0.5rem 1rem black;
+  box-shadow: 0 0.7rem 4rem black;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-indicators {
+  visibility: hidden;
 }

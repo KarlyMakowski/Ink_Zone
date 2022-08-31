@@ -23,7 +23,7 @@ const Layout = () => {
           <Route element={<ForgotConfirm />} path="/forgot-password" />
           {/* <Route element={<h1>Not found!</h1>} /> */}
         </Routes>
-{/*         <Footer /> */}
+{/*         <Footer />  */}
       </BrowserRouter>
     </div>
   );

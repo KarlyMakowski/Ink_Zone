@@ -1,4 +1,5 @@
 import React from "react";
+
 import "../../styles/carousel.css";
 
 export const Carousel = () => {
@@ -37,7 +38,7 @@ export const Carousel = () => {
             className="d-block w-100"
             alt="..."
           />
-          <div class="carousel-caption d-none d-md-block">
+          <div className="carousel-caption d-none d-md-block">
             <h5>First slide label</h5>
             <p>Some representative placeholder content for the first slide.</p>
           </div>
@@ -48,7 +49,7 @@ export const Carousel = () => {
             className="d-block w-100"
             alt="..."
           />
-          <div class="carousel-caption d-none d-md-block">
+          <div className="carousel-caption d-none d-md-block">
             <h5>First slide label</h5>
             <p>Some representative placeholder content for the first slide.</p>
           </div>
@@ -59,13 +60,14 @@ export const Carousel = () => {
             className="d-block w-100"
             alt="..."
           />
-          <div class="carousel-caption d-none d-md-block">
+          <div className="carousel-caption d-none d-md-block">
             <h5>First slide label</h5>
             <p>Some representative placeholder content for the first slide.</p>
           </div>
         </div>
       </div>
       <button
+        style={{ width: 30 + "px" }}
         className="carousel-control-prev"
         type="button"
         data-bs-target="#carouselExampleIndicators"
@@ -75,6 +77,7 @@ export const Carousel = () => {
         <span className="visually-hidden">Previous</span>
       </button>
       <button
+        style={{ width: 30 + "px" }}
         className="carousel-control-next"
         type="button"
         data-bs-target="#carouselExampleIndicators"

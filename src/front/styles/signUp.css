@@ -1,5 +1,13 @@
+
+.register {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .login-container {
-    margin: 40px auto 100px;
+    margin: auto;
     width: 28rem;
 }
 
@@ -15,7 +23,7 @@
     left: 80%;
 }
 
-.signin, 
+.signin,
 .signup {
     color: white;
     background: rgba(48, 30, 30, 0.1);
@@ -48,11 +56,42 @@
     justify-content: center;
     text-decoration: none;
     border-radius: 50%;
+    transition-property: outline-offset, outline-color,
+    background-color;
+    transition-duration: .25s;
 }
 
-.social a:hover {
-    background: white;
-    color: black;
+ .social a:hover {
+    border: none;
+    animation: shake .25s;
+    outline: 1px solid #fff;
+    outline-offset: 4px;
+}
+
+.icon-instagram:hover {
+    background-image: 
+    radial-gradient(circle at 30% 107%,
+    #fdf497 0%, #fdf497 5%,
+    #fd5949 45%, #d6249f 60%,
+    #285AEB 90%);
+    outline-color: #a02d76;
+}
+
+.icon-twitter:hover {
+    background-color: #1da1f2;
+    outline-color: #1da1f2;
+}
+
+.icon-facebook:hover {
+    background-color: #0077b5;
+    outline-color: #0077b5;
+}
+
+@keyframes shake {
+    10%{transform: rotate(15deg);}
+    20%{transform: rotate(-15deg);}
+    30%{transform: rotate(15deg);}
+    40%{transform: rotate(-15deg);}
 }
 
 p {
@@ -86,7 +125,7 @@ p {
     opacity: 0.8;
 }
 
-.login-container form small{
+.login-container form small {
     display: block;
     margin-top: 1rem;
 }
@@ -134,7 +173,7 @@ p {
 
 .forgot a {
     text-decoration: none;
-    font-size: 1em
+    font-size: 1em;
 }
 
 .icon-eye {
@@ -144,15 +183,13 @@ p {
     align-items: center;
     color: rgba(255, 255, 255, 0.5);
     border: none;
-  }
-  
+}
+
 .svg {
     padding-bottom: 12px;
     min-width: 1.5rem;
-  }
-  
+}
+
 .forgot {
     width: 100%;
-  }
-  
-  
+}

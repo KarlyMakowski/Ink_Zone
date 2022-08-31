@@ -1,52 +1,39 @@
-.home-margin {
-  margin-right: 50px;
+.home-header {
+  max-width: 100%;
+  padding: 0;
 }
 
-.home-searchbar {
-  padding: 0 0 20px 40px;
-  margin: 130px 40px 0 0;
+.home-tattooStyles {
+  display: block;
+  justify-content: center;
+}
+
+.styles-components {
+  margin-top: 120px;
+  margin-left: 120px;;
 }
 
 .styles-title {
   position: relative;
-  margin-bottom: 60px;
-  font-size: 4em;
-  font-family: "Miltonian Tattoo", cursive;
-  letter-spacing: 10px;
-  color: rgb(17, 228, 228);
+  margin-top: 20px;
+  margin-bottom: 50px;
+  font-size: 3.5em;
+  font-family: "Carter One", cursive;
+  letter-spacing: 5px;
+  color: white;
   text-transform: uppercase;
-  width: 100%;
+  width: 80%;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
-  animation: animate 5s linear infinite;
+  text-shadow: 0 0 7px #f403e0, 0 0 10px #f403e0, 0 0 21px #f403e0,
+    0 0 102px #f403e0, 0 0 151px #f403e0;
 }
 
-@keyframes animate {
-  0%,
-  18%,
-  20%,
-  50.1%,
-  60%,
-  65.1%,
-  80%,
-  90.1%,
-  92% {
-    color: #22042e;
-    text-shadow: none;
-  }
-  18.1%,
-  20.1%,
-  30%,
-  50%,
-  60.1%,
-  65%,
-  80.1%,
-  90%,
-  92.1%,
-  100% {
-    color: #fff;
-    text-shadow: 0 0 10px #f403e0, 0 0 20px #03bcf4, 0 0 40px #03bcf4,
-      0 0 80px #03bcf4, 0 0 160px #03bcf4;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  justify-content: center;
+  grid-gap: 2.8rem;
+  text-align: center;
 }

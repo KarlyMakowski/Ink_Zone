@@ -1,8 +1,10 @@
 .search {
-  padding: 10px;
-  color: #eee;
+  height: 50px;
   max-width: fit-content;
-  background: linear-gradient(to bottom right, #700a49, #3275b4);
+  padding: 10px;
+  margin-top: 20px;
+  background: #17143d;
+  color: #ffffff;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -29,7 +31,7 @@
 }
 
 .search:focus-within input {
-  width: 200px;
+  width: 150px;
 }
 
 ::placeholder {
