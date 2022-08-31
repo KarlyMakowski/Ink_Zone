@@ -194,7 +194,7 @@ export const SignUp = () => {
               type="submit"
               value="Create Account"
               className="btn btn-info"
-              onClick={()=>{actions.singup(info)}}
+              onClick={()=>{actions.signup(info)}}
             ></button>
             <small>
               Already have an account? <label for="toggle">Sign In</label>

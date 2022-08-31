@@ -21,10 +21,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			singup: async (user) => {
+			signup: async (user) => {
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/singup",{
+					const resp = await fetch(process.env.BACKEND_URL + "/api/signup",{
 						method:"POST", 
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(user)

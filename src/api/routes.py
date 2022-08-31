@@ -11,8 +11,8 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 
 
-@api.route('/singup', methods=['POST'])
-def singup():
+@api.route('/signup', methods=['POST'])
+def signup():
 
     body_name = request.json.get("name")
     body_email = request.json.get("email")
@@ -24,4 +24,5 @@ def singup():
         db.session.commit()
         return jsonify({"created":True,"user":user.email}), 200
     else: 
-        return jsonify({"created":False, "msg":"Algo salió mal"})
+        return jsonify({"created":False, "msg":"Something went wrong"})
+
