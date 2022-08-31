@@ -1,6 +1,7 @@
 .styles-card-container {
   width: 320px;
   margin-top: 5px;
+  margin-left: 100px;
 }
 
 .styles-img-box img {
@@ -52,3 +53,18 @@
   height: 60%;
   transition: 0.7s;
 }
+
+@media (max-width: 480px) {
+  .styles-card-container {
+    width: 50%;
+    margin-left: 130px;
+    padding-left: 10px;
+  }
+  .styles-img-box img {
+    height: 15rem;
+  }
+  .styles-card-content p {
+    visibility: hidden;
+  }
+}
+
