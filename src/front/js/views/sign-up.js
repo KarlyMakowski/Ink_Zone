@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import {Context} from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "../../styles/signUp.css";
 
 export const SignUp = () => {
-    const [info, setInfo] = useState({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        name: "",
-    });
-    const [show, setShow] = useState(true);
-    const [show2, setShow2] = useState(true);
+  const {actions} = useContext (Context)
+  const [info, setInfo] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+  });
+  const [show, setShow] = useState(true);
+  const [show2, setShow2] = useState(true);
 
-    const handleSubmit = (e) => {
+
+   const handleSubmit = (e) => {
         e.preventDefault();
-    };
+   };
 
-    const handleChange = (e) => {
+   const handleChange = (e) => {
         setInfo({
             ...info,
             [e.target.name]: e.target.value,
@@ -189,17 +191,16 @@ export const SignUp = () => {
                                 )}
                             </div>
                         </div>
-                        <input
+                        <button
                             type="submit"
                             value="Create Account"
                             className="btn btn-info"
-                        />
+                        ></button>
                         <small>
                             Already have an account? <label for="toggle">Sign In</label>
                         </small>
                     </form>
                 </div>
             </div>
-        </div>
     );
 };
