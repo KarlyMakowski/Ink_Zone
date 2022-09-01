@@ -44,13 +44,13 @@ export const SignUp = () => {
           <h1 className="fw-bold">Sign In</h1>
           <form onSubmit={handleSubmit}>
             <div className="social">
-              <a href="#" className="icon-instagram">
+              <a href="#" className="social-instagram">
                 <GrInstagram className="gr" />
               </a>
-              <a href="#" className="icon-twitter">
+              <a href="#" className="social-twitter">
                 <GrTwitter className="gr" />
               </a>
-              <a href="#" className="icon-facebook">
+              <a href="#" className="social-facebook">
                 <FaFacebookF className="gr" />
               </a>
             </div>
@@ -107,13 +107,13 @@ export const SignUp = () => {
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={handleSubmit}>
             <div className="social">
-              <a href="#" className="icon-instagram">
+              <a href="#" className="social-instagram">
                 <GrInstagram className="gr" />
               </a>
-              <a href="#" className="icon-twitter">
+              <a href="#" className="social-twitter">
                 <GrTwitter className="gr" />
               </a>
-              <a href="#" className="icon-facebook">
+              <a href="#" className="social-facebook">
                 <FaFacebookF className="gr" />
               </a>
             </div>
@@ -190,11 +190,11 @@ export const SignUp = () => {
                 )}
               </div>
             </div>
-            <button
+            <input
               type="submit"
               value="Create Account"
               className="btn btn-info"
-            ></button>
+            ></input>
             <small>
               Already have an account? <label for="toggle">Sign In</label>
             </small>
