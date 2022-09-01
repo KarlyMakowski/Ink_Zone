@@ -1,82 +1,43 @@
 import React from "react";
 
+import { GrInstagram, GrTwitter } from "react-icons/gr";
+import { FaFacebookF } from "react-icons/fa";
+
 import "../../styles/footer.css";
 
 export const Footer = () => {
   return (
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="row">
-          <div class="footer-col">
-            <h4>company</h4>
-            <ul>
-              <li>
-                <a href="#">about us</a>
-              </li>
-              <li>
-                <a href="#">our services</a>
-              </li>
-              <li>
-                <a href="#">Lorem</a>
-              </li>
-              <li>
-                <a href="#">Ipsum</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>get help</h4>
-            <ul>
-              <li>
-                <a href="#">FAQ</a>
-              </li>
-              <li>
-                <a href="#">Lorem</a>
-              </li>
-              <li>
-                <a href="#">Ipsum</a>
-              </li>
-              <li>
-                <a href="#">Dolor</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Example</h4>
-            <ul>
-              <li>
-                <a href="#">Lorem</a>
-              </li>
-              <li>
-                <a href="#">Ipsum</a>
-              </li>
-              <li>
-                <a href="#">Dolor</a>
-              </li>
-              <li>
-                <a href="#">Sit</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>follow us</h4>
-            <div class="social-links">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+    <footer className="footer">
+      <div className="footer-social">
+        <a href="#" className="icon-instagram">
+          <i className="fab fa-instagram"></i>
+        </a>
+        <a href="#" className="icon-twitter">
+          <i className="fab fa-twitter"></i>
+        </a>
+        <a href="#" className="icon-facebook">
+          <i className="fab fa-facebook-f"></i>
+        </a>
       </div>
+
+      <ul className="footer-list">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Find Your Style</a>
+        </li>
+        <li>
+          <a href="#">Ask Our Experts</a>
+        </li>
+        <li>
+          <a href="#">Contact Us</a>
+        </li>
+        <li>
+          <a href="#">FAQ</a>
+        </li>
+      </ul>
+      <p className="copyright">Ink Zone @ 2022</p>
     </footer>
   );
 };
