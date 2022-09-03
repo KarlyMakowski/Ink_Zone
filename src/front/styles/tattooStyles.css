@@ -54,6 +54,40 @@
   transition: 0.7s;
 }
 
+.tattooStyles-container {
+  margin-bottom: 3rem;
+}
+
+.styles-components {
+  margin-left: 120px;
+  padding-top: 70px;
+}
+
+.styles-title {
+  position: relative;
+  margin-bottom: 50px;
+  font-size: 4.5em;
+  font-family: "Carter One", cursive;
+  letter-spacing: 5px;
+  color: white;
+  text-transform: uppercase;
+  width: 80%;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+  line-height: 0.7em;
+  outline: none;
+  text-shadow: 0 0 7px #f403e0, 0 0 10px #f403e0, 0 0 21px #f403e0,
+    0 0 102px #f403e0, 0 0 151px #f403e0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  justify-content: center;
+  grid-gap: 2.8rem;
+  text-align: center;
+}
+
+
 @media (max-width: 480px) {
   .styles-card-container {
     width: 50%;

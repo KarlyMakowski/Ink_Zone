@@ -4,6 +4,7 @@ import injectContext from "./store/appContext";
 
 import { Home } from "./pages/home";
 import { Navbar } from "./component/navbar.js";
+import { StylesInfo } from "./views/stylesInfo";
 import { SignUp } from "./views/sign-up";
 import { Forgot } from "./views/forgot-password";
 import { Footer } from "./component/footer";
@@ -17,6 +18,7 @@ const Layout = () => {
         <Navbar />
         <Routes>
           <Route element={<Home />} exact path="/" />
+          <Route element={<StylesInfo />} path="/styles" />
           <Route element={<SignUp />} path="/sign-up" />
           <Route element={<Forgot />} path="/forgot-password" />
           {/* <Route element={<h1>Not found!</h1>} /> */}

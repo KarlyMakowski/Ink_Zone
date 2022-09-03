@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadStyles: () => {
         fetch(
-          "https://3001-karlymakowski-inkzone-abvl63tks0i.ws-eu63.gitpod.io/api/styles"
+          "https://3001-karlymakowski-inkzone-b259orsypyc.ws-eu63.gitpod.io/styles"
         )
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
