@@ -75,8 +75,8 @@
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
-  text-shadow: 0 0 7px #f403e0, 0 0 10px #f403e0, 0 0 21px #f403e0,
-    0 0 102px #f403e0, 0 0 151px #f403e0;
+  text-shadow: 0 0 7px #A91079, 0 0 10px #A91079, 0 0 21px #A91079,
+    0 0 102px #A91079, 0 0 151px #A91079;
 }
 
 .grid {

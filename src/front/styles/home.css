@@ -1,5 +1,83 @@
-.home-header {
-  max-width: 100%;
-  padding: 0;
+#video {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
+.home-main {
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.home-main ul {
+  list-style-type: none;
+}
+
+.home-main a {
+  text-decoration: none;
+}
+
+.home-btn {
+  padding: 12px 32px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.home-btn:hover {
+  background: rgba(255,255,255, .2);
+  color: #fff;
+}
+
+.home-btn-light {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.home-btn-light:hover {
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
+}
+
+.home-main .home-content {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  top: 40vh;
+}
+
+.home-main .home-content {
+  font-size: 4rem;
+  color: #fff;
+}
+
+.home-main p {
+  font-size: 1.8rem;
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  color: #fff;
+}
+
+.home-main .home-btn {
+  margin: 1rem .2rem;
+}
+
+@media screen and (max-width:640px) {
+  .home-content h1 {
+      font-size: 3rem;
+  }
+
+  .home-content p {
+      font-size: 1.4rem;
+      margin-bottom: 1.6rem;
+  }
+}

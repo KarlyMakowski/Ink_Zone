@@ -5,7 +5,7 @@ import "../../styles/navbar.css";
 
 import logo from "../../img/ink-zone.png";
 
-import { FaHome, FaTeamspeak } from "react-icons/fa";
+import { FaHome, FaTeamspeak, FaRegMoneyBillAlt } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
 import { GiDeathZone } from "react-icons/gi";
 import { BsFillPaletteFill, BsChatDotsFill } from "react-icons/bs";
@@ -99,6 +99,16 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">client zone</p>}
+          </Link>
+          <Link
+            to="/prices"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <FaRegMoneyBillAlt
+              style={{ height: "57px", width: "35px" }}
+              className="navIcon"
+            />
+            {expanded && <p className="navViews">prices</p>}
           </Link>
           <Link
             to="/contact-us"

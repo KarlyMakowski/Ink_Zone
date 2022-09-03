@@ -1,10 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Rajdhani&display=swap");
 
-.palette {
-  background: #8099E9;
+.palette {  
   background: #17143D;
+  background: #8099E9;
   background: #E99DC8;
   background: #FFFFFF;
+}
+
+.palette1 {
+  background: #2E0249;
+  background: #570A57;
+  background: #A91079;
+  background: #fc50dc;
+}
+
+.palette2 {
+  background: #06283D;
+  background: #1363DF;
+  background: #47B5FF;
+  background: #DFF6FF;
 }
 
 * {
@@ -20,10 +34,8 @@
 
 
 body {
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: linear-gradient(90deg, #17143D, #8099E9, #E99DC8);
+  background: linear-gradient(109.6deg, rgba(0, 0, 0, 0.93) 11.2%, rgb(63, 61, 61) 78.9%);
 }
 
 ::-webkit-scrollbar {
@@ -32,10 +44,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8099E9;
+  background: rgb(46, 46, 46);
   opacity: 0.5;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(134, 134, 134, 0.2);
+  background: rgb(134, 134, 134);
 }
