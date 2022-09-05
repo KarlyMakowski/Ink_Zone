@@ -11,7 +11,7 @@ export const StylesInfo = () => {
         <div className="styles-components">
           <h2 className="styles-title">Styles</h2>
         </div>
-        <div className="grid">
+        <div className="styles-grid">
           <TattooStyles />
         </div>
       </div>
