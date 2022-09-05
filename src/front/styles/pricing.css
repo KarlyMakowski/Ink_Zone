@@ -1,16 +1,20 @@
 .pricing-view {
   width: 100%;
-  height: 100vh;
-  display: flex;
-  padding: 6rem 1rem;
+  padding: 10rem 1rem;
+  margin-left: auto;
 }
 
 .pricing-container {
   max-width: 1140px;
-  margin: auto;
+  margin-top: 15px;
+}
+
+.price-grid {
   display: grid;
-  grid-gap: 40px;
   grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  justify-content: center;
+  grid-gap: 7rem;
+  text-align: center;
 }
 
 .pricing-container .pricing-card {
@@ -24,10 +28,6 @@
   font-weight: bold;
   padding: 1rem;
 }
-
-/* .pricing-card:hover{
-    background-color: #570A57;
-} */
 
 .pricing-card h3 {
   color: black;
@@ -60,11 +60,12 @@
 .pricing-view p {
   color: white;
   padding: 0.5rem 0;
+  font-family: "Rajdhani", sans-serif;
   font-size: 1.2rem;
   text-transform: uppercase;
 }
 
-.pricing-card .btn {
+.pricing-card .pricing-btn {
   display: block;
   width: 80%;
   margin: 2rem auto;
@@ -74,7 +75,7 @@
   border: 1px solid white;
 }
 
-.pricing-card .btn:hover {
+.pricing-card .pricing-btn:hover {
   color: black;
   font-weight: bold;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
@@ -82,6 +83,12 @@
 }
 
 @media (max-width: 480px) {
+  .pricing-view {
+    padding-top: 5rem;
+  }
+  .price-grid {
+    grid-gap: 2rem;
+  }
   .pricing-container {
     max-width: 90%;
     margin-left: 100px;
