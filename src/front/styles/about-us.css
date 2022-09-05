@@ -1,0 +1,102 @@
+.about-1 {
+  margin: 30px;
+  padding: 5px;
+}
+
+.about-1 h1 {
+  font-family: "Carter One", cursive;
+  text-align: center;
+  font-size: 3.2rem;
+  background: -webkit-linear-gradient(#aeffb9, #a091ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  margin-top: 2.4rem;
+}
+
+.about-1 p {
+  text-align: center;
+  padding: 3px;
+  color: #fff;
+}
+
+/*===========================
+adding style to about items 
+============================*/
+
+.about-item {
+  margin-bottom: 20px;
+  color: white;
+  background: rgba(48, 30, 30, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(30px);
+  padding: 80px 30px;
+}
+
+/*======================================
+adding style to the icons(book,globe,pencil)
+=========================================*/
+.about-item i {
+  font-size: 43px;
+  margin: 0;
+}
+
+/*======================================
+adding style to h3(heading 3) of each item 
+=========================================*/
+.about-item h3 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+/*======================================
+styling the hr (the blue line in between)
+=========================================*/
+.about-item hr {
+  width: 46px;
+  height: 3px;
+  background-color: #5fbff9;
+  margin: 0 auto;
+  border: none;
+  text-align: center;
+}
+
+.about-item:hover {
+  color: black;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  transition: transform 200ms;
+}
+.about-item:hover i,
+.about-item:hover h3,
+.about-item:hover p {
+  color: black;
+}
+.about-item:hover hr {
+  background-color: black;
+}
+
+/*==============================================================================
+translate Y: move along the Y axis, negative(-20) moves it up, while positive(20) moves in down by  
+================================================================================*/
+.about-item:hover i {
+  transform: translateY(-20px);
+}
+.about-item:hover i,
+.about-item:hover h3,
+.about-item:hover hr {
+  transition: all 400ms ease-in-out;
+}
+
+footer {
+  background: #212226;
+  padding: 20px;
+}
+footer p {
+  color: #fff;
+}
+
+/*================================================================================
+if you manage it to this far, congratulations, check more on https://devhubke.com
+=================================================================================*/

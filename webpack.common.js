@@ -32,7 +32,20 @@ module.exports = {
             options: { name: '[name].[ext]' }
           }
         }, //for images
-        { test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/, use: ['file-loader'] } //for fonts
+        { test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/, use: ['file-loader'] },
+        //for fonts
+        {
+          test: /.mp4$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "[name].[ext]",
+                outputPath: "video",
+              },
+            },
+          ],
+        },
     ]
   },
   resolve: {
@@ -40,7 +53,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-        favicon: 'ink-zone.ico',
+        favicon: 'favicon.ico',
         template: 'template.html'
     }),
     new Dotenv({ safe: true, systemvars: true })

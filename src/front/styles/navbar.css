@@ -44,12 +44,12 @@
   border: none;
   cursor: pointer;
   margin: auto -35px;
-  background-color: #570A57;
   border: 2px solid #fff;
   padding: 20px;
   border-radius: 90px;
   height: 71px;
   width: 74px;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
 }
 
 .hamburguer span {
@@ -119,8 +119,8 @@
 }
 
 .menu-item:hover {
-  background-color: #570A57;
-  color: #ffffff;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: black;
 }
 
 .navViews {
@@ -146,7 +146,7 @@
   bottom: 0;
   width: 100%;
   grid-template-columns: 2fr 1fr;
-  background-color: #570A57;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
 }
 
 .nav-details {

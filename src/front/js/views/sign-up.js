@@ -79,7 +79,7 @@ export const SignUp = () => {
                 value={info.password}
                 onChange={handleChange}
               />
-              <label className="floatingPassword mt-2">Password </label>
+              <label className="floatingPassword align-password">Password </label>
               <div
                 className="form-control icon-eye show-password mt-2"
                 onClick={toggleBtn}

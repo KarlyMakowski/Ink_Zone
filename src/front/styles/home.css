@@ -1,3 +1,8 @@
+
+.about-container {
+  background-color: rgba(36, 38, 43, 1);
+}
+
 #video {
   position: fixed;
   width: 100%;
@@ -12,6 +17,11 @@
   object-fit: contain;
 }
 
+.home-main h1 {
+  font-family: "Carter One", cursive;
+  font-size: 4rem;
+}
+
 .home-main ul {
   list-style-type: none;
 }
@@ -22,18 +32,20 @@
 
 .home-btn {
   padding: 12px 32px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
   background: transparent;
   color: #fff;
   border: 1px solid #fff;
   cursor: pointer;
   border-radius: 1rem;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .home-btn:hover {
-  background: rgba(255,255,255, .2);
-  color: #fff;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: black;
+  font-weight: bold;
 }
 
 .home-btn-light {
@@ -41,8 +53,9 @@
 }
 
 .home-btn-light:hover {
-  background: rgba(255, 255, 255, 0.13);
-  color: #fff;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: black;
+  font-weight: bold;
 }
 
 .home-main .home-content {
@@ -60,11 +73,12 @@
 }
 
 .home-main p {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 200;
   text-transform: uppercase;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.5rem;
   color: #fff;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .home-main .home-btn {
