@@ -1,26 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Rajdhani&display=swap");
 
-.palette {  
-  background: #17143D;
-  background: #8099E9;
-  background: #E99DC8;
-  background: #FFFFFF;
-}
-
-.palette1 {
-  background: #2E0249;
-  background: #570A57;
-  background: #A91079;
-  background: #fc50dc;
-}
-
-.palette2 {
-  background: #06283D;
-  background: #1363DF;
-  background: #47B5FF;
-  background: #DFF6FF;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +10,6 @@
 *::before {
   box-sizing: border-box;
 }
-
 
 body {
   min-height: 100vh;
