@@ -1,0 +1,96 @@
+.pricing-view {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding: 6rem 1rem;
+}
+
+.pricing-container {
+  max-width: 1140px;
+  margin: auto;
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+}
+
+.pricing-container .pricing-card {
+  border: 1px solid white;
+  box-shadow: 15px 25px 20px #a091ff;
+}
+
+.pricing-card {
+  text-align: center;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+/* .pricing-card:hover{
+    background-color: #570A57;
+} */
+
+.pricing-card h3 {
+  color: black;
+  font-size: 2.5rem;
+  padding: 1rem;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  transition: transform 200ms;
+}
+
+.pricing-card img {
+  display: block;
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+}
+
+.pricing-card .divider {
+  border-bottom: 1px solid white;
+  width: 10%;
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.price {
+  color: #a091ff;
+  font-size: 3.5rem;
+  padding: 1rem;
+}
+
+.pricing-view p {
+  color: white;
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.pricing-card .btn {
+  display: block;
+  width: 80%;
+  margin: 2rem auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid white;
+}
+
+.pricing-card .btn:hover {
+  color: black;
+  font-weight: bold;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  transition: transform 200ms;
+}
+
+@media (max-width: 480px) {
+  .pricing-container {
+    max-width: 90%;
+    margin-left: 100px;
+    grid-template-columns: 1fr;
+  }
+  .pricing-container .pricing-card {
+    box-shadow: none;
+  }
+  .pricing-card img {
+    display: none;
+  }
+}

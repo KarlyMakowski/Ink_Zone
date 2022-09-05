@@ -61,3 +61,10 @@
   color: #aaa;
 }
 
+@media (max-width: 480px) {
+  .footer-social, 
+  .copyright,
+  .footer ul {
+    margin-left: 100px;
+  }
+}

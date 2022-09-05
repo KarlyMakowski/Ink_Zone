@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadStyles: () => {
         fetch(
-          "https://3001-karlymakowski-inkzone-b259orsypyc.ws-eu63.gitpod.io/styles"
+          "https://ink-zone.herokuapp.com/api/styles/"
         )
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
