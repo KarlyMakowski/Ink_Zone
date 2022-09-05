@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       styles: [],
+      prices: [],
     },
 
     actions: {
@@ -23,11 +24,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadStyles: () => {
         fetch(
-          "https://3001-karlymakowski-inkzone-b259orsypyc.ws-eu63.gitpod.io/styles"
+          "https://ink-zone.herokuapp.com/api/styles/"
         )
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
+
+      loadPrices: () => {
+        fetch(
+          "https://ink-zone.herokuapp.com/api/prices/"
+        )
+          .then((response) => response.json())
+          .then((data) => setStore({ prices: data }));
+      }
     },
   };
 };

@@ -21,6 +21,10 @@ const injectContext = (PassedComponent) => {
       state.actions.loadStyles();
     }, []);
 
+    useEffect(() => {
+      state.actions.loadPrices();
+    }, []);
+
     return (
       <Context.Provider value={state}>
         <PassedComponent {...props} />
