@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Styles
+from api.models import db, User, Styles, Prices
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -29,4 +29,11 @@ def get_styles():
     styles = Styles.query.all()
     styles_list = list(map(lambda styles: styles.serialize(), styles))
     return jsonify(styles_list), 200
+
+
+@api.route('/prices', methods=['GET'])
+def get_prices():
+    prices = Prices.query.all()
+    prices_list = list(map(lambda prices: prices.serialize(), prices))
+    return jsonify(prices_list), 200
 
