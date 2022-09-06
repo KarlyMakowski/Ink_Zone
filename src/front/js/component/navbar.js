@@ -57,8 +57,10 @@ export const Navbar = () => {
             <FaHome
               style={{ height: "57px", width: "35px" }}
               className="navIcon"
+            /* title="home" */
             />
             {expanded && <p className="navViews">home</p>}
+            {!expanded && <div className="tooltip">home</div>}
           </Link>
           <Link
             to="/experts"
@@ -69,6 +71,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">ask our experts</p>}
+            {!expanded && <div className="tooltip">experts</div>}
           </Link>
           <Link
             to="/styles"
@@ -79,6 +82,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">find your style</p>}
+            {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
             to="/questionaire"
@@ -89,6 +93,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">questionaire</p>}
+            {!expanded && <div className="tooltip">questionaire</div>}
           </Link>
           <Link
             to="/sign-up"
@@ -99,6 +104,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
           </Link>
           <Link
             to="/prices"
@@ -109,6 +115,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">prices</p>}
+            {!expanded && <div className="tooltip">prices</div>}
           </Link>
           <Link
             to="/contact-us"
@@ -119,6 +126,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">contact us</p>}
+            {!expanded && <div className="tooltip">contact</div>}
           </Link>
           <Link
             to="/faq"
@@ -129,6 +137,7 @@ export const Navbar = () => {
               className="navIcon"
             />
             {expanded && <p className="navViews">faq</p>}
+            {!expanded && <div className="tooltip">faq</div>}
           </Link>
           <form className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
             <i className="searchIcon">
@@ -148,7 +157,7 @@ export const Navbar = () => {
               style={{ height: "57px", width: "50px" }}
               className="navIcon"
             />
-            <div classname="nav-footer-info">
+            <div className="nav-footer-info">
               <p className="nav-footer-user-name navViews">Admin</p>
               <p className="nav-footer-user-position navViews"> Active</p>
             </div>

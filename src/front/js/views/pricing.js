@@ -8,6 +8,9 @@ export const Pricing = () => {
     return (
   
         <div className="pricing-view">
+          <div className="pricing-title">
+            <h1>Check our price rates</h1>
+          </div>
           <div className="price-grid">
             <PriceComp />
           </div>

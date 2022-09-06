@@ -30,7 +30,7 @@ export const AboutUs = () => {
               </div>
               <div className="col-md-4">
                 <div className="about-item text-center">
-                <i class="fa fa-trophy"></i>
+                <i className="fa fa-trophy"></i>
                   <h3>WHAT YOU GET</h3>
                   <hr />
                     <p> sint Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus optio sectetur minima soluta doloribus vitae quo eaque, quae illo!fugit tempora ipsum maiores dolorum enim, be doloribus vitae quo eaque, quae illo!fugit tempora ipsum maiores dolorum enim, beatae qui quasi </p>

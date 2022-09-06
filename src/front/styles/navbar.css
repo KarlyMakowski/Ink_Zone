@@ -141,6 +141,26 @@
   outline: none;
 }
 
+.tooltip {
+  display: none;
+  position: absolute;
+  left: 95%;
+  margin-left: 13px;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  width: auto;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.menu-item:hover .tooltip {
+  display: block;
+  opacity: 1;
+}
+
 .nav-footer {
   position: absolute;
   bottom: 0;

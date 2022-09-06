@@ -9,7 +9,7 @@ export const StylesInfo = () => {
 
       <div className="tattooStyles-container">
         <div className="styles-components">
-          <h2 className="styles-title">Styles</h2>
+          <h2 className="styles-title">Your perfect style</h2>
         </div>
         <div className="styles-grid">
           <TattooStyles />
