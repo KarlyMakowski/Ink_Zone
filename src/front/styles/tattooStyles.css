@@ -23,19 +23,19 @@
 
 .styles-card-content {
   position: absolute;
-  background-color: rgba(0 0 0/50%);
+  background-color: rgba(0 0 0/95%);
   bottom: 0;
   color: #fff;
   width: 100%;
-  height: 18%;
-  padding: 2.2rem 0;
+  height: 19%;
+  padding: 2rem 0;
   overflow: hidden;
   transition: 0.7s;
 }
 
 .styles-card-content h1 {
   font-family: "Carter One", cursive;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 300;
   text-align: center;
   text-transform: capitalize;
@@ -43,10 +43,10 @@
 
 .styles-card-content p {
   font-family: "Rajdhani", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 100;
-  line-height: 1.5rem;
-  padding: 0.9rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+  padding: 0.2rem;
 }
 
 .styles-card-content:hover {
@@ -94,6 +94,9 @@
   }
   .styles-img-box img {
     height: 15rem;
+  }
+  .styles-card-heading {
+    margin-top: -15px;
   }
   .styles-card-content p {
     visibility: hidden;
