@@ -33,7 +33,7 @@ export const Navbar = () => {
         <div className="nav-heading">
           {expanded && (
             <div className="nav-brand">
-              <img src={logo} alt="Inked Zone Logo Brand" />
+              <img src={logo} alt="Ink Zone Brand Logo" />
             </div>
           )}
           <button
@@ -57,7 +57,6 @@ export const Navbar = () => {
             <FaHome
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
-              /* title="home" */
             />
             {expanded && <p className="nav-views">home</p>}
             {!expanded && <div className="tooltip">home</div>}
@@ -158,8 +157,8 @@ export const Navbar = () => {
               className="nav-icon"
             />
             <div className="nav-footer-info">
-              <p className="nav-footer-user-name navViews">Admin</p>
-              <p className="nav-footer-user-position navViews"> Active</p>
+              <p className="nav-footer-user-name nav-views">Admin</p>
+              <p className="nav-footer-user-position nav-views"> Active</p>
             </div>
           </div>
         )}

@@ -54,10 +54,6 @@
   transition: 0.7s;
 }
 
-.tattooStyles-container {
-  margin-bottom: 3rem;
-}
-
 .styles-components {
   text-align: center;
   margin-left: 120px;
@@ -86,6 +82,10 @@
   text-align: center;
 }
 
+.tattooStyles-container {
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 480px) {
   .styles-card-container {
     width: 75%;
@@ -98,11 +98,11 @@
   .styles-card-content p {
     visibility: hidden;
   }
+  .styles-components {
+    padding: 40px 0 30px;
+  }
   .styles-title {
     font-size: 3em;
     margin-bottom: 0;
-  }
-  .styles-components {
-    padding: 40px 0 30px;
   }
 }
