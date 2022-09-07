@@ -37,3 +37,20 @@ def get_prices():
     prices_list = list(map(lambda prices: prices.serialize(), prices))
     return jsonify(prices_list), 200
 
+@api.route('/login', methods=['POST'])
+def login():
+
+    body_email = request.json.get("email")
+    body_password = request.json.get("password")
+    if body_email and body_password: 
+        user = User.query.filter_by(email=body_email).filter_by(password=body_password).first()
+        if user: 
+            if body_email != user.email:  
+                return jsonify({"logged":False, "msg":"Email o password incorrecto"})
+            else:
+                token = create_access_token(identity=user.id)
+                return jsonify({"logged":True, "user":user.serialize(),"token":token}), 200
+        else:       
+            return jsonify({"logged":False, "msg":"Email o password incorrecto"}), 400
+    else: 
+        return jsonify({"logged":False, "msg":"Faltan campos por rellenar"}), 400

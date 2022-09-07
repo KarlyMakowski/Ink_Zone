@@ -7,7 +7,7 @@ import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../../styles/signUp.css";
 
 export const SignUp = () => {
-  const { actions } = useContext(Context);
+  const { actions, store } = useContext(Context);
   const [info, setInfo] = useState({
     email: "",
     password: "",
@@ -79,7 +79,7 @@ export const SignUp = () => {
                 value={info.password}
                 onChange={handleChange}
               />
-              <label className="floatingPassword align-password">Password </label>
+              <label className="floatingPassword mt-2">Password </label>
               <div
                 className="form-control icon-eye show-password mt-2"
                 onClick={toggleBtn}
@@ -96,7 +96,7 @@ export const SignUp = () => {
                 <small>Forgot Password?</small>
               </Link>
             </div>
-            <input type="submit" value="Sign In" className="btn btn-info" />
+            <input type="submit" value="Sign In" className="btn btn-info" onClick={()=> {actions.login(info)}}/>
             <small>
               Don't have an account? <label for="toggle">Sign Up</label>
             </small>
@@ -190,11 +190,15 @@ export const SignUp = () => {
                 )}
               </div>
             </div>
-            <input
+            
+            <input onClick={()=>{actions.signup(info)}}
               type="submit"
               value="Create Account"
               className="btn btn-info"
-            ></input>
+            />
+            <small>
+              {store.message}
+            </small>
             <small>
               Already have an account? <label for="toggle">Sign In</label>
             </small>
