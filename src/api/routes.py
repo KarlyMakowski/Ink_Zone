@@ -19,10 +19,8 @@ def signup():
         user = User(name=body_name, email=body_email, password=body_password) 
         db.session.add(user)
         db.session.commit()
-        print (user.email)
         return jsonify({"created":True,"user":user.email}), 200
     else: 
-        print ("no se creo")
         return jsonify({"created":False, "msg":"Something went wrong"})
 
 
@@ -45,18 +43,14 @@ def login():
     body_email = request.json.get("email")
     body_password = request.json.get("password")
     if body_email and body_password: 
-        print("1@@@@")
         user = User.query.filter_by(email=body_email).filter_by(password=body_password).first()
         if user: 
-            if body_email != user.email:
-                print("2@@@@")
+            if body_email != user.email:  
                 return jsonify({"logged":False, "msg":"Email o password incorrecto"})
             else:
-                print("3@@@@")     
                 token = create_access_token(identity=user.id)
                 return jsonify({"logged":True, "user":user.serialize(),"token":token}), 200
         else:       
             return jsonify({"logged":False, "msg":"Email o password incorrecto"}), 400
-
     else: 
         return jsonify({"logged":False, "msg":"Faltan campos por rellenar"}), 400
