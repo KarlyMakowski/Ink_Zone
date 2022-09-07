@@ -56,10 +56,10 @@ export const Navbar = () => {
           >
             <FaHome
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
-            /* title="home" */
+              className="nav-icon"
+              /* title="home" */
             />
-            {expanded && <p className="navViews">home</p>}
+            {expanded && <p className="nav-views">home</p>}
             {!expanded && <div className="tooltip">home</div>}
           </Link>
           <Link
@@ -68,9 +68,9 @@ export const Navbar = () => {
           >
             <IoMdContacts
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">ask our experts</p>}
+            {expanded && <p className="nav-views">ask our experts</p>}
             {!expanded && <div className="tooltip">experts</div>}
           </Link>
           <Link
@@ -79,9 +79,9 @@ export const Navbar = () => {
           >
             <BsFillPaletteFill
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">find your style</p>}
+            {expanded && <p className="nav-views">find your style</p>}
             {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
@@ -90,9 +90,9 @@ export const Navbar = () => {
           >
             <AiOutlineForm
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">questionaire</p>}
+            {expanded && <p className="nav-views">questionaire</p>}
             {!expanded && <div className="tooltip">questionaire</div>}
           </Link>
           <Link
@@ -101,9 +101,9 @@ export const Navbar = () => {
           >
             <GiDeathZone
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">client zone</p>}
+            {expanded && <p className="nav-views">client zone</p>}
             {!expanded && <div className="tooltip">clients</div>}
           </Link>
           <Link
@@ -112,9 +112,9 @@ export const Navbar = () => {
           >
             <FaRegMoneyBillAlt
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">prices</p>}
+            {expanded && <p className="nav-views">prices</p>}
             {!expanded && <div className="tooltip">prices</div>}
           </Link>
           <Link
@@ -123,9 +123,9 @@ export const Navbar = () => {
           >
             <FaTeamspeak
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">contact us</p>}
+            {expanded && <p className="nav-views">contact us</p>}
             {!expanded && <div className="tooltip">contact</div>}
           </Link>
           <Link
@@ -134,16 +134,16 @@ export const Navbar = () => {
           >
             <BsChatDotsFill
               style={{ height: "57px", width: "35px" }}
-              className="navIcon"
+              className="nav-icon"
             />
-            {expanded && <p className="navViews">faq</p>}
+            {expanded && <p className="nav-views">faq</p>}
             {!expanded && <div className="tooltip">faq</div>}
           </Link>
           <form className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
             <i className="searchIcon">
               <RiSearch2Line
                 style={{ height: "57px", width: "35px" }}
-                className="navIcon"
+                className="nav-icon"
               />
             </i>
             <input type="search" placeholder="Search..." />
@@ -155,7 +155,7 @@ export const Navbar = () => {
           <div className="nav-details">
             <GoOctoface
               style={{ height: "57px", width: "50px" }}
-              className="navIcon"
+              className="nav-icon"
             />
             <div className="nav-footer-info">
               <p className="nav-footer-user-name navViews">Admin</p>
@@ -165,7 +165,7 @@ export const Navbar = () => {
         )}
         <CgLogOut
           style={{ height: "57px", width: "30px" }}
-          className="logOut"
+          className="log-out"
         />
       </div>
     </div>

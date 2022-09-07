@@ -23,20 +23,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadStyles: () => {
-        fetch(
-          "https://ink-zone.herokuapp.com/api/styles/"
-        )
+        fetch("https://ink-zone.herokuapp.com/api/styles/")
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
 
       loadPrices: () => {
-        fetch(
-          "https://ink-zone.herokuapp.com/api/prices/"
-        )
+        fetch("https://ink-zone.herokuapp.com/api/prices/")
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
-      }
+      },
     },
   };
 };

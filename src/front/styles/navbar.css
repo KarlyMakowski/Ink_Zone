@@ -123,11 +123,11 @@
   color: black;
 }
 
-.navViews {
+.nav-views {
   padding: 0 25px;
 }
 
-.navIcon {
+.nav-icon {
   margin-left: 21px;
 }
 
@@ -186,13 +186,13 @@
   margin-top: 0;
 }
 
-.logOut {
+.log-out {
   margin: auto;
   border-radius: 5px;
   margin-left: 30px;
 }
 
-.logOut:hover {
+.log-out:hover {
   cursor: pointer;
 }
 
