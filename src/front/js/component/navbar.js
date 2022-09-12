@@ -84,17 +84,6 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
-            to="/questionaire"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <AiOutlineForm
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">questionaire</p>}
-            {!expanded && <div className="tooltip">questionaire</div>}
-          </Link>
-          <Link
             to="/sign-up"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >

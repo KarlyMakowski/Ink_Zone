@@ -22,20 +22,7 @@ def signup():
         return jsonify({"created":True,"user":user.email}), 200
     else: 
         return jsonify({"created":False, "msg":"Something went wrong"})
-
-
-@api.route('/styles', methods=['GET'])
-def get_styles():
-    styles = Styles.query.all()
-    styles_list = list(map(lambda styles: styles.serialize(), styles))
-    return jsonify(styles_list), 200
-
-
-@api.route('/prices', methods=['GET'])
-def get_prices():
-    prices = Prices.query.all()
-    prices_list = list(map(lambda prices: prices.serialize(), prices))
-    return jsonify(prices_list), 200
+    
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -54,3 +41,18 @@ def login():
             return jsonify({"logged":False, "msg":"Email o password incorrecto"}), 400
     else: 
         return jsonify({"logged":False, "msg":"Faltan campos por rellenar"}), 400
+
+
+@api.route('/styles', methods=['GET'])
+def get_styles():
+    styles = Styles.query.all()
+    styles_list = list(map(lambda styles: styles.serialize(), styles))
+    return jsonify(styles_list), 200
+
+
+@api.route('/prices', methods=['GET'])
+def get_prices():
+    prices = Prices.query.all()
+    prices_list = list(map(lambda prices: prices.serialize(), prices))
+    return jsonify(prices_list), 200
+
