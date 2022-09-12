@@ -89,14 +89,6 @@ translate Y: move along the Y axis, negative(-20) moves it up, while positive(20
   transition: all 400ms ease-in-out;
 }
 
-footer {
-  background: #212226;
-  padding: 20px;
+.about-us-container {
+  padding-bottom: 50px;
 }
-footer p {
-  color: #fff;
-}
-
-/*================================================================================
-if you manage it to this far, congratulations, check more on https://devhubke.com
-=================================================================================*/

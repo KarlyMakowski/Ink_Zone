@@ -63,17 +63,6 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">home</div>}
           </Link>
           <Link
-            to="/experts"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <IoMdContacts
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">ask our experts</p>}
-            {!expanded && <div className="tooltip">experts</div>}
-          </Link>
-          <Link
             to="/styles"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -83,17 +72,6 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">find your style</p>}
             {!expanded && <div className="tooltip">styles</div>}
-          </Link>
-          <Link
-            to="/questionaire"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <AiOutlineForm
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">questionaire</p>}
-            {!expanded && <div className="tooltip">questionaire</div>}
           </Link>
           <Link
             to="/sign-up"
@@ -139,15 +117,6 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">faq</p>}
             {!expanded && <div className="tooltip">faq</div>}
           </Link>
-          <form className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
-            <i className="searchIcon">
-              <RiSearch2Line
-                style={{ height: "57px", width: "35px" }}
-                className="nav-icon"
-              />
-            </i>
-            <input type="search" placeholder="Search..." />
-          </form>
         </div>
       </div>
       <div className="nav-footer">
@@ -159,7 +128,7 @@ export const Navbar = () => {
             />
             <div className="nav-footer-info">
               <p className="nav-footer-user-name navViews">Admin</p>
-              <p className="nav-footer-user-position navViews"> Active</p>
+              <p className="nav-footer-user-position navViews">Active</p>
             </div>
           </div>
         )}

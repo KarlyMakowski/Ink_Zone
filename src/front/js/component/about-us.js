@@ -4,9 +4,9 @@ import "../../styles/about-us.css";
 
 export const AboutUs = () => {
   return (
-    <section>
+    <section className="about-us-container">
       <div className="about-1">
-        <h1> ABOUT US </h1>
+        <h1>ABOUT US</h1>
       </div>
       <div id="about-2">
         <div className="content-box-lg">
