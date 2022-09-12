@@ -89,8 +89,7 @@
 @media (max-width: 480px) {
   .styles-card-container {
     width: 75%;
-    margin-left: 85px;
-    padding-left: 10px;
+    margin: auto;
   }
   .styles-img-box img {
     height: 15rem;
@@ -102,10 +101,12 @@
     visibility: hidden;
   }
   .styles-components {
-    padding: 40px 0 30px;
+    padding: 40px 0;
+    margin: auto;
   }
   .styles-title {
     font-size: 3em;
-    margin-bottom: 0;
+    margin: auto;
+    justify-content: center;
   }
 }

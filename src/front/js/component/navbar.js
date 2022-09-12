@@ -61,7 +61,7 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">home</p>}
             {!expanded && <div className="tooltip">home</div>}
           </Link>
-          <Link
+{/*           <Link
             to="/experts"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -71,7 +71,7 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">ask our experts</p>}
             {!expanded && <div className="tooltip">experts</div>}
-          </Link>
+          </Link> */}
           <Link
             to="/styles"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
@@ -82,17 +82,6 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">find your style</p>}
             {!expanded && <div className="tooltip">styles</div>}
-          </Link>
-          <Link
-            to="/sign-up"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <GiDeathZone
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">client zone</p>}
-            {!expanded && <div className="tooltip">clients</div>}
           </Link>
           <Link
             to="/prices"
@@ -127,15 +116,17 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">faq</p>}
             {!expanded && <div className="tooltip">faq</div>}
           </Link>
-          <form className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
-            <i className="searchIcon">
-              <RiSearch2Line
-                style={{ height: "57px", width: "35px" }}
-                className="nav-icon"
-              />
-            </i>
-            <input type="search" placeholder="Search..." />
-          </form>
+          <Link
+            to="/sign-up"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiDeathZone
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
+          </Link>
         </div>
       </div>
       <div className="nav-footer">

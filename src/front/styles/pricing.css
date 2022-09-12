@@ -99,16 +99,16 @@
 
 @media (max-width: 480px) {
   .pricing-view {
-    padding-top: 5rem;
+    padding: 0;
   }
   .price-grid {
-    grid-gap: 2rem;
+    grid-gap: 1rem;
+    margin: auto;
+    width: 85%;
+    padding-bottom: 50px;
   }
   .pricing-container {
-    max-width: 90%;
-    margin-left: 100px;
     grid-template-columns: 1fr;
-
   }
   .pricing-container .pricing-card {
     box-shadow: none;
@@ -132,10 +132,9 @@
     margin: 0;
     width: 100%;
   }
-  .pricing-title h1{
-    padding: 40px 0 20px 30px;
-    margin-bottom: 0;
-    margin-left: 85px;
+  .pricing-title h1 {
+    padding: 30px 10px 15px;
+    margin: auto;
     font-size: 3em;
   }
 }
