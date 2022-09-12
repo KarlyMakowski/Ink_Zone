@@ -9,6 +9,7 @@ import { Pricing } from "./views/pricing";
 import { SignUp } from "./views/sign-up";
 import { Forgot } from "./views/forgot-password";
 import { Footer } from "./component/footer";
+import { UserProfile } from "./views/user-profile";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -23,6 +24,7 @@ const Layout = () => {
           <Route element={<Pricing />} path="/prices" />
           <Route element={<SignUp />} path="/sign-up" />
           <Route element={<Forgot />} path="/forgot-password" />
+          <Route element={<UserProfile/>} path="/user-profile" />
           {/* <Route element={<h1>Not found!</h1>} /> */}
         </Routes>
         <Footer />

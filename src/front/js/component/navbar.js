@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { Context } from "../store/appContext";
 
 import "../../styles/navbar.css";
 
@@ -15,6 +17,7 @@ import { AiOutlineForm } from "react-icons/ai";
 import { RiSearch2Line } from "react-icons/ri";
 
 export const Navbar = () => {
+  const {store, actions} = useContext(Context);
   const [expanded, setExpanded] = useState(false);
 
   const itsExpanded = () => {
@@ -94,8 +97,7 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">questionaire</p>}
             {!expanded && <div className="tooltip">questionaire</div>}
           </Link>
-          <Link
-            to="/sign-up"
+          {store.logged ?  <Link to="/user-profile"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
             <GiDeathZone
@@ -104,7 +106,18 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">client zone</p>}
             {!expanded && <div className="tooltip">clients</div>}
-          </Link>
+          </Link> :           
+          <Link to="/sign-up"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiDeathZone
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
+          </Link> }
+
           <Link
             to="/prices"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
