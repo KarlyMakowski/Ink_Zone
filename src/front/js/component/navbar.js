@@ -61,17 +61,6 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">home</p>}
             {!expanded && <div className="tooltip">home</div>}
           </Link>
-{/*           <Link
-            to="/experts"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <IoMdContacts
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">ask our experts</p>}
-            {!expanded && <div className="tooltip">experts</div>}
-          </Link> */}
           <Link
             to="/styles"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
@@ -82,6 +71,17 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">find your style</p>}
             {!expanded && <div className="tooltip">styles</div>}
+          </Link>
+          <Link
+            to="/sign-up"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiDeathZone
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
           </Link>
           <Link
             to="/prices"
@@ -116,17 +116,6 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">faq</p>}
             {!expanded && <div className="tooltip">faq</div>}
           </Link>
-          <Link
-            to="/sign-up"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <GiDeathZone
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">client zone</p>}
-            {!expanded && <div className="tooltip">clients</div>}
-          </Link>
         </div>
       </div>
       <div className="nav-footer">
@@ -137,8 +126,8 @@ export const Navbar = () => {
               className="nav-icon"
             />
             <div className="nav-footer-info">
-              <p className="nav-footer-user-name nav-views">Admin</p>
-              <p className="nav-footer-user-position nav-views"> Active</p>
+              <p className="nav-footer-user-name navViews">Admin</p>
+              <p className="nav-footer-user-position navViews">Active</p>
             </div>
           </div>
         )}

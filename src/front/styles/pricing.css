@@ -11,16 +11,16 @@
 
 .pricing-title h1 {
   margin-top: -70px;
-  padding-bottom: 60px;
+  margin-bottom: 60px;
   text-align: center;
   font-family: "Carter One", cursive;
   font-size: 4.5em;
-  color: whitesmoke;
   text-transform: uppercase;
   line-height: 1em;
   outline: none;
-  text-shadow: 0 0 7px #a091ff, 0 0 10px #aeffb9, 0 0 21px #a091ff,
-    0 0 102px #a091ff, 0 0 151px #a091ff;
+  background: -webkit-linear-gradient(#aeffb9, #a091ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .price-grid {
