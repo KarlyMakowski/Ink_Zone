@@ -1,20 +1,20 @@
 .pricing-view {
   width: 100%;
-  padding: 10rem 1rem;
-  margin-left: auto;
+  margin: auto;
 }
 
 .pricing-container {
   max-width: 1140px;
-  margin-top: 15px;
 }
 
 .pricing-title h1 {
-  margin-top: -70px;
-  margin-bottom: 60px;
   text-align: center;
-  font-family: "Carter One", cursive;
+  padding-top: 70px;
+  padding-bottom: 15px;
+  margin-bottom: 50px;
+  position: relative;
   font-size: 4.5em;
+  font-family: "Carter One", cursive;
   text-transform: uppercase;
   line-height: 1em;
   outline: none;
@@ -29,6 +29,7 @@
   justify-content: center;
   grid-gap: 7rem;
   text-align: center;
+  margin-bottom: 160px;
 }
 
 .pricing-container .pricing-card {
