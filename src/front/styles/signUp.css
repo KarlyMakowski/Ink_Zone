@@ -27,7 +27,7 @@
 .signin,
 .signup {
   color: white;
-  background: rgba(48, 30, 30, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   padding: 3rem 2rem;
   border-radius: 1rem;

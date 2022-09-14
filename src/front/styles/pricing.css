@@ -32,8 +32,7 @@
 }
 
 .pricing-container .pricing-card {
-  border: 1px solid white;
-  box-shadow: 5px 5px 20px #a091ff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .pricing-card {
@@ -41,7 +40,10 @@
   font-family: "Rajdhani", sans-serif;
   font-weight: bold;
   padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
+  backdrop-filter: blur(30px);
+  animation: animateForm 1s ease forwards;
 }
 
 .pricing-card h3 {
