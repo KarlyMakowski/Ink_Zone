@@ -1,4 +1,3 @@
-
 .contact-us {
   position: relative;
   width: 100%;
@@ -10,6 +9,17 @@
   justify-content: center;
   align-items: center;
   font-size: 2em;
+  background-image: linear-gradient(
+    to bottom,
+    #534f2c 0,
+    #cb9b51 22%,
+    #f6e27a 45%,
+    #f6e27a 55%,
+    #cb9b51 78%,
+    #534f2c 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .contact-us .contact-title h2 {
@@ -43,9 +53,9 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 5fr 4fr;
-  grid-template-areas: 
-  "form info"
-  "form map";
+  grid-template-areas:
+    "form info"
+    "form map";
   grid-gap: 20px;
   margin-top: 20px;
 }
@@ -130,7 +140,7 @@
   color: lightgray;
 }
 
-/* Info */ 
+/* Info */
 .contact-info {
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
 }
@@ -212,12 +222,13 @@
 /* Responsive */
 @media (max-width: 991px) {
   .contact-us {
+    /*     max-height: max-content; */
     padding: 20px;
   }
   .contact-box {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    grid-template-areas: 
+    grid-template-areas:
       "form"
       "info"
       "map";
@@ -234,7 +245,13 @@
     padding: 30px;
   }
   .map {
-    min-height: 300px;
+    /*     min-height: 300px; */
     padding: 0;
+  }
+}
+
+@media (min-width: 1270px) {
+  .contact-us {
+    height: 100vh;
   }
 }

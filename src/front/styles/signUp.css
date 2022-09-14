@@ -127,10 +127,10 @@ p {
 }
 
 .login-container form input[type="submit"] {
-  background: #47d2fc;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  border: none;
   transition: all 300ms ease;
   cursor: pointer;
-  transition: all 300ms ease;
 }
 
 .login-container form input[type="submit"]:hover {
