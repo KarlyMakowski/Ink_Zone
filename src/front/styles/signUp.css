@@ -130,7 +130,6 @@ p {
   background: #47d2fc;
   transition: all 300ms ease;
   cursor: pointer;
-  transition: all 300ms ease;
 }
 
 .login-container form input[type="submit"]:hover {
