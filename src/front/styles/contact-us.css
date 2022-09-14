@@ -9,15 +9,7 @@
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  background-image: linear-gradient(
-    to bottom,
-    #534f2c 0,
-    #cb9b51 22%,
-    #f6e27a 45%,
-    #f6e27a 55%,
-    #cb9b51 78%,
-    #534f2c 100%
-  );
+  background: -webkit-linear-gradient(#aeffb9, #a091ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
