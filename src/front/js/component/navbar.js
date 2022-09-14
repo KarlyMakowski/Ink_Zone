@@ -11,8 +11,6 @@ import { GiDeathZone } from "react-icons/gi";
 import { BsFillPaletteFill, BsChatDotsFill } from "react-icons/bs";
 import { GoOctoface } from "react-icons/go";
 import { CgLogOut } from "react-icons/cg";
-import { AiOutlineForm } from "react-icons/ai";
-import { RiSearch2Line } from "react-icons/ri";
 
 export const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
