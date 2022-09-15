@@ -71,17 +71,6 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
-            to="/sign-up"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <GiDeathZone
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">client zone</p>}
-            {!expanded && <div className="tooltip">clients</div>}
-          </Link>
-          <Link
             to="/prices"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -113,6 +102,17 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">faq</p>}
             {!expanded && <div className="tooltip">faq</div>}
+          </Link>
+          <Link
+            to="/sign-up"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiDeathZone
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
           </Link>
         </div>
       </div>

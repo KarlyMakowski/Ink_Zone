@@ -1,5 +1,6 @@
 .about-container {
-  background-color: rgba(36, 38, 43, 1);
+  background: url(https://i.imgur.com/jTzfSbb.jpg);
+  background-size: cover;
 }
 
 #video {
@@ -39,6 +40,7 @@
   cursor: pointer;
   border-radius: 1rem;
   font-family: "Rajdhani", sans-serif;
+  font-weight: bold;
 }
 
 .home-btn:hover {

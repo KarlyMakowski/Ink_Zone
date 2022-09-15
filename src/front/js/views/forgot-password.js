@@ -38,7 +38,6 @@ export const Forgot = () => {
               <input
                 type="submit"
                 value="Reset Password"
-                className="btn btn-info"
               />
               <Link to="/sign-up">
                 <small>

@@ -96,7 +96,7 @@ export const SignUp = () => {
                 <small>Forgot Password?</small>
               </Link>
             </div>
-            <input type="submit" value="Sign In" className="btn btn-info" onClick={()=> {actions.login(info)}}/>
+            <input type="submit" value="Sign In" onClick={()=> {actions.login(info)}}/>
             <small>
               Don't have an account? <label for="toggle">Sign Up</label>
             </small>
@@ -190,12 +190,12 @@ export const SignUp = () => {
                 )}
               </div>
             </div>
-            
+            <div className="sign-up-btn">
             <input onClick={()=>{actions.signup(info)}}
               type="submit"
               value="Create Account"
-              className="btn btn-info"
             />
+            </div>
             <small>
               {store.message}
             </small>

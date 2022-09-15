@@ -25,7 +25,9 @@ adding style to about items
 ============================*/
 
 .about-item {
-  margin-bottom: 20px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 5rem;
   color: white;
   background: rgba(48, 30, 30, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -47,7 +49,8 @@ adding style to the icons(book,globe,pencil)
 adding style to h3(heading 3) of each item 
 =========================================*/
 .about-item h3 {
-  font-size: 25px;
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 

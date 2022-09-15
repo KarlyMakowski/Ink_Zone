@@ -7,12 +7,15 @@
   max-width: 1140px;
 }
 
-.pricing-title h1 {
+.pricing-title {
   text-align: center;
   padding-top: 70px;
   padding-bottom: 15px;
-  margin-bottom: 50px;
+}
+
+.pricing-title h1 {
   position: relative;
+  margin-bottom: 50px;
   font-size: 4.5em;
   font-family: "Carter One", cursive;
   text-transform: uppercase;
@@ -50,6 +53,7 @@
 .pricing-card h3 {
   color: black;
   font-size: 2.5rem;
+  font-weight: bold;
   padding: 1rem;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
   border-radius: 1rem;
@@ -73,6 +77,7 @@
 .price {
   color: #a091ff;
   font-size: 3.5rem;
+  font-weight: bold;
   padding: 1rem;
 }
 
@@ -84,20 +89,25 @@
   text-transform: uppercase;
 }
 
-.pricing-card .pricing-btn {
+.pricing-btn {
   display: block;
   width: 80%;
+  padding: 10px;
+  text-decoration: none;
   margin: 2rem auto;
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.pricing-card .pricing-btn:hover {
+.pricing-btn:hover {
   color: black;
   font-weight: bold;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 600px) {
