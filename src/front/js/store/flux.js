@@ -12,18 +12,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       signup: async (user) => {
         try {
           // fetching data from the backend
-          const resp = await fetch("https://ink-zone.herokuapp.com/api/signup", {
+          const resp = await fetch("https://3001-karlymakowski-inkzone-8gvpvv24tdw.ws-eu64.gitpod.io/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
           });
           const data = await resp.json();
-          const response = data.created;
+          const response = await data.created;
           if (response) {
             setStore({message: "Create successful"})
+            localStorage.setItem("created", data.created)
+
           }
           else{
-          setStore({message: "User not created"})
+          setStore({message: data.msg})
           }
           //setStore({ message: data.message })
           // don't forget to return something, that is how the async resolves
@@ -35,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (user) => {
         try {
           // fetching data from the backend
-          const resp = await fetch("https://ink-zone.herokuapp.com/api/login", {
+          const resp = await fetch("https://3001-karlymakowski-inkzone-8gvpvv24tdw.ws-eu64.gitpod.io/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),

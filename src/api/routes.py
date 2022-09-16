@@ -16,10 +16,13 @@ def signup():
     body_password = request.json.get("password")
     body_password_confirmation = request.json.get("confirmPassword")
     if body_name and body_email and body_password and body_password_confirmation ==body_password: 
-        user = User(name=body_name, email=body_email, password=body_password) 
-        db.session.add(user)
-        db.session.commit()
-        return jsonify({"created":True,"user":user.email}), 200
+        if User.query.filter_by(email = body_email).first():
+            return jsonify ({"created":False, "msg":"User already exist"})
+        else:
+            user = User(name=body_name, email=body_email, password=body_password) 
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({"created":True,"user":user.email}), 200
     else: 
         return jsonify({"created":False, "msg":"Something went wrong"})
     
