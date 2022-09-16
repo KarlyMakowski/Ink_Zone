@@ -32,7 +32,6 @@
   padding: 3rem 2rem;
   border-radius: 1rem;
   backdrop-filter: blur(2px);
-  animation: animateForm 1s ease forwards;
 }
 
 .login-container h1 {
