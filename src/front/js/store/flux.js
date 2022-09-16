@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       signup: async (user) => {
         try {
           // fetching data from the backend
-          const resp = await fetch("https://3001-karlymakowski-inkzone-8gvpvv24tdw.ws-eu64.gitpod.io/api/signup", {
+          const resp = await fetch("https://ink-zone.herokuapp.com/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (user) => {
         try {
           // fetching data from the backend
-          const resp = await fetch("https://3001-karlymakowski-inkzone-8gvpvv24tdw.ws-eu64.gitpod.io/api/login", {
+          const resp = await fetch("https://ink-zone.herokuapp.com/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
