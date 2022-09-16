@@ -195,6 +195,7 @@
     display: flex;
     margin-top: 0;
     border: none;
+    z-index: 100;
   }
   .menu-item,
   .menu-item-NX {
@@ -213,3 +214,4 @@
     display: none;
   }
 }
+

@@ -1,14 +1,9 @@
 import React from "react";
-import { MdLocationPin, MdEmail } from "react-icons/md";
-import {
-  FaPhone,
-  FaInstagram,
-  FaTwitter,
-  FaFacebook,
-  FaLinkedin,
-} from "react-icons/fa";
 
 import "../../styles/contact-us.css";
+
+import { MdLocationPin, MdEmail } from "react-icons/md";
+import { FaPhone, FaInstagram, FaTwitter, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 export const ContactUs = () => {
   return (

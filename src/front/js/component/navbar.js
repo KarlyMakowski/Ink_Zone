@@ -5,10 +5,11 @@ import "../../styles/navbar.css";
 
 import logo from "../../img/ink-zone.png";
 
-import { FaHome, FaTeamspeak, FaRegMoneyBillAlt } from "react-icons/fa";
-import { IoMdContacts } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
+import { IoIosColorPalette } from "react-icons/io";
+import { HiCurrencyEuro, HiQuestionMarkCircle } from "react-icons/hi";
+import { RiWechatFill } from "react-icons/ri";
 import { GiDeathZone } from "react-icons/gi";
-import { BsFillPaletteFill, BsChatDotsFill } from "react-icons/bs";
 import { GoOctoface } from "react-icons/go";
 import { CgLogOut } from "react-icons/cg";
 
@@ -63,7 +64,7 @@ export const Navbar = () => {
             to="/styles"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <BsFillPaletteFill
+            <IoIosColorPalette
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
@@ -74,7 +75,7 @@ export const Navbar = () => {
             to="/prices"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <FaRegMoneyBillAlt
+            <HiCurrencyEuro
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
@@ -82,26 +83,26 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">prices</div>}
           </Link>
           <Link
-            to="/contact-us"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <FaTeamspeak
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">contact us</p>}
-            {!expanded && <div className="tooltip">contact</div>}
-          </Link>
-          <Link
             to="/faq"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <BsChatDotsFill
+            <HiQuestionMarkCircle
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
             {expanded && <p className="nav-views">faq</p>}
             {!expanded && <div className="tooltip">faq</div>}
+          </Link>
+          <Link
+            to="/contact-us"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <RiWechatFill
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">contact us</p>}
+            {!expanded && <div className="tooltip">contact</div>}
           </Link>
           <Link
             to="/sign-up"

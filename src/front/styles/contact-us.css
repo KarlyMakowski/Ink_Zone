@@ -260,9 +260,51 @@
   }
 }
 
-/* @media (min-width: 1270px) {
+@media (min-width: 1440px) {
   .contact-us {
     width: 90%;
     margin: auto;
   }
-} */
+}
+
+@media (min-width: 760px) {
+  .contact-us {
+    margin-left: 80px;
+  }
+}
+@media (max-width: 600px) {
+  .contact-title h1 {
+    font-size: 2.9em;
+    margin: auto;
+    justify-content: center;
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .contact-title h1 {
+    font-size: 2.8em;
+  }
+}
+
+@media (max-width: 360px) {
+  .contact-title h1 {
+    font-size: 2.6em;
+  }
+}
+
+@media (max-width: 280px) {
+  .contact-us {
+   margin: auto;
+   padding-left: 0;
+  }
+  .contact-form,
+  .contact-info,
+  .contact-map {
+    margin:0;
+    width: 90%;
+  }
+  .contact-title h1 {
+    font-size: 2.1em;
+  }
+}

@@ -1,6 +1,7 @@
 .styles-card-container {
   width: 85%;
   margin: auto;
+  position: relative;
 }
 
 .styles-img-box img {
@@ -83,6 +84,14 @@
   margin-bottom: 10rem;
 }
 
+.fav-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+
 @media (max-width: 600px) {
   .styles-card-container {
     width: 75%;
@@ -102,7 +111,7 @@
     margin: auto;
   }
   .styles-title {
-    font-size: 3em;
+    font-size: 2.9em;
     margin: auto;
     justify-content: center;
   }

@@ -14,26 +14,26 @@ export const AboutUs = () => {
             <div className="row">
               <div className="col-md-4">
                 <div className="about-item text-center">
-                  <i className="fa fa-book"></i>
+                  <i className="fa fa-skull"></i>
                   <h3>WHO WE ARE</h3>
                   <hr />
-                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus optio sectetur minima soluta nulla, alias tenetur doloribus.  </p>
+                  <p> We are a group of junior programmers developing and designing a webpage inspired in tattoo styles.  </p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="about-item text-center">
-                  <i className="fa fa-globe"></i>
+                  <i className="fa fa-palette"></i>
                   <h3>WHAT WE DO</h3>
                   <hr />
-                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus optio sectetur minima soluta nulla, alias tenetur doloribus.  </p>
+                  <p> If you want to get tattoed but you are not quit sure about the style you are looking for, this is the correct place!  </p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="about-item text-center">
-                  <i className="fa fa-trophy"></i>
+                  <i className="fa fa-hand-holding-heart"></i>
                   <h3>WHAT YOU GET</h3>
                   <hr />
-                  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus optio sectetur minima soluta nulla, alias tenetur doloribus.  </p>
+                  <p> Decide which is your perfect style, and get in contact with us in order to amplify the available information. </p>
                 </div>
               </div>
             </div>
