@@ -1,6 +1,7 @@
 .about-1 {
-  margin: 30px;
+  margin-bottom: 30px;
   padding: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .about-1 h1 {

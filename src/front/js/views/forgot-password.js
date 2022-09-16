@@ -20,7 +20,7 @@ export const Forgot = () => {
     <div className="register">
       <div className="login-container">
         <div className="signin">
-          <h2>Forgot your password?</h2>
+          <h1 className="fw-bold">Forgot your password?</h1>
           <h4>Introduce your email</h4>
           <form onSubmit={handleSubmit}>
             <div className="form-floating">
