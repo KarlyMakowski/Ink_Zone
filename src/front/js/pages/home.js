@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
 
@@ -8,6 +9,13 @@ import { AboutUs } from "../component/about-us";
 import video from "-!file-loader!../../img/tattoo-bg.mp4";
 
 export const Home = () => {
+  const { actions, store } = useContext(Context);
+
+  useEffect(() => {
+    if (store.token && store.token != "" && store.token != undefined) actions.getMesssage();
+  }, [store.token])
+
+
   const videoEl = useRef(video);
 
   useEffect(() => {
@@ -37,6 +45,7 @@ export const Home = () => {
               Sign Up
             </Link>
           </div>
+          <div className="alert">{store.message}</div>
         </div>
       </div>
       <div>

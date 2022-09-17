@@ -1,46 +1,69 @@
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
 from api.models import db, User, Styles, Prices
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from flask_bcrypt import Bcrypt
 
 api = Blueprint('api', __name__)
 
 
 @api.route('/signup', methods=['POST'])
 def signup():
+    username = request.json.get('username', None)
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
 
-    body_name = request.json.get("name")
-    body_email = request.json.get("email")
-    body_password = request.json.get("password")
-    body_password_confirmation = request.json.get("confirmPassword")
-    if body_name and body_email and body_password and body_password_confirmation ==body_password: 
-        user = User(name=body_name, email=body_email, password=body_password) 
+    if not username: return jsonify({"status": "failed", "msg": "Missing username!"}), 400
+    if not email: return jsonify({"status": "failed", "msg":"Missing email address!"}), 400
+    if not password: return jsonify({"status": "failed", "msg":"Enter a password!"}), 400   
+    
+    email_already_exists = User.query.filter_by(email=email).first()
+    if email_already_exists: 
+        return jsonify({"status": "failed", "msg":"Email already registered!"}), 409
+    else:
+        pw_hash = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
+        user = User(username=username, email=email, password=pw_hash)
         db.session.add(user)
         db.session.commit()
-        return jsonify({"created":True,"user":user.email}), 200
-    else: 
-        return jsonify({"created":False, "msg":"Something went wrong"})
     
+        return f'Welcome {username}, you succesfully signed up!', 200 
 
-@api.route('/login', methods=['POST'])
-def login():
 
-    body_email = request.json.get("email")
-    body_password = request.json.get("password")
-    if body_email and body_password: 
-        user = User.query.filter_by(email=body_email).filter_by(password=body_password).first()
-        if user: 
-            if body_email != user.email:  
-                return jsonify({"logged":False, "msg":"Email o password incorrecto"})
-            else:
-                token = create_access_token(identity=user.id)
-                return jsonify({"logged":True, "user":user.serialize(),"token":token}), 200
-        else:       
-            return jsonify({"logged":False, "msg":"Email o password incorrecto"}), 400
-    else: 
-        return jsonify({"logged":False, "msg":"Faltan campos por rellenar"}), 400
+#Route to authenticate users and return JWTs --> LOG IN
+@api.route('/token', methods=['POST', 'GET'])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    
+    user = User.query.filter_by(email = email).first()    
+    
+    if user:
+        if password != user.password:
+            return jsonify({"msg" : "Not valid password"}), 401
+        else:
+            access_token = create_access_token(identity = email)
+        return jsonify(access_token = access_token)
+    else:
+        return jsonify({"msg" : "Not valid email"}), 401
+    
+    response_body = {
+        "message": "Successfuly logged in"
+    }
+    return jsonify(response_body), 200
+
+
+@api.route('/hello', methods=['GET'])
+@jwt_required()
+def get_hello():
+    
+    email = get_jwt_identity()
+    dictionary = {
+        "message": "hello world " + email
+    }
+    
+    return jsonify(dictionary)
+
+
 
 
 @api.route('/styles', methods=['GET'])
