@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { Context } from "../store/appContext";
 
 import "../../styles/navbar.css";
 
@@ -14,6 +16,7 @@ import { GoOctoface } from "react-icons/go";
 import { CgLogOut } from "react-icons/cg";
 
 export const Navbar = () => {
+  const {store, actions} = useContext(Context);
   const [expanded, setExpanded] = useState(false);
 
   const itsExpanded = () => {
@@ -72,16 +75,47 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
+
             to="/prices"
+
+            to="/questionaire"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <AiOutlineForm
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">questionaire</p>}
+            {!expanded && <div className="tooltip">questionaire</div>}
+          </Link>
+          {store.logged ?  <Link to="/user-profile"
+
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
             <HiCurrencyEuro
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
+
             {expanded && <p className="nav-views">prices</p>}
             {!expanded && <div className="tooltip">prices</div>}
           </Link>
+
+            {expanded && <p className="nav-views">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
+          </Link> :           
+          <Link to="/sign-up"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiDeathZone
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">client zone</p>}
+            {!expanded && <div className="tooltip">clients</div>}
+          </Link> }
+
+
           <Link
             to="/faq"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
