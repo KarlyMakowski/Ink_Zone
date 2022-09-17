@@ -18,12 +18,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(user),
           });
           const data = await resp.json();
-          const response = data.created;
+          const response = await data.created;
           if (response) {
             setStore({message: "Create successful"})
+            localStorage.setItem("created", data.created)
+
           }
           else{
-          setStore({message: "User not created"})
+          setStore({message: data.msg})
           }
           //setStore({ message: data.message })
           // don't forget to return something, that is how the async resolves
