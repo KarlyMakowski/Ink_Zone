@@ -9,6 +9,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 
     actions: {
 
+      signup: async (username, email, password) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+          }),
+        };
+
+        try {
+          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/signup", opts)
+            if (resp.status !== 200) {
+              alert("There has been some error");
+            return false;
+            }
+            const data = await resp.json();
+            console.log("this came from the backend", data);
+            const response = data.status;
+            if(response) {
+              setStore({message: "User succesfully created!"});
+            }
+            else {
+              setStore({message: "User could not be created!"})
+            }
+          }
+          catch (error) {
+            console.error("There has been an error during sign up!");
+          }
+        },
+
       syncTokenFromSessionStore: () => {
         const token = sessionStorage.getItem("token");
         console.log("Application just loaded, synching the session storage token");

@@ -1,4 +1,4 @@
-/* import React, { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
@@ -8,34 +8,9 @@ import "../../styles/signUp.css";
 
 export const SignUp = () => {
   const { actions, store } = useContext(Context);
-  const [info, setInfo] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    name: "",
-  });
+
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
-
-  const navigate = useNavigate();
-
-  const submitButton = async () => {
-    const signupbutton = await actions.signup(info);
-      console.log("AQUI ANDO")
-      const useralert = await alert(store.message);
-      navigate("/sign-in");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleChange = (e) => {
-    setInfo({
-      ...info,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const toggleBtn = () => {
     setShow((prevState) => !prevState);
@@ -45,10 +20,26 @@ export const SignUp = () => {
     setShow2((prevState) => !prevState);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const [username, setUsername] =useState("");
+  const [email, setEmail] =useState("");
+  const [password, setPassword] =useState("");
+  const [confirmPassword, setConfirmPassword] =useState("");
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    actions.signup(username, email, password).then(() => {
+      navigate("/")
+    })
+  };
+
   return (
     <div className="register">
       <div className="login-container">
-        <div className="signup">
+        <div className="sign-up">
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={handleSubmit}>
             <div className="social">
@@ -71,8 +62,8 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingInput"
                 autoComplete="off"
-                value={info.name}
-                onChange={handleChange}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <label className="floatingInput">Name</label>
             </div>
@@ -84,8 +75,8 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingInput"
                 autoComplete="off"
-                value={info.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <label className="floatingInput">Email</label>
             </div>
@@ -97,8 +88,8 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingPassword"
                 autoComplete="off"
-                value={info.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <label className="floatingPassword">Password</label>
               <div
@@ -120,10 +111,10 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingPassword"
                 autoComplete="off"
-                value={info.confirmPassword}
-                onChange={handleChange}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <label className="floatingPassword">Confirm Password</label>
+              <label id="floatingPassword">Confirm Password</label>
               <div
                 className="form-control icon-eye show-password2 mt-2"
                 onClick={toggle2Btn}
@@ -136,7 +127,7 @@ export const SignUp = () => {
               </div>
             </div>
             <div className="sign-up-btn">
-              <input onClick={() => {submitButton()}} type="submit" value="Create Account" />
+              <input onClick={handleClick} type="submit" value="Create Account" />
             </div>
             <small>{store.message}</small>
             <small>
@@ -147,4 +138,4 @@ export const SignUp = () => {
       </div>
     </div>
   );
-}; */
+};

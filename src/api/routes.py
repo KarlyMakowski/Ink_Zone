@@ -64,8 +64,6 @@ def get_hello():
     return jsonify(dictionary)
 
 
-
-
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()
