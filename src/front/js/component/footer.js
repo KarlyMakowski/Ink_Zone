@@ -1,5 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
+import { GrInstagram, GrTwitter } from "react-icons/gr";
+import { FaFacebookF } from "react-icons/fa";
 
 import "../../styles/footer.css";
 
@@ -20,19 +22,19 @@ export const Footer = () => {
 
       <ul className="footer-list">
         <li>
-          <Link to="/">Home</Link>
+          <a href="#">Home</a>
         </li>
         <li>
-          <Link to="/styles">Find Your Style</Link>
+          <a href="#">Find Your Style</a>
         </li>
         <li>
-          <Link to="/experts">Ask Our Experts</Link>
+          <a href="#">Ask Our Experts</a>
         </li>
         <li>
-          <Link to="/contact-us">Contact Us</Link>
+          <a href="#">Contact Us</a>
         </li>
         <li>
-          <Link to="/faq">FAQ</Link>
+          <a href="#">FAQ</a>
         </li>
       </ul>
       <p className="copyright">Ink Zone @ 2022</p>

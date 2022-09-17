@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -16,15 +16,6 @@ export const SignUp = () => {
   });
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
-
-  const navigate = useNavigate();
-
-  const submitButton = async () => {
-    const signupbutton = await actions.signup(info);
-      console.log("AQUI ANDO")
-      const useralert = await alert(store.message);
-      navigate("/sign-in");
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +39,70 @@ export const SignUp = () => {
   return (
     <div className="register">
       <div className="login-container">
+        <input type="checkbox" id="toggle" />
+        <div className="signin">
+          <h1 className="fw-bold">Sign In</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="social">
+              <a href="#" className="social-instagram">
+                <GrInstagram className="gr" />
+              </a>
+              <a href="#" className="social-twitter">
+                <GrTwitter className="gr" />
+              </a>
+              <a href="#" className="social-facebook">
+                <FaFacebookF className="gr" />
+              </a>
+            </div>
+            <p>Or enter your info</p>
+            <div className="form-floating">
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                className="form-control"
+                id="floatingInput"
+                autoComplete="off"
+                value={info.email}
+                onChange={handleChange}
+              />
+              <label className="floatingInput">Email</label>
+            </div>
+            <div className="form-floating d-flex">
+              <input
+                type={!show ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                className="form-control"
+                id="floatingPassword"
+                autoComplete="off"
+                value={info.password}
+                onChange={handleChange}
+              />
+              <label className="floatingPassword mt-2">Password </label>
+              <div
+                className="form-control icon-eye show-password mt-2"
+                onClick={toggleBtn}
+              >
+                {show ? (
+                  <FaEyeSlash className="fa-2x svg" />
+                ) : (
+                  <FaEye className="fa-2x svg" />
+                )}
+              </div>
+            </div>
+            <div className="forgot">
+              <Link to="/forgot-password" className="small">
+                <small>Forgot Password?</small>
+              </Link>
+            </div>
+            <input type="submit" value="Sign In" className="btn btn-info" onClick={()=> {actions.login(info)}}/>
+            <small>
+              Don't have an account? <label for="toggle">Sign Up</label>
+            </small>
+          </form>
+        </div>
+
         <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={handleSubmit}>
@@ -135,12 +190,17 @@ export const SignUp = () => {
                 )}
               </div>
             </div>
-            <div className="sign-up-btn">
-              <input onClick={() => {submitButton()}} type="submit" value="Create Account" />
-            </div>
-            <small>{store.message}</small>
+            
+            <input onClick={()=>{actions.signup(info)}}
+              type="submit"
+              value="Create Account"
+              className="btn btn-info"
+            />
             <small>
-              Already have an account? <Link to="/sign-in">Sign In</Link>
+              {store.message}
+            </small>
+            <small>
+              Already have an account? <label for="toggle">Sign In</label>
             </small>
           </form>
         </div>

@@ -7,13 +7,14 @@ import "../../styles/navbar.css";
 
 import logo from "../../img/ink-zone.png";
 
-import { FaHome } from "react-icons/fa";
-import { IoIosColorPalette } from "react-icons/io";
-import { HiCurrencyEuro, HiQuestionMarkCircle } from "react-icons/hi";
-import { RiWechatFill } from "react-icons/ri";
+import { FaHome, FaTeamspeak, FaRegMoneyBillAlt } from "react-icons/fa";
+import { IoMdContacts } from "react-icons/io";
 import { GiDeathZone } from "react-icons/gi";
+import { BsFillPaletteFill, BsChatDotsFill } from "react-icons/bs";
 import { GoOctoface } from "react-icons/go";
 import { CgLogOut } from "react-icons/cg";
+import { AiOutlineForm } from "react-icons/ai";
+import { RiSearch2Line } from "react-icons/ri";
 
 export const Navbar = () => {
   const {store, actions} = useContext(Context);
@@ -64,10 +65,21 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">home</div>}
           </Link>
           <Link
+            to="/experts"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <IoMdContacts
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">ask our experts</p>}
+            {!expanded && <div className="tooltip">experts</div>}
+          </Link>
+          <Link
             to="/styles"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <IoIosColorPalette
+            <BsFillPaletteFill
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
@@ -75,9 +87,6 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
-
-            to="/prices"
-
             to="/questionaire"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -89,18 +98,12 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">questionaire</div>}
           </Link>
           {store.logged ?  <Link to="/user-profile"
-
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <HiCurrencyEuro
+            <GiDeathZone
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
-
-            {expanded && <p className="nav-views">prices</p>}
-            {!expanded && <div className="tooltip">prices</div>}
-          </Link>
-
             {expanded && <p className="nav-views">client zone</p>}
             {!expanded && <div className="tooltip">clients</div>}
           </Link> :           
@@ -115,23 +118,22 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">clients</div>}
           </Link> }
 
-
           <Link
-            to="/faq"
+            to="/prices"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <HiQuestionMarkCircle
+            <FaRegMoneyBillAlt
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
-            {expanded && <p className="nav-views">faq</p>}
-            {!expanded && <div className="tooltip">faq</div>}
+            {expanded && <p className="nav-views">prices</p>}
+            {!expanded && <div className="tooltip">prices</div>}
           </Link>
           <Link
             to="/contact-us"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <RiWechatFill
+            <FaTeamspeak
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
@@ -139,16 +141,25 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">contact</div>}
           </Link>
           <Link
-            to="/sign-up"
+            to="/faq"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <GiDeathZone
+            <BsChatDotsFill
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
-            {expanded && <p className="nav-views">client zone</p>}
-            {!expanded && <div className="tooltip">clients</div>}
+            {expanded && <p className="nav-views">faq</p>}
+            {!expanded && <div className="tooltip">faq</div>}
           </Link>
+          <form className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
+            <i className="searchIcon">
+              <RiSearch2Line
+                style={{ height: "57px", width: "35px" }}
+                className="nav-icon"
+              />
+            </i>
+            <input type="search" placeholder="Search..." />
+          </form>
         </div>
       </div>
       <div className="nav-footer">
@@ -159,8 +170,8 @@ export const Navbar = () => {
               className="nav-icon"
             />
             <div className="nav-footer-info">
-              <p className="nav-footer-user-name navViews">Admin</p>
-              <p className="nav-footer-user-position navViews">Active</p>
+              <p className="nav-footer-user-name nav-views">Admin</p>
+              <p className="nav-footer-user-position nav-views"> Active</p>
             </div>
           </div>
         )}

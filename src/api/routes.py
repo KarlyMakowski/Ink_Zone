@@ -16,16 +16,26 @@ def signup():
     body_password = request.json.get("password")
     body_password_confirmation = request.json.get("confirmPassword")
     if body_name and body_email and body_password and body_password_confirmation ==body_password: 
-        if User.query.filter_by(email = body_email).first():
-            return jsonify ({"created":False, "msg":"User already exist"})
-        else:
-            user = User(name=body_name, email=body_email, password=body_password) 
-            db.session.add(user)
-            db.session.commit()
-            return jsonify({"created":True,"user":user.email}), 200
+        user = User(name=body_name, email=body_email, password=body_password) 
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({"created":True,"user":user.email}), 200
     else: 
         return jsonify({"created":False, "msg":"Something went wrong"})
-    
+
+
+@api.route('/styles', methods=['GET'])
+def get_styles():
+    styles = Styles.query.all()
+    styles_list = list(map(lambda styles: styles.serialize(), styles))
+    return jsonify(styles_list), 200
+
+
+@api.route('/prices', methods=['GET'])
+def get_prices():
+    prices = Prices.query.all()
+    prices_list = list(map(lambda prices: prices.serialize(), prices))
+    return jsonify(prices_list), 200
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -45,20 +55,6 @@ def login():
     else: 
         return jsonify({"logged":False, "msg":"Faltan campos por rellenar"}), 400
 
-
-
-@api.route('/styles', methods=['GET'])
-def get_styles():
-    styles = Styles.query.all()
-    styles_list = list(map(lambda styles: styles.serialize(), styles))
-    return jsonify(styles_list), 200
-
-
-@api.route('/prices', methods=['GET'])
-def get_prices():
-    prices = Prices.query.all()
-    prices_list = list(map(lambda prices: prices.serialize(), prices))
-    return jsonify(prices_list), 200
 
 @api.route('/user-profile', methods=['PUT'])
 @jwt_required()
@@ -113,5 +109,4 @@ def userprofile():
 
 #hacer esto con todos los campos.
 #hacer un db.session.add (no haría falta, mirar) // hacer en la terminal para subir a la base de datos db.session.commit
-
 

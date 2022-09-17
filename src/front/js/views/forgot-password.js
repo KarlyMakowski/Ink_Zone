@@ -20,7 +20,7 @@ export const Forgot = () => {
     <div className="register">
       <div className="login-container">
         <div className="signin">
-          <h1 className="fw-bold">Forgot your password?</h1>
+          <h2>Forgot your password?</h2>
           <h4>Introduce your email</h4>
           <form onSubmit={handleSubmit}>
             <div className="form-floating">
@@ -38,6 +38,7 @@ export const Forgot = () => {
               <input
                 type="submit"
                 value="Reset Password"
+                className="btn btn-info"
               />
               <Link to="/sign-up">
                 <small>
