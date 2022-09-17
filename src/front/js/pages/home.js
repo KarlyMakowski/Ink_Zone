@@ -39,7 +39,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="about-container">
+      <div>
         <AboutUs />
       </div>
     </>

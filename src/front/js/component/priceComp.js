@@ -18,7 +18,7 @@ export const PriceComp = () => {
           <p>{singlePrice.size}</p>
           <p>{singlePrice.what_does_include}</p>
           <p>{singlePrice.type_of_tattoo}</p>
-          <Link to="/contact-us" className="pricing-btn btn">
+          <Link to="/contact-us" className="pricing-btn">
             Contact us
           </Link>
         </div>

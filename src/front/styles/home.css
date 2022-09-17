@@ -1,9 +1,5 @@
-.about-container {
-  background-color: rgba(36, 38, 43, 1);
-}
-
 #video {
-  position: fixed;
+/*   position: fixed; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -39,6 +35,7 @@
   cursor: pointer;
   border-radius: 1rem;
   font-family: "Rajdhani", sans-serif;
+  font-weight: bold;
 }
 
 .home-btn:hover {
@@ -64,9 +61,6 @@
   width: 100%;
   height: 100%;
   top: 40vh;
-}
-
-.home-main .home-content {
   font-size: 4rem;
   color: #fff;
 }

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Favs } from "../component/favs";
 
 import "../../styles/tattooStyles.css";
 
@@ -9,6 +10,9 @@ export const TattooStyles = () => {
   return store.styles.map((singleStyle, i) => {
     return (
       <div className="styles-card-container" key={i}>
+        <div className="fav-btn">
+          <Favs />
+        </div>
         <div className="styles-card">
           <div className="styles-img-box">
             <img src={singleStyle.image} alt="Tattoo Style" />

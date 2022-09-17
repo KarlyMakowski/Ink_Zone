@@ -1,7 +1,7 @@
 .styles-card-container {
-  width: 320px;
-  margin-top: 5px;
-  margin-left: 100px;
+  width: 85%;
+  margin: auto;
+  position: relative;
 }
 
 .styles-img-box img {
@@ -23,30 +23,29 @@
 
 .styles-card-content {
   position: absolute;
-  background-color: rgba(0 0 0/50%);
+  background-color: rgba(0 0 0/95%);
   bottom: 0;
   color: #fff;
   width: 100%;
-  height: 18%;
-  padding: 2.2rem 0;
+  height: 19%;
+  padding: 2rem 0;
   overflow: hidden;
   transition: 0.7s;
 }
 
 .styles-card-content h1 {
   font-family: "Carter One", cursive;
-  font-size: 1.4rem;
-  font-weight: 300;
+  font-size: 2rem;
   text-align: center;
   text-transform: capitalize;
 }
 
 .styles-card-content p {
   font-family: "Rajdhani", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 100;
-  line-height: 1.5rem;
-  padding: 0.9rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+  padding: 0.3rem;
 }
 
 .styles-card-content:hover {
@@ -56,7 +55,6 @@
 
 .styles-components {
   text-align: center;
-  margin-left: 120px;
   padding-top: 70px;
   padding-bottom: 15px;
 }
@@ -66,12 +64,12 @@
   margin-bottom: 50px;
   font-size: 4.5em;
   font-family: "Carter One", cursive;
-  color: whitesmoke;
   text-transform: uppercase;
   line-height: 1em;
   outline: none;
-  text-shadow: 0 0 7px #a091ff, 0 0 10px #aeffb9, 0 0 21px #a091ff,
-    0 0 102px #a091ff, 0 0 151px #a091ff;
+  background: -webkit-linear-gradient(#aeffb9, #a091ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .styles-grid {
@@ -83,26 +81,38 @@
 }
 
 .tattooStyles-container {
-  margin-bottom: 3rem;
+  margin-bottom: 10rem;
 }
 
-@media (max-width: 480px) {
+.fav-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+
+@media (max-width: 600px) {
   .styles-card-container {
     width: 75%;
-    margin-left: 85px;
-    padding-left: 10px;
+    margin: auto;
   }
   .styles-img-box img {
     height: 15rem;
+  }
+  .styles-card-heading {
+    margin-top: -15px;
   }
   .styles-card-content p {
     visibility: hidden;
   }
   .styles-components {
-    padding: 40px 0 30px;
+    padding: 40px 0;
+    margin: auto;
   }
   .styles-title {
-    font-size: 3em;
-    margin-bottom: 0;
+    font-size: 2.9em;
+    margin: auto;
+    justify-content: center;
   }
 }

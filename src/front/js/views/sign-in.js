@@ -1,30 +1,19 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "../../styles/signUp.css";
 
-export const SignUp = () => {
+export const SignIn = () => {
   const { actions, store } = useContext(Context);
   const [info, setInfo] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
-    name: "",
   });
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
-
-  const navigate = useNavigate();
-
-  const submitButton = async () => {
-    const signupbutton = await actions.signup(info);
-      console.log("AQUI ANDO")
-      const useralert = await alert(store.message);
-      navigate("/sign-in");
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,8 +37,9 @@ export const SignUp = () => {
   return (
     <div className="register">
       <div className="login-container">
-        <div className="signup">
-          <h1 className="fw-bold">Create an account</h1>
+
+        <div className="signin">
+          <h1 className="fw-bold">Sign In</h1>
           <form onSubmit={handleSubmit}>
             <div className="social">
               <a href="#" className="social-instagram">
@@ -65,19 +55,6 @@ export const SignUp = () => {
             <p>Or enter your info</p>
             <div className="form-floating">
               <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                className="form-control"
-                id="floatingInput"
-                autoComplete="off"
-                value={info.name}
-                onChange={handleChange}
-              />
-              <label className="floatingInput">Name</label>
-            </div>
-            <div className="form-floating">
-              <input
                 type="email"
                 placeholder="Email"
                 name="email"
@@ -89,7 +66,7 @@ export const SignUp = () => {
               />
               <label className="floatingInput">Email</label>
             </div>
-            <div className="form-floating">
+            <div className="form-floating d-flex">
               <input
                 type={!show ? "text" : "password"}
                 placeholder="Password"
@@ -100,9 +77,9 @@ export const SignUp = () => {
                 value={info.password}
                 onChange={handleChange}
               />
-              <label className="floatingPassword">Password</label>
+              <label className="floatingPassword mt-2">Password </label>
               <div
-                className="form-control icon-eye show-password2 mt-2"
+                className="form-control icon-eye show-password mt-2"
                 onClick={toggleBtn}
               >
                 {show ? (
@@ -112,38 +89,18 @@ export const SignUp = () => {
                 )}
               </div>
             </div>
-            <div className="form-floating">
-              <input
-                type={!show2 ? "text" : "password"}
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                className="form-control"
-                id="floatingPassword"
-                autoComplete="off"
-                value={info.confirmPassword}
-                onChange={handleChange}
-              />
-              <label className="floatingPassword">Confirm Password</label>
-              <div
-                className="form-control icon-eye show-password2 mt-2"
-                onClick={toggle2Btn}
-              >
-                {show2 ? (
-                  <FaEyeSlash className="fa-2x svg" />
-                ) : (
-                  <FaEye className="fa-2x svg" />
-                )}
-              </div>
+            <div className="forgot">
+              <Link to="/forgot-password" className="small">
+                <small>Forgot Password?</small>
+              </Link>
             </div>
-            <div className="sign-up-btn">
-              <input onClick={() => {submitButton()}} type="submit" value="Create Account" />
-            </div>
-            <small>{store.message}</small>
+            <input type="submit" value="Sign In" onClick={()=> {actions.login(info)}}/>
             <small>
-              Already have an account? <Link to="/sign-in">Sign In</Link>
+              Don't have an account? <Link to="/sign-up">Sign Up</Link>
             </small>
           </form>
         </div>
+
       </div>
     </div>
   );

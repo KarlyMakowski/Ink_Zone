@@ -1,7 +1,7 @@
 .footer {
   padding-top: 30px;
   padding-bottom: 10px;
-  background-color: rgba(36, 38, 43, 1);
+  background-color: rgba(8, 8, 8, 0.596);
   color: white;
 }
 
@@ -30,11 +30,12 @@
 }
 
 .footer ul {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
   list-style: none;
-  font-size: 18px;
   line-height: 1.6;
   text-align: center;
 }
@@ -55,16 +56,10 @@
 }
 
 .footer .copyright {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.1rem;
   margin-top: 15px;
   text-align: center;
-  font-size: 15px;
   color: #aaa;
 }
 
-@media (max-width: 480px) {
-  .footer-social, 
-  .copyright,
-  .footer ul {
-    margin-left: 100px;
-  }
-}

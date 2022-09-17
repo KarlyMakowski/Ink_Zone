@@ -1,6 +1,7 @@
 .about-1 {
-  margin: 30px;
+  margin-bottom: 30px;
   padding: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .about-1 h1 {
@@ -25,13 +26,15 @@ adding style to about items
 ============================*/
 
 .about-item {
-  margin-bottom: 20px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 5rem;
   color: white;
-  background: rgba(48, 30, 30, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   padding: 3rem 2rem;
   border-radius: 1rem;
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(2px);
   padding: 80px 30px;
 }
 
@@ -47,7 +50,8 @@ adding style to the icons(book,globe,pencil)
 adding style to h3(heading 3) of each item 
 =========================================*/
 .about-item h3 {
-  font-size: 25px;
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -89,14 +93,6 @@ translate Y: move along the Y axis, negative(-20) moves it up, while positive(20
   transition: all 400ms ease-in-out;
 }
 
-footer {
-  background: #212226;
-  padding: 20px;
+.about-us-container {
+  padding-bottom: 50px;
 }
-footer p {
-  color: #fff;
-}
-
-/*================================================================================
-if you manage it to this far, congratulations, check more on https://devhubke.com
-=================================================================================*/

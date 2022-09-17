@@ -1,39 +1,43 @@
 .pricing-view {
   width: 100%;
-  padding: 10rem 1rem;
-  margin-left: auto;
+  margin: auto;
 }
 
 .pricing-container {
   max-width: 1140px;
-  margin-top: 15px;
+}
+
+.pricing-title {
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 15px;
 }
 
 .pricing-title h1 {
-  margin-top: -70px;
-  padding-bottom: 60px;
-  text-align: center;
-  font-family: "Carter One", cursive;
+  position: relative;
+  margin-bottom: 50px;
   font-size: 4.5em;
-  color: whitesmoke;
+  font-family: "Carter One", cursive;
   text-transform: uppercase;
   line-height: 1em;
   outline: none;
-  text-shadow: 0 0 7px #a091ff, 0 0 10px #aeffb9, 0 0 21px #a091ff,
-    0 0 102px #a091ff, 0 0 151px #a091ff;
+  background: -webkit-linear-gradient(#aeffb9, #a091ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .price-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
   justify-content: center;
-  grid-gap: 7rem;
+  grid-gap: 5rem;
   text-align: center;
+  margin-left: 70px;
+  margin-bottom: 160px;
 }
 
 .pricing-container .pricing-card {
-  border: 1px solid white;
-  box-shadow: 15px 25px 20px #a091ff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .pricing-card {
@@ -41,13 +45,19 @@
   font-family: "Rajdhani", sans-serif;
   font-weight: bold;
   padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  backdrop-filter: blur(2px);
+  animation: animateForm 1s ease forwards;
 }
 
 .pricing-card h3 {
   color: black;
   font-size: 2.5rem;
+  font-weight: bold;
   padding: 1rem;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  border-radius: 1rem;
 }
 
 .pricing-card img {
@@ -55,6 +65,7 @@
   width: 100%;
   height: 18rem;
   object-fit: cover;
+  border-radius: 1rem;
 }
 
 .pricing-card .divider {
@@ -67,6 +78,7 @@
 .price {
   color: #a091ff;
   font-size: 3.5rem;
+  font-weight: bold;
   padding: 1rem;
 }
 
@@ -78,44 +90,68 @@
   text-transform: uppercase;
 }
 
-.pricing-card .pricing-btn {
+.pricing-btn {
   display: block;
   width: 80%;
+  padding: 10px;
+  text-decoration: none;
   margin: 2rem auto;
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.pricing-card .pricing-btn:hover {
+.pricing-btn:hover {
   color: black;
   font-weight: bold;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .pricing-view {
-    padding-top: 5rem;
+    padding: 0;
   }
   .price-grid {
-    grid-gap: 2rem;
+    grid-gap: 1rem;
+    margin: auto;
+    width: 85%;
+    padding-bottom: 50px;
   }
   .pricing-container {
-    max-width: 90%;
-    margin-left: 100px;
     grid-template-columns: 1fr;
   }
   .pricing-container .pricing-card {
     box-shadow: none;
   }
+  .pricing-card h3 {
+    padding: 0.2em;
+  }
   .pricing-card img {
+    height: 10rem;
+    object-fit: cover;
+  }
+  .price {
+    padding: 0;
+    margin: 10px 0;
+  }
+  .pricing-view p,
+  .pricing-card .divider {
     display: none;
   }
-  .pricing-title h1{
-    padding: 40px 0 20px 30px;
-    margin-bottom: 0;
-    margin-left: 85px;
-    font-size: 3em;
+  .pricing-card .pricing-btn {
+    margin: 0;
+    width: 100%;
+  }
+  .pricing-title h1 {
+    font-size: 2.9em;
+    margin: auto;
+    justify-content: center;
+  }
+  .pricing-title {
+    padding: 40px 0;
   }
 }
