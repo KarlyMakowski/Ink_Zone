@@ -10,9 +10,10 @@ api = Blueprint('api', __name__)
 
 @api.route('/signup', methods=['POST'])
 def signup():
-    username = request.json.get('username', None)
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
+    username = request.json.get("username", None)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    confirm_password = request.json.get("confirm_password", None)
     
     # username allowed characters first, it has to be 8-20 characters long, no _ or . at the beginning, no __ or _. or ._ or .. inside, no _ or . at the end.
     regex_username = re.compile(r'^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$')
@@ -20,42 +21,44 @@ def signup():
     regex_email = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
     # password minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
     regex_password = re.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$")
+    
+    if username and email and password and confirm_password == password:
 
-    if not username: return jsonify({"created": False, "msg": "Missing username!"}), 400
+        if not username: return jsonify({"created": False, "msg": "Missing username!"}), 400
     
-    if not email: return jsonify({"created": False, "msg": "Missing email address!"}), 400
+        if not email: return jsonify({"created": False, "msg": "Missing email address!"}), 400
     
-    if not password: return jsonify({"created": False, "msg": "Enter a password!"}), 400
+        if not password: return jsonify({"created": False, "msg": "Enter a password!"}), 400
     
-    if not re.match(regex_username, username):
-        return jsonify({"created": False, "msg": "Not valid username!"}), 400
+        if not re.match(regex_username, username):
+            return jsonify({"created": False, "msg": "Not valid username!"}), 400
     
-    if not re.fullmatch(regex_email, email):
-        return jsonify({"created": False, "msg": "Not valid email!"}), 400
+        if not re.fullmatch(regex_email, email):
+            return jsonify({"created": False, "msg": "Not valid email!"}), 400
 
-    if not re.search(regex_password, password):
-        return jsonify({"created": False, "msg": "You need a min 8 characters password, with at least a symbol, upper and lower case letters, and a number"}), 400
+        if not re.search(regex_password, password):
+            return jsonify({"created": False, "msg": "You need a min 8 characters password, with at least a symbol, upper and lower case letters, and a number"}), 400
     
-    email_already_exists = User.query.filter_by(email = email).first()
-    
-    if User.query.filter_by(email = email).first() is not None:
-        return jsonify({"created": False, "msg": "Email already exists!"}), 409
+        if User.query.filter_by(email = email).first() is not None:
+            return jsonify({"created": False, "msg": "Email already exists!"}), 409
 
-    if User.query.filter_by(username = username).first() is not None:
-        return jsonify({"created": False, "msg": "Username already exists!"}), 409
+        if User.query.filter_by(username = username).first() is not None:
+            return jsonify({"created": False, "msg": "Username already exists!"}), 409
+        
+        else:
+            pw_hash = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
+            new_user = User(username = username, email = email, password = pw_hash)
+            db.session.add(new_user)
+            db.session.commit()
     
-    else:
-        pw_hash = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(username = username, email = email, password = pw_hash)
-        db.session.add(new_user)
-        db.session.commit()
+            response_body = {
+            "created": True,
+            "msg": f'Welcome {username}, you succesfully signed up!'
+        }
     
-    response_body = {
-        "created": True,
-        "msg": f'Welcome {username}, you succesfully signed up!'
-    }
+        return jsonify(response_body), 201 
     
-    return jsonify(response_body), 201 
+    else: return jsonify({"created": False, "msg": "Passwords do not match!"}), 400
 
 @api.route('/token', methods=['POST']) #AUTHENTICATION / LOG IN
 def create_token():
@@ -96,6 +99,7 @@ def private():
     }
         return jsonify(response_body), 200
     else:
+        
         return ({"logged_in": False}), 400
 
 @api.route('/token/refresh', methods=['GET'])
