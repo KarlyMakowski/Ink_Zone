@@ -24,22 +24,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/signup", opts)
-            if (resp.status !== 200) {
-              alert("There has been some error");
-            return false;
-            }
             const data = await resp.json();
             console.log("this came from the backend", data);
-            const response = data.status;
+            const response = await data.created;
             if(response) {
-              setStore({message: "User succesfully created!"});
+              sessionStorage.setItem("created", data.created);
+              setStore({message: data.msg}); 
             }
             else {
-              setStore({message: "User could not be created!"})
+              setStore({message: data.msg})
             }
           }
-          catch (error) {
-            console.error("There has been an error during sign up!");
+          catch(error) {
+            console.error("There has been an error during sign up!", error);
           }
         },
 
@@ -64,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/token", opts)
           if (resp.status !== 200){
-            alert("There has been some error");
+            alert("Email or password not correct!");
             return false;
           } 
 
@@ -75,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return true;
         }
         catch(error){
-          console.error("There has been an error login in!")
+          console.error("There has been an error login in!", error)
         }
       },
 
@@ -86,9 +83,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: "Bearer " + store.token
           }
         }
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/hello", opts)
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/private", opts)
         .then(resp => resp.json())
-        .then(data => setStore({ message: data.message }))
+        .then(data => setStore({ message: data.msg }))
         .catch(error => console.log("Error loading message from backend", error));
       },
 
