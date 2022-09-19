@@ -2,7 +2,7 @@ import React from "react";
 
 import "../../styles/favs.css";
 
-import { GiRoundStar } from "react-icons/gi";
+import { FaHeart } from "react-icons/fa";
 
 export const Favs = ({id}) => {
 
@@ -12,7 +12,7 @@ export const Favs = ({id}) => {
 
     return (
         <button className="add-fav" onClick={handleClick}>
-            <span aria-label="Fav Style" role="img"><GiRoundStar /></span>
+            <span aria-label="Fav Style" role="img"><FaHeart /></span>
         </button>
     );
 }

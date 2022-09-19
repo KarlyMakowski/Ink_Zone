@@ -1,21 +1,22 @@
 .add-fav {
-    background: rgb(244, 67, 54, .5);
+    background: rgba(24, 23, 23, .9);
     border: 0;
-    border-radius: 6px;
+    border-radius: 50px;
     width: 55px;
     height: 55px;
-    color: rgb(55, 0, 2);
-    font-size: 40px;
+    color: rgb(255, 247, 247);
+    font-size: 29px;
     cursor: pointer;
     transition: all .3s ease;
 }
 
 .add-fav:hover {
-    background: rgb(244, 67, 54, .9);
+    background: rgb(255, 247, 247, .9);
+    color: rgb(244, 67, 54);
 }
 
 .add-fav span {
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
+    display: block;
+    width: 55px;
+    height: 50px;
 }

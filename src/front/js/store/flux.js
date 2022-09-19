@@ -1,54 +1,100 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      currentuser: {},
-      logged: null,
-      message: "",
+      token: null,
+      message: null,
       styles: [],
       prices: [],
     },
 
     actions: {
-      signup: async (user) => {
+
+      signup: async (username, email, password) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+          }),
+        };
+
         try {
-          // fetching data from the backend
-          const resp = await fetch("https://ink-zone.herokuapp.com/api/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-          });
+          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/signup", opts)
+            const data = await resp.json();
+            console.log("this came from the backend", data);
+            const response = await data.created;
+            if(response) {
+              sessionStorage.setItem("created", data.created);
+              setStore({message: data.msg}); 
+            }
+            else {
+              setStore({message: data.msg})
+            }
+          }
+          catch(error) {
+            console.error("There has been an error during sign up!", error);
+          }
+        },
+
+      syncTokenFromSessionStore: () => {
+        const token = sessionStorage.getItem("token");
+        console.log("Application just loaded, synching the session storage token");
+        if (token && token != "" && token != undefined) setStore({ token: token });
+      },
+
+      login: async (email, password) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password
+          }),
+        };
+
+        try {
+          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/token", opts)
+          if (resp.status !== 200){
+            alert("Email or password not correct!");
+            return false;
+          } 
+
           const data = await resp.json();
-          const response = data.created;
-          if (response) {
-            setStore({message: "Create successful"})
-          }
-          else{
-          setStore({message: "User not created"})
-          }
-          //setStore({ message: data.message })
-          // don't forget to return something, that is how the async resolves
-        } catch (error) {
-          console.log("Error loading message from backend", error);
+          console.log("this came from the backend", data);
+          sessionStorage.setItem("token", data.access_token);
+          setStore({ token: data.access_token});
+          return true;
+        }
+        catch(error){
+          console.error("There has been an error login in!", error)
         }
       },
 
-      login: async (user) => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch("https://ink-zone.herokuapp.com/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-          });
-          const data = await resp.json();
-          setStore({ message: data.message, logged: data.logged, currentuser: data.user })
-          localStorage.setItem("token", data.token) 
-          // don't forget to return something, that is how the async resolves
-        } catch (error) {
-          console.log("Error loading message from backend", error);
+      getMesssage: () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: "Bearer " + store.token
+          }
         }
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/private", opts)
+        .then(resp => resp.json())
+        .then(data => setStore({ message: data.msg }))
+        .catch(error => console.log("Error loading message from backend", error));
       },
-      
+
+      logout: () => {
+        sessionStorage.removeItem("token");
+        console.log("Login out");
+        setStore({ token: null });
+      },
+
       loadStyles: () => {
         fetch("https://ink-zone.herokuapp.com/api/styles/")
           .then((response) => response.json())

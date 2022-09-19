@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 import "../../styles/navbar.css";
@@ -10,10 +11,12 @@ import { IoIosColorPalette } from "react-icons/io";
 import { HiCurrencyEuro, HiQuestionMarkCircle } from "react-icons/hi";
 import { RiWechatFill } from "react-icons/ri";
 import { GiDeathZone } from "react-icons/gi";
-import { GoOctoface } from "react-icons/go";
-import { CgLogOut } from "react-icons/cg";
+import { FiLogOut, FiLogIn } from "react-icons/fi";
+
 
 export const Navbar = () => {
+  const { actions, store } = useContext(Context);
+
   const [expanded, setExpanded] = useState(false);
 
   const itsExpanded = () => {
@@ -112,28 +115,27 @@ export const Navbar = () => {
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
-            {expanded && <p className="nav-views">client zone</p>}
-            {!expanded && <div className="tooltip">clients</div>}
+            {expanded && <p className="nav-views">profile</p>}
+            {!expanded && <div className="tooltip">profile</div>}
           </Link>
         </div>
       </div>
       <div className="nav-footer">
-        {expanded && (
-          <div className="nav-details">
-            <GoOctoface
-              style={{ height: "57px", width: "50px" }}
-              className="nav-icon"
+      {!store.token ? (
+          <Link to="/sign-in">
+            <FiLogIn
+              style={{ height: "57px", width: "30px" }}
+              className="log-in"
             />
-            <div className="nav-footer-info">
-              <p className="nav-footer-user-name navViews">Admin</p>
-              <p className="nav-footer-user-position navViews">Active</p>
-            </div>
-          </div>
+            {expanded && ("Log In")}
+          </Link>
+        ) : (
+            <FiLogOut
+              style={{ height: "57px", width: "30px" }}
+              className="log-out"
+              onClick={() => actions.logout()}
+            />
         )}
-        <CgLogOut
-          style={{ height: "57px", width: "30px" }}
-          className="log-out"
-        />
       </div>
     </div>
   );
