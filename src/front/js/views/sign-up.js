@@ -40,7 +40,7 @@ export const SignUp = () => {
   return (
     <div className="register">
       <div className="login-container">
-        <div className="sign-up">
+        <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={handleSubmit}>
             <div className="social">
@@ -131,7 +131,7 @@ export const SignUp = () => {
               <input onClick={handleClick} type="submit" value="Create Account" />
             </div>
             <small>
-              Already have an account? <Link to="/sign-in">Sign In</Link>
+              Already have an account? <Link to="/sign-in"><label>Sign In</label></Link>
             </small>
           </form>
         </div>

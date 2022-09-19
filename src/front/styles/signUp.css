@@ -157,24 +157,8 @@ p {
 
 /* Sign Up */
 
-.signup {
-  display: none;
-}
-
 .sign-up-btn {
   margin-top: 58px;
-}
-
-#toggle:checked ~ .signin {
-  display: none;
-}
-
-#toggle:checked ~ .signup {
-  display: block;
-}
-
-#toggle {
-  display: none;
 }
 
 .gr {

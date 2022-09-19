@@ -95,7 +95,7 @@ export const SignIn = () => {
               </div>
               <input type="submit" value="Sign In" onClick={handleClick} />
               <small>
-                Don't have an account? <Link to="/sign-up">Sign Up</Link>
+                Don't have an account? <Link to="/sign-up"><label>Sign Up</label></Link>
               </small>
             </form>
           )}
