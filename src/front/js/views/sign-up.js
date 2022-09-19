@@ -30,10 +30,11 @@ export const SignUp = () => {
   const [confirmPassword, setConfirmPassword] =useState("");
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    actions.signup(username, email, password).then(() => {
-      navigate("/"); 
+  const handleClick = async () => {
+    await actions.signup(username, email, password, confirmPassword).then(() => {
       store.message;
+      navigate("/sign-in"); 
+
     })
   };
 

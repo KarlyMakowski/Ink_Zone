@@ -26,10 +26,11 @@ export const SignIn = () => {
   console.log("This is your token", store.token)
 
   const handleClick = () => {
-    actions.login(email, password);
+    actions.login(email, password).then(() => {
+      if (store.token) navigate("/");
+      store.message;
+    });
   };
-
-  if (store.token && store.token != "" && store.token != undefined) navigate("/");
 
   return (
     <div className="register">

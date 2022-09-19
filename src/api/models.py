@@ -13,7 +13,7 @@ class User(db.Model):
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
-    picture = db.Column(db.String(100), default="")
+    picture = db.Column(db.String(100), default="default.jpg")
     is_active = db.Column(db.Boolean(), default=True, unique=False, nullable=True)
     role = db.relationship('Role')
     reviews = db.relationship('Reviews')

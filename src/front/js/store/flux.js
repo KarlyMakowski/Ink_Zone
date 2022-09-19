@@ -1,6 +1,10 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword:"",
       token: null,
       message: null,
       styles: [],
@@ -9,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
     actions: {
 
-      signup: async (username, email, password) => {
+      signup: async (username, email, password, confirmPassword) => {
         const opts = {
           method: "POST",
           headers: {
@@ -18,7 +22,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             username: username,
             email: email,
-            password: password
+            password: password,
+            confirm_password: confirmPassword
           }),
         };
 
@@ -27,9 +32,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             const data = await resp.json();
             console.log("this came from the backend", data);
             const response = await data.created;
-            if(response) {
+            if(response.created) {
               sessionStorage.setItem("created", data.created);
               setStore({message: data.msg}); 
+              console.log(data)
             }
             else {
               setStore({message: data.msg})
@@ -61,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/token", opts)
           if (resp.status !== 200){
-            alert("Email or password not correct!");
+            alert("Check your email or password!");
             return false;
           } 
 
