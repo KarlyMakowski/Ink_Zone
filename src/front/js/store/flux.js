@@ -112,6 +112,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
       },
+
+      handleChange: e => {
+				const { name, value } = e.target;
+				setStore({
+					[name]: value
+				});
+			},
+      
     },
   };
 };

@@ -8,6 +8,7 @@ import "../../styles/signUp.css";
 
 export const SignIn = () => {
   const { actions, store } = useContext(Context);
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(true);
 
@@ -19,14 +20,10 @@ export const SignIn = () => {
     e.preventDefault();
   };
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
   console.log("This is your token", store.token)
 
   const handleClick = () => {
-    actions.login(email, password).then(() => {
+    actions.login(store.email, store.password).then(() => {
       if (store.token) navigate("/");
       store.message;
     });
@@ -61,8 +58,8 @@ export const SignIn = () => {
                   className="form-control"
                   id="floatingInput"
                   autoComplete="off"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={store.email}
+                  onChange={e => actions.handleChange(e)}
                 />
                 <label className="floatingInput">Email</label>
               </div>
@@ -74,8 +71,8 @@ export const SignIn = () => {
                   className="form-control"
                   id="floatingPassword"
                   autoComplete="off"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={store.password}
+                  onChange={e => actions.handleChange(e)}
                 />
                 <label className="floatingPassword mt-2">Password </label>
                 <div

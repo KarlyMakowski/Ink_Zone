@@ -47,7 +47,7 @@ def signup():
         if User.query.filter_by(email = email).first() is not None:
             return jsonify({"created": False, "msg": "Email already exists!"}), 409
         if User.query.filter_by(username = username).first() is not None:
-            return jsonify({"created": False, "msg": "Username already exists!"}), 409
+            return jsonify({"created": False, "msg": "Username already exists!"}), 409        
         else:
             pw_hash = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
             new_user = User(username = username, email = email, password = pw_hash)
@@ -78,7 +78,7 @@ def create_token():
         
         if passw_is_correct:
             access_token = create_access_token(identity = email)
-            refresh_token = create_refresh_token(identity = email)
+            refresh_token = create_refresh_token(identity = email)           
         return jsonify(access_token = access_token, refresh_token = refresh_token)
     
     else:
@@ -116,8 +116,8 @@ def private():
         "logged_in": True
     }
         return jsonify(response_body), 200
-    else:
-        
+    
+    else:        
         return ({"logged_in": False}), 400
 
 """ @api.route('/private', methods=['PUT'])
@@ -145,7 +145,6 @@ def private_update():
             if not uploading_picture: return jsonify({"status": "failed", "msg":"There was an error while uploading your image!", "data": None}), 400
             current_user.profile.picture = uploading_picture["secure_url"]      """                                          
                                                            
-
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()

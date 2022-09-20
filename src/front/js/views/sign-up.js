@@ -8,6 +8,7 @@ import "../../styles/signUp.css";
 
 export const SignUp = () => {
   const { actions, store } = useContext(Context);
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
@@ -24,14 +25,8 @@ export const SignUp = () => {
     e.preventDefault();
   };
 
-  const [username, setUsername] =useState("");
-  const [email, setEmail] =useState("");
-  const [password, setPassword] =useState("");
-  const [confirmPassword, setConfirmPassword] =useState("");
-  const navigate = useNavigate();
-
   const handleClick = async () => {
-    await actions.signup(username, email, password, confirmPassword).then(() => {
+    await actions.signup(store.username, store.email, store.password, store.confirmPassword).then(() => {
       store.message;
       navigate("/sign-in"); 
 
@@ -59,15 +54,15 @@ export const SignUp = () => {
             <div className="form-floating">
               <input
                 type="text"
-                placeholder="Name"
-                name="name"
+                placeholder="User Name"
+                name="username"
                 className="form-control"
                 id="floatingInput"
                 autoComplete="off"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={store.username}
+                onChange={e => actions.handleChange(e)}
               />
-              <label className="floatingInput">Name</label>
+              <label className="floatingInput">User Name</label>
             </div>
             <div className="form-floating">
               <input
@@ -77,8 +72,8 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingInput"
                 autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={store.email}
+                onChange={e => actions.handleChange(e)}
               />
               <label className="floatingInput">Email</label>
             </div>
@@ -90,8 +85,8 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingPassword"
                 autoComplete="off"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={store.password}
+                onChange={e => actions.handleChange(e)}
               />
               <label className="floatingPassword">Password</label>
               <div
@@ -113,8 +108,8 @@ export const SignUp = () => {
                 className="form-control"
                 id="floatingPassword"
                 autoComplete="off"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={store.confirmPassword}
+                onChange={e => actions.handleChange(e)}
               />
               <label id="floatingPassword">Confirm Password</label>
               <div
