@@ -126,6 +126,7 @@ export const SignUp = () => {
             <div className="sign-up-btn">
               <input onClick={handleClick} type="submit" value="Create Account" />
             </div>
+            <small>{store.message}</small>
             <small>
               Already have an account? <Link to="/sign-in"><label>Sign In</label></Link>
             </small>
