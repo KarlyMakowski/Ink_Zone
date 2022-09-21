@@ -3,7 +3,6 @@ from api.models import db, User, Styles, Prices, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
-from flask_login import current_user
 
 import re
 import cloudinary
@@ -18,6 +17,7 @@ from cloudinary.uploader import upload
 ) """
 
 api = Blueprint('api', __name__)
+
 
 @api.route('/signup', methods=['POST'])
 def signup():
@@ -63,6 +63,7 @@ def signup():
     
     else: return jsonify({"created": False, "msg": "Passwords do not match!"}), 400
 
+
 @api.route('/token', methods=['POST']) #AUTHENTICATION / LOG IN
 def create_token():
     email = request.json.get("email", None)
@@ -107,6 +108,7 @@ def refresh_users_token():
     
     return jsonify(response_body), 200
 
+
 @api.route('/private', methods=['GET'])
 @jwt_required()
 def private():
@@ -124,29 +126,36 @@ def private():
     else:        
         return ({"logged_in": False}), 400
 
+
 @api.route('/create-review', methods=['GET','POST'])
 @jwt_required()
 def create_post():
     current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    review = request.json.get("review", None)
     
     if request.method == 'POST':
-        review = request.json.get("review", None)
         
-    if not review: return jsonify({"created": False, "msg": "Please, write your review!"}), 400
-                
-    user = User.query.filter_by(email = current_user).first()    
-    new_review = Reviews(review = review, user_id =  user.id)
-    db.session.add(new_review)
-    db.session.commit()
+        if not review: return jsonify({"created": False, "msg": "Please, write your review!"}), 400
+                     
+        new_review = Reviews(review = review, user_id = user.id)
+        db.session.add(new_review)
+        db.session.commit()
             
-    response_body = {
-        "created": True,
-        "review": new_review.review,
-        "msg": "Review successfuly created!"                
-    }
+        response_body = {
+            "created": True,
+            "user.id": new_review.user_id,
+            "review": new_review.review,
+            "msg": "Review successfuly created!"                
+        }
             
-    return jsonify(response_body), 201
+        return jsonify(response_body), 201
     
+    else:        
+       all_reviews = Reviews.query.filter_by(user_id = user.id)
+       reviews_list = list(map(lambda review:review.serialize(), all_reviews))
+       return jsonify(reviews_list), 200 
+
 
 """ @api.route('/private', methods=['PUT'])
 @jwt_required()
@@ -179,6 +188,7 @@ def get_styles():
     styles_list = list(map(lambda styles: styles.serialize(), styles))
     
     return jsonify(styles_list), 200
+
 
 @api.route('/prices', methods=['GET'])
 def get_prices():
