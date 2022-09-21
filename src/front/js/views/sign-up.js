@@ -28,7 +28,7 @@ export const SignUp = () => {
   const handleClick = async () => {
     await actions.signup(store.username, store.email, store.password, store.confirmPassword).then(() => {
       store.message;
-      navigate("/sign-in"); 
+      navigate("/profile"); 
 
     })
   };

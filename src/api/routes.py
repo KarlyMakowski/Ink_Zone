@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices
+from api.models import db, User, Styles, Prices, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
+from flask_login import current_user
 
 import re
 import cloudinary
@@ -24,7 +25,6 @@ def signup():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     confirm_password = request.json.get("confirm_password", None)
-    print(password, confirm_password)
     # username allowed characters first, it has to be 8-20 characters long, no _ or . at the beginning, no __ or _. or ._ or .. inside, no _ or . at the end.
     regex_username = re.compile(r'^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$')
     # email validation (special characters needed)
@@ -78,27 +78,31 @@ def create_token():
         
         if passw_is_correct:
             access_token = create_access_token(identity = email)
-            refresh_token = create_refresh_token(identity = email)           
-        return jsonify(access_token = access_token, refresh_token = refresh_token)
+            refresh_token = create_refresh_token(identity = email)  
+            
+            response_body = {
+                "user": {
+                    "email": user.email,
+                    "username": user.username,
+                    "logged_in": True,
+                    "msg": "Successfuly logged in",
+                    "access": access_token,                    
+                    "refresh": refresh_token
+                }
+            }         
+            return jsonify(response_body), 200
     
-    else:
-        return jsonify({"logged_in": False, "msg": "Wrong credentials!"}), 401
+    return jsonify({"logged_in": False, "msg": "Wrong credentials!"}), 401
     
-    response_body = {
-        "logged_in": True,
-        "msg": "Successfuly logged in"
-    }
-    
-    return jsonify(response_body), 200
 
 @api.route('/token/refresh', methods=['GET'])
 @jwt_required(refresh = True)
 def refresh_users_token():
-    identity = get_jwt_identity()
-    access = create_access_token(identity = identity)
+    current_user = get_jwt_identity()
+    access_token = create_access_token(identity = current_user)
     
     response_body = {
-        "access": access
+        "access": access_token
     } 
     
     return jsonify(response_body), 200
@@ -119,6 +123,30 @@ def private():
     
     else:        
         return ({"logged_in": False}), 400
+
+@api.route('/create-review', methods=['GET','POST'])
+@jwt_required()
+def create_post():
+    current_user = get_jwt_identity()
+    
+    if request.method == 'POST':
+        review = request.json.get("review", None)
+        
+    if not review: return jsonify({"created": False, "msg": "Please, write your review!"}), 400
+                
+    user = User.query.filter_by(email = current_user).first()    
+    new_review = Reviews(review = review, user_id =  user.id)
+    db.session.add(new_review)
+    db.session.commit()
+            
+    response_body = {
+        "created": True,
+        "review": new_review.review,
+        "msg": "Review successfuly created!"                
+    }
+            
+    return jsonify(response_body), 201
+    
 
 """ @api.route('/private', methods=['PUT'])
 @jwt_required()

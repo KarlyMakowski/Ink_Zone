@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return true;
         }
         catch(error){
-          console.error("There has been an error login in!", error)
+          console.error("There has been an error logging in!!", error)
         }
       },
 
