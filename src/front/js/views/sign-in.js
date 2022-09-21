@@ -29,7 +29,7 @@ export const SignIn = () => {
     actions.login(email, password);
   };
 
-  if (store.token && store.token != "" && store.token != undefined) navigate("/");
+  if (store.token && store.token != "" && store.token != undefined) navigate("/profile");
 
   return (
     <div className="register">
@@ -57,8 +57,7 @@ export const SignIn = () => {
                   type="email"
                   placeholder="Email"
                   name="email"
-                  className="form-control"
-                  id="floatingInput"
+                  className="form-control floatingInput"
                   autoComplete="off"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -70,8 +69,7 @@ export const SignIn = () => {
                   type={!show ? "text" : "password"}
                   placeholder="Password"
                   name="password"
-                  className="form-control"
-                  id="floatingPassword"
+                  className="form-control floatingPassword"
                   autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

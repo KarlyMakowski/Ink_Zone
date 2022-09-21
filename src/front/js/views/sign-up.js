@@ -32,7 +32,7 @@ export const SignUp = () => {
 
   const handleClick = () => {
     actions.signup(username, email, password).then(() => {
-      navigate("/"); 
+      navigate("/sign-in"); 
       store.message;
     })
   };
@@ -60,21 +60,19 @@ export const SignUp = () => {
                 type="text"
                 placeholder="Name"
                 name="name"
-                className="form-control"
-                id="floatingInput"
+                className="form-control floatingInput"
                 autoComplete="off"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label className="floatingInput">Name</label>
+              <label className="floatingInput">Username</label>
             </div>
             <div className="form-floating">
               <input
                 type="email"
                 placeholder="Email"
                 name="email"
-                className="form-control"
-                id="floatingInput"
+                className="form-control floatingInput"
                 autoComplete="off"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -86,8 +84,7 @@ export const SignUp = () => {
                 type={!show ? "text" : "password"}
                 placeholder="Password"
                 name="password"
-                className="form-control"
-                id="floatingPassword"
+                className="form-control floatingPassword"
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -109,8 +106,7 @@ export const SignUp = () => {
                 type={!show2 ? "text" : "password"}
                 placeholder="Confirm Password"
                 name="confirmPassword"
-                className="form-control"
-                id="floatingPassword"
+                className="form-control floatingPassword"
                 autoComplete="off"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

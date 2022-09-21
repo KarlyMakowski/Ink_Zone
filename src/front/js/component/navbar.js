@@ -108,7 +108,7 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">contact</div>}
           </Link>
           <Link
-            to="/sign-up"
+            to="/profile"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
             <GiDeathZone

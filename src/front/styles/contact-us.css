@@ -102,7 +102,7 @@
 
 .inputBox input {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1.25rem;
   outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
@@ -112,7 +112,7 @@
 
 .inputBox textarea {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1.25rem;
   outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;

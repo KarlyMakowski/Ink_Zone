@@ -1,0 +1,108 @@
+.profile-container {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    padding-bottom: 10rem;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.main-body {
+  font-size: 1.25rem;
+}
+
+.profile-container h5, h4, h3 {
+  font-weight: bold;
+}
+
+.profile-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-clip: border-box;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+  backdrop-filter: blur(2px);
+}
+
+.profile-card .col-sm-3 {
+  font-weight: bold;
+}
+
+.profile-card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.list-group-item span {
+  margin-left: 10px;
+}
+
+.profile-btn input, 
+.review-btn input {
+  padding: 10px;
+  font-size: 1em;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.profile-btn input[type="submit"],
+.review-btn input[type="submit"] {
+  width: 100px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.profile-btn input[type="submit"]:hover,
+.review-btn input[type="submit"]:hover {
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: black;
+  font-weight: bold;
+}
+
+.review-btn input[type="submit"] {
+  width: 180px;
+}
+
+.profile-card textarea {
+  padding: 10px;
+  font-size: 1em;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  resize: none;
+  min-height: 220px;
+  margin-bottom: 10px;
+}
+
+.hr-size {
+  margin: 1.73rem 0;
+}
+
+.gutters-sm {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.list-group {
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}

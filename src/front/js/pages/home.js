@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 import { AboutUs } from "../component/about-us";
-
 import video from "-!file-loader!../../img/tattoo-bg.mp4";
 
 export const Home = () => {
@@ -14,7 +13,6 @@ export const Home = () => {
   useEffect(() => {
     if (store.token && store.token != "" && store.token != undefined) actions.getMesssage();
   }, [store.token])
-
 
   const videoEl = useRef(video);
 

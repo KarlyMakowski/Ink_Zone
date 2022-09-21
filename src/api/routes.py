@@ -88,7 +88,7 @@ def create_token():
 @jwt_required()
 def private():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(email = current_user).first()
+    user = User.query.filter_by(username = current_user).first()
     
     if user:
         response_body = {
