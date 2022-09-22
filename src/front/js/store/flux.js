@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         try {
-          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/signup", opts)
+          const resp = await fetch("https://ink-zone.herokuapp.com/api/signup", opts)
             const data = await resp.json();
             console.log("this came from the backend", data);
             const response = await data.created;
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         try {
-          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/token", opts)
+          const resp = await fetch("https://ink-zone.herokuapp.com/api/token", opts)
           if (resp.status !== 200){
             alert("Email or password not correct!");
             return false;
@@ -83,7 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: "Bearer " + store.token
           }
         }
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/private", opts)
+        fetch("https://ink-zone.herokuapp.com/api/private", opts)
         .then(resp => resp.json())
         .then(data => setStore({ message: data.msg }))
         .catch(error => console.log("Error loading message from backend", error));
