@@ -8,7 +8,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       password: "",
       confirmPassword: "",
       message: "",
-      token: null,
       styles: [],
       prices: [],
     },
@@ -73,12 +72,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
         .then ((response) => {
           if (response.status !== 200){
-            Notify.failure("Wrong credentials!")
-          }
-          return response.json();
+            throw new Error()
+          } 
+          return response.json()          
         })
         .then((data) => {
-          Notify.success("Succesfully logged in")
           sessionStorage.setItem("token", data.token);
           setStore({ token: data.token});
           navigate('/')
