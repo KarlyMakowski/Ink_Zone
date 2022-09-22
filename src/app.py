@@ -13,6 +13,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
+import cloudinary
 
 
 #from models import Person
@@ -28,6 +29,9 @@ jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 app.bcrypt = bcrypt
 
+app.config['CLOUD_NAME'] = os.environ.get("CLOUD_NAME")
+app.config['CLOUD_API_KEY'] = os.environ.get("CLOUD_API_KEY")
+app.config['CLOUD_API_SECRET'] = os.environ.get("CLOUD_API_SECRET")
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")

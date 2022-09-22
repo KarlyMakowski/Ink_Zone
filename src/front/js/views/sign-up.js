@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
@@ -8,6 +8,7 @@ import "../../styles/signUp.css";
 
 export const SignUp = () => {
   const { actions, store } = useContext(Context);
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
@@ -20,29 +21,12 @@ export const SignUp = () => {
     setShow2((prevState) => !prevState);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const [username, setUsername] =useState("");
-  const [email, setEmail] =useState("");
-  const [password, setPassword] =useState("");
-  const [confirmPassword, setConfirmPassword] =useState("");
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    actions.signup(username, email, password).then(() => {
-      navigate("/sign-in"); 
-      store.message;
-    })
-  };
-
   return (
     <div className="register">
       <div className="login-container">
         <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={e => actions.signup(e, navigate)}>
             <div className="social">
               <a href="#" className="social-instagram">
                 <GrInstagram className="gr" />
@@ -58,14 +42,14 @@ export const SignUp = () => {
             <div className="form-floating">
               <input
                 type="text"
-                placeholder="Name"
-                name="name"
+                placeholder="User Name"
+                name="username"
                 className="form-control floatingInput"
                 autoComplete="off"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={store.username}
+                onChange={e => actions.handleChange(e)}
               />
-              <label className="floatingInput">Username</label>
+              <label className="floatingInput">User Name</label>
             </div>
             <div className="form-floating">
               <input
@@ -74,8 +58,8 @@ export const SignUp = () => {
                 name="email"
                 className="form-control floatingInput"
                 autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={store.email}
+                onChange={e => actions.handleChange(e)}
               />
               <label className="floatingInput">Email</label>
             </div>
@@ -86,8 +70,8 @@ export const SignUp = () => {
                 name="password"
                 className="form-control floatingPassword"
                 autoComplete="off"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={store.password}
+                onChange={e => actions.handleChange(e)}
               />
               <label className="floatingPassword">Password</label>
               <div
@@ -108,8 +92,8 @@ export const SignUp = () => {
                 name="confirmPassword"
                 className="form-control floatingPassword"
                 autoComplete="off"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={store.confirmPassword}
+                onChange={e => actions.handleChange(e)}
               />
               <label id="floatingPassword">Confirm Password</label>
               <div
@@ -124,8 +108,9 @@ export const SignUp = () => {
               </div>
             </div>
             <div className="sign-up-btn">
-              <input onClick={handleClick} type="submit" value="Create Account" />
+              <input type="submit" value="Create Account" />
             </div>
+            <small>{store.message}</small>
             <small>
               Already have an account? <Link to="/sign-in"><label>Sign In</label></Link>
             </small>

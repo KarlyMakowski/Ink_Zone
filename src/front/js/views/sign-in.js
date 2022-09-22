@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
@@ -8,6 +8,7 @@ import "../../styles/signUp.css";
 
 export const SignIn = () => {
   const { actions, store } = useContext(Context);
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(true);
 
@@ -15,21 +16,9 @@ export const SignIn = () => {
     setShow((prevState) => !prevState);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  console.log("This is your token", store.token)
-
-  const handleClick = () => {
-    actions.login(email, password);
-  };
-
-  if (store.token && store.token != "" && store.token != undefined) navigate("/profile");
+/*   useEffect(() => {
+    if (store.currentUser !== null) navigate('/private');
+  }, []) */
 
   return (
     <div className="register">
@@ -39,7 +28,7 @@ export const SignIn = () => {
           {store.token && store.token != "" && store.token != undefined ? (
             "You are logged in with this token" + store.token
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => actions.login(e, navigate)}>
               <div className="social">
                 <a href="#" className="social-instagram">
                   <GrInstagram className="gr" />
@@ -59,8 +48,8 @@ export const SignIn = () => {
                   name="email"
                   className="form-control floatingInput"
                   autoComplete="off"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={store.email}
+                  onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingInput">Email</label>
               </div>
@@ -71,8 +60,8 @@ export const SignIn = () => {
                   name="password"
                   className="form-control floatingPassword"
                   autoComplete="off"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={store.password}
+                  onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingPassword mt-2">Password </label>
                 <div
@@ -91,7 +80,7 @@ export const SignIn = () => {
                   <small>Forgot Password?</small>
                 </Link>
               </div>
-              <input type="submit" value="Sign In" onClick={handleClick} />
+              <input type="submit" value="Sign In" />
               <small>
                 Don't have an account? <Link to="/sign-up"><label>Sign Up</label></Link>
               </small>

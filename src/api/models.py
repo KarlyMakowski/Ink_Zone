@@ -13,7 +13,7 @@ class User(db.Model):
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
-    picture = db.Column(db.String(100), default="")
+    picture = db.Column(db.String(100), default="default.jpg")
     is_active = db.Column(db.Boolean(), default=True, unique=False, nullable=True)
     role = db.relationship('Role')
     reviews = db.relationship('Reviews')
@@ -113,9 +113,9 @@ class Experts(db.Model):
         }
         
 class Reviews(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     review = db.Column(db.String(3000), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), primary_key=True, nullable=False)
     
     def __repr__(self):
         return f'<Reviews %r>' % self.id

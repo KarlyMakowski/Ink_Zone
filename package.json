@@ -75,6 +75,7 @@
 	"dependencies": {
 		"bootstrap": "^5.2.1",
 		"bootswatch": "^5.2.0",
+		"notiflix": "^3.2.5",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-bootstrap": "^2.5.0",
