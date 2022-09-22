@@ -9,15 +9,6 @@ import cloudinary
 import cloudinary.api
 from cloudinary.uploader import upload
 
-
-""" cloudinary.config( 
-    cloud_name = "daahnwdra", 
-    api_key = "316871795959153", 
-    api_secret = "Aa3JYOvrl2yNciZW-xiB79VfNNo",
-    secure = True
-)  """
-
-
 api = Blueprint('api', __name__)
 
 
@@ -117,7 +108,7 @@ def refresh_users_token():
 @jwt_required()
 def private():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username = current_user).first()
+    user = User.query.filter_by(email = current_user).first()
     
     if user:
         response_body = {
@@ -130,6 +121,71 @@ def private():
     
     else:                
         return jsonify({"status": "failed", "logged": False}), 400
+
+
+@api.route('/private', methods=['PUT'])
+@jwt_required()
+def private_update():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()    
+    
+    username = request.json.get("username")    
+    if username == "" or username == None:
+        username = user.username
+        
+    email = request.json.get("email")
+    if email == "" or email == None:
+        email = user.email
+        
+    password = request.json.get("password") 
+    if password == "" or password == None:
+        password = user.password
+        
+    name = request.json.get("name")  
+    if name == "" or name == None:
+        name = user.name 
+        
+    lastname = request.json.get("lastname")
+    if lastname == "" or lastname == None:
+        lastname = user.lastname
+        
+    phonenumber = request.json.get("phonenumber")
+    if phonenumber == "" or phonenumber == None:
+        phonenumber = user.phonenumber
+        
+    facebook = request.json.get("facebook")  
+    if facebook == "" or facebook == None:
+        facebook = user.facebook  
+        
+    instagram = request.json.get("instagram")
+    if instagram == "" or instagram == None:
+        instagram = user.instagram
+        
+    twitter = request.json.get("twitter")
+    if twitter == "" or twitter == None:
+        twitter = user.twitter
+    
+    pw_hash = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
+    
+    user.username = username 
+    user.email = email
+    user.password = pw_hash
+    user.name = name
+    user.lastname = lastname
+    user.phonenumber = phonenumber
+    user.facebook = facebook
+    user.instagram = instagram
+    user.twiter = twitter
+
+    db.session.commit()
+    
+    response_body = {
+        "status": "succees",
+        "msg": "You successfully updated your profile!",
+        "user": user.serialize()    
+    }
+    
+    return jsonify (response_body), 200
 
 
 @api.route('/users-reviews', methods=['GET','POST'])
@@ -205,7 +261,7 @@ def edit_review(id):
         "user": user.username,
     }
     
-    return jsonify(response_body)
+    return jsonify(response_body), 200
     
 
 @api.route('/users-reviews/<id>', methods=['DELETE'])
@@ -225,32 +281,7 @@ def delete_review(id):
         
         return jsonify({}), 204
         
-        
-""" @api.route('/private', methods=['PUT'])
-@jwt_required()
-def private_update():
-    user = get_jwt_identity()
-    current_user = User.query.get(user)
-    
-    username = request.json.get("username", None)
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    name = request.json.get("name", None)
-    lastname = request.json.get("lastname", None)
-    phonenumber = request.json.get("phonenumber", None)
-    facebook = request.json.get("facebook", None)
-    instagram = request.json.get("instagram", None)
-    twitter = request.json.get("twitter", None)
-    
-    if "picture" in request.files:
-        profile_picture = request.files["picture"]
-    
-        if profile_picture != "":
-            uploading_picture = cloudinary.uploader.upload(request.files["profile_picture"])
-             
-            if not uploading_picture: return jsonify({"status": "failed", "msg":"There was an error while uploading your image!", "data": None}), 400
-            current_user.profile.picture = uploading_picture["secure_url"]      """                                          
-                                                           
+                                                                                                 
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()

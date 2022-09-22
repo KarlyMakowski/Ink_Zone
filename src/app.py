@@ -33,6 +33,13 @@ app.config['CLOUD_NAME'] = os.environ.get("CLOUD_NAME")
 app.config['CLOUD_API_KEY'] = os.environ.get("CLOUD_API_KEY")
 app.config['CLOUD_API_SECRET'] = os.environ.get("CLOUD_API_SECRET")
 
+cloudinary.config( 
+    cloud_name = app.config['CLOUD_NAME'], 
+    api_key = app.config['CLOUD_API_KEY'], 
+    api_secret = app.config['CLOUD_API_SECRET'],
+    secure = True
+)  
+
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
