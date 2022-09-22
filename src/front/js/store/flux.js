@@ -1,5 +1,3 @@
-import Notiflix, { Notify } from "notiflix";
-
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -7,6 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       email: "",
       password: "",
       confirmPassword: "",
+      token: null,
+      currentUser: {},
       message: "",
       styles: [],
       prices: [],
@@ -17,18 +17,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         e.preventDefault();
         const { username, email, password, confirmPassword } = getStore();
 
-        try{
+        try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup", {
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup",
+            {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                "username": username,
-                "email": email,
-                "password": password,
-                "confirm_password": confirmPassword,
+                username: username,
+                email: email,
+                password: password,
+                confirm_password: confirmPassword,
               }),
             }
           );
@@ -42,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ message: data.msg });
           }
         } catch (error) {
-          console.error("There has been an error during sign up!", error);
+          console.error("Error loading message from backend", error);
         }
       },
 
@@ -56,47 +57,44 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       login: async (e, navigate) => {
-
         e.preventDefault();
         const { email, password } = getStore();
 
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            "email": email,
-            "password": password
-          }),
-        })
-        .then ((response) => {
-          if (response.status !== 200){
-            throw new Error()
-          } 
-          return response.json()          
-        })
-        .then((data) => {
+        try {
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                password: password,
+              }),
+            }
+          );
+          const data = await resp.json();
+          setStore({
+            message: data.msg,
+            token: data.token,
+            currentuser: data.user,
+          });
           sessionStorage.setItem("token", data.token);
-          setStore({ token: data.token});
-          navigate('/')
-        })
-        .catch((error) => {
-          console.error("There has been an error logging in!!", error);
-        })        
+          navigate("/");
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
       getMesssage: () => {
         const store = getStore();
 
-        fetch(
-          "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/private",
-          {
-            headers: {
-              Authorization: "Bearer " + store.token,
-            },
-          }
-        )
+        fetch("https://ink-zone.herokuapp.com/api/private", {
+          headers: {
+            Authorization: "Bearer " + store.token,
+          },
+        })
           .then((resp) => resp.json())
           .then((data) => setStore({ message: data.msg }))
           .catch((error) =>
@@ -108,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         Notify.info("Successfully logged out");
         sessionStorage.removeItem("token");
         console.log("Login out");
-        setStore({ token: null });
+        setStore({ token: null, currentUser: {} });
       },
 
       loadStyles: () => {

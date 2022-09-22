@@ -90,8 +90,6 @@ def create_token():
                 "status": "success",
                 "msg": "Successfuly logged in",
                 "user": user.serialize(),
-                "email": user.email,
-                "username": user.username,
                 "token": token,                    
                 "refresh": refresh_token,
             }
@@ -108,6 +106,7 @@ def refresh_users_token():
     token = create_access_token(identity = current_user)
     
     response_body = {
+        "user": user.serialize(),
         "token": token
     } 
     
@@ -133,9 +132,9 @@ def private():
         return ({"status": "failed", "logged": False}), 400
 
 
-@api.route('/create-review', methods=['GET','POST'])
+@api.route('/users-reviews', methods=['GET','POST'])
 @jwt_required()
-def create_post():
+def create_review():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email = current_user).first()
     review = request.json.get("review", None)
@@ -167,6 +166,41 @@ def create_post():
        }
        
        return jsonify(response_body), 200 
+
+
+@api.route('/users-reviews/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_review(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    review = Reviews.query.filter_by(id = id, user_id = user.id).first()
+    
+    if not review:
+        return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
+    elif user.id != review.user_id:
+        return jsonify({"status": "failed", "msg": "You are not allowed to delete this review!"}), 401
+    else:
+        db.session.delete(review)
+        db.session.commit()
+        
+        return jsonify({}), 204
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """ @api.route('/private', methods=['PUT'])
