@@ -129,7 +129,7 @@ def private():
         return jsonify(response_body), 200
     
     else:                
-        return ({"status": "failed", "logged": False}), 400
+        return jsonify({"status": "failed", "logged": False}), 400
 
 
 @api.route('/users-reviews', methods=['GET','POST'])
@@ -168,6 +168,46 @@ def create_review():
        return jsonify(response_body), 200 
 
 
+@api.route('/users-reviews/<id>', methods=['GET'])
+@jwt_required()
+def get_review(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    review = request.json.get("review", None)
+    single_review = Reviews.query.filter_by(id = id, user_id = user.id).first()
+    
+    if not single_review:
+        return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
+
+    return jsonify({
+        "user": user.username,
+        "review": single_review.review,
+    })
+        
+   
+@api.route('/users-reviews/<id>', methods=['PUT', 'PATCH'])
+@jwt_required()
+def edit_review(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    edit_review = Reviews.query.filter_by(id = id, user_id = user.id).first()
+    review = request.json.get("review", None)
+    
+    if not edit_review:
+        return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404    
+
+    edit_review.review = review
+        
+    db.session.commit()
+    
+    response_body = {
+        "review": edit_review.review,
+        "user": user.username,
+    }
+    
+    return jsonify(response_body)
+    
+
 @api.route('/users-reviews/<id>', methods=['DELETE'])
 @jwt_required()
 def delete_review(id):
@@ -186,23 +226,6 @@ def delete_review(id):
         return jsonify({}), 204
         
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 """ @api.route('/private', methods=['PUT'])
 @jwt_required()
 def private_update():
