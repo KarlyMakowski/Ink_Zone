@@ -32,7 +32,6 @@
   padding: 3rem 2rem;
   border-radius: 1rem;
   backdrop-filter: blur(2px);
-  animation: animateForm 1s ease forwards;
 }
 
 .login-container h1 {
@@ -158,24 +157,8 @@ p {
 
 /* Sign Up */
 
-.signup {
-  display: none;
-}
-
 .sign-up-btn {
   margin-top: 58px;
-}
-
-#toggle:checked ~ .signin {
-  display: none;
-}
-
-#toggle:checked ~ .signup {
-  display: block;
-}
-
-#toggle {
-  display: none;
 }
 
 .gr {

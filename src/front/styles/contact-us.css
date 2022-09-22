@@ -48,7 +48,6 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 1rem;
   backdrop-filter: blur(2px);
-  animation: animateForm 1s ease forwards;
   font-size: 1.3rem;
 }
 
@@ -103,7 +102,7 @@
 
 .inputBox input {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1.25rem;
   outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
@@ -113,7 +112,7 @@
 
 .inputBox textarea {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1.25rem;
   outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
@@ -151,7 +150,6 @@
   border-radius: 1rem;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
   backdrop-filter: blur(2px);
-  animation: animateForm 1s ease forwards;
 }
 
 .contact-info h3 {

@@ -24,7 +24,7 @@ export const SignUp = () => {
   return (
     <div className="register">
       <div className="login-container">
-        <div className="sign-up">
+        <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={e => actions.signup(e, navigate)}>
             <div className="social">
@@ -44,8 +44,7 @@ export const SignUp = () => {
                 type="text"
                 placeholder="User Name"
                 name="username"
-                className="form-control"
-                id="floatingInput"
+                className="form-control floatingInput"
                 autoComplete="off"
                 value={store.username}
                 onChange={e => actions.handleChange(e)}
@@ -57,8 +56,7 @@ export const SignUp = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                className="form-control"
-                id="floatingInput"
+                className="form-control floatingInput"
                 autoComplete="off"
                 value={store.email}
                 onChange={e => actions.handleChange(e)}
@@ -70,8 +68,7 @@ export const SignUp = () => {
                 type={!show ? "text" : "password"}
                 placeholder="Password"
                 name="password"
-                className="form-control"
-                id="floatingPassword"
+                className="form-control floatingPassword"
                 autoComplete="off"
                 value={store.password}
                 onChange={e => actions.handleChange(e)}
@@ -93,8 +90,7 @@ export const SignUp = () => {
                 type={!show2 ? "text" : "password"}
                 placeholder="Confirm Password"
                 name="confirmPassword"
-                className="form-control"
-                id="floatingPassword"
+                className="form-control floatingPassword"
                 autoComplete="off"
                 value={store.confirmPassword}
                 onChange={e => actions.handleChange(e)}
@@ -114,8 +110,9 @@ export const SignUp = () => {
             <div className="sign-up-btn">
               <input type="submit" value="Create Account" />
             </div>
+            <small>{store.message}</small>
             <small>
-              Already have an account? <Link to="/sign-in">Sign In</Link>
+              Already have an account? <Link to="/sign-in"><label>Sign In</label></Link>
             </small>
           </form>
         </div>

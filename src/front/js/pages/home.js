@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 import { AboutUs } from "../component/about-us";
-
 import video from "-!file-loader!../../img/tattoo-bg.mp4";
 
 export const Home = () => {

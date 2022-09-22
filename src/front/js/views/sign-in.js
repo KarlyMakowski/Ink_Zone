@@ -46,8 +46,7 @@ export const SignIn = () => {
                   type="email"
                   placeholder="Email"
                   name="email"
-                  className="form-control"
-                  id="floatingInput"
+                  className="form-control floatingInput"
                   autoComplete="off"
                   value={store.email}
                   onChange={(e) => actions.handleChange(e)}
@@ -59,8 +58,7 @@ export const SignIn = () => {
                   type={!show ? "text" : "password"}
                   placeholder="Password"
                   name="password"
-                  className="form-control"
-                  id="floatingPassword"
+                  className="form-control floatingPassword"
                   autoComplete="off"
                   value={store.password}
                   onChange={(e) => actions.handleChange(e)}
@@ -84,7 +82,7 @@ export const SignIn = () => {
               </div>
               <input type="submit" value="Sign In" />
               <small>
-                Don't have an account? <Link to="/sign-up">Sign Up</Link>
+                Don't have an account? <Link to="/sign-up"><label>Sign Up</label></Link>
               </small>
             </form>
           )}

@@ -3,7 +3,7 @@ import React from "react";
 import "../../styles/contact-us.css";
 
 import { MdLocationPin, MdEmail } from "react-icons/md";
-import { FaPhone, FaInstagram, FaTwitter, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaPhone, FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 
 export const ContactUs = () => {
   return (
@@ -87,8 +87,8 @@ export const ContactUs = () => {
                 <MdLocationPin />
               </span>
               <p>
-                Calle de la Pinada, Madrid <br />
-                ESPAÑA
+                Calle Las Ramblas, 25 <br />
+                Madrid, España
               </p>
             </div>
             <div>
