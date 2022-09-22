@@ -133,7 +133,7 @@ export const Navbar = () => {
             <FiLogOut
               style={{ height: "57px", width: "30px" }}
               className="log-out"
-              onClick={() => actions.logout()}
+              onClick={(e) => actions.logout(e)}
             />
         )}
       </div>

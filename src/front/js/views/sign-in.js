@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
@@ -16,18 +16,9 @@ export const SignIn = () => {
     setShow((prevState) => !prevState);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  console.log("This is your token", store.token)
-
-  const handleClick = () => {
-    actions.login(store.email, store.password).then(() => {
-      if (store.token) navigate("/");
-      store.message;
-    });
-  };
+/*   useEffect(() => {
+    if (store.currentUser !== null) navigate('/private');
+  }, []) */
 
   return (
     <div className="register">
@@ -37,7 +28,7 @@ export const SignIn = () => {
           {store.token && store.token != "" && store.token != undefined ? (
             "You are logged in with this token" + store.token
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => actions.login(e, navigate)}>
               <div className="social">
                 <a href="#" className="social-instagram">
                   <GrInstagram className="gr" />
@@ -59,7 +50,7 @@ export const SignIn = () => {
                   id="floatingInput"
                   autoComplete="off"
                   value={store.email}
-                  onChange={e => actions.handleChange(e)}
+                  onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingInput">Email</label>
               </div>
@@ -72,7 +63,7 @@ export const SignIn = () => {
                   id="floatingPassword"
                   autoComplete="off"
                   value={store.password}
-                  onChange={e => actions.handleChange(e)}
+                  onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingPassword mt-2">Password </label>
                 <div
@@ -91,7 +82,7 @@ export const SignIn = () => {
                   <small>Forgot Password?</small>
                 </Link>
               </div>
-              <input type="submit" value="Sign In" onClick={handleClick} />
+              <input type="submit" value="Sign In" />
               <small>
                 Don't have an account? <Link to="/sign-up">Sign Up</Link>
               </small>

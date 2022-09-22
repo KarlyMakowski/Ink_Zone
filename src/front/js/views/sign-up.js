@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
@@ -21,24 +21,12 @@ export const SignUp = () => {
     setShow2((prevState) => !prevState);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleClick = async () => {
-    await actions.signup(store.username, store.email, store.password, store.confirmPassword).then(() => {
-      store.message;
-      navigate("/profile"); 
-
-    })
-  };
-
   return (
     <div className="register">
       <div className="login-container">
         <div className="sign-up">
           <h1 className="fw-bold">Create an account</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={e => actions.signup(e, navigate)}>
             <div className="social">
               <a href="#" className="social-instagram">
                 <GrInstagram className="gr" />
@@ -124,7 +112,7 @@ export const SignUp = () => {
               </div>
             </div>
             <div className="sign-up-btn">
-              <input onClick={handleClick} type="submit" value="Create Account" />
+              <input type="submit" value="Create Account" />
             </div>
             <small>
               Already have an account? <Link to="/sign-in">Sign In</Link>

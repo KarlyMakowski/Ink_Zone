@@ -11,11 +11,6 @@ import video from "-!file-loader!../../img/tattoo-bg.mp4";
 export const Home = () => {
   const { actions, store } = useContext(Context);
 
-  useEffect(() => {
-    if (store.token && store.token != "" && store.token != undefined) actions.getMesssage();
-  }, [store.token])
-
-
   const videoEl = useRef(video);
 
   useEffect(() => {
@@ -45,7 +40,6 @@ export const Home = () => {
               Sign Up
             </Link>
           </div>
-          <div className="alert">{store.message}</div>
         </div>
       </div>
       <div>

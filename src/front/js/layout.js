@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import injectContext from "./store/appContext";
 
 import { Home } from "./pages/home";
-/* import { Navbar } from "./component/navbar.js"; */
+import { Navbar } from "./component/navbar.js";
 import { StylesInfo } from "./views/stylesInfo";
 import { Pricing } from "./views/pricing";
 import { SignUp } from "./views/sign-up";
@@ -20,7 +20,7 @@ const Layout = () => {
   return (
     <div>
       <BrowserRouter basename={basename}>
-{/*         <Navbar /> */}
+        <Navbar />
         <Routes>
           <Route element={<Home />} exact path="/" />
           <Route element={<StylesInfo />} path="/styles" />

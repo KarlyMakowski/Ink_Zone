@@ -1,101 +1,113 @@
+import Notiflix, { Notify } from "notiflix";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       username: "",
       email: "",
       password: "",
-      confirmPassword:"",
+      confirmPassword: "",
+      message: "",
       token: null,
-      message: null,
       styles: [],
       prices: [],
     },
 
     actions: {
+      signup: async (e, navigate) => {
+        e.preventDefault();
+        const { username, email, password, confirmPassword } = getStore();
 
-      signup: async (username, email, password, confirmPassword) => {
-        const opts = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username,
-            email: email,
-            password: password,
-            confirm_password: confirmPassword
-          }),
-        };
-
-        try {
-          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/signup", opts)
-            const data = await resp.json();
-            console.log("this came from the backend", data);
-            const response = await data.created;
-            if(response.created) {
-              sessionStorage.setItem("created", data.created);
-              setStore({message: data.msg}); 
-              console.log(data)
+        try{
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                "username": username,
+                "email": email,
+                "password": password,
+                "confirm_password": confirmPassword,
+              }),
             }
-            else {
-              setStore({message: data.msg})
-            }
+          );
+          const data = await resp.json();
+          const response = await data.created;
+          if (response) {
+            sessionStorage.setItem("created", data.created);
+            setStore({ message: data.msg });
+            navigate("/sign-in");
+          } else {
+            setStore({ message: data.msg });
           }
-          catch(error) {
-            console.error("There has been an error during sign up!", error);
-          }
-        },
+        } catch (error) {
+          console.error("There has been an error during sign up!", error);
+        }
+      },
 
       syncTokenFromSessionStore: () => {
         const token = sessionStorage.getItem("token");
-        console.log("Application just loaded, synching the session storage token");
-        if (token && token != "" && token != undefined) setStore({ token: token });
+        console.log(
+          "Application just loaded, synching the session storage token"
+        );
+        if (token && token != "" && token != undefined)
+          setStore({ token: token });
       },
 
-      login: async (email, password) => {
-        const opts = {
+      login: async (e, navigate) => {
+
+        e.preventDefault();
+        const { email, password } = getStore();
+
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
-            password: password
+            "email": email,
+            "password": password
           }),
-        };
-
-        try {
-          const resp = await fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/token", opts)
-          if (resp.status !== 200){
-            alert("Check your email or password!");
-            return false;
-          } 
-
-          const data = await resp.json();
-          console.log("this came from the backend", data);
-          sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token});
-          return true;
-        }
-        catch(error){
-          console.error("There has been an error logging in!!", error)
-        }
+        })
+        .then ((response) => {
+          if (response.status !== 200){
+            Notify.failure("Wrong credentials!")
+          }
+          return response.json();
+        })
+        .then((data) => {
+          Notify.success("Succesfully logged in")
+          sessionStorage.setItem("token", data.token);
+          setStore({ token: data.token});
+          navigate('/')
+        })
+        .catch((error) => {
+          console.error("There has been an error logging in!!", error);
+        })        
       },
 
       getMesssage: () => {
         const store = getStore();
-        const opts = {
-          headers: {
-            Authorization: "Bearer " + store.token
+
+        fetch(
+          "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/private",
+          {
+            headers: {
+              Authorization: "Bearer " + store.token,
+            },
           }
-        }
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu64.gitpod.io/api/private", opts)
-        .then(resp => resp.json())
-        .then(data => setStore({ message: data.msg }))
-        .catch(error => console.log("Error loading message from backend", error));
+        )
+          .then((resp) => resp.json())
+          .then((data) => setStore({ message: data.msg }))
+          .catch((error) =>
+            console.log("Error loading message from backend", error)
+          );
       },
 
       logout: () => {
+        Notify.info("Successfully logged out");
         sessionStorage.removeItem("token");
         console.log("Login out");
         setStore({ token: null });
@@ -113,13 +125,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => setStore({ prices: data }));
       },
 
-      handleChange: e => {
-				const { name, value } = e.target;
-				setStore({
-					[name]: value
-				});
-			},
-      
+      handleChange: (e) => {
+        const { name, value } = e.target;
+        setStore({
+          [name]: value,
+        });
+      },
     },
   };
 };
