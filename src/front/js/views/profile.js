@@ -5,9 +5,9 @@ import { Context } from "../store/appContext";
 import "../../styles/profile.css";
 
 import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
-import { TbWorld } from "react-icons/tb";
 
 import Notiflix, { Notify } from "notiflix";
+import skull from "../../img/skull-profile.png";
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
@@ -34,12 +34,12 @@ export const Profile = () => {
             <div className="profile-card">
               <div className="profile-card-body">
                 <div className="d-flex flex-column align-items-center text-center">
-                  <img src={(store.currentUser?.picture == "") ? "https://bootdey.com/img/Content/avatar/avatar7.png" : store.currentUser?.picture} alt="Admin" className="rounded-circle" style={{ width: "150" }} /> {/* hay que poner height */}
+                  <img src={(store.currentUser?.picture == "") ? {skull} : store.currentUser?.picture} alt="default-pic" className="rounded-circle" /> 
                   <div className="mt-3">
-                    <h4>{store.currentUser?.name}</h4>
                     <form onSubmit={e => actions.uploadPicture(e)}>
-                    <input type="file" onChange={e => {actions.handlePicture(e)}}/>
-                    <input type="submit"/>
+                    <input type="file" id="files" className="hidden" onChange={e => {actions.handlePicture(e)}}/>
+                    <label htmlFor="files" className="upload">Update</label>
+                    <input type="submit" value="Submit"/>
                     </form>                  
                   </div>
                 </div>
@@ -49,32 +49,25 @@ export const Profile = () => {
             <div className="profile-card mt-3">
               <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                  <h5 className="mb-0 mt-2">
-                    <TbWorld />
-                    <span>Website</span>
-                  </h5>
-                  <span className="mt-2">https://www.example.com</span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-0">
                     <FaInstagram />
-                    <span>{store.currentUser?.instagram}</span>
+                    <span>Instagram</span>
                   </h5>
-                  <span>Example</span>
+                  <span>{store.currentUser?.instagram}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-0">
                     <FaTwitter />
-                    <span>{store.currentUser?.twitter}</span>
+                    <span>Twitter</span>
                   </h5>
-                  <span>@example</span>
+                  <span>{store.currentUser?.twitter}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-2">
                     <FaFacebook />
-                    <span>{store.currentUser?.facebook}</span>
+                    <span>Facebook</span>
                   </h5>
-                  <span className="mb-2">example</span>
+                  <span className="mb-2">{store.currentUser?.facebook}</span>
                 </li>
               </ul>
             </div>
@@ -85,28 +78,28 @@ export const Profile = () => {
               <div className="profile-card-body">
                 <div className="row">
                   <div className="col-sm-3">
-                    <span className="mb-0">Full Name</span>
+                    <span className="mb-0">User</span>
                   </div>
                   <div className="col-sm-9">
-                    <span>Kenneth Valdez</span>
+                    <span>{store.currentUser?.username}</span>
                   </div>
                 </div>
                 <hr className="hr-size" />
                 <div className="row">
                   <div className="col-sm-3">
-                    <span className="mb-0">Date of Birth</span>
+                    <span className="mb-0">Name</span>
                   </div>
                   <div className="col-sm-9">
-                    <span>19/05/1995</span>
+                    <span>{store.currentUser?.name}</span>
                   </div>
                 </div>
                 <hr className="hr-size" />
                 <div className="row">
                   <div className="col-sm-3">
-                    <span className="mb-0">Email</span>
+                    <span className="mb-0">Last Name</span>
                   </div>
                   <div className="col-sm-9">
-                    <span>{store.currentUser?.email}</span>
+                    <span>{store.currentUser?.lastname}</span>
                   </div>
                 </div>
                 <hr className="hr-size" />
@@ -121,10 +114,10 @@ export const Profile = () => {
                 <hr className="hr-size" />
                 <div className="row">
                   <div className="col-sm-3">
-                    <span className="mb-0">Address</span>
+                    <span className="mb-0">Email</span>
                   </div>
                   <div className="col-sm-9">
-                    <span>Calle Las Ramblas, Madrid, España</span>
+                    <span>{store.currentUser?.email}</span>
                   </div>
                 </div>
                 <hr className="hr-size" />
@@ -132,24 +125,6 @@ export const Profile = () => {
                   <div className="col-sm-12">
                     <div className="profile-btn">
                       <input type="submit" value="Edit" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="profile-card mt-3">
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">
-                    <h3 className="mt-2">Leave a review</h3>
-                    <textarea className="form-control" placeholder="Write your message here..."></textarea>
-                  </li>
-                </ul>
-                <div className="row">
-                  <div className="col-sm-12">
-                    <div className="review-btn profile-card-body">
-                      <input type="submit" value="Post Review" />
                     </div>
                   </div>
                 </div>
