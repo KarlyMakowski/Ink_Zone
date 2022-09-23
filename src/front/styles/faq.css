@@ -1,0 +1,100 @@
+.faq-container {
+  padding-bottom: 10rem;
+}
+
+.faq-accordion {
+  font-family: "Rajdhani", sans-serif;
+  margin: auto;
+  max-width: 80rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  font-size: 1.5rem;
+}
+
+.faq-accordion p {
+  text-align: justify;
+}
+
+.accordion__label,
+.accordion__content {
+  padding: 14px 20px;
+}
+
+.accordion__content p {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    backdrop-filter: blur(2px);
+    padding: 1rem 2rem;
+}
+
+.accordion__content p::before {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 100%;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.accordion__label {
+  display: block;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+
+.accordion__label:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.accordion__label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 12px;
+  height: 6px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 100,0 50,50" style="fill:%23FFFFFF99;" /></svg>');
+  background-size: contain;
+  transition: transform 0.4s;
+}
+
+.accordion__content {
+  line-height: 1.6;
+  font-size: 0.85em;
+  display: none;
+}
+
+.accordion__input {
+  display: none;
+}
+
+.accordion__input:checked ~ .accordion__content {
+  display: block;
+}
+
+.accordion__input:checked ~ .accordion__label::after {
+  transform: translateY(-50%) rotate(0.5turn);
+}
+
+.faq-hr {
+  margin: 0.2rem;
+}
+
+.top-space {
+  padding-top: 6px;
+}
+
+.bottom-space {
+  padding-bottom: 6px;
+}

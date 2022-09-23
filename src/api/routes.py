@@ -27,12 +27,12 @@ def signup():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     confirm_password = request.json.get("confirm_password", None)
-    # username allowed characters first, it has to be 8-20 characters long, no _ or . at the beginning, no __ or _. or ._ or .. inside, no _ or . at the end.
+    # username pattern which accepts 5 to 15 characters with any lower case character, digit or special symbol “_-” only.
     regex_username = re.compile(r'^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$')
     # email validation (special characters needed)
     regex_email = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
     # password minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
-    regex_password = re.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$")
+    regex_password = re.compile("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")    
     
     
     if not username: return jsonify({"created": False, "status": "failed", "msg": "Missing username!"}), 400
@@ -57,7 +57,7 @@ def signup():
             db.session.commit()
     
             response_body = {
-                "status": "succes",
+                "status": "success",
                 "created": True,
                 "msg": f'Welcome {username}, you succesfully signed up!'
             }

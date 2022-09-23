@@ -12,17 +12,18 @@ export const Profile = () => {
         <h1>Profile</h1>
       </div>
       <div className="main-body">
-
         <div className="row gutters-sm">
           <div className="col-md-4 mb-3">
             <div className="profile-card">
               <div className="profile-card-body">
                 <div className="d-flex flex-column align-items-center text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" style={{ width: "150" }} />
+                  <img
+                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                    alt="Admin"
+                    className="rounded-circle"
+                  />
                   <div className="mt-3">
                     <h4>John Doe</h4>
-                    <p className="mb-1">Full Stack Developer</p>
-                    <p className="text-muted font-size-sm">Calle Las Ramblas, Madrid, España</p>
                   </div>
                 </div>
               </div>
@@ -125,7 +126,10 @@ export const Profile = () => {
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
                     <h3 className="mt-2">Leave a review</h3>
-                    <textarea className="form-control" placeholder="Write your message here..."></textarea>
+                    <textarea
+                      className="form-control"
+                      placeholder="Write your message here..."
+                    ></textarea>
                   </li>
                 </ul>
                 <div className="row">
@@ -137,10 +141,24 @@ export const Profile = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
+
+      <div className="profile-card mt-3">
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <div className="profile-btn">
+                      <input type="submit" value="Log Out" />
+                    </div>
+                  <div className="review-btn">
+                    <input type="submit" value="Delete Account" />
+                  </div>
+                </li>
+              </ul>
+            </div>
     </div>
+
+    
   );
 };

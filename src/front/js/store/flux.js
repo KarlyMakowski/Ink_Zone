@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try{
           const resp = await fetch(
-            "https://ink-zone.herokuapp.com/api/signup", {
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         e.preventDefault();
         const { email, password } = getStore();
 
-        fetch("https://ink-zone.herokuapp.com/api/token", {
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
 
         fetch(
-          "https://ink-zone.herokuapp.com/api/private",
+          "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
           {
             headers: {
               Authorization: "Bearer " + store.token,
