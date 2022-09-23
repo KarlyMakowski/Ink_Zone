@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/profile.css";
 
@@ -6,6 +8,14 @@ import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 
 export const Profile = () => {
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (store.currentUser == null) navigate('/sign-in');
+    actions.profile();
+  }, [store.currentUser])
+
   return (
     <div className="profile-container">
       <div className="pricing-title">
@@ -18,9 +28,9 @@ export const Profile = () => {
             <div className="profile-card">
               <div className="profile-card-body">
                 <div className="d-flex flex-column align-items-center text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" style={{ width: "150" }} />
+                  <img src={(store.picture == "") ? "https://bootdey.com/img/Content/avatar/avatar7.png" : store.picture} alt="Admin" className="rounded-circle" style={{ width: "150" }} />
                   <div className="mt-3">
-                    <h4>John Doe</h4>
+                    <h4>{store.name}</h4>
                     <p className="mb-1">Full Stack Developer</p>
                     <p className="text-muted font-size-sm">Calle Las Ramblas, Madrid, España</p>
                   </div>
@@ -40,21 +50,21 @@ export const Profile = () => {
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-0">
                     <FaInstagram />
-                    <span>Instagram</span>
+                    <span>{store.instagram}</span>
                   </h5>
                   <span>Example</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-0">
                     <FaTwitter />
-                    <span>Twitter</span>
+                    <span>{store.twitter}</span>
                   </h5>
                   <span>@example</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-2">
                     <FaFacebook />
-                    <span>Facebook</span>
+                    <span>{store.facebook}</span>
                   </h5>
                   <span className="mb-2">example</span>
                 </li>
@@ -137,7 +147,7 @@ export const Profile = () => {
                 </div>
               </div>
             </div>
-
+            
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ def signup():
     # email validation (special characters needed)
     regex_email = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
     # password minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
-    regex_password = re.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$")
+    regex_password = re.compile("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
     
     
     if not username: return jsonify({"created": False, "status": "failed", "msg": "Missing username!"}), 400
@@ -48,7 +48,7 @@ def signup():
             db.session.commit()
     
             response_body = {
-                "status": "succes",
+                "status": "success",
                 "created": True,
                 "msg": f'Welcome {username}, you succesfully signed up!'
             }
@@ -66,8 +66,8 @@ def create_token():
     
     user = User.query.filter_by(email = email).first() 
     
-    if not email: return({"logged": False, "status": "failed", "msg": "Write your email address"}), 400
-    if not password: return({"logged": False, "status": "failed", "msg": "Enter your password"}), 400
+    if not email: return({"logged_in": False, "status": "failed", "msg": "Write your email address"}), 400
+    if not password: return({"logged_in": False, "status": "failed", "msg": "Enter your password"}), 400
     
     if user:
         passw_is_correct = current_app.bcrypt.check_password_hash(user.password, password)
@@ -77,7 +77,7 @@ def create_token():
             refresh_token = create_refresh_token(identity = email)  
             
             response_body = {
-                "logged": True,
+                "logged_in": True,
                 "status": "success",
                 "msg": "Successfuly logged in",
                 "user": user.serialize(),
@@ -137,10 +137,6 @@ def private_update():
     if email == "" or email == None:
         email = user.email
         
-    password = request.json.get("password") 
-    if password == "" or password == None:
-        password = user.password
-        
     name = request.json.get("name")  
     if name == "" or name == None:
         name = user.name 
@@ -165,11 +161,8 @@ def private_update():
     if twitter == "" or twitter == None:
         twitter = user.twitter
     
-    pw_hash = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
-    
     user.username = username 
     user.email = email
-    user.password = pw_hash
     user.name = name
     user.lastname = lastname
     user.phonenumber = phonenumber
@@ -235,10 +228,11 @@ def get_review(id):
     if not single_review:
         return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
 
-    return jsonify({
+    response_body = {
         "user": user.username,
-        "review": single_review.review,
-    })
+        "review": single_review.review
+    }
+    return jsonify({response_body}), 200
         
    
 @api.route('/users-reviews/<id>', methods=['PUT', 'PATCH'])

@@ -8,6 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       currentUser: {},
       message: "",
+      name: "",
+      lastname: "",
+      phonenumber: "",
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      picture: null,
       styles: [],
       prices: [],
     },
@@ -36,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           const response = await data.created;
           if (response) {
-            sessionStorage.setItem("created", data.created);
+            localStorage.setItem("created", data.created);
             setStore({ message: data.msg });
             navigate("/sign-in");
           } else {
@@ -48,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       syncTokenFromSessionStore: () => {
-        const token = sessionStorage.getItem("token");
+        const token = localStorage.getItem("token");
         console.log(
           "Application just loaded, synching the session storage token"
         );
@@ -80,31 +87,36 @@ const getState = ({ getStore, getActions, setStore }) => {
             token: data.token,
             currentuser: data.user,
           });
-          sessionStorage.setItem("token", data.token);
-          navigate("/");
+          localStorage.setItem("token", data.token);
+          navigate("/profile");
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
       },
 
-      getMesssage: () => {
-        const store = getStore();
-
-        fetch("https://ink-zone.herokuapp.com/api/private", {
-          headers: {
-            Authorization: "Bearer " + store.token,
-          },
-        })
-          .then((resp) => resp.json())
-          .then((data) => setStore({ message: data.msg }))
-          .catch((error) =>
-            console.log("Error loading message from backend", error)
+      profile: async (user) => {
+        try {
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+              body: JSON.stringify(user),
+            }
           );
-      },
+          const data = await resp.json();
+          setStore({ currentUser: data.user, message: data.msg });
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },  
 
       logout: () => {
         Notify.info("Successfully logged out");
-        sessionStorage.removeItem("token");
+        localStorage.removeItem("token");
         console.log("Login out");
         setStore({ token: null, currentUser: {} });
       },
