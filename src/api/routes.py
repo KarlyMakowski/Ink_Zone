@@ -3,6 +3,7 @@ from api.models import db, User, Styles, Prices, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
+from flask_mail import Mail
 
 import re
 import cloudinary
@@ -87,7 +88,7 @@ def create_token():
                      
             return jsonify(response_body), 200
     
-    return jsonify({"logged": False, "status": "failed", "msg": "Wrong credentials!"}), 401
+    return jsonify({"logged_in": False, "status": "failed", "msg": "Wrong credentials!"}), 401
     
 
 @api.route('/token/refresh', methods=['GET'])
@@ -102,25 +103,6 @@ def refresh_users_token():
     } 
     
     return jsonify(response_body), 200
-
-
-@api.route('/private', methods=['GET'])
-@jwt_required()
-def private():
-    current_user = get_jwt_identity()
-    user = User.query.filter_by(email = current_user).first()
-    
-    if user:
-        response_body = {
-            "logged": True,
-            "status": "success",           
-            "msg": f'Welcome back {current_user}!',
-        }
-        
-        return jsonify(response_body), 200
-    
-    else:                
-        return jsonify({"status": "failed", "logged": False}), 400
 
 
 @api.route('/private', methods=['PUT'])
@@ -179,6 +161,31 @@ def private_update():
     }
     
     return jsonify (response_body), 200
+
+
+@api.route('/private/upload-picture', methods=['PUT'])
+@jwt_required()
+def upload_image():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    
+    if "picture" in request.files:
+        image_upload = cloudinary.uploader.upload(request.files["picture"], folder="Ink Zone")
+        
+        if not image_upload:
+            return jsonify ({"status": "failed", "msg": "There was an error during upload!", "user": None}), 400
+        
+        user.picture = image_upload["secure_url"]
+        
+        db.session.commit()
+        
+        response_body = {
+            "status": "success",
+            "msg": "You successfully uploaded your picture!",
+            "user": user.serialize()
+        }
+        
+        return jsonify(response_body), 200
 
 
 @api.route('/private', methods=['DELETE'])

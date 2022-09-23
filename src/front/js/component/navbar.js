@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../styles/navbar.css";
 
@@ -16,6 +16,7 @@ import { FiLogOut, FiLogIn } from "react-icons/fi";
 
 export const Navbar = () => {
   const { actions, store } = useContext(Context);
+  const navigate = useNavigate();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -133,7 +134,7 @@ export const Navbar = () => {
             <FiLogOut
               style={{ height: "57px", width: "30px" }}
               className="log-out"
-              onClick={() => actions.logout()}
+              onClick={() => actions.logout(navigate)}
             />
         )}
       </div>

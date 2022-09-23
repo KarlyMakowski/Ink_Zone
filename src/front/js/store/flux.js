@@ -1,3 +1,5 @@
+import Notiflix, { Notify } from "notiflix";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -6,7 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       password: "",
       confirmPassword: "",
       token: null,
-      currentUser: {},
+      currentUser: null,
       message: "",
       name: "",
       lastname: "",
@@ -40,27 +42,19 @@ const getState = ({ getStore, getActions, setStore }) => {
               }),
             }
           );
-          const data = await resp.json();
-          const response = await data.created;
-          if (response) {
-            localStorage.setItem("created", data.created);
-            setStore({ message: data.msg });
+          const { status, msg, created } = await resp.json();
+          if (status == "failed") {
+            Notify.failure(msg)
+          } 
+          if(status == "success") {
+            Notify.success(msg)
+            setStore({ created: created });
+            sessionStorage.setItem("created", created);
             navigate("/sign-in");
-          } else {
-            setStore({ message: data.msg });
           }
         } catch (error) {
           console.error("Error loading message from backend", error);
         }
-      },
-
-      syncTokenFromSessionStore: () => {
-        const token = localStorage.getItem("token");
-        console.log(
-          "Application just loaded, synching the session storage token"
-        );
-        if (token && token != "" && token != undefined)
-          setStore({ token: token });
       },
 
       login: async (e, navigate) => {
@@ -81,14 +75,15 @@ const getState = ({ getStore, getActions, setStore }) => {
               }),
             }
           );
-          const data = await resp.json();
-          setStore({
-            message: data.msg,
-            token: data.token,
-            currentuser: data.user,
-          });
-          localStorage.setItem("token", data.token);
-          navigate("/profile");
+          const { status, msg, user, token } = await resp.json();
+          if(status == "failed") {
+            Notify.failure(msg)
+          } 
+          if(status == "success"){
+            setStore({currentUser: user, token: token});
+            sessionStorage.setItem("token", token);
+            navigate("/profile");
+          }
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
@@ -102,22 +97,65 @@ const getState = ({ getStore, getActions, setStore }) => {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
               body: JSON.stringify(user),
             }
           );
-          const data = await resp.json();
-          setStore({ currentUser: data.user, message: data.msg });
+          const {status, msg} = await resp.json();
+          if(status == "failed") {
+            Notify.failure(msg)
+          }
+          if(status == "succeess") {
+            Notify.success(msg)
+          }
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
       },  
 
-      logout: () => {
-        localStorage.removeItem("token");
-        console.log("Login out");
-        setStore({ token: null, currentUser: {} });
+      logout: (navigate) => {
+        Notify.info("See you next time! :smiley:")
+        sessionStorage.removeItem("token");
+        setStore({ token: null, currentUser: null });
+        navigate("/")
+      },
+
+      uploadPicture: async (e) => {
+        const { picture } = getStore()
+        e.preventDefault();
+
+        try {
+          let formData = new FormData();
+          formData.append("picture", picture)
+
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private/upload-picture", 
+            {
+              method: "PUT",
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token")
+              },
+              body: formData
+            }
+          );
+            const { status, msg, user } = await resp.json();
+            if(status == "failed"){
+              Notify.failure(msg)
+            }
+            if(status == "success") {
+              Notify.success(msg)
+              setStore({currentUser: user})
+            }
+          }
+          catch (error) {
+            console.log("Error loading message from backend", error);
+        }  
+      },
+
+      handlePicture: (e) => {
+        const { files } = e.target;
+        setStore({ "picture": files[0] });
       },
 
       loadStyles: () => {

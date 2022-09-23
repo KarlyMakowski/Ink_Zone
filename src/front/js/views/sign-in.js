@@ -16,10 +16,6 @@ export const SignIn = () => {
     setShow((prevState) => !prevState);
   };
 
-/*   useEffect(() => {
-    if (store.currentUser !== null) navigate('/private');
-  }, []) */
-
   return (
     <div className="register">
       <div className="login-container">
@@ -28,7 +24,7 @@ export const SignIn = () => {
           {store.token && store.token != "" && store.token != undefined ? (
             "You are logged in with this token" + store.token
           ) : (
-            <form onSubmit={(e) => actions.login(e, navigate)}>
+            <form onSubmit={e => actions.login(e, navigate)}>
               <div className="social">
                 <a href="#" className="social-instagram">
                   <GrInstagram className="gr" />

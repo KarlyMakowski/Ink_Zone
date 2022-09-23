@@ -14,6 +14,7 @@ from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 import cloudinary
+from flask_mail import Mail
 
 
 #from models import Person
@@ -23,12 +24,16 @@ static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
+#JWT Manager
 app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_Secret_Key')
 jwt = JWTManager(app)
 
+# password encryptation
 bcrypt = Bcrypt(app)
 app.bcrypt = bcrypt
 
+# upload images cloudinary
 app.config['CLOUD_NAME'] = os.environ.get("CLOUD_NAME")
 app.config['CLOUD_API_KEY'] = os.environ.get("CLOUD_API_KEY")
 app.config['CLOUD_API_SECRET'] = os.environ.get("CLOUD_API_SECRET")
@@ -38,7 +43,18 @@ cloudinary.config(
     api_key = app.config['CLOUD_API_KEY'], 
     api_secret = app.config['CLOUD_API_SECRET'],
     secure = True
-)  
+) 
+
+# send recover password to users
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 3001
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+
+mail = Mail()
+mail.init_app(app) 
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")

@@ -7,14 +7,20 @@ import "../../styles/profile.css";
 import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 
+import Notiflix, { Notify } from "notiflix";
+
 export const Profile = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (store.currentUser == null) navigate('/sign-in');
-    actions.profile();
-  }, [store.currentUser])
+    if (store.currentUser === null) {
+      navigate('/sign-in');
+    }
+    else {
+      Notify.info(`Welcome back ${store.currentUser?.username}`)
+    };
+  }, [])
 
   return (
     <div className="profile-container">
@@ -28,11 +34,13 @@ export const Profile = () => {
             <div className="profile-card">
               <div className="profile-card-body">
                 <div className="d-flex flex-column align-items-center text-center">
-                  <img src={(store.picture == "") ? "https://bootdey.com/img/Content/avatar/avatar7.png" : store.picture} alt="Admin" className="rounded-circle" style={{ width: "150" }} />
+                  <img src={(store.currentUser?.picture == "") ? "https://bootdey.com/img/Content/avatar/avatar7.png" : store.currentUser?.picture} alt="Admin" className="rounded-circle" style={{ width: "150" }} /> {/* hay que poner height */}
                   <div className="mt-3">
-                    <h4>{store.name}</h4>
-                    <p className="mb-1">Full Stack Developer</p>
-                    <p className="text-muted font-size-sm">Calle Las Ramblas, Madrid, España</p>
+                    <h4>{store.currentUser?.name}</h4>
+                    <form onSubmit={e => actions.uploadPicture(e)}>
+                    <input type="file" onChange={e => {actions.handlePicture(e)}}/>
+                    <input type="submit"/>
+                    </form>                  
                   </div>
                 </div>
               </div>
@@ -50,21 +58,21 @@ export const Profile = () => {
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-0">
                     <FaInstagram />
-                    <span>{store.instagram}</span>
+                    <span>{store.currentUser?.instagram}</span>
                   </h5>
                   <span>Example</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-0">
                     <FaTwitter />
-                    <span>{store.twitter}</span>
+                    <span>{store.currentUser?.twitter}</span>
                   </h5>
                   <span>@example</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h5 className="mb-2">
                     <FaFacebook />
-                    <span>{store.facebook}</span>
+                    <span>{store.currentUser?.facebook}</span>
                   </h5>
                   <span className="mb-2">example</span>
                 </li>
@@ -98,7 +106,7 @@ export const Profile = () => {
                     <span className="mb-0">Email</span>
                   </div>
                   <div className="col-sm-9">
-                    <span>example@gmail.com</span>
+                    <span>{store.currentUser?.email}</span>
                   </div>
                 </div>
                 <hr className="hr-size" />
@@ -107,7 +115,7 @@ export const Profile = () => {
                     <span className="mb-0">Phone Number</span>
                   </div>
                   <div className="col-sm-9">
-                    <span>648245874</span>
+                    <span>{store.currentUser?.phonenumber}</span>
                   </div>
                 </div>
                 <hr className="hr-size" />
