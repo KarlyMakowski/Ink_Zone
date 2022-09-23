@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../../styles/tattooStyles.css";
 
 import { TattooStyles } from "../component/tattooStyles";
 
 export const StylesInfo = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  })
+  
   return (
     <div className="tattooStyles-container">
       <div className="styles-components">

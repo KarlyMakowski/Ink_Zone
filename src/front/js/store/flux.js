@@ -7,7 +7,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       email: "",
       password: "",
       confirmPassword: "",
+      token: null,
+      currentUser: null,
       message: "",
+      name: "",
+      lastname: "",
+      phonenumber: "",
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      picture: null,
       styles: [],
       prices: [],
     },
@@ -17,98 +26,136 @@ const getState = ({ getStore, getActions, setStore }) => {
         e.preventDefault();
         const { username, email, password, confirmPassword } = getStore();
 
-        try{
+        try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup", {
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup",
+            {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                "username": username,
-                "email": email,
-                "password": password,
-                "confirm_password": confirmPassword,
+                username: username,
+                email: email,
+                password: password,
+                confirm_password: confirmPassword,
               }),
             }
           );
-          const data = await resp.json();
-          const response = await data.created;
-          if (response) {
-            sessionStorage.setItem("created", data.created);
-            setStore({ message: data.msg });
+          const { status, msg, created } = await resp.json();
+          if (status == "failed") {
+            Notify.failure(msg)
+          } 
+          if(status == "success") {
+            Notify.success(msg)
+            setStore({ created: created });
+            sessionStorage.setItem("created", created);
             navigate("/sign-in");
-          } else {
-            setStore({ message: data.msg });
           }
         } catch (error) {
-          console.error("There has been an error during sign up!", error);
+          console.error("Error loading message from backend", error);
         }
       },
 
-      syncTokenFromSessionStore: () => {
-        const token = sessionStorage.getItem("token");
-        console.log(
-          "Application just loaded, synching the session storage token"
-        );
-        if (token && token != "" && token != undefined)
-          setStore({ token: token });
-      },
-
       login: async (e, navigate) => {
-
         e.preventDefault();
         const { email, password } = getStore();
 
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            "email": email,
-            "password": password
-          }),
-        })
-        .then ((response) => {
-          if (response.status !== 200){
-            throw new Error()
-          } 
-          return response.json()          
-        })
-        .then((data) => {
-          sessionStorage.setItem("token", data.token);
-          setStore({ token: data.token});
-          navigate('/')
-        })
-        .catch((error) => {
-          console.error("There has been an error logging in!!", error);
-        })        
-      },
-
-      getMesssage: () => {
-        const store = getStore();
-
-        fetch(
-          "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
-          {
-            headers: {
-              Authorization: "Bearer " + store.token,
-            },
-          }
-        )
-          .then((resp) => resp.json())
-          .then((data) => setStore({ message: data.msg }))
-          .catch((error) =>
-            console.log("Error loading message from backend", error)
+        try {
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                password: password,
+              }),
+            }
           );
+          const { status, msg, user, token } = await resp.json();
+          if(status == "failed") {
+            Notify.failure(msg)
+          } 
+          if(status == "success"){
+            setStore({currentUser: user, token: token});
+            sessionStorage.setItem("token", token);
+            navigate("/profile");
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
-      logout: () => {
-        Notify.info("Successfully logged out");
+      profile: async (user) => {
+        try {
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
+              body: JSON.stringify(user),
+            }
+          );
+          const {status, msg} = await resp.json();
+          if(status == "failed") {
+            Notify.failure(msg)
+          }
+          if(status == "succeess") {
+            Notify.success(msg)
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },  
+
+      logout: (navigate) => {
+        Notify.info("See you next time! :smiley:")
         sessionStorage.removeItem("token");
-        console.log("Login out");
-        setStore({ token: null });
+        setStore({ token: null, currentUser: null });
+        navigate("/")
+      },
+
+      uploadPicture: async (e) => {
+        const { picture } = getStore()
+        e.preventDefault();
+
+        try {
+          let formData = new FormData();
+          formData.append("picture", picture)
+
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private/upload-picture", 
+            {
+              method: "PUT",
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token")
+              },
+              body: formData
+            }
+          );
+            const { status, msg, user } = await resp.json();
+            if(status == "failed"){
+              Notify.failure(msg)
+            }
+            if(status == "success") {
+              Notify.success(msg)
+              setStore({currentUser: user})
+            }
+          }
+          catch (error) {
+            console.log("Error loading message from backend", error);
+        }  
+      },
+
+      handlePicture: (e) => {
+        const { files } = e.target;
+        setStore({ "picture": files[0] });
       },
 
       loadStyles: () => {

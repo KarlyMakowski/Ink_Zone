@@ -18,14 +18,7 @@ const injectContext = (PassedComponent) => {
     );
     
     useEffect(() => {
-      state.actions.syncTokenFromSessionStore();
-    }, []);
-
-    useEffect(() => {
       state.actions.loadStyles();
-    }, []);
-
-    useEffect(() => {
       state.actions.loadPrices();
     }, []);
 

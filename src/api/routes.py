@@ -3,20 +3,12 @@ from api.models import db, User, Styles, Prices, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
+from flask_mail import Mail
 
 import re
 import cloudinary
 import cloudinary.api
 from cloudinary.uploader import upload
-
-
-""" cloudinary.config( 
-    cloud_name = "daahnwdra", 
-    api_key = "316871795959153", 
-    api_secret = "Aa3JYOvrl2yNciZW-xiB79VfNNo",
-    secure = True
-)  """
-
 
 api = Blueprint('api', __name__)
 
@@ -32,7 +24,7 @@ def signup():
     # email validation (special characters needed)
     regex_email = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
     # password minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
-    regex_password = re.compile("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")    
+    regex_password = re.compile("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
     
     
     if not username: return jsonify({"created": False, "status": "failed", "msg": "Missing username!"}), 400
@@ -75,8 +67,8 @@ def create_token():
     
     user = User.query.filter_by(email = email).first() 
     
-    if not email: return({"logged": False, "status": "failed", "msg": "Write your email address"}), 400
-    if not password: return({"logged": False, "status": "failed", "msg": "Enter your password"}), 400
+    if not email: return({"logged_in": False, "status": "failed", "msg": "Write your email address"}), 400
+    if not password: return({"logged_in": False, "status": "failed", "msg": "Enter your password"}), 400
     
     if user:
         passw_is_correct = current_app.bcrypt.check_password_hash(user.password, password)
@@ -86,19 +78,17 @@ def create_token():
             refresh_token = create_refresh_token(identity = email)  
             
             response_body = {
-                "logged": True,
+                "logged_in": True,
                 "status": "success",
                 "msg": "Successfuly logged in",
                 "user": user.serialize(),
-                "email": user.email,
-                "username": user.username,
                 "token": token,                    
                 "refresh": refresh_token,
             }
                      
             return jsonify(response_body), 200
     
-    return jsonify({"logged": False, "status": "failed", "msg": "Wrong credentials!"}), 401
+    return jsonify({"logged_in": False, "status": "failed", "msg": "Wrong credentials!"}), 401
     
 
 @api.route('/token/refresh', methods=['GET'])
@@ -108,34 +98,116 @@ def refresh_users_token():
     token = create_access_token(identity = current_user)
     
     response_body = {
+        "user": user.serialize(),
         "token": token
     } 
     
     return jsonify(response_body), 200
 
 
-@api.route('/private', methods=['GET'])
+@api.route('/private', methods=['PUT'])
 @jwt_required()
-def private():
+def private_update():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username = current_user).first()
+    user = User.query.filter_by(email = current_user).first()    
     
-    if user:
+    username = request.json.get("username")    
+    if username == "" or username == None:
+        username = user.username
+        
+    email = request.json.get("email")
+    if email == "" or email == None:
+        email = user.email
+        
+    name = request.json.get("name")  
+    if name == "" or name == None:
+        name = user.name 
+        
+    lastname = request.json.get("lastname")
+    if lastname == "" or lastname == None:
+        lastname = user.lastname
+        
+    phonenumber = request.json.get("phonenumber")
+    if phonenumber == "" or phonenumber == None:
+        phonenumber = user.phonenumber
+        
+    facebook = request.json.get("facebook")  
+    if facebook == "" or facebook == None:
+        facebook = user.facebook  
+        
+    instagram = request.json.get("instagram")
+    if instagram == "" or instagram == None:
+        instagram = user.instagram
+        
+    twitter = request.json.get("twitter")
+    if twitter == "" or twitter == None:
+        twitter = user.twitter
+    
+    user.username = username 
+    user.email = email
+    user.name = name
+    user.lastname = lastname
+    user.phonenumber = phonenumber
+    user.facebook = facebook
+    user.instagram = instagram
+    user.twiter = twitter
+
+    db.session.commit()
+    
+    response_body = {
+        "status": "succees",
+        "msg": "You successfully updated your profile!",
+        "user": user.serialize()    
+    }
+    
+    return jsonify (response_body), 200
+
+
+@api.route('/private/upload-picture', methods=['PUT'])
+@jwt_required()
+def upload_image():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    
+    if "picture" in request.files:
+        image_upload = cloudinary.uploader.upload(request.files["picture"], folder="Ink Zone")
+        
+        if not image_upload:
+            return jsonify ({"status": "failed", "msg": "There was an error during upload!", "user": None}), 400
+        
+        user.picture = image_upload["secure_url"]
+        
+        db.session.commit()
+        
         response_body = {
-            "logged": True,
-            "status": "success",           
-            "msg": f'Welcome back {current_user}!',
+            "status": "success",
+            "msg": "You successfully uploaded your picture!",
+            "user": user.serialize()
         }
         
         return jsonify(response_body), 200
-    
-    else:                
-        return ({"status": "failed", "logged": False}), 400
 
 
-@api.route('/create-review', methods=['GET','POST'])
+@api.route('/private', methods=['DELETE'])
 @jwt_required()
-def create_post():
+def delete_profile():
+    current_user = get_jwt_identity()
+    delete_user = User.query.filter_by(email = current_user).first()
+    
+    db.session.delete(delete_user)
+    db.session.commit()
+    
+    response_body = {
+        "status": "success",
+        "msg": "Profile successfully deleted"
+    } 
+    
+    return jsonify(response_body), 200
+
+
+@api.route('/users-reviews', methods=['GET','POST'])
+@jwt_required()
+def create_review():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email = current_user).first()
     review = request.json.get("review", None)
@@ -169,31 +241,65 @@ def create_post():
        return jsonify(response_body), 200 
 
 
-""" @api.route('/private', methods=['PUT'])
+@api.route('/users-reviews/<id>', methods=['GET'])
 @jwt_required()
-def private_update():
-    user = get_jwt_identity()
-    current_user = User.query.get(user)
+def get_review(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    review = request.json.get("review", None)
+    single_review = Reviews.query.filter_by(id = id, user_id = user.id).first()
     
-    username = request.json.get("username", None)
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    name = request.json.get("name", None)
-    lastname = request.json.get("lastname", None)
-    phonenumber = request.json.get("phonenumber", None)
-    facebook = request.json.get("facebook", None)
-    instagram = request.json.get("instagram", None)
-    twitter = request.json.get("twitter", None)
+    if not single_review:
+        return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
+
+    response_body = {
+        "user": user.username,
+        "review": single_review.review
+    }
+    return jsonify({response_body}), 200
+        
+   
+@api.route('/users-reviews/<id>', methods=['PUT', 'PATCH'])
+@jwt_required()
+def edit_review(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    edit_review = Reviews.query.filter_by(id = id, user_id = user.id).first()
+    review = request.json.get("review", None)
     
-    if "picture" in request.files:
-        profile_picture = request.files["picture"]
+    if not edit_review:
+        return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404    
+
+    edit_review.review = review
+        
+    db.session.commit()
     
-        if profile_picture != "":
-            uploading_picture = cloudinary.uploader.upload(request.files["profile_picture"])
-             
-            if not uploading_picture: return jsonify({"status": "failed", "msg":"There was an error while uploading your image!", "data": None}), 400
-            current_user.profile.picture = uploading_picture["secure_url"]      """                                          
-                                                           
+    response_body = {
+        "review": edit_review.review,
+        "user": user.username,
+    }
+    
+    return jsonify(response_body), 200
+    
+
+@api.route('/users-reviews/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_review(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    review = Reviews.query.filter_by(id = id, user_id = user.id).first()
+    
+    if not review:
+        return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
+    elif user.id != review.user_id:
+        return jsonify({"status": "failed", "msg": "You are not allowed to delete this review!"}), 401
+    else:
+        db.session.delete(review)
+        db.session.commit()
+        
+        return jsonify({}), 204
+        
+                                                                                                 
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()
