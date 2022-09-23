@@ -181,6 +181,23 @@ def private_update():
     return jsonify (response_body), 200
 
 
+@api.route('/private', methods=['DELETE'])
+@jwt_required()
+def delete_profile():
+    current_user = get_jwt_identity()
+    delete_user = User.query.filter_by(email = current_user).first()
+    
+    db.session.delete(delete_user)
+    db.session.commit()
+    
+    response_body = {
+        "status": "success",
+        "msg": "Profile successfully deleted"
+    } 
+    
+    return jsonify(response_body), 200
+
+
 @api.route('/users-reviews', methods=['GET','POST'])
 @jwt_required()
 def create_review():

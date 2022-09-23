@@ -115,7 +115,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },  
 
       logout: () => {
-        Notify.info("Successfully logged out");
         localStorage.removeItem("token");
         console.log("Login out");
         setStore({ token: null, currentUser: {} });
