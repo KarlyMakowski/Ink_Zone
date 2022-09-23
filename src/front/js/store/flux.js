@@ -28,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup",
+            "https://ink-zone.herokuapp.com/api/signup",
             {
               method: "POST",
               headers: {
@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token",
+            "https://ink-zone.herokuapp.com/api/token",
             {
               method: "POST",
               headers: {
@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: async (user) => {
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
+            "https://ink-zone.herokuapp.com/api/private",
             {
               method: "PUT",
               headers: {
@@ -130,7 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           formData.append("picture", picture)
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private/upload-picture", 
+            "https://ink-zone.herokuapp.com/api/private/upload-picture", 
             {
               method: "PUT",
               headers: {
