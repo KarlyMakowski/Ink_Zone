@@ -298,8 +298,8 @@ def delete_review(id):
         db.session.commit()
         
         return jsonify({}), 204
-        
-                                                                                                 
+
+                                                                                             
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()
@@ -308,6 +308,51 @@ def get_styles():
     return jsonify(styles_list), 200
 
 
+""" @api.route('/styles/<id>', methods=['GET'])
+@jwt_required()
+def private_styles_info(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    information = request.json.get("information", None)
+    style_info = Styles.query.filter_by(id = id, user_id = user.id).first()
+    
+    if user.id == None:
+        return jsonify({"status": "failed", "msg": "You're not allowed to see this content. Please, log in"}), 401
+    
+    response_body = {
+        "status": "success",
+        "style": style_info.information       
+    } 
+    
+    return jsonify({response_body}), 200"""
+    
+""" @api.route('/like-style/<styles_id>', methods=['POST'])
+@jwt_required()
+def like(styles_id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email = current_user).first()
+    style = Styles.query.filter_by(id = styles_id)
+    fav = Favourites.query.filter_by(user_id = user.id, styles_id = styles_id)
+    
+    if not style:
+        return jsonify({"status": "failed", "msg": "Style does not exist!"}), 404
+    elif fav:
+        db.session.delete(fav)
+        db.session.commit()
+    else:
+        fav = Favourites(user_id = user.id, styles_id = styles_id)
+        
+        db.session.add(fav)ç
+        db.session.commit()
+        
+        response_body = {
+            "status": "success",
+            "msg": "You got it! :)"
+        }
+        
+        return jsonify(response_body), 200 """
+    
+    
 @api.route('/prices', methods=['GET'])
 def get_prices():
     prices = Prices.query.all()

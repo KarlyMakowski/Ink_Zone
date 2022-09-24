@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+
+import "../../styles/signup-signin.css";
+
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
-
-import "../../styles/signUp.css";
 
 export const SignUp = () => {
   const { actions, store } = useContext(Context);

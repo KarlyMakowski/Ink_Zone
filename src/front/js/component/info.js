@@ -5,7 +5,7 @@ import "../../styles/info.css";
 export const Info = () => {
 
     return (
-        <button className="add-fav">
+        <button className="learn-more">
             <span aria-label="Fav Style" role="img">Learn More</span>
         </button>
     );

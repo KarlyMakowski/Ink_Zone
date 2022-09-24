@@ -2,7 +2,7 @@ import React from "react";
 
 import "../../styles/pricing.css";
 
-import { PriceComp } from "../component/priceComp";
+import { Prices } from "../component/prices";
 
 export const Pricing = () => {
   return (
@@ -12,7 +12,7 @@ export const Pricing = () => {
         <h1>Tattoo pricing</h1>
       </div>
       <div className="price-grid">
-        <PriceComp />
+        <Prices />
       </div>
     </div>
 

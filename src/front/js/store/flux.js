@@ -18,6 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       twitter: "",
       picture: null,
       styles: [],
+      privateStyle: [],
       prices: [],
     },
 
@@ -163,6 +164,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
+
+/*       loadSingleStyle: (id) => {
+        fetch(`https://ink-zone.herokuapp.com/api/styles/${id}`)
+          .then((response) => response.json())
+          .then((data) => setStore({ privateStyle: data }));
+      }, */
 
       loadPrices: () => {
         fetch("https://ink-zone.herokuapp.com/api/prices/")

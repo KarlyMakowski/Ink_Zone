@@ -1,4 +1,4 @@
-.add-fav {
+.learn-more {
     background: rgba(24, 23, 23, .9);
     border: 0;
     border-radius: 6px;
@@ -12,7 +12,7 @@
     transition: all .3s ease;
 }
 
-.add-fav:hover {
+.learn-more:hover {
     background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
     color: #000;
 }

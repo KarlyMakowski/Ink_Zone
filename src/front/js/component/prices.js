@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/pricing.css";
 
-export const PriceComp = () => {
+export const Prices = () => {
   const { store, actions } = useContext(Context);
 
   return store.prices.map((singlePrice, i) => {

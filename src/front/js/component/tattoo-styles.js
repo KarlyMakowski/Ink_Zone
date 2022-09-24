@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Info } from "../component/info";
 
-import "../../styles/tattooStyles.css";
+import "../../styles/tattoo-styles.css";
+
+import { Info } from "./info";
 
 export const TattooStyles = () => {
   const { store, actions } = useContext(Context);
@@ -16,7 +18,9 @@ export const TattooStyles = () => {
           </div>
           <div className="styles-card-content">
             <h1 className="styles-card-heading">{singleStyle.style}</h1>
+            <Link to="/styles/private/:id">
               <Info />
+            </Link>
           </div>
         </div>
       </div>

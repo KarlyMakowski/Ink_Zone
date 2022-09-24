@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 
-import "../../styles/tattooStyles.css";
+import "../../styles/tattoo-styles.css";
 
-import { TattooStyles } from "../component/tattooStyles";
+import { TattooStyles } from "../component/tattoo-styles";
 
-export const StylesInfo = () => {
+export const StylesPublic = () => {
 
   useEffect(() => {
     window.scrollTo(0,0);
