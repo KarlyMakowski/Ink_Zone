@@ -160,16 +160,22 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadStyles: () => {
-        fetch("https://ink-zone.herokuapp.com/api/styles/")
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/styles/")
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
 
-/*       loadSingleStyle: (id) => {
-        fetch(`https://ink-zone.herokuapp.com/api/styles/${id}`)
+      loadSingleStyle: (id) => {
+        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/styles/private/${id}`, 
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((response) => response.json())
           .then((data) => setStore({ privateStyle: data }));
-      }, */
+      },
 
       loadPrices: () => {
         fetch("https://ink-zone.herokuapp.com/api/prices/")

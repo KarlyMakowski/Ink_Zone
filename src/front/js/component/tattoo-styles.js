@@ -18,7 +18,7 @@ export const TattooStyles = () => {
           </div>
           <div className="styles-card-content">
             <h1 className="styles-card-heading">{singleStyle.style}</h1>
-            <Link to="/styles/private/:id">
+            <Link to={"/styles/private/" + singleStyle.id}>
               <Info />
             </Link>
           </div>
