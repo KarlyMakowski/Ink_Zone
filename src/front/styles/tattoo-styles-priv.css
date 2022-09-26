@@ -64,9 +64,51 @@
   text-align: start;
 }
 
-.private-fav button {
+.like-dislike {
+  display: flex;
+  margin-top: 60px;
+}
+
+.private-fav {
+  width: 16%;
+  margin-right: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 13px;
+  display: flex;
+  cursor: pointer;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.3rem;
+}
+
+.fav-icon {
+  font-size: 1.7rem;
+  margin-right: 10px;
+}
+
+.go-back {
+  text-align: end;
+  margin-top: 60px;
+}
+.go-back button {
   display: inline-block;
-  padding: 0.6rem 2.5rem;
+  width: 35%;
+  margin: 2rem auto;
+  padding: 5px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.go-back button:hover {
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: black;
+  font-weight: bold;
 }
 
 @media (max-width: 1280px) {
@@ -96,6 +138,12 @@
     font-size: 2.5rem;
     line-height: 3rem;
     text-align: center;
+  }
+  .private-fav {
+    width: 20%;
+  }
+  .go-back button {
+    width: 25%;
   }
 }
 
@@ -150,5 +198,14 @@
     margin-top: 30px;
     font-size: 1.7rem;
     line-height: 2.3rem;
+  }
+  .like-dislike{
+    justify-content: center;
+  }
+  .private-fav {
+    width: 40%;
+  }
+  .go-back button {
+    width: 40%;
   }
 }

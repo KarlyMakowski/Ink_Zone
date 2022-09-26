@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { useParams } from "react-router-dom";
 
 import "../../styles/tattoo-styles-priv.css";
+
+import { RiHeartFill, RiDislikeFill } from "react-icons/ri";
 
 import { Review } from "../component/user-reviews";
 
 export const StylesPrivate = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
   const params = useParams();
 
@@ -18,33 +21,33 @@ export const StylesPrivate = () => {
   const [dislikeActive, setDislikeActive] = useState(false);
 
   const likes = () => {
-    if(likeActive) {
+    if (likeActive) {
       setLikeActive(false);
-      setLike(like -1);
+      setLike(like - 1);
     } else {
       setLikeActive(true);
-      setLike(like +1);
-      if(dislikeActive){
+      setLike(like + 1);
+      if (dislikeActive) {
         setDislikeActive(false);
-        setLike(like +1);
-        setDislike(dislike -1);
-      };
-    };
+        setLike(like + 1);
+        setDislike(dislike - 1);
+      }
+    }
   };
 
   const dislikes = () => {
-    if(dislikeActive) {
+    if (dislikeActive) {
       setDislikeActive(false);
-      setDislike(dislike -1);
+      setDislike(dislike - 1);
     } else {
       setDislikeActive(true);
-      setDislike(dislike +1);
-      if(likeActive){
+      setDislike(dislike + 1);
+      if (likeActive) {
         setLikeActive(false);
-        setDislike(dislike +1);
-        setLike(like -1);
-      };
-    };
+        setDislike(dislike + 1);
+        setLike(like - 1);
+      }
+    }
   };
 
   useEffect(() => {
@@ -68,15 +71,20 @@ export const StylesPrivate = () => {
               <span className="text-primary">"{store.privateStyle.style}"</span>{" "}
               style special?
             </h3>
-            <p className="private-style-info">{store.privateStyle.information}</p>
-            <div className="private-fav">
-              <button onClick={likes}>Love {like}</button>
-              <button onClick={dislikes}>Hate {dislike}</button>
+            <p className="private-style-info">
+              {store.privateStyle.information}
+            </p>
+            <div className="like-dislike">
+              <button className="private-fav" onClick={likes}><RiHeartFill className ="fav-icon"/>Love {like}</button>
+              <button className="private-fav" onClick={dislikes}><RiDislikeFill className ="fav-icon"/>Hate {dislike}</button>
+            </div>
+            <div className="go-back">
+              <button onClick={() => navigate("/styles")}> ⇦ GO BACK </button>
             </div>
           </div>
         </div>
       </div>
-{/*       <Review /> */}
+      {/*       <Review /> */}
     </>
   );
 };
