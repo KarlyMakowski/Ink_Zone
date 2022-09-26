@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../../styles/contact-us.css";
 
@@ -6,6 +6,11 @@ import { MdLocationPin, MdEmail } from "react-icons/md";
 import { FaPhone, FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 
 export const ContactUs = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <div className="contact-us">
       <div className="contact-title">

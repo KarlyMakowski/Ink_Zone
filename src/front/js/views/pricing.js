@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../../styles/pricing.css";
 
 import { Prices } from "../component/prices";
 
 export const Pricing = () => {
-  return (
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
+  return (
     <div className="pricing-view">
       <div className="pricing-title">
         <h1>Tattoo pricing</h1>

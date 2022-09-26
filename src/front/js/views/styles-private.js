@@ -1,45 +1,82 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 
-import "../../styles/tattoo-styles.css";
+import "../../styles/tattoo-styles-priv.css";
+
+import { Review } from "../component/user-reviews";
 
 export const StylesPrivate = () => {
   const { store, actions } = useContext(Context);
 
   const params = useParams();
 
+  const [like, setLike] = useState(0);
+  const [dislike, setDislike] = useState(0);
+
+  const [likeActive, setLikeActive] = useState(false);
+  const [dislikeActive, setDislikeActive] = useState(false);
+
+  const likes = () => {
+    if(likeActive) {
+      setLikeActive(false);
+      setLike(like -1);
+    } else {
+      setLikeActive(true);
+      setLike(like +1);
+      if(dislikeActive){
+        setDislikeActive(false);
+        setLike(like +1);
+        setDislike(dislike -1);
+      };
+    };
+  };
+
+  const dislikes = () => {
+    if(dislikeActive) {
+      setDislikeActive(false);
+      setDislike(dislike -1);
+    } else {
+      setDislikeActive(true);
+      setDislike(dislike +1);
+      if(likeActive){
+        setLikeActive(false);
+        setDislike(dislike +1);
+        setLike(like -1);
+      };
+    };
+  };
+
   useEffect(() => {
-    actions.loadSingleStyle(params.id)
-  }, [])
+    window.scrollTo(0, 0);
+    actions.loadSingleStyle(params.id);
+  }, []);
 
   return (
     <>
-      <div className="priv-style-title">
+      <div className="private-title">
         <h1>learn more...</h1>
       </div>
-      <div className="container my-5 my-md-0 vh-md-100 d-flex align-items-center justify-content-center" key={store.privateStyle.id}>
-        <article className="card overflow-hidden border-0 rounded-3 flex-md-row align-items-center">
-          <div className="order-md-2 flex-md-grow-1 w-100">
-            <picture>
-              <img
-                src={store.privateStyle.image}
-                alt="style-img"
-                className="card-img"
-              />
-            </picture>
+      <div className="private-container">
+        <div className="private-card" key={store.privateStyle.id}>
+          <div className="private-img">
+            <img src={store.privateStyle.image} alt="style-img" />
           </div>
-          <section className="order-md-1 flex-md-grow-1 w-100">
-            <div className="card-body text-center text-md-start text-white">
-              <h3 className="card-title priv-style-intro">
-                What makes <span className="text-primary">"{store.privateStyle.style}"</span> style special?
-              </h3>
-              <p className="text-secondary text-md-start priv-style-info">{store.privateStyle.information}
-              </p>
+          <div className="private-info">
+            <h3 className="private-style-intro">
+              What makes{" "}
+              <span className="text-primary">"{store.privateStyle.style}"</span>{" "}
+              style special?
+            </h3>
+            <p className="private-style-info">{store.privateStyle.information}</p>
+            <div className="private-fav">
+              <button onClick={likes}>Love {like}</button>
+              <button onClick={dislikes}>Hate {dislike}</button>
             </div>
-          </section>
-        </article>
+          </div>
+        </div>
       </div>
+{/*       <Review /> */}
     </>
   );
 };
