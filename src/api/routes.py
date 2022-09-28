@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews
+from api.models import db, User, Styles, Prices, Reviews, Favourites
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
-from flask_mail import Mail
 
 import re
 import cloudinary
@@ -209,7 +208,7 @@ def delete_profile():
 
     response_body = {
         "status": "success",
-        "msg": "Profile successfully deleted"
+        "msg": "Hope to see you back! :("
     }
 
     return jsonify(response_body), 200
@@ -230,32 +229,73 @@ def private_styles_info(id):
     return (style_info.serialize()), 200
 
 
-"""@api.route('/favourite/<styles_id>', methods=['POST'])
+@api.route('/styles/private/favourite/<id>', methods=['POST', 'GET'])
 @jwt_required()
-def fav(styles_id):
+def fav(id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(email = current_user).first()
-    style = Styles.query.filter_by(id = styles_id)
-    fav = Favourites.query.filter_by(user_id = user.id, styles_id = styles_id)
-    
-    if not style:
-        return jsonify({"status": "failed", "msg": "Style does not exist!"}), 404
-    elif fav:
-        db.session.delete(fav)
-        db.session.commit()
-    else:
-        fav = Favourites(user_id = user.id, styles_id = styles_id)
-        
-        db.session.add(fav)
-        db.session.commit()
-        
-        response_body = {
-            "status": "success",
-            "msg": "You got it! :)"
-        }
-        
-        return jsonify(response_body), 200 """
+    user = User.query.filter_by(email=current_user).first()
+    style = Styles.query.filter_by(id=id).first()
+    fav = Favourites.query.filter_by(
+        user_id=user.id, styles_id=style.id).first()
+    fav_count = Favourites.query.filter_by(styles_id=style.id).count()
 
+    if request.method == 'POST':
+        if not user:
+            return jsonify({"status": "failed", "msg": "Please, log in!!"}), 400
+
+        elif not fav:
+            fav = Favourites(user_id=user.id, styles_id=style.id)
+            fav_add = fav_count + 1
+
+            db.session.add(fav)
+            db.session.commit()
+
+            response_body = {
+                "status": "success",
+                "msg": "You got it! :)",
+                "fav_counter": fav_add
+            }
+
+            return jsonify(response_body), 200
+
+        else:
+            fav_delete = fav_count - 1
+
+            db.session.delete(fav)
+            db.session.commit()
+
+            response_body = {
+                "status": "success",
+                "msg": ":(",
+                "fav_counter": fav_delete
+            }
+
+            return jsonify(response_body), 200
+
+    else:
+        is_fav = False
+
+        if fav:
+            is_fav = True
+
+        response_body = {
+            "user": user.username,
+            "fav_counter": fav_count,
+            "is_favourite": is_fav
+        }
+
+        return jsonify(response_body), 200
+
+
+@api.route('/prices', methods=['GET'])
+def get_prices():
+    prices = Prices.query.all()
+    prices_list = list(map(lambda prices: prices.serialize(), prices))
+
+    return jsonify(prices_list), 200
+
+
+# --> COMING SOON... !!!
 
 @api.route('/users-reviews', methods=['GET', 'POST'])
 @jwt_required()
@@ -352,11 +392,3 @@ def delete_review(id):
         db.session.commit()
 
         return jsonify({}), 204
-
-
-@api.route('/prices', methods=['GET'])
-def get_prices():
-    prices = Prices.query.all()
-    prices_list = list(map(lambda prices: prices.serialize(), prices))
-
-    return jsonify(prices_list), 200

@@ -33,7 +33,7 @@ export const Profile = () => {
           <div className="col-md-4 mb-3">
             <div className="profile-card">
               <div className="profile-card-body">
-                <div className="d-flex flex-column align-items-center text-center">
+                <div className="d-flex flex-column align-items-center text-center img-size">
                   <img src={(store.currentUser?.picture == "") ? {skull} : store.currentUser?.picture} alt="default-pic" className="rounded-circle" /> 
                   <div className="mt-3">
                     <form onSubmit={e => actions.uploadPicture(e)}>

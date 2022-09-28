@@ -3,12 +3,13 @@ import Notiflix, { Notify } from "notiflix";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      token: null,
+      currentUser: null,
+      picture: null,
       username: "",
       email: "",
       password: "",
       confirmPassword: "",
-      token: null,
-      currentUser: null,
       message: "",
       name: "",
       lastname: "",
@@ -16,9 +17,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       facebook: "",
       instagram: "",
       twitter: "",
-      picture: null,
       styles: [],
       privateStyle: [],
+      addFav: [],
+      favCount: 0,
       prices: [],
     },
 
@@ -107,7 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if(status == "failed") {
             Notify.failure(msg)
           }
-          if(status == "succeess") {
+          if(status == "success") {
             Notify.success(msg)
           }
         } catch (error) {
@@ -116,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },  
 
       logout: (navigate) => {
-        Notify.info("See you next time! :smiley:")
+        Notify.info("See you next time!")
         sessionStorage.removeItem("token");
         setStore({ token: null, currentUser: null });
         navigate("/")
@@ -177,8 +179,43 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => setStore({ privateStyle: data }));
       },
 
+      handleFav: async (id, addElem) => {
+        try {
+          const resp = await fetch(
+            `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/styles/private/favourite/${id}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
+              body: JSON.stringify(id),
+            }
+          );
+          const {status, msg} = await resp.json();
+          const store = getStore();
+          if(status == "failed") {
+            Notify.failure(msg);
+          }
+          if(status == "success") {
+            Notify.success(msg);
+            setStore({ addFav: [...store.addFav, addElem] })
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      handleCount: async () => {
+        try {
+          const resp = await fetch(
+            
+          )
+        }
+      }
+
       loadPrices: () => {
-        fetch("https://ink-zone.herokuapp.com/api/prices/")
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/prices/")
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
       },

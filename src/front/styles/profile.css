@@ -114,3 +114,8 @@
 .upload {
   cursor: pointer;
 }
+
+.img-size img {
+  max-width: 200px;
+  max-height: 200px;
+}

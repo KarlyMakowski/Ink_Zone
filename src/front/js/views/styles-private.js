@@ -15,45 +15,21 @@ export const StylesPrivate = () => {
   const params = useParams();
 
   const [like, setLike] = useState(0);
-  const [dislike, setDislike] = useState(0);
-
   const [likeActive, setLikeActive] = useState(false);
-  const [dislikeActive, setDislikeActive] = useState(false);
 
   const likes = () => {
-    if (likeActive) {
-      setLikeActive(false);
-      setLike(like - 1);
-    } else {
-      setLikeActive(true);
-      setLike(like + 1);
-      if (dislikeActive) {
-        setDislikeActive(false);
-        setLike(like + 1);
-        setDislike(dislike - 1);
-      }
-    }
-  };
-
-  const dislikes = () => {
-    if (dislikeActive) {
-      setDislikeActive(false);
-      setDislike(dislike - 1);
-    } else {
-      setDislikeActive(true);
-      setDislike(dislike + 1);
-      if (likeActive) {
-        setLikeActive(false);
-        setDislike(dislike + 1);
-        setLike(like - 1);
-      }
-    }
+    const userLikes = likeActive;
+    setLikeActive(!userLikes);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     actions.loadSingleStyle(params.id);
   }, []);
+
+  useEffect(() => {
+    actions.handleFav();
+  }, [likeActive]);
 
   return (
     <>
@@ -75,8 +51,7 @@ export const StylesPrivate = () => {
               {store.privateStyle.information}
             </p>
             <div className="like-dislike">
-              <button className="private-fav" onClick={likes}><RiHeartFill className ="fav-icon"/>Love {like}</button>
-              <button className="private-fav" onClick={dislikes}><RiDislikeFill className ="fav-icon"/>Hate {dislike}</button>
+              <button className="private-fav" onClick={likes}><RiHeartFill className ="fav-icon"/>Love! {like}</button>
             </div>
             <div className="go-back">
               <button onClick={() => navigate("/styles")}> ⇦ GO BACK </button>

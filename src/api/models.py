@@ -128,9 +128,9 @@ class Reviews(db.Model):
         }
         
 class Favourites(db.Model):
-    id = db.Column(db.Integer, primary_key=True) 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     styles_id = db.Column(db.Integer, db.ForeignKey('styles.id'), primary_key=True)
-    experts_id = db.Column(db.Integer, db.ForeignKey('experts.id'), primary_key=True)
+    experts_id = db.Column(db.Integer, db.ForeignKey('experts.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     
     def __repr__(self):
