@@ -223,6 +223,7 @@ def get_styles():
 
 
 @api.route('/styles/private/<id>', methods=['GET'])
+#@jwt_required()
 def private_styles_info(id):
     style_info = Styles.query.filter_by(id=id).first()
 
@@ -238,6 +239,7 @@ def fav(id):
     fav = Favourites.query.filter_by(
         user_id=user.id, styles_id=style.id).first()
     fav_count = Favourites.query.filter_by(styles_id=style.id).count()
+    is_fav = False
 
     if request.method == 'POST':
         if not user:
@@ -246,14 +248,16 @@ def fav(id):
         elif not fav:
             fav = Favourites(user_id=user.id, styles_id=style.id)
             fav_add = fav_count + 1
-
+            is_fav = True
+            
             db.session.add(fav)
             db.session.commit()
 
             response_body = {
                 "status": "success",
                 "msg": "You got it! :)",
-                "fav_counter": fav_add
+                "fav_counter": fav_add,
+                "is_favourite": is_fav
             }
 
             return jsonify(response_body), 200
@@ -267,16 +271,13 @@ def fav(id):
             response_body = {
                 "status": "success",
                 "msg": ":(",
-                "fav_counter": fav_delete
+                "fav_counter": fav_delete, 
+                "is_favourite": is_fav                
             }
 
             return jsonify(response_body), 200
 
     else:
-        is_fav = False
-
-        if fav:
-            is_fav = True
 
         response_body = {
             "user": user.username,

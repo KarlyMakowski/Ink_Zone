@@ -4,9 +4,7 @@ import { Context } from "../store/appContext";
 
 import "../../styles/tattoo-styles-priv.css";
 
-import { RiHeartFill, RiDislikeFill } from "react-icons/ri";
-
-import { Review } from "../component/user-reviews";
+import { HiOutlineHeart } from "react-icons/hi";
 
 export const StylesPrivate = () => {
   const { store, actions } = useContext(Context);
@@ -14,22 +12,20 @@ export const StylesPrivate = () => {
 
   const params = useParams();
 
-  const [like, setLike] = useState(0);
-  const [likeActive, setLikeActive] = useState(false);
-
-  const likes = () => {
+/*   const counter = () => {
     const userLikes = likeActive;
     setLikeActive(!userLikes);
-  };
+  }; */
 
   useEffect(() => {
     window.scrollTo(0, 0);
     actions.loadSingleStyle(params.id);
+    actions.handleCount(params.id)
   }, []);
 
-  useEffect(() => {
-    actions.handleFav();
-  }, [likeActive]);
+/*   useEffect(() => {
+    actions.handleCount();
+  }, [store.favCount]); */
 
   return (
     <>
@@ -50,16 +46,17 @@ export const StylesPrivate = () => {
             <p className="private-style-info">
               {store.privateStyle.information}
             </p>
+
             <div className="like-dislike">
-              <button className="private-fav" onClick={likes}><RiHeartFill className ="fav-icon"/>Love! {like}</button>
+              <button className="private-fav" onClick={() => actions.handleFav(params.id)}><HiOutlineHeart className ="fav-icon"/>Love! {store.favCount}</button>
             </div>
+
             <div className="go-back">
               <button onClick={() => navigate("/styles")}> ⇦ GO BACK </button>
             </div>
           </div>
         </div>
       </div>
-      {/*       <Review /> */}
     </>
   );
 };

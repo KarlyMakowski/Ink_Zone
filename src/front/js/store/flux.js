@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/signup",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/signup",
             {
               method: "POST",
               headers: {
@@ -48,8 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const { status, msg, created } = await resp.json();
           if (status == "failed") {
             Notify.failure(msg)
-          } 
-          if(status == "success") {
+          }
+          if (status == "success") {
             Notify.success(msg)
             setStore({ created: created });
             sessionStorage.setItem("created", created);
@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/token",
             {
               method: "POST",
               headers: {
@@ -79,11 +79,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const { status, msg, user, token } = await resp.json();
-          if(status == "failed") {
+          if (status == "failed") {
             Notify.failure(msg)
-          } 
-          if(status == "success"){
-            setStore({currentUser: user, token: token});
+          }
+          if (status == "success") {
+            setStore({ currentUser: user, token: token });
             sessionStorage.setItem("token", token);
             navigate("/profile");
           }
@@ -95,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: async (user) => {
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/private",
             {
               method: "PUT",
               headers: {
@@ -105,17 +105,17 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: JSON.stringify(user),
             }
           );
-          const {status, msg} = await resp.json();
-          if(status == "failed") {
+          const { status, msg } = await resp.json();
+          if (status == "failed") {
             Notify.failure(msg)
           }
-          if(status == "success") {
+          if (status == "success") {
             Notify.success(msg)
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
-      },  
+      },
 
       logout: (navigate) => {
         Notify.info("See you next time!")
@@ -133,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           formData.append("picture", picture)
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private/upload-picture", 
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/private/upload-picture",
             {
               method: "PUT",
               headers: {
@@ -142,18 +142,18 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: formData
             }
           );
-            const { status, msg, user } = await resp.json();
-            if(status == "failed"){
-              Notify.failure(msg)
-            }
-            if(status == "success") {
-              Notify.success(msg)
-              setStore({currentUser: user})
-            }
+          const { status, msg, user } = await resp.json();
+          if (status == "failed") {
+            Notify.failure(msg)
           }
-          catch (error) {
-            console.log("Error loading message from backend", error);
-        }  
+          if (status == "success") {
+            Notify.success(msg)
+            setStore({ currentUser: user })
+          }
+        }
+        catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
       handlePicture: (e) => {
@@ -162,60 +162,62 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadStyles: () => {
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/styles/")
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/styles/")
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
 
       loadSingleStyle: (id) => {
-        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/styles/private/${id}`, 
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/styles/private/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          })
           .then((response) => response.json())
           .then((data) => setStore({ privateStyle: data }));
       },
 
-      handleFav: async (id, addElem) => {
-        try {
-          const resp = await fetch(
-            `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/styles/private/favourite/${id}`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
-              },
-              body: JSON.stringify(id),
-            }
-          );
-          const {status, msg} = await resp.json();
-          const store = getStore();
-          if(status == "failed") {
-            Notify.failure(msg);
-          }
-          if(status == "success") {
-            Notify.success(msg);
-            setStore({ addFav: [...store.addFav, addElem] })
-          }
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
+      handleFav: (id) => {
+        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/styles/private/favourite/${id}`, 
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setStore({ addFav: data.is_favourite, favCount: data.fav_counter })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       },
 
-      handleCount: async () => {
-        try {
-          const resp = await fetch(
-            
-          )
-        }
-      }
+      handleCount: (id) => {
+        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/styles/private/favourite/${id}`, 
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setStore({ favCount: data.fav_counter, addFav: data.is_favourite })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      },
 
       loadPrices: () => {
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/prices/")
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu69.gitpod.io/api/prices/")
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
       },
