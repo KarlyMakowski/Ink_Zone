@@ -69,7 +69,7 @@
   margin-top: 60px;
 }
 
-.private-fav {
+.no-fav {
   width: 16%;
   margin-right: 10px;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -80,6 +80,21 @@
   cursor: pointer;
   font-family: "Rajdhani", sans-serif;
   font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.fav {
+  width: 16%;
+  margin-right: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  padding: 6px 13px;
+  display: flex;
+  cursor: pointer;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.3rem;
+  font-weight: bold;  
 }
 
 .fav-icon {
@@ -139,7 +154,7 @@
     line-height: 3rem;
     text-align: center;
   }
-  .private-fav {
+  .no-fav {
     width: 20%;
   }
   .go-back button {
@@ -202,7 +217,7 @@
   .like-dislike{
     justify-content: center;
   }
-  .private-fav {
+  .no-fav {
     width: 40%;
   }
   .go-back button {
