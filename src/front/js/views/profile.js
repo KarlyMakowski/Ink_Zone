@@ -83,10 +83,10 @@ export const Profile = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder={store.currentUser?.username}
                   className="form-control"
                   onChange={(e) => actions.handleChange(e)}
                   defaultValue={store.currentUser?.username}
+                  name="username"
                 />
               </div>
             </div>
@@ -99,10 +99,10 @@ export const Profile = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder={store.currentUser?.name}
                   className="form-control"
                   onChange={(e) => actions.handleChange(e)}
-                  defaultValue={store.name}
+                  defaultValue={store.currentUser?.name}
+                  name="name"
                 />
               </div>
             </div>
@@ -115,10 +115,10 @@ export const Profile = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder={store.currentUser?.lastname}
                   className="form-control"
                   onChange={(e) => actions.handleChange(e)}
-                  defaultValue={store.lastname}
+                  defaultValue={store.currentUser?.lastname}
+                  name="lastname"
                 />
               </div>
             </div>
@@ -131,10 +131,10 @@ export const Profile = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder={store.currentUser?.phonenumber}
                   className="form-control"
                   onChange={(e) => actions.handleChange(e)}
-                  defaultValue={store.phonenumber}
+                  defaultValue={store.currentUser?.phonenumber}
+                  name="phonenumber"
                 />
               </div>
             </div>
@@ -147,10 +147,10 @@ export const Profile = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder={store.currentUser?.email}
                   className="form-control"
                   onChange={(e) => actions.handleChange(e)}
-                  defaultValue={store.email}
+                  defaultValue={store.currentUser?.email}
+                  name="email"
                 />
               </div>
             </div>
@@ -164,10 +164,10 @@ export const Profile = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder={store.currentUser?.facebook}
                     className="form-control"
                     onChange={(e) => actions.handleChange(e)}
-                    defaultValue={store.facebook}
+                    defaultValue={store.currentUser?.facebook}
+                    name="facebook"
                   />
                 </div>
               </div>
@@ -180,10 +180,10 @@ export const Profile = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder={store.currentUser?.twitter}
                     className="form-control"
                     onChange={(e) => actions.handleChange(e)}
-                    defaultValue={store.twitter}
+                    defaultValue={store.currentUser?.twitter}
+                    name="twitter"
                   />
                 </div>
               </div>
@@ -196,10 +196,10 @@ export const Profile = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder={store.currentUser?.instagram}
                     className="form-control"
                     onChange={(e) => actions.handleChange(e)}
-                    defaultValue={store.instagram}
+                    defaultValue={store.currentUser?.instagram}
+                    name="instagram"
                   />
                 </div>
               </div>

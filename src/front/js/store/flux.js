@@ -117,14 +117,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
               body: JSON.stringify({
-                username,
-                email,
-                name,
-                lastname,
-                phonenumber,
-                facebook,
-                instagram,
-                twitter,
+                username: username,
+                email: email,
+                name: name,
+                lastname: lastname,
+                phonenumber: phonenumber,
+                facebook: facebook,
+                instagram: instagram,
+                twitter: twitter,
               }),
             }
           );
