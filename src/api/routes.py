@@ -5,6 +5,7 @@ from flask_jwt_extended import jwt_required, create_access_token, create_refresh
 from flask_bcrypt import Bcrypt
 
 import re
+import datetime
 import cloudinary
 import cloudinary.api
 from cloudinary.uploader import upload
@@ -73,44 +74,29 @@ def create_token():
     user = User.query.filter_by(email=email).first()
 
     if not email:
-        return ({"logged_in": False, "status": "failed", "msg": "Write your email address"}), 400
+        return ({"status": "failed", "msg": "Write your email address"}), 400
     if not password:
-        return ({"logged_in": False, "status": "failed", "msg": "Enter your password"}), 400
+        return ({"status": "failed", "msg": "Enter your password"}), 400
 
     if user:
         passw_is_correct = current_app.bcrypt.check_password_hash(
             user.password, password)
 
         if passw_is_correct:
-            token = create_access_token(identity=email)
-            refresh_token = create_refresh_token(identity=email)
+            token_expiration = datetime.timedelta(days=1)
+            token = create_access_token(
+                identity=email, expires_delta=token_expiration)
 
             response_body = {
-                "logged_in": True,
                 "status": "success",
                 "msg": "Successfuly logged in",
                 "user": user.serialize(),
                 "token": token,
-                "refresh": refresh_token,
             }
 
             return jsonify(response_body), 200
 
-    return jsonify({"logged_in": False, "status": "failed", "msg": "Wrong credentials!"}), 401
-
-
-@api.route('/token/refresh', methods=['GET'])
-@jwt_required(refresh=True)
-def refresh_users_token():
-    current_user = get_jwt_identity()
-    token = create_access_token(identity=current_user)
-
-    response_body = {
-        "user": user.serialize(),
-        "token": token
-    }
-
-    return jsonify(response_body), 200
+    return jsonify({"status": "failed", "msg": "Wrong credentials!"}), 401
 
 
 @api.route('/private', methods=['PUT'])
@@ -223,7 +209,7 @@ def get_styles():
 
 
 @api.route('/styles/private/<id>', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def private_styles_info(id):
     style_info = Styles.query.filter_by(id=id).first()
 

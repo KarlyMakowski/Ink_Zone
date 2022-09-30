@@ -247,7 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            setStore({ addFav: data.is_favourite, favCount: data.fav_counter });
+            setStore({ addFav: data.is_favourite, favCount: data.fav_counter, currentUser: data.user });
           })
           .catch((error) => {
             console.log(error);

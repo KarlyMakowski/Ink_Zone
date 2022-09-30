@@ -133,9 +133,9 @@ export const ContactUs = () => {
         <div className="contact contact-map">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.999812004841!2d-3.688012684350767!3d40.431003062694764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6ea7728ed9735a32!2zNDDCsDI1JzUxLjYiTiAzwrA0MScwOS4wIlc!5e0!3m2!1ses!2ses!4v1662915382089!5m2!1ses!2ses"
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>
