@@ -14,13 +14,13 @@ export const StylesPrivate = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    actions.loadSingleStyle(params.id);
-    actions.handleCount(params.id);
+    if (store.currentUser === null) {
+      navigate("/sign-in");
+    } else {
+      actions.loadSingleStyle(params.id);
+      actions.handleCount(params.id);
+    }
   }, []);
-
-  /*   useEffect(() => {
-      actions.handleCount();
-    }, [store.favCount]); */
 
   return (
     <>

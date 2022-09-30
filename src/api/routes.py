@@ -163,7 +163,7 @@ def private_update():
     db.session.commit()
 
     response_body = {
-        "status": "succees",
+        "status": "success",
         "msg": "You successfully updated your profile!",
         "user": user.serialize()
     }
