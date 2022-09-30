@@ -16,6 +16,10 @@ export const SignIn = () => {
     setShow((prevState) => !prevState);
   };
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  })
+
   return (
     <div className="register">
       <div className="login-container">

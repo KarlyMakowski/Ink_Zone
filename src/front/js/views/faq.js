@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../../styles/faq.css";
 
 export const Faq = () => {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  })
 
   return (<>
     <div className="pricing-title">

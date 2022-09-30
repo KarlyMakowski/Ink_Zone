@@ -45,8 +45,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const { status, msg, created } = await resp.json();
           if (status == "failed") {
             Notify.failure(msg)
-          } 
-          if(status == "success") {
+          }
+          if (status == "success") {
             Notify.success(msg)
             setStore({ created: created });
             sessionStorage.setItem("created", created);
@@ -76,43 +76,60 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const { status, msg, user, token } = await resp.json();
-          if(status == "failed") {
+          if (status == "failed") {
             Notify.failure(msg)
-          } 
-          if(status == "success"){
-            setStore({currentUser: user, token: token});
-            sessionStorage.setItem("token", token);
-            navigate("/profile");
+          }
+          if (status == "success") {
+            setStore({ currentUser: user, token: token })
+            sessionStorage.setItem("token", token)
+            navigate("/profile")
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
       },
 
-      profile: async (user) => {
+      loadProfile: async () => {
+/*         e.preventDefault();
+ */
+        const { username, email, name, lastname, phonenumber, facebook, instagram, twitter } = getStore();
+
         try {
+          let formData = new FormData();
+
+          formData.append('username', username);
+          formData.append('email', email);
+          formData.append('name', name);
+          formData.append('lastname', lastname);
+          formData.append('phonenumber', phonenumber);
+          formData.append('facebook', facebook);
+          formData.append('instagram', instagram);
+          formData.append('twitter', twitter);
+
           const resp = await fetch(
             "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
             {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
+                Authorization: "Bearer " + sessionStorage.getItem("token")
               },
-              body: JSON.stringify(user),
-            }
+              body: formData,
+            },
           );
-          const {status, msg} = await resp.json();
-          if(status == "failed") {
-            Notify.failure(msg)
+          const { status, msg, user } = await resp.json();
+          if (status === "failed") {
+            Notify.failure("There has been an error updating your profile")
           }
-          if(status == "succeess") {
+          if (status === "success") {
             Notify.success(msg)
+            setStore({ currentUser: user })
           }
-        } catch (error) {
+        }
+        catch (error) {
           console.log("Error loading message from backend", error);
         }
-      },  
+      },
 
       logout: (navigate) => {
         Notify.info("See you next time! :smiley:")
@@ -130,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           formData.append("picture", picture)
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private/upload-picture", 
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private/upload-picture",
             {
               method: "PUT",
               headers: {
@@ -139,18 +156,18 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: formData
             }
           );
-            const { status, msg, user } = await resp.json();
-            if(status == "failed"){
-              Notify.failure(msg)
-            }
-            if(status == "success") {
-              Notify.success(msg)
-              setStore({currentUser: user})
-            }
+          const { status, msg, user } = await resp.json();
+          if (status == "failed") {
+            Notify.failure(msg)
           }
-          catch (error) {
-            console.log("Error loading message from backend", error);
-        }  
+          if (status == "success") {
+            Notify.success(msg)
+            setStore({ currentUser: user })
+          }
+        }
+        catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
       handlePicture: (e) => {

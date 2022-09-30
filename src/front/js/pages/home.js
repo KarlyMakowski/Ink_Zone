@@ -13,6 +13,7 @@ export const Home = () => {
   const videoEl = useRef(video);
 
   useEffect(() => {
+    window.scrollTo(0,0);
     videoEl.current.play();
   }, []);
 

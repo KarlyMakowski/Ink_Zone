@@ -1,17 +1,9 @@
-.profile-container {
-    position: relative;
-    width: 80%;
-    margin: auto;
-    padding-bottom: 10rem;
-    font-family: "Rajdhani", sans-serif;
-}
-
-.main-body {
-  font-size: 1.25rem;
-}
-
-.profile-container h5, h4, h3 {
-  font-weight: bold;
+.form {
+  position: relative;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 10rem;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .profile-card {
@@ -26,23 +18,75 @@
   backdrop-filter: blur(2px);
 }
 
-.profile-card .col-sm-3 {
-  font-weight: bold;
+.profile-card form {
+  padding: 3rem 2rem 4rem;
 }
 
-.profile-card-body {
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding: 1rem;
-  margin: 1rem;
+.form_box_input {
+  margin-top: 2rem;
 }
 
-.list-group-item span {
-  margin-left: 10px;
+.form_box_input_first {
+  margin-top: 0;
+}
+
+.form_box_input label,
+.form_box_input_first label {
+  display: block;
+  width: 100%;
+  margin-left: 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.form_box_input_userName,
+.form_box_input_name,
+.form_box_input_lastName,
+.form_box_input_phoneNumber {
+  margin-top: 0.5rem;
+  padding: 10px;
+  font-size: 1.25rem;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.form_box_input_box {
+  margin-top: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+}
+
+.form_box_input_box_icon {
+  font-size: 38px;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  padding: 0.5rem 1rem;
+  color: #fff;
+  display: grid;
+  cursor: pointer;
+}
+
+.form_box_input_box input {
+  border: 0;
+  border-radius: 0;
+  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+
+.form_box_input_social {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
 .profile-btn input, 
-.review-btn input {
+.profile-btn label {
   padding: 10px;
   font-size: 1em;
   outline: none;
@@ -53,7 +97,7 @@
 }
 
 .profile-btn input[type="submit"],
-.review-btn input[type="submit"] {
+.profile-btn label {
   width: 100px;
   font-size: 1.2rem;
   font-weight: bold;
@@ -64,53 +108,54 @@
 }
 
 .profile-btn input[type="submit"]:hover,
-.review-btn input[type="submit"]:hover {
+.profile-btn label:hover {
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
   color: black;
   font-weight: bold;
 }
 
-.review-btn input[type="submit"] {
-  width: 180px;
+.profile-btn label {
+  cursor: pointer;
+  margin-right: 1rem;
 }
 
-.profile-card textarea {
+.update-profile-btn input {
+  width: 170px;
+  margin-top: 3rem;
   padding: 10px;
-  font-size: 1em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
   outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.15);
   color: white;
-  resize: none;
-  min-height: 220px;
-  margin-bottom: 10px;
 }
 
-.hr-size {
-  margin: 1.8rem 0;
+.update-profile-btn input:hover {
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: black;
+  font-weight: bold;
 }
 
-.gutters-sm {
-  margin-right: -8px;
-  margin-left: -8px;
-}
-
-.gutters-sm>.col, .gutters-sm>[class*=col-] {
-  padding-right: 8px;
-  padding-left: 8px;
-}
-
-.list-group {
-  background: none;
-  box-shadow: none;
-  backdrop-filter: none;
+.img-size img {
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .hidden {
   display: none;
 }
 
-.upload {
-  cursor: pointer;
+@media screen and (max-width: 35em) {
+  .form_box_input_social {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 768px) {
+  .form_box_input_social {
+    grid-template-columns: 1fr 1fr;
+  }
 }

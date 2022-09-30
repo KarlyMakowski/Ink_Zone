@@ -3,7 +3,6 @@ from api.models import db, User, Styles, Prices, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
-from flask_mail import Mail
 
 import re
 import cloudinary
@@ -155,7 +154,7 @@ def private_update():
     db.session.commit()
     
     response_body = {
-        "status": "succees",
+        "status": "success",
         "msg": "You successfully updated your profile!",
         "user": user.serialize()    
     }

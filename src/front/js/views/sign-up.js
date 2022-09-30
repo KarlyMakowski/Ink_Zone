@@ -21,6 +21,10 @@ export const SignUp = () => {
     setShow2((prevState) => !prevState);
   };
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  })
+
   return (
     <div className="register">
       <div className="login-container">

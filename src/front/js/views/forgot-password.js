@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "../../styles/signUp.css";
@@ -9,12 +9,17 @@ export const Forgot = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  
   const handleChange = (e) => {
     setInfo({
       ...info,
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  })
 
   return (
     <div className="register">
@@ -41,7 +46,7 @@ export const Forgot = () => {
               />
               <Link to="/sign-up">
                 <small>
-                  <label for="toggle"> ← Go back</label>
+                  <label htmlFor="toggle"> ← Go back</label>
                 </small>
               </Link>
             </div>
