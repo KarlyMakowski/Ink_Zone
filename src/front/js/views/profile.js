@@ -43,7 +43,6 @@ export const Profile = () => {
       <div className="pricing-title">
         <h1>Profile</h1>
       </div>
-
       <div className="row gutters-sm">
         <div className="col-md-4 mb-3">
           <div className="profile-card">
@@ -72,7 +71,6 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-
         <div className="col-md-8 profile-card">
           <form onSubmit={(e) => actions.loadProfile(e)}>
             <div className="form_box_input_first">
@@ -90,7 +88,6 @@ export const Profile = () => {
                 />
               </div>
             </div>
-
             <div className="form_box_input">
               <label htmlFor="name">Name</label>
               <div className="form_box_input_box">
@@ -106,7 +103,6 @@ export const Profile = () => {
                 />
               </div>
             </div>
-
             <div className="form_box_input">
               <label htmlFor="lastName">Last Name</label>
               <div className="form_box_input_box">
@@ -122,7 +118,6 @@ export const Profile = () => {
                 />
               </div>
             </div>
-
             <div className="form_box_input">
               <label htmlFor="phoneNumber">Phone Number</label>
               <div className="form_box_input_box">
@@ -138,7 +133,6 @@ export const Profile = () => {
                 />
               </div>
             </div>
-
             <div className="form_box_input">
               <label htmlFor="email">Email</label>
               <div className="form_box_input_box">
@@ -154,7 +148,6 @@ export const Profile = () => {
                 />
               </div>
             </div>
-
             <div className="form_box_input_social">
               <div className="form_box_input">
                 <label htmlFor="facebook">Facebook</label>
@@ -171,7 +164,6 @@ export const Profile = () => {
                   />
                 </div>
               </div>
-
               <div className="form_box_input">
                 <label htmlFor="Twitter">Twitter</label>
                 <div className="form_box_input_box">
@@ -187,7 +179,6 @@ export const Profile = () => {
                   />
                 </div>
               </div>
-
               <div className="form_box_input">
                 <label htmlFor="Instagram">Instagram</label>
                 <div className="form_box_input_box">
@@ -204,7 +195,6 @@ export const Profile = () => {
                 </div>
               </div>
             </div>
-
             <div className="update-profile-btn">
               <input type="submit" value="Save changes" />
             </div>

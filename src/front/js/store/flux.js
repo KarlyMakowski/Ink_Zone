@@ -6,16 +6,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       currentUser: null,
       picture: "",
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      name: "",
-      lastname: "",
-      phonenumber: "",
-      facebook: "",
-      instagram: "",
-      twitter: "",
       styles: [],
       privateStyle: [],
       addFav: [],
@@ -105,7 +95,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadProfile: async (e) => {
         e.preventDefault();
-        const { username, email, name, lastname, phonenumber, facebook, instagram, twitter } = getStore();
+        const {
+          username,
+          email,
+          name,
+          lastname,
+          phonenumber,
+          facebook,
+          instagram,
+          twitter,
+        } = getStore();
 
         try {
           const resp = await fetch(

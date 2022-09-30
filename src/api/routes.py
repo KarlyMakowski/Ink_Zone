@@ -223,7 +223,7 @@ def get_styles():
 
 
 @api.route('/styles/private/<id>', methods=['GET'])
-#@jwt_required()
+# @jwt_required()
 def private_styles_info(id):
     style_info = Styles.query.filter_by(id=id).first()
 
@@ -249,7 +249,7 @@ def fav(id):
             fav = Favourites(user_id=user.id, styles_id=style.id)
             fav_add = fav_count + 1
             is_fav = True
-            
+
             db.session.add(fav)
             db.session.commit()
 
@@ -271,8 +271,8 @@ def fav(id):
             response_body = {
                 "status": "success",
                 "msg": ":(",
-                "fav_counter": fav_delete, 
-                "is_favourite": is_fav                
+                "fav_counter": fav_delete,
+                "is_favourite": is_fav
             }
 
             return jsonify(response_body), 200

@@ -42,7 +42,7 @@ export const StylesPrivate = () => {
               {store.privateStyle.information}
             </p>
             <div className="like-dislike">
-              {store.addFav == false ? (
+              {store.currentUser?.addFav == false ? (
                 <button
                   className="no-fav"
                   onClick={() => actions.handleFav(params.id)}
