@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import "../../styles/signUp.css";
+import "../../styles/signup-signin.css";
 
 export const Forgot = () => {
   const [info, setInfo] = useState({ email: "" });

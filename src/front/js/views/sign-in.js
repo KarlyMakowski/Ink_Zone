@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+
+import "../../styles/signup-signin.css";
+
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
-
-import "../../styles/signUp.css";
 
 export const SignIn = () => {
   const { actions, store } = useContext(Context);
@@ -17,8 +18,8 @@ export const SignIn = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  })
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="register">
@@ -48,7 +49,7 @@ export const SignIn = () => {
                   name="email"
                   className="form-control floatingInput"
                   autoComplete="off"
-                  value={store.email}
+                  value={store.currentUser?.email}
                   onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingInput">Email</label>
@@ -60,7 +61,7 @@ export const SignIn = () => {
                   name="password"
                   className="form-control floatingPassword"
                   autoComplete="off"
-                  value={store.password}
+                  value={store.currentUser?.password}
                   onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingPassword mt-2">Password </label>

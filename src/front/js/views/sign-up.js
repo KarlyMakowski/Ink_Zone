@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+
+import "../../styles/signup-signin.css";
+
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
-
-import "../../styles/signUp.css";
 
 export const SignUp = () => {
   const { actions, store } = useContext(Context);
@@ -22,8 +23,8 @@ export const SignUp = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  })
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="register">
@@ -50,7 +51,7 @@ export const SignUp = () => {
                 name="username"
                 className="form-control floatingInput"
                 autoComplete="off"
-                value={store.username}
+                value={store.currentUser?.username}
                 onChange={e => actions.handleChange(e)}
               />
               <label className="floatingInput">User Name</label>
@@ -62,7 +63,7 @@ export const SignUp = () => {
                 name="email"
                 className="form-control floatingInput"
                 autoComplete="off"
-                value={store.email}
+                value={store.currentUser?.email}
                 onChange={e => actions.handleChange(e)}
               />
               <label className="floatingInput">Email</label>
@@ -74,7 +75,7 @@ export const SignUp = () => {
                 name="password"
                 className="form-control floatingPassword"
                 autoComplete="off"
-                value={store.password}
+                value={store.currentUser?.password}
                 onChange={e => actions.handleChange(e)}
               />
               <label className="floatingPassword">Password</label>
@@ -96,7 +97,7 @@ export const SignUp = () => {
                 name="confirmPassword"
                 className="form-control floatingPassword"
                 autoComplete="off"
-                value={store.confirmPassword}
+                value={store.currentUser?.confirmPassword}
                 onChange={e => actions.handleChange(e)}
               />
               <label id="floatingPassword">Confirm Password</label>
@@ -114,7 +115,6 @@ export const SignUp = () => {
             <div className="sign-up-btn">
               <input type="submit" value="Create Account" />
             </div>
-            <small>{store.message}</small>
             <small>
               Already have an account? <Link to="/sign-in"><label>Sign In</label></Link>
             </small>

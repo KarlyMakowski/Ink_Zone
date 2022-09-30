@@ -15,7 +15,6 @@ from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 import cloudinary
 
-
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
@@ -51,10 +50,7 @@ app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-
-""" mail = Mail()
-mail.init_app(app)  """
-
+ 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
