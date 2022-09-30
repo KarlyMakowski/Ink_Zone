@@ -9,14 +9,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       confirmPassword: "",
       token: null,
       currentUser: null,
-      message: "",
       name: "",
       lastname: "",
       phonenumber: "",
       facebook: "",
       instagram: "",
       twitter: "",
-      picture: null,
+      picture: "",
       styles: [],
       prices: [],
     },
@@ -89,22 +88,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      loadProfile: async () => {
-/*         e.preventDefault();
- */
+      loadProfile: async (e) => {
+        e.preventDefault();
+
         const { username, email, name, lastname, phonenumber, facebook, instagram, twitter } = getStore();
 
         try {
-          let formData = new FormData();
-
-          formData.append('username', username);
-          formData.append('email', email);
-          formData.append('name', name);
-          formData.append('lastname', lastname);
-          formData.append('phonenumber', phonenumber);
-          formData.append('facebook', facebook);
-          formData.append('instagram', instagram);
-          formData.append('twitter', twitter);
 
           const resp = await fetch(
             "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
@@ -114,10 +103,20 @@ const getState = ({ getStore, getActions, setStore }) => {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + sessionStorage.getItem("token")
               },
-              body: formData,
+              body: JSON.stringify({
+                username,
+                email,
+                name,
+                lastname,
+                phonenumber,
+                facebook,
+                instagram,
+                twitter
+              })
             },
           );
           const { status, msg, user } = await resp.json();
+          console.log(msg, status, "Este es el console log del perfil");
           if (status === "failed") {
             Notify.failure("There has been an error updating your profile")
           }

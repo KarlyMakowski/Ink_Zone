@@ -110,6 +110,8 @@ def private_update():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email = current_user).first()    
     
+    print(user)
+
     username = request.json.get("username")    
     if username == "" or username == None:
         username = user.username

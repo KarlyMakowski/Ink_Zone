@@ -19,7 +19,6 @@ export const Profile = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    actions.loadProfile();
     if (store.currentUser === null) {
       navigate("/sign-in");
     } else {
@@ -40,13 +39,6 @@ export const Profile = () => {
     }
   }, []);
 
-/*   useEffect(() => {
-    if (store.currentUser === null) {
-      navigate("/sign-in");
-    }
-    actions.loadProfile();
-  }, [store.currentUser]); */
-
   return (
     <div className="form">
       <div className="pricing-title">
@@ -59,7 +51,7 @@ export const Profile = () => {
           <div className="profile-card">
             <div className="profile-card-body">
               <div className="d-flex flex-column align-items-center text-center img-size">
-                <img src={(store.currentUser?.picture == "") ? { skull } : store.currentUser?.picture} alt="default-pic" className="rounded-circle" />
+                <img src={(store.currentUser?.picture == "" ) ? skull : store.currentUser?.picture} alt="default-pic" className="rounded-circle" />
                 <div className="profile-btn">
                   <form onSubmit={e => actions.uploadPicture(e)}>
                     <input type="file" id="files" className="hidden" onChange={e => { actions.handlePicture(e) }} />
@@ -73,14 +65,14 @@ export const Profile = () => {
         </div>
 
         <div className="col-md-8 profile-card">
-          <form onSubmit={() => actions.loadProfile()}>
+          <form onSubmit={(e) => actions.loadProfile(e)}>
             <div className="form_box_input_first">
               <label htmlFor="username">Username</label>
               <div className="form_box_input_box">
                 <div className="form_box_input_box_icon">
                   <VscMention />
                 </div>
-                <input type="text" placeholder={store.currentUser?.username} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.username} />
+                <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.username} />
               </div>
             </div>
 
@@ -90,7 +82,7 @@ export const Profile = () => {
                 <div className="form_box_input_box_icon">
                   <HiUserCircle />
                 </div>
-                <input type="text" placeholder={store.currentUser?.name} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.name} />
+                <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.name} />
               </div>
             </div>
 
@@ -100,7 +92,7 @@ export const Profile = () => {
                 <div className="form_box_input_box_icon">
                   <HiUserCircle />
                 </div>
-                <input type="text" placeholder={store.currentUser?.lastname} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.lastname} />
+                <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.lastname} />
               </div>
             </div>
 
@@ -110,7 +102,7 @@ export const Profile = () => {
                 <div className="form_box_input_box_icon">
                   <RiPhoneFill />
                 </div>
-                <input type="text" placeholder={store.currentUser?.phonenumber} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.phonenumber} />
+                <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.phonenumber} />
               </div>
             </div>
 
@@ -120,7 +112,7 @@ export const Profile = () => {
                 <div className="form_box_input_box_icon">
                   <MdEmail />
                 </div>
-                <input type="text" placeholder={store.currentUser?.email} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.email} />
+                <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.email} />
               </div>
             </div>
 
@@ -132,7 +124,7 @@ export const Profile = () => {
                   <div className="form_box_input_box_icon">
                     <RiFacebookFill />
                   </div>
-                  <input type="text" placeholder={store.currentUser?.facebook} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.facebook} />
+                  <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.facebook} />
                 </div>
               </div>
 
@@ -142,7 +134,7 @@ export const Profile = () => {
                   <div className="form_box_input_box_icon">
                     <RiTwitterFill />
                   </div>
-                  <input type="text" placeholder={store.currentUser?.twitter} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.twitter} />
+                  <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.twitter} />
                 </div>
               </div>
 
@@ -152,7 +144,7 @@ export const Profile = () => {
                   <div className="form_box_input_box_icon">
                     <RiInstagramLine />
                   </div>
-                  <input type="text" placeholder={store.currentUser?.instagram} className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.instagram} />
+                  <input type="text" className="form-control" onChange={e => actions.handleChange(e)} defaultValue={store.currentUser?.instagram} />
                 </div>
               </div>
             </div>
