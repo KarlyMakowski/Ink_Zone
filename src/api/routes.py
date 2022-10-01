@@ -144,7 +144,7 @@ def private_update():
     user.phonenumber = phonenumber
     user.facebook = facebook
     user.instagram = instagram
-    user.twiter = twitter
+    user.twitter = twitter
 
     db.session.commit()
 
@@ -200,6 +200,36 @@ def delete_profile():
     return jsonify(response_body), 200
 
 
+@api.route('/token/google', methods=['POST'])
+def auth_google():
+    username = request.json.get("username", None)
+    name = request.json.get("name", None)
+    lastaname = request.json.get("lastname", None)
+    email = request.json.get("email", None)
+    profile_pic = request.json.get("profilePic", None)
+    user = User.query.filter_by(email = email).first()
+  
+    if user is None:
+        passw_is_correct = current_app.bcrypt.generate_password_hash("google").decode("utf-8")
+        google_user = User(username=username, name=name, email=email, password=passw_is_correct, picture=profile_pic)
+        
+        db.session.add(google_user)
+        db.session.commit()
+        
+        token_expiration = datetime.timedelta(days=1)
+        token = create_access_token(identity=email, expires_delta=token_expiration)
+        
+        response_body = {
+            "email": email,
+            "token": token    
+        }
+        
+        return jsonify(response_body), 200
+    
+    else:
+        return jsonify({"msg": "You could not log in with Google!!"}), 400
+    
+    
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()
