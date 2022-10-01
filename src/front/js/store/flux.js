@@ -107,13 +107,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         } = getStore();
 
         try {
+
           const resp = await fetch(
             "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
             {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
+                Authorization: "Bearer " + sessionStorage.getItem("token")
               },
               body: JSON.stringify({
                 username: username,
@@ -136,7 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Notify.success(msg);
             setStore({ currentUser: user });
           }
-        } catch (error) {
+        catch (error) {
           console.log("Error loading message from backend", error);
         }
       },

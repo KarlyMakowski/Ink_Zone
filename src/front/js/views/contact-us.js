@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import emailjs from 'emailjs-com';
+import Notiflix, { Notify } from "notiflix";
 
 import "../../styles/contact-us.css";
 
@@ -7,9 +9,28 @@ import { FaPhone, FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 
 export const ContactUs = () => {
 
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('contact_service', 'contact_form', form.current, 'M8jRmp0FGwuSWFUG_')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+
+      e.target.reset();
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  })
+
+  const emailSuccess = () => {
+    Notify.success("Email sent successfully.");
+  };
 
   return (
     <div className="contact-us">
@@ -20,63 +41,68 @@ export const ContactUs = () => {
         {/* Form */}
         <div className="contact contact-form">
           <h3>Send a Message</h3>
-          <form>
+          <form ref={form} onSubmit={sendEmail}>
             <div className="formBox">
               <div className="row50">
                 <div className="inputBox">
-                  <span>First Name</span>
+                  <label>Name *</label>
                   <input
                     type="text"
+                    name="user_name"
                     placeholder="Name"
                     className="form-control"
-                    autoComplete="off"
+                    required
                   />
                 </div>
                 <div className="inputBox">
-                  <span>Last Name</span>
+                  <label>Last Name *</label>
                   <input
                     type="text"
+                    name="user_lastName"
                     placeholder="Last Name"
                     className="form-control"
-                    autoComplete="off"
+                    required
                   />
                 </div>
               </div>
 
               <div className="row50">
                 <div className="inputBox">
-                  <span>Email</span>
+                  <label>Email *</label>
                   <input
                     type="text"
+                    name="user_email"
                     placeholder="Email"
                     className="form-control"
-                    autoComplete="off"
+                    required
                   />
                 </div>
                 <div className="inputBox">
-                  <span>Phone Number</span>
+                  <label>Phone Number</label>
                   <input
                     type="text"
+                    name="user_phone"
                     placeholder="Phone Number"
                     className="form-control"
-                    autoComplete="off"
                   />
                 </div>
               </div>
 
               <div className="row100">
                 <div className="inputBox">
-                  <span>Message</span>
+                  <label className="contact-message">Message *</label>
                   <textarea
                     placeholder="Write your message here..."
+                    name="message"
                     className="form-control"
+                    required
                   ></textarea>
                 </div>
               </div>
 
               <div className="row100">
                 <div className="inputBox">
-                  <input type="submit" value="Send" />
+                  <input type="submit" value="Send" onClick={emailSuccess} />
                 </div>
               </div>
             </div>

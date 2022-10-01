@@ -13,6 +13,7 @@ import Notiflix, { Notify } from "notiflix";
 import skull from "../../img/skull-profile.png";
 
 export const Profile = () => {
+
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
