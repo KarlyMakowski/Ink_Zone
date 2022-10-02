@@ -4,16 +4,19 @@ import { Context } from "../store/appContext";
 
 import "../../styles/profile.css";
 
-import { RiPhoneFill, RiInstagramLine, RiTwitterFill, RiFacebookFill } from "react-icons/ri";
+import {
+  RiPhoneFill,
+  RiInstagramLine,
+  RiTwitterFill,
+  RiFacebookFill,
+} from "react-icons/ri";
 import { VscMention } from "react-icons/vsc";
 import { MdEmail } from "react-icons/md";
 import { HiUserCircle } from "react-icons/hi";
 
-import Notiflix, { Notify } from "notiflix";
 import skull from "../../img/skull-profile.png";
 
 export const Profile = () => {
-
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
@@ -21,21 +24,6 @@ export const Profile = () => {
     window.scrollTo(0, 0);
     if (store.currentUser === null) {
       navigate("/sign-in");
-    } else {
-      Notify.success(`Welcome back ${store.currentUser?.username}`, {
-        width: "320px",
-        distance: "60px",
-        borderRadius: "6px",
-        backOverlay: true,
-        fontSize: "22px",
-        cssAnimationStyle: "zoom",
-        useFontAwesome: true,
-        success: {
-          background: "#a091ff",
-          fontAwesomeClassName: "fas fa-hand-peace",
-          backOverlayColor: "rgb(160, 145, 255, 0.2)",
-        },
-      });
     }
   }, []);
 

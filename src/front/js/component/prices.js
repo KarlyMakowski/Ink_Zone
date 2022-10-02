@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 import "../../styles/pricing.css";
 
 export const Prices = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   return store.prices.map((singlePrice, i) => {
     return (

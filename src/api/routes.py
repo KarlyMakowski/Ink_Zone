@@ -89,7 +89,7 @@ def create_token():
 
             response_body = {
                 "status": "success",
-                "msg": "Successfuly logged in",
+                "msg": "You successfuly logged in!",
                 "user": user.serialize(),
                 "token": token,
             }
@@ -203,33 +203,37 @@ def delete_profile():
 @api.route('/token/google', methods=['POST'])
 def auth_google():
     username = request.json.get("username", None)
-    name = request.json.get("name", None)
-    lastaname = request.json.get("lastname", None)
     email = request.json.get("email", None)
-    profile_pic = request.json.get("profilePic", None)
-    user = User.query.filter_by(email = email).first()
-  
+    picture = request.json.get("picture", None)
+    user = User.query.filter_by(email=email).first()
+
     if user is None:
-        passw_is_correct = current_app.bcrypt.generate_password_hash("google").decode("utf-8")
-        google_user = User(username=username, name=name, email=email, password=passw_is_correct, picture=profile_pic)
-        
+        passw_is_correct = current_app.bcrypt.generate_password_hash(
+            "google").decode("utf-8")
+        google_user = User(username=username, email=email,
+                           password=passw_is_correct, picture=picture)
+
         db.session.add(google_user)
         db.session.commit()
-        
+
         token_expiration = datetime.timedelta(days=1)
-        token = create_access_token(identity=email, expires_delta=token_expiration)
-        
+        token = create_access_token(
+            identity=email, expires_delta=token_expiration)
+
         response_body = {
+            "status": "success",
+            "msg": "You successfully logged in with Google!",
+            "username": username,
             "email": email,
-            "token": token    
+            "token": token
         }
-        
+
         return jsonify(response_body), 200
-    
+
     else:
         return jsonify({"msg": "You could not log in with Google!!"}), 400
-    
-    
+
+
 @api.route('/styles', methods=['GET'])
 def get_styles():
     styles = Styles.query.all()
@@ -294,7 +298,6 @@ def fav(id):
             return jsonify(response_body), 200
 
     else:
-
         response_body = {
             "user": user.username,
             "fav_counter": fav_count,
@@ -313,6 +316,7 @@ def get_prices():
 
 
 # --> COMING SOON... !!!
+
 
 @api.route('/users-reviews', methods=['GET', 'POST'])
 @jwt_required()
@@ -402,10 +406,17 @@ def delete_review(id):
 
     if not review:
         return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
+    
     elif user.id != review.user_id:
         return jsonify({"status": "failed", "msg": "You are not allowed to delete this review!"}), 401
+    
     else:
         db.session.delete(review)
         db.session.commit()
+        
+        response_body = {
+            "status": "success",
+            "msg": "You just deleted your review"
+        }
 
-        return jsonify({}), 204
+        return jsonify(response_body), 200

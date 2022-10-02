@@ -4,10 +4,9 @@ import { Context } from "../store/appContext";
 
 import "../../styles/signup-signin.css";
 
-import { GrInstagram, GrTwitter } from "react-icons/gr";
-import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-
+import { GoogleAuth } from "../component/google-auth"
 
 export const SignIn = () => {
   const { actions, store } = useContext(Context);
@@ -33,15 +32,7 @@ export const SignIn = () => {
           ) : (
             <form onSubmit={e => actions.login(e, navigate)}>
               <div className="social">
-                <a href="#" className="social-instagram">
-                  <GrInstagram className="gr" />
-                </a>
-                <a href="#" className="social-twitter">
-                  <GrTwitter className="gr" />
-                </a>
-                <a href="#" className="social-facebook">
-                  <FaFacebookF className="gr" />
-                </a>
+                <GoogleAuth />
               </div>
               <p>Or enter your info</p>
               <div className="form-floating">

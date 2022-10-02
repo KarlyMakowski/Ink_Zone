@@ -84,6 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
           }
           if (status === "success") {
+            Notify.success(msg);
             setStore({ currentUser: user, token: token });
             sessionStorage.setItem("token", token);
             navigate("/profile");
@@ -107,14 +108,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         } = getStore();
 
         try {
-
           const resp = await fetch(
             "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
             {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.getItem("token")
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
               body: JSON.stringify({
                 username: username,
@@ -137,7 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Notify.success(msg);
             setStore({ currentUser: user });
           }
-        catch (error) {
+        } catch (error) {
           console.log("Error loading message from backend", error);
         }
       },
@@ -185,31 +185,61 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ picture: files[0] });
       },
 
-      handleDelete: (navigate) => {
-        fetch(
-          "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: "Bearer " + sessionStorage.getItem("token"),
-            },
-          }
-        )
-          .then((response) => {
-            if (response.status !== 200) {
-              Notify.failure("There was an error deleting your profile!");
+      deleteProfile: async (navigate) => {
+        try {
+          fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/private",
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
             }
-            return response.json();
-          })
-          .then((data) => {
-            Notify.info(data.msg);
-            sessionStorage.removeItem("token");
+          );
+          const { status, msg } = await resp.json();
+          if (status === "failed") {
+            Notify.failure("There was an error deletingf your profile!");
+          }
+          if (status === "success") {
+            Notify.info(msg);
+            sessionStorage.clear("token", token);
             setStore({ token: null, currentUser: null });
             navigate("/");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      authGoogle: async (user) => {
+        try {
+          const resp = await fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu67.gitpod.io/api/token/google",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                username: user.displayName,
+                email: user.email,
+                picture: user.photoUrl,
+              }),
+            }
+          );
+          const { status, msg, token, username } = await resp.json();
+          if (status === "failed") {
+            Notify.failure(msg);
+          }
+          if (status === "success") {
+            Notify.success(msg);
+            sessionStorage.setItem("token", token);
+            setStore({ token: token, currentUser: username });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
       loadStyles: () => {
@@ -248,7 +278,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            setStore({ addFav: data.is_favourite, favCount: data.fav_counter, currentUser: data.user });
+            setStore({
+              addFav: data.is_favourite,
+              favCount: data.fav_counter,
+              currentUser: data.user,
+            });
           })
           .catch((error) => {
             console.log(error);

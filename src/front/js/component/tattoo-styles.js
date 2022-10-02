@@ -7,7 +7,7 @@ import "../../styles/tattoo-styles.css";
 import { Info } from "./info";
 
 export const TattooStyles = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   return store.styles.map((singleStyle, i) => {
     return (
