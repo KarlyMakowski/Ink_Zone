@@ -4,12 +4,7 @@ import { Context } from "../store/appContext";
 
 import "../../styles/profile.css";
 
-import {
-  RiPhoneFill,
-  RiInstagramLine,
-  RiTwitterFill,
-  RiFacebookFill,
-} from "react-icons/ri";
+import { RiPhoneFill, RiInstagramLine, RiTwitterFill, RiFacebookFill } from "react-icons/ri";
 import { VscMention } from "react-icons/vsc";
 import { MdEmail } from "react-icons/md";
 import { HiUserCircle } from "react-icons/hi";
@@ -38,7 +33,9 @@ export const Profile = () => {
             <div className="profile-card-body">
               <div className="d-flex flex-column align-items-center text-center img-size">
                 <img
-                  src={store.picture == "" ? skull : store.picture}
+                  src={
+                    store.picture == null ? skull : store.currentUser?.picture
+                  }
                   alt="default-pic"
                   className="rounded-circle"
                 />

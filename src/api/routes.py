@@ -250,7 +250,7 @@ def private_styles_info(id):
     return (style_info.serialize()), 200
 
 
-@api.route('/styles/private/favourite/<id>', methods=['POST', 'GET'])
+@api.route('/styles/private/favourite/<id>', methods=['GET', 'POST'])
 @jwt_required()
 def fav(id):
     current_user = get_jwt_identity()
@@ -277,7 +277,8 @@ def fav(id):
                 "status": "success",
                 "msg": "You got it! :)",
                 "fav_counter": fav_add,
-                "is_favourite": is_fav
+                "is_favourite": is_fav,
+                "user": user.username
             }
 
             return jsonify(response_body), 200
@@ -292,17 +293,32 @@ def fav(id):
                 "status": "success",
                 "msg": ":(",
                 "fav_counter": fav_delete,
-                "is_favourite": is_fav
+                "is_favourite": is_fav,
+                "user": user.username
             }
 
             return jsonify(response_body), 200
 
     else:
-        response_body = {
-            "user": user.username,
-            "fav_counter": fav_count,
-            "is_favourite": is_fav
-        }
+        favourites = Favourites.query.filter_by(user_id=user.id).all()
+        fav_list = list(map(lambda style: style.serialize(), favourites))
+
+        if not fav:
+            response_body = {
+                "user": user.username,
+                "favourites": fav_list,
+                "fav_counter": fav_count,
+                "is_favourite": is_fav
+            }
+
+        else:
+            is_fav = True
+            response_body = {
+                "user": user.username,
+                "favourites": fav_list,
+                "fav_counter": fav_count,
+                "is_favourite": is_fav
+            }
 
         return jsonify(response_body), 200
 
@@ -406,14 +422,14 @@ def delete_review(id):
 
     if not review:
         return jsonify({"status": "failed", "msg": "Review does not exist!"}), 404
-    
+
     elif user.id != review.user_id:
         return jsonify({"status": "failed", "msg": "You are not allowed to delete this review!"}), 401
-    
+
     else:
         db.session.delete(review)
         db.session.commit()
-        
+
         response_body = {
             "status": "success",
             "msg": "You just deleted your review"
