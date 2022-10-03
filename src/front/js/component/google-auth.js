@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import GoogleButton from "react-google-button"
+import GoogleButton from "react-google-button";
 
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "ink-zone-9637c",
   storageBucket: "ink-zone-9637c.appspot.com",
   messagingSenderId: "372713622138",
-  appId: "1:372713622138:web:e5acd18dd8e83c8d5189c3"
+  appId: "1:372713622138:web:e5acd18dd8e83c8d5189c3",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -30,15 +30,11 @@ export const GoogleAuth = () => {
     const user = result._tokenResponse;
     await actions.authGoogle(user);
     navigate("/profile");
-  }
+  };
 
   return (
     <div className="googleAuth">
-      <GoogleButton onClick={onClickGoogle}/>
+      <GoogleButton onClick={onClickGoogle} />
     </div>
-
   );
 };
-
-
-

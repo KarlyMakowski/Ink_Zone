@@ -5,11 +5,10 @@ import "../../styles/tattoo-styles.css";
 import { TattooStyles } from "../component/tattoo-styles";
 
 export const StylesPublic = () => {
-
   useEffect(() => {
-    window.scrollTo(0,0);
-  })
-  
+    window.scrollTo(0, 0);
+  });
+
   return (
     <div className="tattooStyles-container">
       <div className="styles-components">

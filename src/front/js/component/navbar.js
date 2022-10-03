@@ -13,7 +13,6 @@ import { RiWechatFill } from "react-icons/ri";
 import { GiDeathZone } from "react-icons/gi";
 import { FiLogOut, FiLogIn } from "react-icons/fi";
 
-
 export const Navbar = () => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
@@ -122,20 +121,20 @@ export const Navbar = () => {
         </div>
       </div>
       <div className="nav-footer">
-      {!store.token ? (
+        {!store.token ? (
           <Link to="/sign-in">
             <FiLogIn
               style={{ height: "57px", width: "30px" }}
               className="log-in"
             />
-            {expanded && ("Log In")}
+            {expanded && "Log In"}
           </Link>
         ) : (
-            <FiLogOut
-              style={{ height: "57px", width: "30px" }}
-              className="log-out"
-              onClick={() => actions.logout(navigate)}
-            />
+          <FiLogOut
+            style={{ height: "57px", width: "30px" }}
+            className="log-out"
+            onClick={() => actions.logout(navigate)}
+          />
         )}
       </div>
     </div>

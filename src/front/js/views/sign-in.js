@@ -6,7 +6,7 @@ import "../../styles/signup-signin.css";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { GoogleAuth } from "../component/google-auth"
+import { GoogleAuth } from "../component/google-auth";
 
 export const SignIn = () => {
   const { actions, store } = useContext(Context);
@@ -30,7 +30,7 @@ export const SignIn = () => {
           {store.token && store.token != "" && store.token != undefined ? (
             "You are logged in with this token" + store.token
           ) : (
-            <form onSubmit={e => actions.login(e, navigate)}>
+            <form onSubmit={(e) => actions.login(e, navigate)}>
               <div className="social">
                 <GoogleAuth />
               </div>
@@ -76,7 +76,10 @@ export const SignIn = () => {
               </div>
               <input type="submit" value="Sign In" />
               <small>
-                Don't have an account? <Link to="/sign-up"><label>Sign Up</label></Link>
+                Don't have an account?{" "}
+                <Link to="/sign-up">
+                  <label>Sign Up</label>
+                </Link>
               </small>
             </form>
           )}

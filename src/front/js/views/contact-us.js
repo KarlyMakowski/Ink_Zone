@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 import Notiflix, { Notify } from "notiflix";
 
 import "../../styles/contact-us.css";
@@ -8,25 +8,33 @@ import { MdLocationPin, MdEmail } from "react-icons/md";
 import { FaPhone, FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 
 export const ContactUs = () => {
-
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('contact_service', 'contact_form', form.current, 'M8jRmp0FGwuSWFUG_')
-      .then((result) => {
-        console.log(result.text);
-      }, (error) => {
-        console.log(error.text);
-      });
+    emailjs
+      .sendForm(
+        "contact_service",
+        "contact_form",
+        form.current,
+        "M8jRmp0FGwuSWFUG_"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
 
-      e.target.reset();
+    e.target.reset();
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  })
+  });
 
   const emailSuccess = () => {
     Notify.success("Email sent successfully.");

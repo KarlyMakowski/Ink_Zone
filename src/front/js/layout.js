@@ -31,10 +31,8 @@ const Layout = () => {
           <Route element={<ContactUs />} path="/contact-us" />
           <Route element={<SignUp />} path="/sign-up" />
           <Route element={<SignIn />} path="/sign-in" />
-          <Route element={<Forgot />} path="/forgot-password" />          
+          <Route element={<Forgot />} path="/forgot-password" />
           <Route element={<Profile />} path="/profile" />
-          
-
           {/* <Route element={<h1>Not found!</h1>} /> */}
         </Routes>
         <Footer />

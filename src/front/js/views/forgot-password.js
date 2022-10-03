@@ -9,7 +9,7 @@ export const Forgot = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  
+
   const handleChange = (e) => {
     setInfo({
       ...info,
@@ -18,8 +18,8 @@ export const Forgot = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  })
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="register">
@@ -40,10 +40,7 @@ export const Forgot = () => {
                 onChange={handleChange}
               />
               <label className="floatingInput">Email</label>
-              <input
-                type="submit"
-                value="Reset Password"
-              />
+              <input type="submit" value="Reset Password" />
               <Link to="/sign-up">
                 <small>
                   <label htmlFor="toggle"> ← Go back</label>

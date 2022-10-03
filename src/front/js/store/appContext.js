@@ -16,7 +16,7 @@ const injectContext = (PassedComponent) => {
           }),
       })
     );
-    
+
     useEffect(() => {
       state.actions.loadStyles();
       state.actions.loadPrices();

@@ -227,15 +227,23 @@ const getState = ({ getStore, getActions, setStore }) => {
               }),
             }
           );
-          const { status, msg, token, username, email, picture } = await resp.json();
+          const { status, msg, token, username, email, picture } =
+            await resp.json();
           if (status === "failed") {
             Notify.failure(msg);
           }
           if (status === "success") {
             Notify.success(msg);
             sessionStorage.setItem("token", token);
-            setStore({ token: token, currentUser: {username:username, email:email, picture:picture} });
-            console.log(email, username)
+            setStore({
+              token: token,
+              currentUser: {
+                username: username,
+                email: email,
+                picture: picture,
+              },
+            });
+            console.log(email, username);
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
@@ -280,7 +288,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             setStore({
               addFav: data.is_favourite,
-              favCount: data.fav_counter
+              favCount: data.fav_counter,
             });
           })
           .catch((error) => {

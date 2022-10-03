@@ -31,8 +31,8 @@ export const SignUp = () => {
       <div className="login-container">
         <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
-          <form onSubmit={e => actions.signup(e, navigate)}>
-          <div className="social">
+          <form onSubmit={(e) => actions.signup(e, navigate)}>
+            <div className="social">
               <a href="#" className="social-instagram">
                 <GrInstagram className="gr" />
               </a>
@@ -42,7 +42,7 @@ export const SignUp = () => {
               <a href="#" className="social-facebook">
                 <FaFacebookF className="gr" />
               </a>
-            </div> 
+            </div>
             <p>Or enter your info</p>
             <div className="form-floating">
               <input
@@ -52,7 +52,7 @@ export const SignUp = () => {
                 className="form-control floatingInput"
                 autoComplete="off"
                 value={store.currentUser?.username}
-                onChange={e => actions.handleChange(e)}
+                onChange={(e) => actions.handleChange(e)}
               />
               <label className="floatingInput">User Name</label>
             </div>
@@ -64,7 +64,7 @@ export const SignUp = () => {
                 className="form-control floatingInput"
                 autoComplete="off"
                 value={store.currentUser?.email}
-                onChange={e => actions.handleChange(e)}
+                onChange={(e) => actions.handleChange(e)}
               />
               <label className="floatingInput">Email</label>
             </div>
@@ -76,7 +76,7 @@ export const SignUp = () => {
                 className="form-control floatingPassword"
                 autoComplete="off"
                 value={store.currentUser?.password}
-                onChange={e => actions.handleChange(e)}
+                onChange={(e) => actions.handleChange(e)}
               />
               <label className="floatingPassword">Password</label>
               <div
@@ -98,7 +98,7 @@ export const SignUp = () => {
                 className="form-control floatingPassword"
                 autoComplete="off"
                 value={store.currentUser?.confirmPassword}
-                onChange={e => actions.handleChange(e)}
+                onChange={(e) => actions.handleChange(e)}
               />
               <label id="floatingPassword">Confirm Password</label>
               <div
@@ -116,7 +116,10 @@ export const SignUp = () => {
               <input type="submit" value="Create Account" />
             </div>
             <small>
-              Already have an account? <Link to="/sign-in"><label>Sign In</label></Link>
+              Already have an account?{" "}
+              <Link to="/sign-in">
+                <label>Sign In</label>
+              </Link>
             </small>
           </form>
         </div>
