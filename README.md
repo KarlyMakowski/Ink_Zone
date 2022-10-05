@@ -17,6 +17,7 @@ This web application is divided in two main parts:
 - Back-End: using Python and Flask.
 
 It is integrated with Pipenv for package managing and SQLAlchemy for database abstraction. We also made use of .env file.
+<br/>
 
 ## BACK-END
 
@@ -46,6 +47,7 @@ In addition, we have to use different Python's built-in packages:
 - `Datetime`, a module that allows us to work with times. We use it to declare user's token duration.
 - `Cloudinary`, which allows us to integrate our application with cloudinary in order to upload image files. Here you can get the [link to install](https://www.npmjs.com/package/cloudinary) this package.<br/> 
 In this particular case, we also have to import and set up the extension in `routes.py` and `app.py`.
+<br/>
 
 ## FRONT-END
 
