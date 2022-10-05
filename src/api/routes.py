@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
 from api.models import db, User, Styles, Prices, Reviews, Favourites
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from flask_bcrypt import Bcrypt
 
 import re
@@ -313,6 +313,7 @@ def fav(id):
 
         else:
             is_fav = True
+            
             response_body = {
                 "user": user.username,
                 "favourites": fav_list,
@@ -387,6 +388,7 @@ def get_review(id):
         "user": user.username,
         "review": single_review.review
     }
+    
     return jsonify({response_body}), 200
 
 
@@ -432,7 +434,7 @@ def delete_review(id):
 
         response_body = {
             "status": "success",
-            "msg": "You just deleted your review"
+            "msg": "You just deleted your review!"
         }
 
         return jsonify(response_body), 200

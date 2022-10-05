@@ -197,11 +197,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg } = await resp.json();
           if (status === "failed") {
-            Notify.failure("There was an error deletingf your profile!");
+            Notify.failure("There was an error deleting your profile!");
           }
           if (status === "success") {
             Notify.info(msg);
-            sessionStorage.clear("token", token);
+            sessionStorage.removeItem("token", token);
             setStore({ token: null, currentUser: null });
             navigate("/");
           }
