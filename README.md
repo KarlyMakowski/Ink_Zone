@@ -63,7 +63,7 @@ Make sure you are using node version 14+ and that you have already successfully 
 This web application is divided in different views for the user to navigate the website.
 
 <p align="center">
-<img src="https://res.cloudinary.com/daahnwdra/image/upload/v1664994075/home-gif_wavnxl.gif" height=350px />
+<img src="https://res.cloudinary.com/daahnwdra/image/upload/v1664994484/home-gif_kohukh.gif" height=350px />
 </p>
 
 ### STYLES
