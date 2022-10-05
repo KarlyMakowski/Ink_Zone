@@ -18,6 +18,7 @@ This web application is divided in two main parts:
 
 It is integrated with Pipenv for package managing and SQLAlchemy for database abstraction. We also made use of .env file.
 <br/>
+<br/>
 
 ## BACK-END
 
@@ -84,7 +85,7 @@ However, we also used [Bootstrap](https://getbootstrap.com/docs/5.2/getting-star
 This web app comes with a centralized general Context API. The file `./src/js/store/flux.js` has a base structure to store the different variables in flux.<br/>
 We used the Fetch API tool to connect with the backend application using async/await syntax, and declare the different actions through all our site.
 
-# HOPE YOU LIKE IT! ENJOY DISCOVERING IT BY YOURSELF!
+## You can explore our website by [clicking here](https://ink-zone.herokuapp.com/). <br/> Or you can open a new workspace through:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/KarlyMakowski/Ink_Zone)
 
