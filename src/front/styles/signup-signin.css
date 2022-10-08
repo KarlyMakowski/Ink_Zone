@@ -190,25 +190,61 @@ p {
 }
 
 .align-password {
-  /* Revisar */
   margin-top: 13px;
+}
+
+/* Responsive */
+
+/* Surface Duo */
+@media (max-width: 540px) and (max-height: 720px) {
+  .register {
+    height: inherit;
+  }
+  .signin, 
+  .signup {
+    margin: 50px 0;
+  }
+}
+
+/* iPad Mini */
+@media (min-width: 768px) and (min-height: 1024px) {
+  .register {
+    margin-left: 80px;
+  }
+}
+
+@media (min-width: 820px) {
+  .register {
+    margin-left: 80px;
+  }
 }
 
 @media (max-width: 480px) {
   .signin {
-    padding-top: 100px;
+    padding-top: 150px;
     height: 100vh;
     border: none;
+    border-radius: 0;
+    background: none;
   }
   .signup {
-    padding-top: 100px;
     height: 100vh;
     border: none;
+    border-radius: 0;
+    background: none;
   }
 }
 
 @media (max-width: 375px) {
+  .register {
+    height: inherit;
+  }
+  .signin {
+    padding-top: 0;
+  }
   .signup {
+    height: inherit;
     padding-top: 0;
   }
 }
+

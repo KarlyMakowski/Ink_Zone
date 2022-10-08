@@ -1,5 +1,5 @@
 .styles-card-container {
-  width: 85%;
+  width: 90%;
   margin: auto;
   position: relative;
 }
@@ -76,6 +76,7 @@
   margin-bottom: 10rem;
 }
 
+/* Responsive */
 @media(max-width: 1024px) {
   .styles-grid {
     margin-left: 100px;
@@ -133,4 +134,8 @@
   }
 }
 
-
+@media(max-width: 3000px) {
+  .styles-title {
+    margin-left: auto;
+  }
+}

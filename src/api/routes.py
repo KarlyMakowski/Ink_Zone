@@ -144,7 +144,7 @@ def private_update():
     user.phonenumber = phonenumber
     user.facebook = facebook
     user.instagram = instagram
-    user.twiter = twitter
+    user.twitter = twitter
 
     db.session.commit()
 
@@ -264,7 +264,7 @@ def fav(id):
             return jsonify(response_body), 200
 
     else:
-
+        
         response_body = {
             "user": user.username,
             "fav_counter": fav_count,

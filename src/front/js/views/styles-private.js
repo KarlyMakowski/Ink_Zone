@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -24,8 +24,8 @@ export const StylesPrivate = () => {
 
   return (
     <>
-      <div className="private-title">
-        <h1>learn more...</h1>
+      <div className="pricing-title">
+        <h1>style details</h1>
       </div>
       <div className="private-container">
         <div className="private-card" key={store.privateStyle.id}>
@@ -35,7 +35,7 @@ export const StylesPrivate = () => {
           <div className="private-info">
             <h3 className="private-style-intro">
               What makes{" "}
-              <span className="text-primary">"{store.privateStyle.style}"</span>{" "}
+              <span>"{store.privateStyle.style}"</span>{" "}
               style special?
             </h3>
             <p className="private-style-info">
