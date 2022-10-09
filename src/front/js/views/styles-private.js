@@ -48,7 +48,7 @@ export const StylesPrivate = () => {
                   onClick={() => actions.handleFav(params.id)}
                 >
                   <HiOutlineHeart className="fav-icon" />
-                  Love! {store.favCount}
+                  LOVE {store.favCount}
                 </button>
               ) : (
                 <button
@@ -56,12 +56,12 @@ export const StylesPrivate = () => {
                   onClick={() => actions.handleFav(params.id)}
                 >
                   <HiHeart className="fav-icon" />
-                  Love! {store.favCount}
+                  LOVE {store.favCount}
                 </button>
               )}
             </div>
             <div className="go-back">
-              <button onClick={() => navigate("/styles")}> ⇦ GO BACK </button>
+              <button onClick={() => navigate("/styles")}> ← GO BACK </button>
             </div>
           </div>
         </div>
