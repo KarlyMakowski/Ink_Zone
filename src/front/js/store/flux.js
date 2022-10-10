@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/signup",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/signup",
             {
               method: "POST",
               headers: {
@@ -35,10 +35,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg, created } = await resp.json();
           if (status === "failed") {
-            Notify.failure(msg);
+            Notify.failure(msg, {
+              width: "350px",
+              position: "center-top",
+              distance: "820px",
+              borderRadius: "6px",
+              timeout: 2000,
+              clickToClose: true,
+              fontSize: "25px",
+              cssAnimationStyle: "zoom",
+              useFontAwesome: true,
+              failure: {
+                fontAwesomeClassName: "fas fa-skull",
+              }
+            });
           }
           if (status === "success") {
-            Notify.success(msg);
+            Notify.success(msg, {
+              width: "350px",
+              position: "center-top",
+              distance: "820px",
+              borderRadius: "6px",
+              timeout: 2000,
+              clickToClose: true,
+              fontSize: "25px",
+              cssAnimationStyle: "zoom",
+              useFontAwesome: true,
+              success: {
+                fontAwesomeClassName: "fas fa-hand-peace",
+              }
+            });
             setStore({ created: created });
             sessionStorage.setItem("created", created);
             navigate("/sign-in");
@@ -54,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/token",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/token",
             {
               method: "POST",
               headers: {
@@ -71,9 +97,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             Notify.failure(msg, {
               width: "320px",
               position: "right-top",
-              distance: "700px",
+              distance: "750px",
               borderRadius: "6px",
-              backOverlay: true,
+              timeout: 2000,
+              clickToClose: true,
               fontSize: "25px",
               cssAnimationStyle: "zoom",
               useFontAwesome: true,
@@ -83,6 +110,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
           }
           if (status === "success") {
+            Notify.success(msg, {
+              width: "320px",
+              distance: "130px",
+              borderRadius: "6px",
+              timeout: 2000,
+              clickToClose: true,
+              fontSize: "25px",
+              cssAnimationStyle: "zoom",
+              useFontAwesome: true,
+              success: {
+                fontAwesomeClassName: "fas fa-hand-peace",
+              },
+            })
             setStore({ currentUser: user, token: token });
             sessionStorage.setItem("token", token);
             navigate("/profile");
@@ -108,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/private",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/private",
             {
               method: "PUT",
               headers: {
@@ -128,12 +168,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const { status, msg, user } = await resp.json();
-          console.log(msg, status, "Este es el console log del perfil");
           if (status === "failed") {
             Notify.failure("There has been an error updating your profile");
           }
           if (status === "success") {
-            Notify.success(msg);
+            Notify.success(msg, {
+              width: "260px",
+              position: "center-top",
+              distance: "130px",
+              borderRadius: "6px",
+              timeout: 2000,
+              clickToClose: true,
+              fontSize: "25px",
+              cssAnimationStyle: "zoom",
+              useFontAwesome: true,
+              success: {
+                fontAwesomeClassName: "fas fa-marker",
+              },
+            });
             setStore({ currentUser: user });
           }
         } catch (error) {
@@ -142,7 +194,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: (navigate) => {
-        Notify.info("See you next time!");
+        Notify.info("See you next time!", {
+          width: "300px",
+          position: "center-top",
+          distance: "130px",
+          borderRadius: "6px",
+          timeout: 2000,
+          clickToClose: true,
+          fontSize: "25px",
+          cssAnimationStyle: "zoom",
+          useFontAwesome: true,
+          info: {
+            fontAwesomeClassName: "fas fa-hand-peace",
+          },
+        });
         sessionStorage.removeItem("token");
         setStore({ token: null, currentUser: null });
         navigate("/");
@@ -157,7 +222,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           formData.append("picture", picture);
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/private/upload-picture",
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/private/upload-picture",
             {
               method: "PUT",
               headers: {
@@ -171,7 +236,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             Notify.failure(msg);
           }
           if (status === "success") {
-            Notify.success(msg);
+            Notify.success(msg, {
+              width: "300px",
+              position: "left-top",
+              distance: "140px",
+              borderRadius: "6px",
+              timeout: 2000,
+              clickToClose: true,
+              fontSize: "25px",
+              cssAnimationStyle: "zoom",
+              useFontAwesome: true,
+              success: {
+                fontAwesomeClassName: "fas fa-camera",
+              },
+            });
             setStore({ currentUser: user });
           }
         } catch (error) {
@@ -184,31 +262,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ picture: files[0] });
       },
 
-      deleteProfile: (navigate) => {
-        fetch(
-          "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/private",
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: "Bearer " + sessionStorage.getItem("token"),
-            },
-          }
-        )
-          .then((response) => {
-            if (response.status !== 200) {
-              Notify.failure("There was an error deleting your profile!");
+      deleteProfile: async (navigate) => {
+        try {
+          fetch(
+            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/private",
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
             }
-            return response.json();
-          })
-          .then((data) => {
-            Notify.info(data.msg);
-            sessionStorage.removeItem("token");
+          );
+          const { status, msg } = await resp.json();
+          if (status === "failed") {
+            Notify.failure("There was an error deleting your account");
+          }
+          if (status === "success") {
+            Notify.info(msg);
+            sessionStorage.removeItem("token", token);
             setStore({ token: null, currentUser: null });
             navigate("/");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
       loadStyles: () => {
@@ -221,7 +298,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadSingleStyle: (id) => {
         fetch(
-          `https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/styles/private/${id}`,
+          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/${id}`,
           {
             method: "GET",
             headers: {
@@ -236,7 +313,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       handleFav: (id) => {
         fetch(
-          `https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/styles/private/favourite/${id}`,
+          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/favourite/${id}`,
           {
             method: "POST",
             headers: {
@@ -256,7 +333,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       handleCount: (id) => {
         fetch(
-          `https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/styles/private/favourite/${id}`,
+          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/favourite/${id}`,
           {
             method: "GET",
             headers: {
