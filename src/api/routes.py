@@ -57,7 +57,7 @@ def signup():
             response_body = {
                 "status": "success",
                 "created": True,
-                "msg": f'Welcome {username}, you succesfully signed up!'
+                "msg": 'Successfully signed up!'
             }
 
         return jsonify(response_body), 201
@@ -89,7 +89,7 @@ def create_token():
 
             response_body = {
                 "status": "success",
-                "msg": "You successfuly logged in!",
+                "msg": "Successfully logged in",
                 "user": user.serialize(),
                 "token": token,
             }
@@ -150,7 +150,7 @@ def private_update():
 
     response_body = {
         "status": "success",
-        "msg": "You successfully updated your profile!",
+        "msg": "Profile updated",
         "user": user.serialize()
     }
 
@@ -176,7 +176,7 @@ def upload_image():
 
         response_body = {
             "status": "success",
-            "msg": "You successfully uploaded your picture!",
+            "msg": "Picture updated",
             "user": user.serialize()
         }
 
@@ -222,7 +222,7 @@ def auth_google():
 
         response_body = {
             "status": "success",
-            "msg": "You successfully logged in with Google!",
+            "msg": "Logged in with Google!",
             "username": username,
             "email": email,
             "token": token

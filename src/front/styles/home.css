@@ -88,3 +88,12 @@
     margin-bottom: 1.6rem;
   }
 }
+
+@media (max-width: 480px) {
+  .home-main .home-content {
+    top: 35vh;
+  }
+  .home-main p {
+    margin-bottom: 0;
+  }
+}

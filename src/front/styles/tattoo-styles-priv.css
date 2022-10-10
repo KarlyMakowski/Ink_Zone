@@ -1,39 +1,23 @@
-.private-title h1 {
-    text-align: center;
-    padding-top: 70px;
-    padding-bottom: 15px;
-    position: relative;
-    margin-bottom: 50px;
-    font-size: 4.5em;
-    font-family: "Carter One", cursive;
-    text-transform: uppercase;
-    line-height: 1em;
-    outline: none;
-    background: -webkit-linear-gradient(#aeffb9, #a091ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .private-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1.5rem;
-  }
+.private-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem 10rem;
+}
 
-  .private-card {
-    width: 80%;
-    margin-left: 130px;
-    max-width: 98rem;
-    padding: 4rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.5); 
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-  }
+.private-card {
+  width: 80%;
+  margin-left: 130px;
+  max-width: 98rem;
+  padding: 4rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+}
 
 .private-img {
   min-width: 35rem;
@@ -64,37 +48,44 @@
   text-align: start;
 }
 
+.private-info span {
+  color: #a091ff;
+  font-weight: bold;
+}
+
 .like-dislike {
   display: flex;
   margin-top: 60px;
 }
 
 .no-fav {
-  width: 16%;
+  display: flex;
+  width: 120px;
   margin-right: 10px;
+  padding: 10px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.15);
-  padding: 6px 13px;
-  display: flex;
-  cursor: pointer;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 1.3rem;
-  font-weight: bold;
+  color: white;
 }
 
 .fav {
-  width: 16%;
+  display: flex;
+  width: 120px;
   margin-right: 10px;
+  padding: 10px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  outline: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
-  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
-  padding: 6px 13px;
-  display: flex;
-  cursor: pointer;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 1.3rem;
-  font-weight: bold;  
+  color: black;
 }
 
 .fav-icon {
@@ -106,18 +97,21 @@
   text-align: end;
   margin-top: 60px;
 }
+
 .go-back button {
   display: inline-block;
-  width: 35%;
+  width: 200px;
   margin: 2rem auto;
-  padding: 5px;
+  padding: 10px;
   color: #fff;
+  font-family: "Rajdhani", sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.15);
+  outline: none;
 }
 
 .go-back button:hover {
@@ -126,12 +120,13 @@
   font-weight: bold;
 }
 
+/* Responsive */
 @media (max-width: 1280px) {
-  .private-title h1{
+  .private-title h1 {
     margin-left: 140px;
   }
   .private-container {
-    padding: 0;
+    padding: 0 0 10rem;
   }
   .private-card {
     padding: 1rem;
@@ -154,11 +149,8 @@
     line-height: 3rem;
     text-align: center;
   }
-  .no-fav {
-    width: 20%;
-  }
   .go-back button {
-    width: 25%;
+    width: 150px;
   }
 }
 
@@ -189,7 +181,10 @@
 }
 
 @media (max-width: 600px) {
-  .private-title h1{
+  .private-container {
+    margin-top: 2rem;
+  }
+  .private-title h1 {
     font-size: 2.9em;
     padding: 40px 0;
     margin: 0px 0px 30px;
@@ -214,11 +209,8 @@
     font-size: 1.7rem;
     line-height: 2.3rem;
   }
-  .like-dislike{
+  .like-dislike {
     justify-content: center;
-  }
-  .no-fav {
-    width: 40%;
   }
   .go-back button {
     width: 40%;

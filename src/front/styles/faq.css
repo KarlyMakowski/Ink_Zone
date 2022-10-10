@@ -24,10 +24,10 @@
 }
 
 .accordion__content p {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    backdrop-filter: blur(2px);
-    padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  backdrop-filter: blur(2px);
+  padding: 1rem 2rem;
 }
 
 .accordion__content p::before {
@@ -98,3 +98,66 @@
 .bottom-space {
   padding-bottom: 6px;
 }
+
+/* Responsive */
+
+/* iPad Mini */
+@media (min-width: 768px) and (max-height: 1024px) {
+  .faq-container {
+    width: 80%;
+    margin-left: 7.5rem;
+    padding-bottom: 12em;
+  }
+}
+
+/* iPad Air */
+@media (min-width: 820px) and (max-height: 1180px) {
+  .faq-container {
+    width: 80%;
+    margin-left: 7.5rem;
+    padding-bottom: 22em;
+  }
+}
+
+@media (min-width: 1280px) and (max-height: 800px) {
+  .faq-container {
+    width: 80%;
+    margin-left: 10.5rem;
+  }
+}
+
+/* Surface Duo */
+@media (max-width: 540px) and (max-height: 720px) {
+  .faq-container {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* Surface Pro 7 */
+@media (min-width: 912px) and (max-height: 1368px) {
+  .faq-container {
+    width: 80%;
+    margin-left: 8rem;
+    padding-bottom: 34em;
+  }
+}
+
+@media (max-width: 600px) {
+  .faq-accordion {
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+  .faq-accordion label {
+    padding-right: 50px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .faq-container {
+    margin: auto;
+    padding-bottom: 29em;
+  }
+}
+

@@ -123,7 +123,7 @@ export const ContactUs = () => {
           <div className="infoBox">
             <div>
               <span>
-                <MdLocationPin />
+                <MdLocationPin className="social-contact-icons" />
               </span>
               <p>
                 Calle Las Ramblas, 25 <br />
@@ -132,13 +132,13 @@ export const ContactUs = () => {
             </div>
             <div>
               <span>
-                <MdEmail />
+                <MdEmail className="social-contact-icons" />
               </span>
               <a href="mailto:ink-zone@gmail.com">ink-zone@gmail.com</a>
             </div>
             <div>
               <span>
-                <FaPhone />
+                <FaPhone className="social-contact-icons" />
               </span>
               <a href="tel:+34648215148">+34 648 215 148</a>
             </div>
