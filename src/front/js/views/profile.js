@@ -17,7 +17,9 @@ export const Profile = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (store.currentUser === null) {
+    console.log("Profile");
+    console.log({ currentUser: store.currentUser });
+    if (!store.currentUser) {
       navigate("/sign-in");
     }
   }, []);
@@ -33,12 +35,17 @@ export const Profile = () => {
             <div className="profile-card-body">
               <div className="d-flex flex-column align-items-center text-center img-size">
                 <img
-                  src={store.picture == null ? skull : store.currentUser?.picture}
+                  src={
+                    store.picture == null ? skull : store.currentUser?.picture
+                  }
                   alt="default-pic"
                   className="rounded-circle"
                 />
                 <div className="profile-btn">
-                  <form onSubmit={(e) => actions.uploadPicture(e)} className="pic-update-mobile">
+                  <form
+                    onSubmit={(e) => actions.uploadPicture(e)}
+                    className="pic-update-mobile"
+                  >
                     <input
                       type="file"
                       id="files"
@@ -180,19 +187,31 @@ export const Profile = () => {
               </div>
             </div>
             <div>
-              <input type="submit" value="Save changes" className="update-profile-btn" />
+              <input
+                type="submit"
+                value="Save changes"
+                className="update-profile-btn"
+              />
             </div>
           </form>
         </div>
 
         <hr className="log-out-spacer" />
         <div className="profile-footer">
-          <input type="button" value="Log Out" className="log-out-btn" onClick={() => actions.logout(navigate)} />
+          <input
+            type="button"
+            value="Log Out"
+            className="log-out-btn"
+            onClick={() => actions.logout(navigate)}
+          />
           <form onSubmit={() => actions.deleteProfile(navigate)}>
-            <input type="submit" value="Delete Account" className="delete-profile-btn" />
+            <input
+              type="submit"
+              value="Delete Account"
+              className="delete-profile-btn"
+            />
           </form>
         </div>
-
       </div>
     </div>
   );

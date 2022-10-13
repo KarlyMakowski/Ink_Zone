@@ -1,4 +1,4 @@
-import Notiflix, { Notify } from "notiflix";
+import Swal from "sweetalert2";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -35,36 +35,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg, created } = await resp.json();
           if (status === "failed") {
-            Notify.failure(msg, {
-              width: "350px",
-              position: "center-top",
-              distance: "820px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              failure: {
-                fontAwesomeClassName: "fas fa-skull",
-              }
+            Swal.fire({
+              title: msg,
+              toast: true,
+              width: "34em",
+              icon: "error",
+              color: "#ff6242",
+              position: "top-end",
+              animation: true,
+              showConfirmButton: true,
+              timer: 6000,
+              timerProgressBar: true,
             });
           }
           if (status === "success") {
-            Notify.success(msg, {
-              width: "350px",
-              position: "center-top",
-              distance: "820px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              success: {
-                fontAwesomeClassName: "fas fa-hand-peace",
-              }
-            });
+            Swal.fire(msg);
             setStore({ created: created });
             sessionStorage.setItem("created", created);
             navigate("/sign-in");
@@ -76,7 +61,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       login: async (e, navigate) => {
         e.preventDefault();
-        const { email, password } = getStore();
+        const data = new FormData(e.target);
+        const email = data.get("email");
+        const password = data.get("password");
 
         try {
           const resp = await fetch(
@@ -94,35 +81,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg, user, token } = await resp.json();
           if (status === "failed") {
-            Notify.failure(msg, {
-              width: "320px",
-              position: "right-top",
-              distance: "750px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              failure: {
-                fontAwesomeClassName: "fas fa-skull",
-              },
+            Swal.fire({
+              title: msg,
+              toast: true,
+              width: "34em",
+              icon: "error",
+              color: "#ff6242",
+              position: "top-end",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
             });
           }
           if (status === "success") {
-            Notify.success(msg, {
-              width: "320px",
-              distance: "130px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              success: {
-                fontAwesomeClassName: "fas fa-hand-peace",
-              },
-            })
+            Swal.fire(msg);
             setStore({ currentUser: user, token: token });
             sessionStorage.setItem("token", token);
             navigate("/profile");
@@ -168,23 +141,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg, user } = await resp.json();
           if (status === "failed") {
-            Notify.failure("There has been an error updating your profile");
+            Swal.fire({
+              title: msg,
+              toast: true,
+              width: "34em",
+              icon: "error",
+              color: "#ff6242",
+              position: "top-end",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
+            });
           }
           if (status === "success") {
-            Notify.success(msg, {
-              width: "260px",
-              position: "center-top",
-              distance: "130px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              success: {
-                fontAwesomeClassName: "fas fa-marker",
-              },
-            });
+            Swal.fire(msg);
             setStore({ currentUser: user });
           }
         } catch (error) {
@@ -193,20 +164,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: (navigate) => {
-        Notify.info("See you next time!", {
-          width: "300px",
-          position: "center-top",
-          distance: "130px",
-          borderRadius: "6px",
-          timeout: 2000,
-          clickToClose: true,
-          fontSize: "25px",
-          cssAnimationStyle: "zoom",
-          useFontAwesome: true,
-          info: {
-            fontAwesomeClassName: "fas fa-hand-peace",
-          },
-        });
         sessionStorage.removeItem("token");
         setStore({ token: null, currentUser: null });
         navigate("/");
@@ -232,23 +189,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg, user } = await resp.json();
           if (status === "failed") {
-            Notify.failure(msg);
+            Swal.fire({
+              title: msg,
+              toast: true,
+              width: "34em",
+              icon: "error",
+              color: "#ff6242",
+              position: "top-end",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
+            });
           }
           if (status === "success") {
-            Notify.success(msg, {
-              width: "300px",
-              position: "left-top",
-              distance: "140px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              success: {
-                fontAwesomeClassName: "fas fa-camera",
-              },
-            });
+            Swal.fire(msg);
             setStore({ currentUser: user });
           }
         } catch (error) {
@@ -274,10 +229,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const { status, msg } = await resp.json();
           if (status === "failed") {
-            Notify.failure("There was an error deleting your account");
+            Swal.fire({
+              title: msg,
+              toast: true,
+              width: "34em",
+              icon: "error",
+              color: "#ff6242",
+              position: "top-end",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
+            });
           }
           if (status === "success") {
-            Notify.info(msg);
+            Swal.fire(msg);
             sessionStorage.removeItem("token", token);
             setStore({ token: null, currentUser: null });
             navigate("/");
@@ -296,6 +262,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
               body: JSON.stringify({
                 username: user.displayName,
@@ -307,35 +274,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           const { status, msg, token, username, email, picture } =
             await resp.json();
           if (status === "failed") {
-            Notify.failure(msg, {
-              width: "320px",
-              position: "right-top",
-              distance: "750px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              failure: {
-                fontAwesomeClassName: "fas fa-skull",
-              },
+            Swal.fire({
+              title: msg,
+              toast: true,
+              width: "34em",
+              icon: "error",
+              color: "#ff6242",
+              position: "top-end",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
             });
           }
           if (status === "success") {
-            Notify.success(msg, {
-              width: "360px",
-              distance: "130px",
-              borderRadius: "6px",
-              timeout: 2000,
-              clickToClose: true,
-              fontSize: "25px",
-              cssAnimationStyle: "zoom",
-              useFontAwesome: true,
-              success: {
-                fontAwesomeClassName: "fas fa-hand-peace",
-              },
-            });
+            Swal.fire(msg);
             sessionStorage.setItem("token", token);
             setStore({
               token: token,
@@ -345,7 +298,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 picture: picture,
               },
             });
-            console.log(email, username);
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
@@ -409,7 +361,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             setStore({ favCount: data.fav_counter, addFav: data.is_favourite });
-            console.log(data)
+            console.log(data);
           })
           .catch((error) => {
             console.log(error);

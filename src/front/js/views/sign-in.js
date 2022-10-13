@@ -42,8 +42,6 @@ export const SignIn = () => {
                   name="email"
                   className="form-control floatingInput"
                   autoComplete="off"
-                  value={store.currentUser?.email}
-                  onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingInput">Email</label>
               </div>
@@ -54,8 +52,6 @@ export const SignIn = () => {
                   name="password"
                   className="form-control floatingPassword"
                   autoComplete="off"
-                  value={store.currentUser?.password}
-                  onChange={(e) => actions.handleChange(e)}
                 />
                 <label className="floatingPassword mt-2">Password </label>
                 <div

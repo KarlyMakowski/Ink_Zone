@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
 from api.models import db, User, Styles, Prices, Reviews, Favourites
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
 
 import re
@@ -183,6 +183,19 @@ def upload_image():
         return jsonify(response_body), 200
 
 
+@api.route('/logout', methods=['DELETE'])
+@jwt_required()
+def logout():
+    token = get_jwt()
+    jti = token["jti"]
+    now = datetime.now(timezone.utc)
+
+    db.session.add(TokenBlocklist(jti=jti,  created_at=now))
+    db.session.commit()
+
+    return jsonify({"msg": "Token successfully revoked"})
+
+
 @api.route('/private', methods=['DELETE'])
 @jwt_required()
 def delete_profile():
@@ -208,30 +221,27 @@ def auth_google():
     user = User.query.filter_by(email=email).first()
 
     if user is None:
-        passw_is_correct = current_app.bcrypt.generate_password_hash(
+        pw_hash = current_app.bcrypt.generate_password_hash(
             "google").decode("utf-8")
-        google_user = User(username=username, email=email,
-                           password=passw_is_correct, picture=picture)
-
-        db.session.add(google_user)
-        db.session.commit()
-
-        token_expiration = datetime.timedelta(days=1)
-        token = create_access_token(
-            identity=email, expires_delta=token_expiration)
-
-        response_body = {
-            "status": "success",
-            "msg": "Logged in with Google!",
-            "username": username,
-            "email": email,
-            "token": token
-        }
-
-        return jsonify(response_body), 200
+        user = User(username=username, email=email,
+                    password=pw_hash, picture=picture)
 
     else:
-        return jsonify({"msg": "You could not log in with Google!!"}), 400
+        user.username = username
+        user.picture = picture
+        user.email = email
+
+    db.session.add(user)
+    db.session.commit()
+
+    response_body = {
+        "status": "success",
+        "msg": "Logged in with Google!",
+        "username": username,
+        "email": email
+    }
+
+    return jsonify(response_body), 200
 
 
 @api.route('/styles', methods=['GET'])
@@ -313,7 +323,7 @@ def fav(id):
 
         else:
             is_fav = True
-            
+
             response_body = {
                 "user": user.username,
                 "favourites": fav_list,
@@ -388,7 +398,7 @@ def get_review(id):
         "user": user.username,
         "review": single_review.review
     }
-    
+
     return jsonify({response_body}), 200
 
 

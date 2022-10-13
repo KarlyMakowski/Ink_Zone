@@ -20,16 +20,35 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 export const GoogleAuth = () => {
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
   const onClickGoogle = async () => {
-    const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result._tokenResponse;
-    await actions.authGoogle(user);
-    navigate("/profile");
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      try {
+        const idToken = await user.getIdToken(/* forceRefresh */ true);
+        store.token = idToken;
+        sessionStorage.getItem("token");
+      } catch (error) {
+        console.error({ error });
+      }
+      actions.authGoogle(user);
+      console.log({ user });
+      store.currentUser = {
+        name: user.displayName,
+        username: user.email.split("@")[0],
+        email: user.email,
+        picture: user.photoURL,
+      };
+      navigate("/profile");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    }
   };
 
   return (

@@ -73,6 +73,8 @@
 		]
 	},
 	"dependencies": {
+		"@sweetalert2/theme-dark": "^5.0.12",
+		"@sweetalert2/theme-wordpress-admin": "^5.0.12",
 		"bootstrap": "^5.2.1",
 		"bootswatch": "^5.2.0",
 		"emailjs-com": "^3.2.0",
@@ -88,6 +90,7 @@
 		"react-icons": "^4.4.0",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0",
-		"react-toastify": "^9.0.8"
+		"react-toastify": "^9.0.8",
+		"sweetalert2": "^11.5.1"
 	}
 }
