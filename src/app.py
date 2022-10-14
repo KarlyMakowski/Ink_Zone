@@ -15,9 +15,12 @@ from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 import cloudinary
 import firebase_admin
-from firebase_admin import credentials
+from firebase_admin import credentials, auth
+from flask_mail import Mail
+
 
 #from models import Person
+
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(
@@ -25,31 +28,34 @@ static_file_dir = os.path.join(os.path.dirname(
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
 # FIREBASE ADMIN SDK
 cred = credentials.Certificate("firebase-admin-key.json")
 firebase_admin.initialize_app(cred)
+
 
 # JWT MANAGER
 app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_Secret_Key')
 jwt = JWTManager(app)
 
+
 # TOKEN BLACKLIST
 @jwt.token_in_blocklist_loader
 def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
-    # try:
-    #     decoded_token = auth.verify_id_token(id_token, check_revoked=True)
-    #     uid = decoded_token['uid']
+    try:
+        decoded_token = auth.verify_id_token(id_token, check_revoked=True)
+        uid = decoded_token['uid']
 
-    #     return False
+        return False
 
-    # except auth.RevokedIdTokenError:
-    #     pass
+    except auth.RevokedIdTokenError:
+        pass
 
-    # except auth.UserDisabledError:
-    #     pass
+    except auth.UserDisabledError:
+        pass
 
-    # except auth.InvalidIdTokenError:
-    #     pass
+    except auth.InvalidIdTokenError:
+        pass
 
     jti = jwt_payload["jti"]
     token = db.session.query(BlackList.id).filter_by(jti=jti).scalar()
@@ -60,6 +66,7 @@ def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
 # PASSWORD ENCRYPTATION
 bcrypt = Bcrypt(app)
 app.bcrypt = bcrypt
+
 
 # UPLOAD IMAGES CLOUDINARY
 app.config['CLOUD_NAME'] = os.environ.get("CLOUD_NAME")
@@ -73,13 +80,17 @@ cloudinary.config(
     secure=True
 )
 
-# SEND RECOVER PASSWORD TO USERS
+
+# MAILTRAP
 app.config['MAIL_SERVER'] = 'smtp.mailtrap.io'
-app.config['MAIL_PORT'] = 3001
+app.config['MAIL_PORT'] = 2525
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
+mail = Mail()
+mail.init_app(app)
+
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -93,37 +104,38 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
+
 # Allow CORS requests to this API
 CORS(app)
+
 
 # add the admin
 setup_admin(app)
 
+
 # add the admin
 setup_commands(app)
+
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
 
+
 # Handle/serialize errors like a JSON object
-
-
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
+
 # generate sitemap with all your endpoints
-
-
 @app.route('/')
 def sitemap():
     if ENV == "development":
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
 
+
 # any other endpoint will try to serve it like a static file
-
-
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):

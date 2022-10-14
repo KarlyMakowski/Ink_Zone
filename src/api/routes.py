@@ -1,14 +1,18 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews, Favourites
+from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
+from flask_mail import Mail, Message
+import random
+import string
 
 import re
 import datetime
 import cloudinary
 import cloudinary.api
 from cloudinary.uploader import upload
+
 
 api = Blueprint('api', __name__)
 
@@ -47,6 +51,7 @@ def signup():
             return jsonify({"created": False, "status": "failed", "msg": "Email already exists!"}), 409
         if User.query.filter_by(username=username).first() is not None:
             return jsonify({"created": False, "status": "failed", "msg": "Username already exists!"}), 409
+
         else:
             pw_hash = current_app.bcrypt.generate_password_hash(
                 password).decode('utf-8')
@@ -243,6 +248,39 @@ def auth_google():
 
     return jsonify(response_body), 200
 
+
+@api.route('/password-recovery', methods=['POST'])
+def recover_password():
+    body = json.loads(request.data)
+    email = body["email"]
+
+    new_password = "".join(random.choice(
+        string.ascii_uppercase + string.digits) for x in range(10))
+    pw_hash = current_app.bcrypt.generate_password_hash(
+        new_password).decode("utf-8")
+
+    user = User.query.filter_by(email=email).first()
+
+    if user != None:
+        user.password = pw_hash
+        db.session.commit()
+
+        mail = Mail()
+        msg = Message("Password Recovery", sender="Ink-Zone",
+                      recipients=[user.email])
+        msg.body = "Hello " + user.username + ", this is your new password: " + new_password + "."
+        msg.html = "<h1>INK ZONE</h1><h2> Hello " + user.username + "</h2> <p>Your new password is <b> " + new_password + "</b></p><p>If you did not make this request then please ignore this email.</p><p>This email has been automatically generated. Please do not reply to this email.</p>"
+        mail.send(msg)
+        
+        return "Message sent!"
+    
+    else:
+        response_body = {
+            "status": "failed",
+            "msg": "This email does not exist"
+        }
+        
+        return jsonify(response_body), 400
 
 @api.route('/styles', methods=['GET'])
 def get_styles():
