@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList
+from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList, UserRoles
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt

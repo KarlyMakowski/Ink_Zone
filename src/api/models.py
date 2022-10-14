@@ -4,6 +4,7 @@ db = SQLAlchemy()
 
 
 class User(db.Model):
+    __tablename__= 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
@@ -15,9 +16,8 @@ class User(db.Model):
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
     picture = db.Column(db.String(100), nullable=True)
-    is_active = db.Column(db.Boolean(), default=True,
-                          unique=False, nullable=True)
-    role = db.relationship('Role')
+    is_active = db.Column(db.Boolean(), default=True, unique=False, nullable=True)
+    role = db.relationship('Role', secondary='user_roles')
     reviews = db.relationship('Reviews')
     favourites = db.relationship('Favourites')
 
@@ -41,9 +41,9 @@ class User(db.Model):
 
 
 class Role(db.Model):
+    __tablename__= 'roles'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
 
     def __repr__(self):
         return f'<Role %r>' % self.id
@@ -52,6 +52,23 @@ class Role(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+        }
+
+
+class UserRoles(db.Model):
+    __tablename__= 'user_roles'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id', ondelete='CASCADE'))
+
+    def __repr__(self):
+        return f'<UserRoles %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "role_id": self.role_id
         }
 
 

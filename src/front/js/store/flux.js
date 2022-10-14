@@ -300,23 +300,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const { status, msg } = await resp.json();
-          if (status === "failed") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "error",
-              color: "#c61a09",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#c61a09",
-              timer: 8000,
-            });
-          }
           if (status === "success") {
             Swal.fire({
               title: msg,
@@ -395,7 +378,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            console.log(user);
             sessionStorage.setItem("token", token);
             setStore({
               token: token,
