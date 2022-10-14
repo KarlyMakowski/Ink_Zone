@@ -7,7 +7,7 @@ import "../../styles/signup-signin.css";
 export const Forgot = () => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   });

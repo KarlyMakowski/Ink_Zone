@@ -34,19 +34,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
-              toast: true,
-              width: "34em",
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
-              position: "top-end",
+              color: "#c61a09",
+              position: "center",
               animation: true,
               showConfirmButton: true,
-              timer: 6000,
-              timerProgressBar: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
-            Swal.fire(msg);
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
             setStore({ created: created });
             sessionStorage.setItem("created", created);
             navigate("/sign-in");
@@ -77,19 +94,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
-              toast: true,
-              width: "34em",
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
-              position: "top-end",
+              color: "#c61a09",
+              position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
-            Swal.fire(msg);
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
             setStore({ currentUser: user, token: token });
             sessionStorage.setItem("token", token);
             navigate("/profile");
@@ -134,19 +168,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
-              toast: true,
-              width: "34em",
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
-              position: "top-end",
+              color: "#c61a09",
+              position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
-            Swal.fire(msg);
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
             setStore({ currentUser: user });
           }
         } catch (error) {
@@ -155,6 +206,22 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: (navigate) => {
+        Swal.fire({
+          title: "See you next time!",
+          width: 720,
+          padding: '5em',
+          background: "transparent",
+          backdrop: "rgba(32, 32, 32, 0.8)",
+          icon: "success",
+          iconColor: "#a091ff",
+          color: "#a091ff",
+          position: "center",
+          animation: true,
+          showConfirmButton: true,
+          confirmButtonText: "Close",
+          confirmButtonColor: "#a091ff",
+          timer: 8000,
+        });
         sessionStorage.removeItem("token");
         setStore({ token: null, currentUser: null });
         navigate("/");
@@ -182,19 +249,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
-              toast: true,
-              width: "34em",
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
-              position: "top-end",
+              color: "#c61a09",
+              position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
-            Swal.fire(msg);
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
             setStore({ currentUser: user });
           }
         } catch (error) {
@@ -219,19 +303,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
-              toast: true,
-              width: "34em",
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
-              position: "top-end",
+              color: "#c61a09",
+              position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
-            Swal.fire(msg);
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
             sessionStorage.removeItem("token", token);
             setStore({ token: null, currentUser: null });
             navigate("/");
@@ -264,19 +365,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
-              toast: true,
-              width: "34em",
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
-              position: "top-end",
+              color: "#c61a09",
+              position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
-            Swal.fire(msg);
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
             sessionStorage.setItem("token", token);
             setStore({
               token: token,
@@ -313,25 +431,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (status === "failed") {
             Swal.fire({
               title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "error",
-              color: "#ff6242",
+              color: "#c61a09",
               position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
             });
           }
           if (status === "success") {
             Swal.fire({
               title: msg,
+              width: 720,
+              padding: '5em',
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.8)",
               icon: "success",
-              color: "#39e75f",
+              color: "#aeffb9",
               position: "center",
               animation: true,
-              showConfirmButton: false,
-              timer: 6000,
-              timerProgressBar: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
             });
             navigate("/sign-in");
           }
