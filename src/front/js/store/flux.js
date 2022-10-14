@@ -292,6 +292,54 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      passwordRecovery: async (e, navigate) => {
+        e.preventDefault();
+        const { email } = getStore();
+
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/password-recovery",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+              }),
+            }
+          );
+          const { status, msg } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              icon: "error",
+              color: "#ff6242",
+              position: "center",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              icon: "success",
+              color: "#39e75f",
+              position: "center",
+              animation: true,
+              showConfirmButton: false,
+              timer: 6000,
+              timerProgressBar: true,
+            });
+            navigate("/sign-in");
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
       loadStyles: () => {
         fetch(process.env.BACKEND_URL + "/api/styles")
           .then((response) => response.json())

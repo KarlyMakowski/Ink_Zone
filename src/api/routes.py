@@ -268,19 +268,27 @@ def recover_password():
         mail = Mail()
         msg = Message("Password Recovery", sender="Ink-Zone",
                       recipients=[user.email])
-        msg.body = "Hello " + user.username + ", this is your new password: " + new_password + "."
-        msg.html = "<h1>INK ZONE</h1><h2> Hello " + user.username + "</h2> <p>Your new password is <b> " + new_password + "</b></p><p>If you did not make this request then please ignore this email.</p><p>This email has been automatically generated. Please do not reply to this email.</p>"
+        msg.body = "Hello " + user.username + \
+            ", this is your new password: " + new_password + "."
+        msg.html = "<h1>INK ZONE</h1><h2> Hello " + user.username + "</h2> <p>Your new password is <b> " + new_password + \
+            "</b></p><p>If you did not make this request then please ignore this email.</p><p>This email has been automatically generated. Please do not reply to this email.</p>"
         mail.send(msg)
         
-        return "Message sent!"
-    
+        response_body = {
+            "status": "success",
+            "msg": "Email sent!"
+        }
+
+        return jsonify(response_body), 200
+
     else:
         response_body = {
             "status": "failed",
             "msg": "This email does not exist"
         }
-        
+
         return jsonify(response_body), 400
+
 
 @api.route('/styles', methods=['GET'])
 def get_styles():

@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/signup-signin.css";
 
 export const Forgot = () => {
-  const [info, setInfo] = useState({ email: "" });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleChange = (e) => {
-    setInfo({
-      ...info,
-      [e.target.name]: e.target.value,
-    });
-  };
-
+  const { actions, store } = useContext(Context);
+  const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -27,7 +18,7 @@ export const Forgot = () => {
         <div className="signin">
           <h1 className="fw-bold">Forgot your password?</h1>
           <h4>Introduce your email</h4>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => actions.passwordRecovery(e, navigate)}>
             <div className="form-floating">
               <input
                 type="email"
@@ -36,8 +27,8 @@ export const Forgot = () => {
                 className="form-control"
                 id="floatingInput"
                 autoComplete="off"
-                value={info.email}
-                onChange={handleChange}
+                value={store.currentUser?.email}
+                onChange={(e) => actions.handleChange(e)}
               />
               <label className="floatingInput">Email</label>
               <input type="submit" value="Reset Password" />
