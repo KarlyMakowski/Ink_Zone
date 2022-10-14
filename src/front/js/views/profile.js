@@ -17,8 +17,6 @@ export const Profile = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log("Profile");
-    console.log({ currentUser: store.currentUser });
     if (!store.currentUser) {
       navigate("/sign-in");
     }
@@ -35,9 +33,7 @@ export const Profile = () => {
             <div className="profile-card-body">
               <div className="d-flex flex-column align-items-center text-center img-size">
                 <img
-                  src={
-                    store.picture == null ? skull : store.currentUser?.picture
-                  }
+                  src={store.currentUser?.picture || skull}
                   alt="default-pic"
                   className="rounded-circle"
                 />

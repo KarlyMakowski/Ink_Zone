@@ -243,7 +243,9 @@ def auth_google():
         "status": "success",
         "msg": "Logged in with Google!",
         "username": username,
-        "email": email
+        "email": email,
+        "picture": picture,
+        "token": create_access_token(identity=email)
     }
 
     return jsonify(response_body), 200

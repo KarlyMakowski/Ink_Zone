@@ -43,7 +43,8 @@ jwt = JWTManager(app)
 @jwt.token_in_blocklist_loader
 def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
     try:
-        decoded_token = auth.verify_id_token(id_token, check_revoked=True)
+        token = request.headers.get("Authorization")[7:]
+        decoded_token = auth.verify_id_token(token, check_revoked=True)
         uid = decoded_token['uid']
 
         return False

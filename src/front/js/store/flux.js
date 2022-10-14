@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: null,
-      currentUser: null,
+      currentUser: [],
       styles: [],
       privateStyle: [],
       addFav: false,
@@ -35,9 +35,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -52,9 +52,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",
@@ -95,9 +95,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -112,9 +112,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",
@@ -169,9 +169,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -186,9 +186,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",
@@ -209,9 +209,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         Swal.fire({
           title: "See you next time!",
           width: 720,
-          padding: '5em',
+          padding: "5em",
           background: "transparent",
-          backdrop: "rgba(32, 32, 32, 0.8)",
+          backdrop: "rgba(32, 32, 32, 0.9)",
           icon: "success",
           iconColor: "#a091ff",
           color: "#a091ff",
@@ -250,9 +250,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -267,9 +267,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",
@@ -304,9 +304,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -321,9 +321,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",
@@ -356,7 +356,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: JSON.stringify({
                 username: user.displayName,
                 email: user.email,
-                picture: user.photoUrl,
+                picture: user.photoURL,
               }),
             }
           );
@@ -366,9 +366,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -383,9 +383,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",
@@ -395,6 +395,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
+            console.log(user);
             sessionStorage.setItem("token", token);
             setStore({
               token: token,
@@ -432,9 +433,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "error",
               color: "#c61a09",
               position: "center",
@@ -449,9 +450,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             Swal.fire({
               title: msg,
               width: 720,
-              padding: '5em',
+              padding: "5em",
               background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.8)",
+              backdrop: "rgba(32, 32, 32, 0.9)",
               icon: "success",
               color: "#aeffb9",
               position: "center",

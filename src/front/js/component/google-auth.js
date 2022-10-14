@@ -7,12 +7,12 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCOfrmhWC1yKAsBff5BA9PRLH7dKN67mGM",
-  authDomain: "ink-zone-9637c.firebaseapp.com",
-  projectId: "ink-zone-9637c",
-  storageBucket: "ink-zone-9637c.appspot.com",
-  messagingSenderId: "372713622138",
-  appId: "1:372713622138:web:e5acd18dd8e83c8d5189c3",
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -35,7 +35,6 @@ export const GoogleAuth = () => {
         console.error({ error });
       }
       actions.authGoogle(user);
-      console.log({ user });
       store.currentUser = {
         name: user.displayName,
         username: user.email.split("@")[0],
