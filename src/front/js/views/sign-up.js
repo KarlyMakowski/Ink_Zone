@@ -4,10 +4,7 @@ import { Context } from "../store/appContext";
 
 import "../../styles/signup-signin.css";
 
-import { GrInstagram, GrTwitter } from "react-icons/gr";
-import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
-
-import { Roles } from "../component/role";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const SignUp = () => {
   const { actions, store } = useContext(Context);
@@ -26,7 +23,8 @@ export const SignUp = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+    actions.getRole();
+  }, []);
 
   return (
     <div className="register">
@@ -34,9 +32,20 @@ export const SignUp = () => {
         <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={(e) => actions.signup(e, navigate)}>
-            <select className="form-select" aria-label="Default select example">
-              <option value className="colour">Who are you?</option>
-              <Roles />
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => actions.handleChange(e)}
+              name="role"
+            >
+              <option>Select type of user</option>
+              {store.roles.map((singleRole, i) => {
+                return (
+                  <option value={store.currentUser?.role} key={i}>
+                    {singleRole.name}
+                  </option>
+                );
+              })}
             </select>
             <div className="form-floating">
               <input

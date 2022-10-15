@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               email: email,
               password: password,
               confirm_password: confirmPassword,
-              role: role
+              role: role,
             }),
           });
           const { status, msg, created } = await resp.json();

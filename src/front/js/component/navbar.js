@@ -11,7 +11,7 @@ import { IoIosColorPalette } from "react-icons/io";
 import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle } from "react-icons/hi";
 import { RiWechatFill } from "react-icons/ri";
 import { GiDeathZone } from "react-icons/gi";
-import { FiLogOut, FiLogIn } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 
 export const Navbar = () => {
   const { actions, store } = useContext(Context);
@@ -122,7 +122,10 @@ export const Navbar = () => {
       </div>
       <div className="nav-footer">
         {!store.token ? (
-          <Link to="/sign-in" className={expanded ? "menu-item" : "menu-item menu-item-NX"}>
+          <Link
+            to="/sign-in"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
             <HiUserCircle
               style={{ height: "57px", width: "40px" }}
               className="log-in-icon"
@@ -131,7 +134,12 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">Log In</div>}
           </Link>
         ) : (
-          <span className={expanded ? "menu-item log-out" : "menu-item menu-item-NX log-out"} onClick={() => actions.logout(navigate)}>
+          <span
+            className={
+              expanded ? "menu-item log-out" : "menu-item menu-item-NX log-out"
+            }
+            onClick={() => actions.logout(navigate)}
+          >
             <FiLogOut
               style={{ height: "57px", width: "30px" }}
               className="log-out-icon"

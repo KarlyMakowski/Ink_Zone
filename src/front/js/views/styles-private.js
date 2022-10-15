@@ -34,9 +34,8 @@ export const StylesPrivate = () => {
           </div>
           <div className="private-info">
             <h3 className="private-style-intro">
-              What makes{" "}
-              <span>"{store.privateStyle.style}"</span>{" "}
-              style special?
+              What makes <span>"{store.privateStyle.style}"</span> style
+              special?
             </h3>
             <p className="private-style-info">
               {store.privateStyle.information}

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList, UserRoles, Role
+from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList, Role, UserRoles
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
@@ -21,7 +21,7 @@ api = Blueprint('api', __name__)
 def get_roles():
     roles = Role.query.all()
     roles_list = list(map(lambda roles: roles.serialize(), roles))
-    
+
     return jsonify(roles_list)
 
 
@@ -32,7 +32,6 @@ def signup():
     password = request.json.get("password", None)
     confirm_password = request.json.get("confirm_password", None)
     role = request.json.get("role", None)
-    print(role)
     # username pattern which accepts 5 to 15 characters with any lower case character, digit or special symbol “_-” only.
     regex_username = re.compile(
         r'^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$')
@@ -43,6 +42,8 @@ def signup():
     regex_password = re.compile(
         "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
 
+    if not role:
+        return jsonify({"created": False, "status": "failed", "msg": "Select type of user"}), 400
     if not username:
         return jsonify({"created": False, "status": "failed", "msg": "Missing username!"}), 400
     if not email:
@@ -58,7 +59,7 @@ def signup():
     if not role:
         return jsonify({"created": False, "status": "failed", "msg": "Who you are?"})
 
-    if username and email and password and confirm_password == password:
+    if role and username and email and password and confirm_password == password:
         if User.query.filter_by(email=email).first() is not None:
             return jsonify({"created": False, "status": "failed", "msg": "Email already exists!"}), 409
         if User.query.filter_by(username=username).first() is not None:
@@ -67,15 +68,18 @@ def signup():
         else:
             pw_hash = current_app.bcrypt.generate_password_hash(
                 password).decode('utf-8')
-            new_user = User(username=username, email=email, password=pw_hash)
-            
+            user_role = Role.query.filter_by(name=role).first()
+            new_user = User(username=username, email=email,
+                            password=pw_hash, role=user_role)
+
             db.session.add(new_user)
             db.session.commit()
 
             response_body = {
                 "status": "success",
                 "created": True,
-                "msg": "Successfully signed up!"
+                "msg": "Successfully signed up!",
+                "user": new_user.serialize()
             }
 
         return jsonify(response_body), 201
@@ -108,8 +112,8 @@ def create_token():
             response_body = {
                 "status": "success",
                 "msg": "Successfully logged in",
-                "user": user.serialize(),
                 "token": token,
+                "user": user.serialize()
             }
 
             return jsonify(response_body), 200
@@ -194,8 +198,7 @@ def upload_image():
 
         response_body = {
             "status": "success",
-            "msg": "Picture updated",
-            "user": user.serialize()
+            "msg": "Picture updated"
         }
 
         return jsonify(response_body), 200

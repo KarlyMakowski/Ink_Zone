@@ -20,7 +20,6 @@ const injectContext = (PassedComponent) => {
     useEffect(() => {
       state.actions.loadStyles();
       state.actions.loadPrices();
-      state.actions.getRole();
     }, []);
 
     return (
