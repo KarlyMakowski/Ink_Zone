@@ -126,6 +126,8 @@ class Experts(db.Model):
     image = db.Column(db.String(2000), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     instagram = db.Column(db.String(2000), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    expert = db.relationship('User')
 
     def __repr__(self):
         return f'<Experts %r>' % self.id
@@ -138,6 +140,7 @@ class Experts(db.Model):
             "image": self.image,
             "description": self.description,
             "instagram": self.instagram,
+            "user_id": self.user_id
         }
 
 
