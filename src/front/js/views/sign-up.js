@@ -7,6 +7,8 @@ import "../../styles/signup-signin.css";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 
+import { Roles } from "../component/role";
+
 export const SignUp = () => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
@@ -32,18 +34,10 @@ export const SignUp = () => {
         <div className="signup">
           <h1 className="fw-bold">Create an account</h1>
           <form onSubmit={(e) => actions.signup(e, navigate)}>
-            <div className="social">
-              <a href="#" className="social-instagram">
-                <GrInstagram className="gr" />
-              </a>
-              <a href="#" className="social-twitter">
-                <GrTwitter className="gr" />
-              </a>
-              <a href="#" className="social-facebook">
-                <FaFacebookF className="gr" />
-              </a>
-            </div>
-            <p>Or enter your info</p>
+            <select className="form-select" aria-label="Default select example">
+              <option value className="colour">Who are you?</option>
+              <Roles />
+            </select>
             <div className="form-floating">
               <input
                 type="text"

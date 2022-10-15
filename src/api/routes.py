@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList, UserRoles
+from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList, UserRoles, Role
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
@@ -17,12 +17,22 @@ from cloudinary.uploader import upload
 api = Blueprint('api', __name__)
 
 
+@api.route('/roles', methods=['GET'])
+def get_roles():
+    roles = Role.query.all()
+    roles_list = list(map(lambda roles: roles.serialize(), roles))
+    
+    return jsonify(roles_list)
+
+
 @api.route('/signup', methods=['POST'])
 def signup():
     username = request.json.get("username", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     confirm_password = request.json.get("confirm_password", None)
+    role = request.json.get("role", None)
+    print(role)
     # username pattern which accepts 5 to 15 characters with any lower case character, digit or special symbol “_-” only.
     regex_username = re.compile(
         r'^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$')
@@ -45,6 +55,8 @@ def signup():
         return jsonify({"created": False, "status": "failed", "msg": "Not valid email!"}), 400
     if not re.search(regex_password, password):
         return jsonify({"created": False, "status": "failed", "msg": "You need a min 8 characters password, with at least a symbol, upper and lower case letters, and a number"}), 400
+    if not role:
+        return jsonify({"created": False, "status": "failed", "msg": "Who you are?"})
 
     if username and email and password and confirm_password == password:
         if User.query.filter_by(email=email).first() is not None:
@@ -56,13 +68,14 @@ def signup():
             pw_hash = current_app.bcrypt.generate_password_hash(
                 password).decode('utf-8')
             new_user = User(username=username, email=email, password=pw_hash)
+            
             db.session.add(new_user)
             db.session.commit()
 
             response_body = {
                 "status": "success",
                 "created": True,
-                "msg": 'Successfully signed up!'
+                "msg": "Successfully signed up!"
             }
 
         return jsonify(response_body), 201

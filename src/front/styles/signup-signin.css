@@ -110,6 +110,16 @@ p {
   margin: 1rem 0;
 }
 
+.login-container form select {
+  display: block;
+  width: 100%;
+  outline: none;
+  padding: 0.8rem;
+  color: white;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+}
+
 .login-container form input {
   display: block;
   width: 100%;

@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       currentUser: [],
       styles: [],
+      roles: [],
       privateStyle: [],
       addFav: false,
       favCount: 0,
@@ -13,9 +14,15 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
+      getRole: () => {
+        fetch(process.env.BACKEND_URL + "/api/roles")
+          .then((response) => response.json())
+          .then((data) => setStore({ roles: data }));
+      },
+
       signup: async (e, navigate) => {
         e.preventDefault();
-        const { username, email, password, confirmPassword } = getStore();
+        const { username, email, password, confirmPassword, role } = getStore();
 
         try {
           const resp = await fetch(process.env.BACKEND_URL + "/api/signup", {
@@ -28,6 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               email: email,
               password: password,
               confirm_password: confirmPassword,
+              role: role
             }),
           });
           const { status, msg, created } = await resp.json();
