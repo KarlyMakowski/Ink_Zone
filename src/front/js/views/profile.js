@@ -135,53 +135,55 @@ export const Profile = () => {
                 />
               </div>
             </div>
-            <div className="form_box_input_social">
-              <div className="form_box_input">
-                <label htmlFor="facebook">Facebook</label>
-                <div className="form_box_input_box">
-                  <div className="form_box_input_box_icon">
-                    <RiFacebookFill />
+            {store.role == "Expert" ? (
+              <div className="form_box_input_social">
+                <div className="form_box_input">
+                  <label htmlFor="facebook">Facebook</label>
+                  <div className="form_box_input_box">
+                    <div className="form_box_input_box_icon">
+                      <RiFacebookFill />
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={(e) => actions.handleChange(e)}
+                      defaultValue={store.currentUser?.facebook}
+                      name="facebook"
+                    />
                   </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => actions.handleChange(e)}
-                    defaultValue={store.currentUser?.facebook}
-                    name="facebook"
-                  />
+                </div>
+                <div className="form_box_input">
+                  <label htmlFor="Twitter">Twitter</label>
+                  <div className="form_box_input_box">
+                    <div className="form_box_input_box_icon">
+                      <RiTwitterFill />
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={(e) => actions.handleChange(e)}
+                      defaultValue={store.currentUser?.twitter}
+                      name="twitter"
+                    />
+                  </div>
+                </div>
+                <div className="form_box_input">
+                  <label htmlFor="Instagram">Instagram</label>
+                  <div className="form_box_input_box">
+                    <div className="form_box_input_box_icon">
+                      <RiInstagramLine />
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={(e) => actions.handleChange(e)}
+                      defaultValue={store.currentUser?.instagram}
+                      name="instagram"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="form_box_input">
-                <label htmlFor="Twitter">Twitter</label>
-                <div className="form_box_input_box">
-                  <div className="form_box_input_box_icon">
-                    <RiTwitterFill />
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => actions.handleChange(e)}
-                    defaultValue={store.currentUser?.twitter}
-                    name="twitter"
-                  />
-                </div>
-              </div>
-              <div className="form_box_input">
-                <label htmlFor="Instagram">Instagram</label>
-                <div className="form_box_input_box">
-                  <div className="form_box_input_box_icon">
-                    <RiInstagramLine />
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => actions.handleChange(e)}
-                    defaultValue={store.currentUser?.instagram}
-                    name="instagram"
-                  />
-                </div>
-              </div>
-            </div>
+            ) : null}
             <div>
               <input
                 type="submit"
@@ -191,7 +193,6 @@ export const Profile = () => {
             </div>
           </form>
         </div>
-
         <hr className="log-out-spacer" />
         <div className="profile-footer">
           <input

@@ -6,7 +6,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       currentUser: [],
       styles: [],
-      roles: [],
       privateStyle: [],
       addFav: false,
       favCount: 0,
@@ -14,12 +13,6 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
-      getRole: () => {
-        fetch(process.env.BACKEND_URL + "/api/roles")
-          .then((response) => response.json())
-          .then((data) => setStore({ roles: data }));
-      },
-
       signup: async (e, navigate) => {
         e.preventDefault();
         const { username, email, password, confirmPassword, role } = getStore();
@@ -132,7 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            setStore({ currentUser: user, token: token });
+            setStore({ currentUser: user, token: token, role: user.role });
             sessionStorage.setItem("token", token);
             navigate("/profile");
           }
@@ -231,7 +224,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           timer: 8000,
         });
         sessionStorage.removeItem("token");
-        setStore({ token: null, currentUser: null });
+        setStore({ token: null, currentUser: null, role: null });
         navigate("/");
       },
 
@@ -297,6 +290,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       handlePicture: (e) => {
         const { files } = e.target;
         setStore({ picture: files[0] });
+      },
+
+      multipleUpload: (e) => {
+        const { files } = e.target;
+        setStore({ multipleFiles: files });
+        console.log("These are ur pics: ", multipleFiles);
       },
 
       deleteProfile: async (navigate) => {

@@ -23,8 +23,7 @@ export const SignUp = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    actions.getRole();
-  }, []);
+  });
 
   return (
     <div className="register">
@@ -39,13 +38,8 @@ export const SignUp = () => {
               name="role"
             >
               <option>Select type of user</option>
-              {store.roles.map((singleRole, i) => {
-                return (
-                  <option value={store.currentUser?.role} key={i}>
-                    {singleRole.name}
-                  </option>
-                );
-              })}
+              <option value="Client">Client</option>
+              <option value="Expert">Expert</option>
             </select>
             <div className="form-floating">
               <input

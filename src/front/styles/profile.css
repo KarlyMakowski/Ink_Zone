@@ -195,6 +195,10 @@
   display: none;
 }
 
+.form_box_input textarea {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* Responsive */
 @media (min-width: 1290px) {
   .row {

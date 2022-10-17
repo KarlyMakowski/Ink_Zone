@@ -9,7 +9,7 @@ import logo from "../../img/ink-zone.png";
 import { FaHome } from "react-icons/fa";
 import { IoIosColorPalette } from "react-icons/io";
 import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle } from "react-icons/hi";
-import { RiWechatFill } from "react-icons/ri";
+import { RiWechatFill, RiUploadCloud2Fill } from "react-icons/ri";
 import { GiDeathZone } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
 
@@ -86,6 +86,30 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">prices</div>}
           </Link>
           <Link
+            to="/profile"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiDeathZone
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">profile</p>}
+            {!expanded && <div className="tooltip">profile</div>}
+          </Link>
+          {store.role == "Expert" ? (
+            <Link
+              to="/publish-expert"
+              className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+            >
+              <RiUploadCloud2Fill
+                style={{ height: "57px", width: "35px" }}
+                className="nav-icon"
+              />
+              {expanded && <p className="nav-views">publish</p>}
+              {!expanded && <div className="tooltip">publish</div>}
+            </Link>
+          ) : null}
+          <Link
             to="/faq"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -106,17 +130,6 @@ export const Navbar = () => {
             />
             {expanded && <p className="nav-views">contact us</p>}
             {!expanded && <div className="tooltip">contact</div>}
-          </Link>
-          <Link
-            to="/profile"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <GiDeathZone
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">profile</p>}
-            {!expanded && <div className="tooltip">profile</div>}
           </Link>
         </div>
       </div>

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList, Role, UserRoles
+from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
@@ -15,14 +15,6 @@ from cloudinary.uploader import upload
 
 
 api = Blueprint('api', __name__)
-
-
-@api.route('/roles', methods=['GET'])
-def get_roles():
-    roles = Role.query.all()
-    roles_list = list(map(lambda roles: roles.serialize(), roles))
-
-    return jsonify(roles_list)
 
 
 @api.route('/signup', methods=['POST'])
@@ -66,9 +58,8 @@ def signup():
         else:
             pw_hash = current_app.bcrypt.generate_password_hash(
                 password).decode('utf-8')
-            user_role = Role.query.filter_by(name=role).first()
             new_user = User(username=username, email=email,
-                            password=pw_hash, role=user_role)
+                            password=pw_hash, role=role)
 
             db.session.add(new_user)
             db.session.commit()
@@ -197,6 +188,55 @@ def upload_image():
         response_body = {
             "status": "success",
             "msg": "Picture updated"
+        }
+
+        return jsonify(response_body), 200
+
+
+@api.route('/private/expert/form', methods=['POST', 'PUT'])
+@jwt_required()
+def create_expert():
+    current_user = get_jwt_identity()
+    expert = User.query.filter_by(email=current_user).first()
+
+    username = request.json.get("username", None)
+    email = request.json.get("email", None)
+    name = request.json.get("name", None)
+    lastname = request.json.get("lastname", None)
+    description = request.json.get("description", None)
+    instagram = request.json.get("instagram", None)
+
+    new_expert = User(username=expert.username, email=expert.email, name=name,
+                      lastname=lastname, description=description, instagram=instagram)
+
+    if request.method == 'POST':
+
+        if not expert:
+            return jsonify({"msg": "Please, log in!"}), 400
+
+        else:
+            db.session.add(new_expert)
+            db.session.commit()
+
+            response_body = {
+                "created": True,
+                "status": "success",
+                "msg": "Successfully published"
+            }
+
+            return jsonify(response_body), 200
+
+    else:
+        new_expert.name = name
+        new_expert.lastname = lastname
+        new_expert.description = description
+        new_expert.instagram = instagram
+
+        db.session.commit()
+
+        response_body = {
+            "status": "success",
+            "msg": "Successfully modified your info"
         }
 
         return jsonify(response_body), 200
@@ -402,60 +442,6 @@ def get_prices():
     prices_list = list(map(lambda prices: prices.serialize(), prices))
 
     return jsonify(prices_list), 200
-
-
-@api.route('/experts', methods=['GET'])
-def experts():
-    experts = Experts.query.all()
-    experts_list = list(map(lambda experts: experts.serialize(), experts))
-    
-    return jsonify(experts_list), 200
-
-
-@api.route('/experts/private/form', methods=['PUT'])
-@jwt_required()
-def create_expert():
-    current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
-    name = request.json.get("name", None)
-    lastname = request.json.get("lastname", None)
-    description = request.json.get("description", None)
-    instagram = request.json.get("instagram", None)
-
-    if user != None:
-        expert = Experts.query.filter_by(user_id=user.id).first()
-        
-        if expert == None:
-            new_expert = Experts(user_id=user.id, name=name, lastname=lastname, description=description, instagram=instagram)
-            
-            db.session.add(new_expert)
-            db.session.commit()
-            
-            response_body = {
-                "Created": True,
-                "status": "success",
-                "msg": "Succesfully created!"
-            }
-            
-            return jsonify(response_body), 200
-        
-        else:
-            new_expert.name = name
-            new_expert.lastname = lastname
-            new_expert.description = description
-            new_expert.instagram = instagram
-            
-            db.session.commit()
-            
-            response_body = {
-                "status": "success",
-                "msg": "Successfully modified view"
-            }
-            
-            return jsonify(response_body), 200
-    
-    else:
-        return jsonify({"created": False, "status": "failed", "msg": "Information not saved"}), 400
 
 
 # --> COMING SOON... !!!

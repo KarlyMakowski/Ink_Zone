@@ -11,6 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     name = db.Column(db.String(80), default="")
     lastname = db.Column(db.String(80), default="")
+    description = db.Column(db.String(2000), default="")
     phonenumber = db.Column(db.Integer, default=0)
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
@@ -18,8 +19,7 @@ class User(db.Model):
     picture = db.Column(db.String(100), nullable=True)
     is_active = db.Column(db.Boolean(), default=True,
                           unique=False, nullable=True)
-    role = db.relationship('Role', backref='user',
-                           uselist=False, secondary='user_roles')
+    role = db.Column(db.String(80), default="")
     reviews = db.relationship('Reviews')
     favourites = db.relationship('Favourites')
 
@@ -31,6 +31,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "lastname": self.lastname,
+            "description": self.description,
             "phonenumber": self.phonenumber,
             "facebook": self.facebook,
             "instagram": self.instagram,
@@ -39,41 +40,7 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "is_active": self.is_active,
-            "role": self.role.serialize()
-        }
-
-
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-
-    def __repr__(self):
-        return f'<Role %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-        }
-
-
-class UserRoles(db.Model):
-    __tablename__ = 'user_roles'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer, db.ForeignKey(
-        'roles.id', ondelete='CASCADE'))
-
-    def __repr__(self):
-        return f'<UserRoles %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "role_id": self.role_id
+            "role": self.role
         }
 
 
@@ -119,31 +86,6 @@ class Prices(db.Model):
         }
 
 
-class Experts(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    lastname = db.Column(db.String(200), nullable=False)
-    image = db.Column(db.String(2000), nullable=False)
-    description = db.Column(db.String(2000), nullable=False)
-    instagram = db.Column(db.String(2000), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    expert = db.relationship('User')
-
-    def __repr__(self):
-        return f'<Experts %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "lastname": self.lastname,
-            "image": self.image,
-            "description": self.description,
-            "instagram": self.instagram,
-            "user_id": self.user_id
-        }
-
-
 class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     review = db.Column(db.String(3000), nullable=False)
@@ -165,8 +107,6 @@ class Favourites(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     styles_id = db.Column(db.Integer, db.ForeignKey(
         'styles.id'), primary_key=True)
-    experts_id = db.Column(
-        db.Integer, db.ForeignKey('experts.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
 
     def __repr__(self):
@@ -176,7 +116,6 @@ class Favourites(db.Model):
         return {
             "id": self.id,
             "styles_id": self.styles_id,
-            "experts_id": self.experts_id,
             "user_id": self.user_id,
         }
 
