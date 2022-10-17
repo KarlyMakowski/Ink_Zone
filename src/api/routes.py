@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Styles, Prices, Reviews, Favourites, BlackList
+from api.models import db, User, Publish, Styles, Prices, Reviews, Favourites, BlackList
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
@@ -131,7 +131,7 @@ def private_update():
     lastname = request.json.get("lastname")
     if lastname == "" or lastname == None:
         lastname = user.lastname
-
+        
     phonenumber = request.json.get("phonenumber")
     if phonenumber == "" or phonenumber == None:
         phonenumber = user.phonenumber
@@ -152,6 +152,7 @@ def private_update():
     user.email = email
     user.name = name
     user.lastname = lastname
+    user.description = description
     user.phonenumber = phonenumber
     user.facebook = facebook
     user.instagram = instagram
@@ -161,7 +162,7 @@ def private_update():
 
     response_body = {
         "status": "success",
-        "msg": "Profile updated",
+        "msg": "Account updated",
         "user": user.serialize()
     }
 
@@ -193,29 +194,25 @@ def upload_image():
         return jsonify(response_body), 200
 
 
-@api.route('/private/expert/form', methods=['POST', 'PUT'])
+@api.route('/private/form', methods=['PUT'])
 @jwt_required()
 def create_expert():
     current_user = get_jwt_identity()
-    expert = User.query.filter_by(email=current_user).first()
+    user = User.query.filter_by(email=current_user).first()
 
-    username = request.json.get("username", None)
-    email = request.json.get("email", None)
-    name = request.json.get("name", None)
-    lastname = request.json.get("lastname", None)
+    styles = request.json.get("styles", None)
     description = request.json.get("description", None)
+    facebook = request.json.get("facebook", None)
     instagram = request.json.get("instagram", None)
+    twitter = request.json.get("twitter", None)
 
-    new_expert = User(username=expert.username, email=expert.email, name=name,
-                      lastname=lastname, description=description, instagram=instagram)
+    if user != None:    
+        expert = Publish.query.filter_by(user_id=user).first()
+        
+        if expert == None:
+            create_expert = Publish(user_id=user, styles=styles, description=description, facebook=facebook, instagram=instagram, twitter=twitter)
 
-    if request.method == 'POST':
-
-        if not expert:
-            return jsonify({"msg": "Please, log in!"}), 400
-
-        else:
-            db.session.add(new_expert)
+            db.session.add(create_expert)
             db.session.commit()
 
             response_body = {
@@ -226,20 +223,24 @@ def create_expert():
 
             return jsonify(response_body), 200
 
+        else:
+            expert.styles = styles
+            expert.description = description
+            expert.facebook = facebook
+            expert.instagram = instagram
+            expert.twitter = twitter
+
+            db.session.commit()
+
+            response_body = {
+                "status": "success",
+                "msg": "Successfully modified your info"
+            }
+
+            return jsonify(response_body), 200 
+            
     else:
-        new_expert.name = name
-        new_expert.lastname = lastname
-        new_expert.description = description
-        new_expert.instagram = instagram
-
-        db.session.commit()
-
-        response_body = {
-            "status": "success",
-            "msg": "Successfully modified your info"
-        }
-
-        return jsonify(response_body), 200
+        return jsonify({"msg": "Your info could not be saved"}), 400
 
 
 @api.route('/logout', methods=['DELETE'])

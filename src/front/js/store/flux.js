@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       currentUser: [],
+      files: [],
       styles: [],
       privateStyle: [],
       addFav: false,
@@ -141,6 +142,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           email,
           name,
           lastname,
+          description,
           phonenumber,
           facebook,
           instagram,
@@ -160,6 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               name: name,
               lastname: lastname,
               phonenumber: phonenumber,
+              description: description,
               facebook: facebook,
               instagram: instagram,
               twitter: twitter,
@@ -290,12 +293,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       handlePicture: (e) => {
         const { files } = e.target;
         setStore({ picture: files[0] });
-      },
-
-      multipleUpload: (e) => {
-        const { files } = e.target;
-        setStore({ multipleFiles: files });
-        console.log("These are ur pics: ", multipleFiles);
       },
 
       deleteProfile: async (navigate) => {

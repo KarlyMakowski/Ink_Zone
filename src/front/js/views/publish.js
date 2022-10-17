@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 import Select from "react-select";
+import { PublishFiles } from "../component/publish-files";
 
 import "../../styles/profile.css";
 
@@ -48,10 +49,11 @@ export const Publish = () => {
     multiValue: (styles, { data }) => {
       return {
         ...styles,
-        backgroundColor: "rgb(255,255,255, 0.3)",
+        backgroundImage:
+          "linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%)",
         borderRadius: "6px",
         color: "black",
-        fontSize: "1.3em",
+        fontSize: "1.1em",
       };
     },
     multiValueLabel: (styles, { data }) => {
@@ -76,34 +78,9 @@ export const Publish = () => {
       <div className="pricing-title">
         <h1>Publish Your Art</h1>
       </div>
-      <div className="row gutters-sm">
-        <div className="col-md-4 mb-3">
-          <div className="profile-card">
-            <div className="profile-card-body">
-              <div className="d-flex flex-column align-items-center text-center img-size">
-                <div className="profile-btn">
-                  <form
-                    onSubmit={(e) => actions.uploadPicture(e)}
-                    className="pic-update-mobile"
-                  >
-                    <input
-                      type="file"
-                      id="files"
-                      className="hidden"
-                      onChange={(e) => {
-                        actions.multipleUpload(e);
-                      }}
-                    />
-                    <label htmlFor="files">Upload</label>
-                    <input type="submit" value="Submit" />
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-8 profile-card">
-          <form onSubmit={(e) => actions.loadProfile(e)}>
+      <div className="row gutters-sm justify-content-center">
+        <div className="col-md-8 profile-card publish-card">
+          <form>
             <div className="form_box_input mt-0">
               <label htmlFor="basic-multi-select">Select your styles:</label>
               <Select
@@ -119,10 +96,13 @@ export const Publish = () => {
               <label htmlFor="form-control">Add your description:</label>
               <textarea
                 className="form-control mt-1"
-                style={{ height: "150px" }}
+                style={{ height: "200px" }}
                 onChange={(e) => actions.handleChange(e)}
                 name="description"
               ></textarea>
+            </div>
+            <div className="profile-btn publish-btn mt-3">
+              <PublishFiles />
             </div>
             <div className="form_box_input_social">
               <div className="form_box_input">
@@ -176,6 +156,7 @@ export const Publish = () => {
                 type="submit"
                 value="Save changes"
                 className="update-profile-btn"
+                onSubmit={(e) => actions.loadProfile(e)}
               />
             </div>
           </form>

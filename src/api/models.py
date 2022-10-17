@@ -6,20 +6,19 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
     name = db.Column(db.String(80), default="")
     lastname = db.Column(db.String(80), default="")
-    description = db.Column(db.String(2000), default="")
     phonenumber = db.Column(db.Integer, default=0)
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
-    picture = db.Column(db.String(100), nullable=True)
+    picture = db.Column(db.String(80), nullable=True)
+    role = db.Column(db.String(15), default="")
     is_active = db.Column(db.Boolean(), default=True,
                           unique=False, nullable=True)
-    role = db.Column(db.String(80), default="")
     reviews = db.relationship('Reviews')
     favourites = db.relationship('Favourites')
 
@@ -29,26 +28,51 @@ class User(db.Model):
     def serialize(self):  # do not serialize the password, its a security breach
         return {
             "id": self.id,
+            "username": self.username,
+            "email": self.email,
             "name": self.name,
             "lastname": self.lastname,
-            "description": self.description,
             "phonenumber": self.phonenumber,
             "facebook": self.facebook,
             "instagram": self.instagram,
             "twitter": self.twitter,
             "picture": self.picture,
-            "email": self.email,
-            "username": self.username,
-            "is_active": self.is_active,
-            "role": self.role
+            "role": self.role,
+            "is_active": self.is_active
         }
 
 
+class Publish(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    styles = db.Column(db.String(50), default="")
+    description = db.Column(db.String(1200), default="")
+    files = db.Column(db.String(80), default="")
+    facebook = db.Column(db.String(80), default="")
+    instagram = db.Column(db.String(80), default="")
+    twitter = db.Column(db.String(80), default="")
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
+    
+    def __repr__(self):
+        f'<Publish %r>' % self.id
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "styles": self.styles,
+            "description": self.description,
+            "files": self.files,
+            "facebook": self.facebook,
+            "instagram": self.instagram,
+            "twitter": self.twitter,
+            "user_id": self.user_id
+        }  
+              
+
 class Styles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    style = db.Column(db.String(200), unique=True, nullable=False)
-    information = db.Column(db.String(2000), nullable=False)
-    image = db.Column(db.String(2000), nullable=False)
+    style = db.Column(db.String(50), nullable=False)
+    information = db.Column(db.String(1200), nullable=False)
+    image = db.Column(db.String(80), nullable=False)
 
     def __repr__(self):
         return f'<Styles %r>' % self.id
@@ -64,12 +88,12 @@ class Styles(db.Model):
 
 class Prices(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String(200), unique=True, nullable=False)
-    price = db.Column(db.Integer, unique=False, nullable=False)
-    image = db.Column(db.String(2000), nullable=False)
-    size = db.Column(db.String(2000), nullable=False)
-    what_does_include = db.Column(db.String(2000), nullable=False)
-    type_of_tattoo = db.Column(db.String(2000), nullable=False)
+    category = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    image = db.Column(db.String(80), nullable=False)
+    size = db.Column(db.String(80), nullable=False)
+    what_does_include = db.Column(db.String(120), nullable=False)
+    type_of_tattoo = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
         return f'<Prices %r>' % self.id
@@ -88,9 +112,9 @@ class Prices(db.Model):
 
 class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    review = db.Column(db.String(3000), nullable=False)
+    review = db.Column(db.String(1200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete="CASCADE"), primary_key=True, nullable=False)
+        'user.id', ondelete="CASCADE"), nullable=False)
 
     def __repr__(self):
         return f'<Reviews %r>' % self.id
@@ -106,8 +130,8 @@ class Reviews(db.Model):
 class Favourites(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     styles_id = db.Column(db.Integer, db.ForeignKey(
-        'styles.id'), primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+        'styles.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
         return f'<Favourites %r>' % self.id

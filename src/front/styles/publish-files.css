@@ -1,0 +1,9 @@
+.publish-box h5 {
+  margin-left: 16px;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.publish-btn label {
+  width: 138px;
+}
