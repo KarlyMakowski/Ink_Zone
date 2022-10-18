@@ -131,7 +131,7 @@ def private_update():
     lastname = request.json.get("lastname")
     if lastname == "" or lastname == None:
         lastname = user.lastname
-        
+
     phonenumber = request.json.get("phonenumber")
     if phonenumber == "" or phonenumber == None:
         phonenumber = user.phonenumber
@@ -206,11 +206,12 @@ def create_expert(id):
     instagram = request.json.get("instagram", None)
     twitter = request.json.get("twitter", None)
 
-    if user != None:    
+    if user != None:
         expert = Publish.query.filter_by(user_id=user.id).first()
-        
+
         if expert == None:
-            create_expert = Publish(user_id=user.id, styles=styles, description=description, facebook=facebook, instagram=instagram, twitter=twitter)
+            create_expert = Publish(user_id=user.id, styles=styles, description=description,
+                                    facebook=facebook, instagram=instagram, twitter=twitter)
 
             db.session.add(create_expert)
             db.session.commit()
@@ -239,8 +240,8 @@ def create_expert(id):
                 "user": user.serialize()
             }
 
-            return jsonify(response_body), 200 
-            
+            return jsonify(response_body), 200
+
     else:
         return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
 
@@ -347,6 +348,28 @@ def recover_password():
         }
 
         return jsonify(response_body), 400
+    
+    
+@api.route('/experts', methods=['GET'])
+def get_experts():
+    role = request.json.get("role", None)    
+    expert = User.query.filter_by(role=role).first()
+    
+    if role == "Expert": 
+        expert_published = Publish.query.filter_by(user_id=expert.id).all()      
+        experts_list = list(map(lambda expert: expert.serialize(), expert_published))
+        
+        return jsonify(experts_list), 200
+    
+    return jsonify({"msg": "There are no experts"}), 400
+
+
+@api.route('/experts-search', methods=['POST', 'GET'])
+def search_expert():
+    response_body = User.query.filter_by(role="Expert").order_by(User.username).all()
+    response_body = [user.serialize() for user in response_body]
+    
+    return json.dumps(response_body), 200
 
 
 @api.route('/styles', methods=['GET'])

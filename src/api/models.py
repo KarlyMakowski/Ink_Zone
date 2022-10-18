@@ -51,11 +51,12 @@ class Publish(db.Model):
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=True)
-    
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete="CASCADE"), nullable=True)
+
     def __repr__(self):
         f'<Publish %r>' % self.id
-    
+
     def serialize(self):
         return {
             "id": self.id,
@@ -66,8 +67,8 @@ class Publish(db.Model):
             "instagram": self.instagram,
             "twitter": self.twitter,
             "user_id": self.user_id
-        }  
-              
+        }
+
 
 class Styles(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -291,7 +291,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       publishProfile: async (e, id) => {
         e.preventDefault();
-        const { styles, description, facebook, instagram, twitter } =
+        const { stylesPublish, description, facebook, instagram, twitter } =
           getStore();
 
         try {
@@ -304,7 +304,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
               body: JSON.stringify({
-                styles: styles,
+                styles: stylesPublish,
                 description: description,
                 facebook: facebook,
                 instagram: instagram,
@@ -346,7 +346,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            setStore({ created: created, currentUser: user.id });
+            setStore({ created: created, currentUser: user });
           }
         } catch (error) {
           console.log("Error loading message from backend", error);

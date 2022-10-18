@@ -8,9 +8,9 @@ import logo from "../../img/ink-zone.png";
 
 import { FaHome } from "react-icons/fa";
 import { IoIosColorPalette } from "react-icons/io";
-import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle } from "react-icons/hi";
+import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle} from "react-icons/hi";
 import { RiWechatFill, RiUploadCloud2Fill } from "react-icons/ri";
-import { GiDeathZone } from "react-icons/gi";
+import { GiChewedSkull, GiTripleSkulls } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
 
 export const Navbar = () => {
@@ -75,6 +75,17 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">styles</div>}
           </Link>
           <Link
+            to="/experts"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <GiTripleSkulls
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">meet our experts</p>}
+            {!expanded && <div className="tooltip">experts</div>}
+          </Link>
+          <Link
             to="/prices"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -89,7 +100,7 @@ export const Navbar = () => {
             to="/profile"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <GiDeathZone
+            <GiChewedSkull
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
