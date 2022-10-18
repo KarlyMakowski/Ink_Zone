@@ -348,27 +348,29 @@ def recover_password():
         }
 
         return jsonify(response_body), 400
-    
-    
+
+
 @api.route('/experts', methods=['GET'])
 def get_experts():
-    role = request.json.get("role", None)    
+    role = request.json.get("role", None)
     expert = User.query.filter_by(role=role).first()
-    
-    if role == "Expert": 
-        expert_published = Publish.query.filter_by(user_id=expert.id).all()      
-        experts_list = list(map(lambda expert: expert.serialize(), expert_published))
-        
+
+    if role == "Expert":
+        expert_published = Publish.query.filter_by(user_id=expert.id).all()
+        experts_list = list(
+            map(lambda expert: expert.serialize(), expert_published))
+
         return jsonify(experts_list), 200
-    
+
     return jsonify({"msg": "There are no experts"}), 400
 
 
 @api.route('/experts-search', methods=['POST', 'GET'])
 def search_expert():
-    response_body = User.query.filter_by(role="Expert").order_by(User.username).all()
+    response_body = User.query.filter_by(
+        role="Expert").order_by(User.username).all()
     response_body = [user.serialize() for user in response_body]
-    
+
     return json.dumps(response_body), 200
 
 
