@@ -21,6 +21,7 @@ class User(db.Model):
                           unique=False, nullable=True)
     reviews = db.relationship('Reviews')
     favourites = db.relationship('Favourites')
+    publish = db.relationship('Publish')
 
     def __repr__(self):
         f'<User %r>' % self.email
@@ -50,7 +51,7 @@ class Publish(db.Model):
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=True)
     
     def __repr__(self):
         f'<Publish %r>' % self.id
@@ -130,8 +131,8 @@ class Reviews(db.Model):
 class Favourites(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     styles_id = db.Column(db.Integer, db.ForeignKey(
-        'styles.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+        'styles.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
         return f'<Favourites %r>' % self.id

@@ -96,9 +96,9 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">profile</p>}
             {!expanded && <div className="tooltip">profile</div>}
           </Link>
-          {store.role == "Expert" ? (
+          {store.currentUser?.role == "Expert" ? (
             <Link
-              to="/publish-expert"
+              to={"/publish-expert/" + store.currentUser?.id}
               className={expanded ? "menu-item" : "menu-item menu-item-NX"}
             >
               <RiUploadCloud2Fill

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 import Select from "react-select";
@@ -13,7 +13,9 @@ export const Publish = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
-  const styles = [
+  const params = useParams();
+
+  const options = [
     { value: "Old School", label: "Old School", color: "black" },
     { value: "New School", label: "New School", color: "black" },
     { value: "Neo Traditional", label: "Neo Traditional", color: "black" },
@@ -80,16 +82,17 @@ export const Publish = () => {
       </div>
       <div className="row gutters-sm justify-content-center">
         <div className="col-md-8 profile-card publish-card">
-          <form>
+          <form key={store.currentUser?.id}>
             <div className="form_box_input mt-0">
               <label htmlFor="basic-multi-select">Select your styles:</label>
               <Select
-                isMulti
-                name="styles"
-                options={styles}
                 className="basic-multi-select mt-1"
                 classNamePrefix="select"
+                name="stylesPublish"
+                options={options}
                 styles={colorStyles}
+                onChange={(e) => actions.handleSelect(e)}
+                isMulti
               />
             </div>
             <div className="form_box_input mt-3">
@@ -156,7 +159,7 @@ export const Publish = () => {
                 type="submit"
                 value="Save changes"
                 className="update-profile-btn"
-                onSubmit={(e) => actions.loadProfile(e)}
+                onClick={(e) => actions.publishProfile(e, params.id)}
               />
             </div>
           </form>

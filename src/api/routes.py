@@ -194,9 +194,9 @@ def upload_image():
         return jsonify(response_body), 200
 
 
-@api.route('/private/form', methods=['PUT'])
+@api.route('/private/publish/<id>', methods=['PUT'])
 @jwt_required()
-def create_expert():
+def create_expert(id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
 
@@ -207,10 +207,10 @@ def create_expert():
     twitter = request.json.get("twitter", None)
 
     if user != None:    
-        expert = Publish.query.filter_by(user_id=user).first()
+        expert = Publish.query.filter_by(user_id=user.id).first()
         
         if expert == None:
-            create_expert = Publish(user_id=user, styles=styles, description=description, facebook=facebook, instagram=instagram, twitter=twitter)
+            create_expert = Publish(user_id=user.id, styles=styles, description=description, facebook=facebook, instagram=instagram, twitter=twitter)
 
             db.session.add(create_expert)
             db.session.commit()
@@ -218,7 +218,8 @@ def create_expert():
             response_body = {
                 "created": True,
                 "status": "success",
-                "msg": "Successfully published"
+                "msg": "Successfully published",
+                "user": user.serialize()
             }
 
             return jsonify(response_body), 200
@@ -234,13 +235,14 @@ def create_expert():
 
             response_body = {
                 "status": "success",
-                "msg": "Successfully modified your info"
+                "msg": "Successfully modified your info",
+                "user": user.serialize()
             }
 
             return jsonify(response_body), 200 
             
     else:
-        return jsonify({"msg": "Your info could not be saved"}), 400
+        return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
 
 
 @api.route('/logout', methods=['DELETE'])

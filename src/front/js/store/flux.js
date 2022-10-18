@@ -5,7 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       currentUser: [],
-      files: [],
+      stylesPublish: [],
+      multipleFiles: [],
       styles: [],
       privateStyle: [],
       addFav: false,
@@ -142,7 +143,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           email,
           name,
           lastname,
-          description,
           phonenumber,
           facebook,
           instagram,
@@ -162,7 +162,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               name: name,
               lastname: lastname,
               phonenumber: phonenumber,
-              description: description,
               facebook: facebook,
               instagram: instagram,
               twitter: twitter,
@@ -284,6 +283,70 @@ const getState = ({ getStore, getActions, setStore }) => {
               timer: 8000,
             });
             setStore({ currentUser: user });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      publishProfile: async (e, id) => {
+        e.preventDefault();
+        const { styles, description, facebook, instagram, twitter } =
+          getStore();
+
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + `/api/private/publish/${id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
+              body: JSON.stringify({
+                styles: styles,
+                description: description,
+                facebook: facebook,
+                instagram: instagram,
+                twitter: twitter,
+              }),
+            }
+          );
+          const { created, status, msg, user } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "error",
+              color: "#c61a09",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            setStore({ created: created, currentUser: user.id });
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
@@ -501,7 +564,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             setStore({ favCount: data.fav_counter, addFav: data.is_favourite });
-            console.log(data);
           })
           .catch((error) => {
             console.log(error);
@@ -519,6 +581,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           [name]: value,
         });
+      },
+
+      handleSelect: (e) => {
+        const stringedStyles = Array.prototype.map
+          .call(e, function (item) {
+            return item.value;
+          })
+          .join(",");
+        setStore({ stylesPublish: stringedStyles });
       },
     },
   };

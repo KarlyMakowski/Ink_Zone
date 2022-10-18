@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/publish-files.css";
@@ -38,26 +38,41 @@ export const PublishFiles = () => {
     <>
       <div className="publish-box">
         <h5>Publish your art:</h5>
-        <input
-          type="file"
-          id="files"
-          className="hidden"
-          onChange={handleFileEvent}
-          disabled={fileLimit}
-          multiple
-        />
-        <label htmlFor="files">Choose files</label>
-        <input
-          type="submit"
-          value="Upload"
-          name="multipleFiles"
-          className={`${!fileLimit ? "" : "disabled"}`}
-        />
+        <div className="input-box">
+          <input
+            type="file"
+            id="files"
+            className="hidden"
+            onChange={handleFileEvent}
+            disabled={fileLimit}
+            multiple
+          />
+          <label htmlFor="files">Choose files</label>
+          <input
+            type="submit"
+            value="Upload"
+            name="multipleFiles"
+            className={`${!fileLimit ? "" : "disabled"}`}
+          />
+        </div>
       </div>
       <div className="uploaded-files-list">
-        {uploadedFiles.map((file) => (
-          <div>{file.name}</div>
-        ))}
+        {uploadedFiles &&
+          uploadedFiles.map((file, index) => {
+            return (
+              <div key={index} className="uploaded-file">
+                <img src={file} alt={"image-" + index} />
+                <button
+                  onClick={() =>
+                    setUploadedFiles(uploadedFiles.filter((e) => e !== file))
+                  }
+                >
+                  Delete image
+                </button>
+                <p>{index + 1}</p>
+              </div>
+            );
+          })}
       </div>
     </>
   );
