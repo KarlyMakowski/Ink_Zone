@@ -525,13 +525,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadSingleStyle: (id) => {
-        fetch(process.env.BACKEND_URL + `/api/styles/private/${id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.getItem("token"),
-          },
-        })
+        fetch(
+          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        )
           .then((response) => response.json())
           .then((data) => setStore({ privateStyle: data }));
       },
@@ -571,7 +574,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadPrices: () => {
-        fetch(process.env.BACKEND_URL + "/api/prices/")
+        fetch(
+          "https://ink-zone.herokuapp.com/api/prices/"
+        )
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
       },
