@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/signup",
+            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/signup",
             {
               method: "POST",
               headers: {
@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/token",
+            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/token",
             {
               method: "POST",
               headers: {
@@ -148,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/private",
+            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/private",
             {
               method: "PUT",
               headers: {
@@ -222,7 +222,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           formData.append("picture", picture);
 
           const resp = await fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/private/upload-picture",
+            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/private/upload-picture",
             {
               method: "PUT",
               headers: {
@@ -265,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteProfile: async (navigate) => {
         try {
           fetch(
-            "https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/private",
+            "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/private",
             {
               method: "DELETE",
               headers: {
@@ -290,7 +290,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadStyles: () => {
         fetch(
-          "https://ink-zone.herokuapp.com/api/styles/"
+          "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/styles/"
         )
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
@@ -298,7 +298,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadSingleStyle: (id) => {
         fetch(
-          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/${id}`,
+          `https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/styles/private/${id}`,
           {
             method: "GET",
             headers: {
@@ -354,7 +354,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       loadPrices: () => {
         fetch(
-          "https://ink-zone.herokuapp.com/api/prices/"
+          "https://3001-karlymakowski-inkzone-yrwklbt8bpb.ws-eu70.gitpod.io/api/prices/"
         )
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));

@@ -105,7 +105,7 @@
   }
 }
 
-p {
+.login-container p {
   text-align: center;
   margin: 1rem 0;
 }
