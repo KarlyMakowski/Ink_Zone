@@ -36,8 +36,8 @@ export const Home = () => {
             <Link to="/styles" className="home-btn">
               Styles
             </Link>
-            <Link to="/sign-up" className="home-btn home-btn-light">
-              Sign Up
+            <Link to="/experts" className="home-btn home-btn-light">
+              Experts
             </Link>
           </div>
         </div>

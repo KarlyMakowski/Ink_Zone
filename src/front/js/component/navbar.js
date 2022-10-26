@@ -8,7 +8,7 @@ import logo from "../../img/ink-zone.png";
 
 import { FaHome } from "react-icons/fa";
 import { IoIosColorPalette } from "react-icons/io";
-import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle} from "react-icons/hi";
+import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle } from "react-icons/hi";
 import { RiWechatFill, RiUploadCloud2Fill } from "react-icons/ri";
 import { GiChewedSkull, GiTripleSkulls } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
@@ -64,26 +64,15 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">home</div>}
           </Link>
           <Link
-            to="/styles"
+            to="/profile"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
-            <IoIosColorPalette
+            <GiChewedSkull
               style={{ height: "57px", width: "35px" }}
               className="nav-icon"
             />
-            {expanded && <p className="nav-views">find your style</p>}
-            {!expanded && <div className="tooltip">styles</div>}
-          </Link>
-          <Link
-            to="/experts"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <GiTripleSkulls
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">meet our experts</p>}
-            {!expanded && <div className="tooltip">experts</div>}
+            {expanded && <p className="nav-views">profile</p>}
+            {!expanded && <div className="tooltip">profile</div>}
           </Link>
           <Link
             to="/prices"
@@ -96,17 +85,6 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">prices</p>}
             {!expanded && <div className="tooltip">prices</div>}
           </Link>
-          <Link
-            to="/profile"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <GiChewedSkull
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">profile</p>}
-            {!expanded && <div className="tooltip">profile</div>}
-          </Link>
           {store.currentUser?.role == "Expert" ? (
             <Link
               to={"/publish-expert/" + store.currentUser?.id}
@@ -116,8 +94,8 @@ export const Navbar = () => {
                 style={{ height: "57px", width: "35px" }}
                 className="nav-icon"
               />
-              {expanded && <p className="nav-views">publish</p>}
-              {!expanded && <div className="tooltip">publish</div>}
+              {expanded && <p className="nav-views">Upload Profile</p>}
+              {!expanded && <div className="tooltip">Upload</div>}
             </Link>
           ) : null}
           <Link

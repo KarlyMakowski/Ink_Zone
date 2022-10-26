@@ -78,13 +78,13 @@ export const Publish = () => {
   return (
     <div className="form">
       <div className="pricing-title">
-        <h1>Publish Your Art</h1>
+        <h1>Profile Upload</h1>
       </div>
       <div className="row gutters-sm justify-content-center">
         <div className="col-md-8 profile-card publish-card">
           <form key={store.currentUser?.id}>
             <div className="form_box_input mt-0">
-              <label htmlFor="basic-multi-select">Select your styles:</label>
+              <label htmlFor="basic-multi-select">Choose the styles that you specialize on</label>
               <Select
                 className="basic-multi-select mt-1"
                 classNamePrefix="select"
@@ -96,7 +96,7 @@ export const Publish = () => {
               />
             </div>
             <div className="form_box_input mt-3">
-              <label htmlFor="form-control">Add your description:</label>
+              <label htmlFor="form-control">Add your description</label>
               <textarea
                 className="form-control mt-1"
                 style={{ height: "200px" }}

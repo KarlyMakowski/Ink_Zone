@@ -26,6 +26,9 @@ export const Footer = () => {
           <Link to="/styles">Find Your Style</Link>
         </li>
         <li>
+          <Link to="/experts">Experts</Link>
+        </li>
+        <li>
           <Link to="/prices">Our Prices</Link>
         </li>
         <li>
