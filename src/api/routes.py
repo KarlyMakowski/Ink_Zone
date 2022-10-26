@@ -110,6 +110,52 @@ def create_token():
     return jsonify({"status": "failed", "msg": "Wrong credentials!"}), 401
 
 
+@api.route('/token/google', methods=['POST'])
+def auth_google():
+    username = request.json.get("username", None)
+    email = request.json.get("email", None)
+    picture = request.json.get("picture", None)
+    user = User.query.filter_by(email=email).first()
+
+    if user is None:
+        pw_hash = current_app.bcrypt.generate_password_hash(
+            "google").decode("utf-8")
+        user = User(username=username, email=email,
+                    password=pw_hash, picture=picture)
+
+    else:
+        user.username = username
+        user.picture = picture
+        user.email = email
+
+    db.session.add(user)
+    db.session.commit()
+
+    response_body = {
+        "status": "success",
+        "msg": "Logged in with Google!",
+        "username": username,
+        "email": email,
+        "picture": picture,
+        "token": create_access_token(identity=email)
+    }
+
+    return jsonify(response_body), 200
+
+
+@api.route('/logout', methods=['DELETE'])
+@jwt_required()
+def logout():
+    token = get_jwt()
+    jti = token["jti"]
+    now = datetime.now(timezone.utc)
+
+    db.session.add(TokenBlocklist(jti=jti,  created_at=now))
+    db.session.commit()
+
+    return jsonify({"msg": "Token successfully revoked"})
+
+
 @api.route('/private', methods=['PUT'])
 @jwt_required()
 def private_update():
@@ -148,15 +194,20 @@ def private_update():
     if twitter == "" or twitter == None:
         twitter = user.twitter
 
+    if user.role == "Expert":
+        publish = Publish.query.filter_by(user_id=user.id).first()
+
     user.username = username
     user.email = email
     user.name = name
     user.lastname = lastname
-    user.description = description
     user.phonenumber = phonenumber
     user.facebook = facebook
     user.instagram = instagram
     user.twitter = twitter
+    publish.facebook = facebook
+    publish.instagram = instagram
+    publish.twitter = twitter
 
     db.session.commit()
 
@@ -188,7 +239,8 @@ def upload_image():
 
         response_body = {
             "status": "success",
-            "msg": "Picture updated"
+            "msg": "Picture updated",
+            "user": user.serialize()
         }
 
         return jsonify(response_body), 200
@@ -244,19 +296,64 @@ def create_expert(id):
 
     else:
         return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
-
-
-@api.route('/logout', methods=['DELETE'])
+    
+    
+@api.route('/private/publish/<id>/multiple-files', methods=['PUT'])
 @jwt_required()
-def logout():
-    token = get_jwt()
-    jti = token["jti"]
-    now = datetime.now(timezone.utc)
+def multiple_upload(id):
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    
+    if user.role == "Expert":
+        expert = Publish.query.filter_by(user_id=user.id).first()
 
-    db.session.add(TokenBlocklist(jti=jti,  created_at=now))
-    db.session.commit()
+        if "files" in request.files:
+            multiple_upload = cloudinary.uploader.upload(
+                request.files.getlist("files []"), folder="Ink Zone")
 
-    return jsonify({"msg": "Token successfully revoked"})
+            if not multiple_upload:
+                return jsonify({"status": "failed", "msg": "There was an error during upload!", "user": None}), 400
+
+            expert.files = multiple_upload["secure_url"]
+
+            db.session.commit()
+
+            response_body = {
+                "status": "success",
+                "msg": "Files published",
+                "user": user.serialize()
+            }
+
+            return jsonify(response_body), 200
+
+
+@api.route('/experts', methods=['GET'])
+def get_experts():
+    expert = User.query.filter_by(role="Expert").first()
+    expert_published = Publish.query.filter_by(user_id=expert.id).first()
+    """ experts_list = list(
+        map(lambda expert: expert.serialize(), expert_published)) """
+    print(expert_published.serialize())
+
+    """ full_expert = experts_list + [expert.serialize()] """
+    full_expert = expert.serialize() | expert_published.serialize()
+    #full_expert = experts_list.extend(expert)
+    #full_expert = {**expert.serialize(), **experts_list}
+
+    response_body = {
+        "full_expert": full_expert
+    }
+
+    return jsonify(response_body), 200
+
+
+@api.route('/experts-search', methods=['POST', 'GET'])
+def search_expert():
+    response_body = User.query.filter_by(
+        role="Expert").order_by(User.username).all()
+    response_body = [user.serialize() for user in response_body]
+
+    return json.dumps(response_body), 200
 
 
 @api.route('/private', methods=['DELETE'])
@@ -271,39 +368,6 @@ def delete_profile():
     response_body = {
         "status": "success",
         "msg": "Hope to see you back! :("
-    }
-
-    return jsonify(response_body), 200
-
-
-@api.route('/token/google', methods=['POST'])
-def auth_google():
-    username = request.json.get("username", None)
-    email = request.json.get("email", None)
-    picture = request.json.get("picture", None)
-    user = User.query.filter_by(email=email).first()
-
-    if user is None:
-        pw_hash = current_app.bcrypt.generate_password_hash(
-            "google").decode("utf-8")
-        user = User(username=username, email=email,
-                    password=pw_hash, picture=picture)
-
-    else:
-        user.username = username
-        user.picture = picture
-        user.email = email
-
-    db.session.add(user)
-    db.session.commit()
-
-    response_body = {
-        "status": "success",
-        "msg": "Logged in with Google!",
-        "username": username,
-        "email": email,
-        "picture": picture,
-        "token": create_access_token(identity=email)
     }
 
     return jsonify(response_body), 200
@@ -348,30 +412,6 @@ def recover_password():
         }
 
         return jsonify(response_body), 400
-
-
-@api.route('/experts', methods=['GET'])
-def get_experts():
-    role = request.json.get("role", None)
-    expert = User.query.filter_by(role=role).first()
-
-    if role == "Expert":
-        expert_published = Publish.query.filter_by(user_id=expert.id).all()
-        experts_list = list(
-            map(lambda expert: expert.serialize(), expert_published))
-
-        return jsonify(experts_list), 200
-
-    return jsonify({"msg": "There are no experts"}), 400
-
-
-@api.route('/experts-search', methods=['POST', 'GET'])
-def search_expert():
-    response_body = User.query.filter_by(
-        role="Expert").order_by(User.username).all()
-    response_body = [user.serialize() for user in response_body]
-
-    return json.dumps(response_body), 200
 
 
 @api.route('/styles', methods=['GET'])

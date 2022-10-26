@@ -15,7 +15,7 @@ class User(db.Model):
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
-    picture = db.Column(db.String(80), nullable=True)
+    picture = db.Column(db.String(500), nullable=True)
     role = db.Column(db.String(15), default="")
     is_active = db.Column(db.Boolean(), default=True,
                           unique=False, nullable=True)
@@ -47,7 +47,7 @@ class Publish(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     styles = db.Column(db.String(50), default="")
     description = db.Column(db.String(1200), default="")
-    files = db.Column(db.String(80), default="")
+    files = db.Column(db.String(500), default="")
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")

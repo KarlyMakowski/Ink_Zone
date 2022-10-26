@@ -37,7 +37,6 @@ const Layout = () => {
           <Route element={<Publish />} path="/publish-expert/:id" />
           <Route element={<Profile />} path="/profile" />
           <Route element={<Experts />} path="/experts" />
-
           {/* <Route element={<h1>Not found!</h1>} /> */}
         </Routes>
         <Footer />
