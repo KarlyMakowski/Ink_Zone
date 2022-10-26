@@ -37,7 +37,7 @@ export const PublishFiles = () => {
   return (
     <>
       <div className="publish-box">
-        <h5>Publish your art:</h5>
+        <h5>Post your Art</h5>
         <div className="input-box">
           <input
             type="file"
@@ -47,7 +47,7 @@ export const PublishFiles = () => {
             disabled={fileLimit}
             multiple
           />
-          <label htmlFor="files">Choose files</label>
+          <label htmlFor="files">Select files</label>
           <input
             type="submit"
             value="Upload"
@@ -61,7 +61,7 @@ export const PublishFiles = () => {
           uploadedFiles.map((file, index) => {
             return (
               <div key={index} className="uploaded-file">
-                <img src={file} alt={"image-" + index} />
+                <img src={file} alt={"image-" + index} className="publish-image" />
                 <button
                   onClick={() =>
                     setUploadedFiles(uploadedFiles.filter((e) => e !== file))
@@ -69,7 +69,6 @@ export const PublishFiles = () => {
                 >
                   Delete image
                 </button>
-                <p>{index + 1}</p>
               </div>
             );
           })}

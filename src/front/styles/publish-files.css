@@ -1,8 +1,8 @@
 .publish-box h5 {
-  margin-left: 16px;
+/*   margin-left: 1rem; */  
   font-weight: bold;
   font-size: 1.3rem;
-  /* text-align: center; */
+  text-align: center;
 }
 
 .uploaded-files-list {
@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
 .uploaded-file {
@@ -43,11 +44,16 @@
 }
 
 .publish-btn label {
-  width: 138px;
+  width: 145px;
+  text-align: center;
 }
 
 .input-box {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+
+.publish-image {
+  margin: 2rem 2rem 3rem;
 }

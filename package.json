@@ -78,7 +78,7 @@
 		"bootstrap": "^5.2.1",
 		"bootswatch": "^5.2.0",
 		"emailjs-com": "^3.2.0",
-		"firebase": "^9.10.0",
+		"firebase": "^9.12.1",
 		"notiflix": "^3.2.5",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",

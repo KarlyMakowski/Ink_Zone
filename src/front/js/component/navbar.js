@@ -63,17 +63,6 @@ export const Navbar = () => {
             {!expanded && <div className="tooltip">home</div>}
           </Link>
           <Link
-            to="/prices"
-            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
-          >
-            <HiCurrencyEuro
-              style={{ height: "57px", width: "35px" }}
-              className="nav-icon"
-            />
-            {expanded && <p className="nav-views">prices</p>}
-            {!expanded && <div className="tooltip">prices</div>}
-          </Link>
-          <Link
             to="/profile"
             className={expanded ? "menu-item" : "menu-item menu-item-NX"}
           >
@@ -84,6 +73,17 @@ export const Navbar = () => {
             {expanded && <p className="nav-views">profile</p>}
             {!expanded && <div className="tooltip">profile</div>}
           </Link>
+          <Link
+            to="/prices"
+            className={expanded ? "menu-item" : "menu-item menu-item-NX"}
+          >
+            <HiCurrencyEuro
+              style={{ height: "57px", width: "35px" }}
+              className="nav-icon"
+            />
+            {expanded && <p className="nav-views">prices</p>}
+            {!expanded && <div className="tooltip">prices</div>}
+          </Link>
           {store.currentUser?.role == "Expert" ? (
             <Link
               to={"/publish-expert/" + store.currentUser?.id}
@@ -93,8 +93,8 @@ export const Navbar = () => {
                 style={{ height: "57px", width: "35px" }}
                 className="nav-icon"
               />
-              {expanded && <p className="nav-views">publish</p>}
-              {!expanded && <div className="tooltip">publish</div>}
+              {expanded && <p className="nav-views">Upload Profile</p>}
+              {!expanded && <div className="tooltip">Upload</div>}
             </Link>
           ) : null}
           <Link
