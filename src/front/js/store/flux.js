@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: null,
-      currentUser: [],
+      currentUser: null,
+      experts: [],
       stylesPublish: [],
       multipleFiles: [],
       styles: [],
@@ -136,262 +137,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      loadProfile: async (e) => {
-        e.preventDefault();
-        const {
-          username,
-          email,
-          name,
-          lastname,
-          phonenumber,
-          facebook,
-          instagram,
-          twitter,
-        } = getStore();
-
-        try {
-          const resp = await fetch(process.env.BACKEND_URL + "/api/private", {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + sessionStorage.getItem("token"),
-            },
-            body: JSON.stringify({
-              username: username,
-              email: email,
-              name: name,
-              lastname: lastname,
-              phonenumber: phonenumber,
-              facebook: facebook,
-              instagram: instagram,
-              twitter: twitter,
-            }),
-          });
-          const { status, msg, user } = await resp.json();
-          if (status === "failed") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "error",
-              color: "#c61a09",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#c61a09",
-              timer: 8000,
-            });
-          }
-          if (status === "success") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "success",
-              color: "#aeffb9",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#aeffb9",
-              timer: 8000,
-            });
-            setStore({ currentUser: user });
-          }
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-
-      logout: (navigate) => {
-        Swal.fire({
-          title: "See you next time!",
-          width: 720,
-          padding: "5em",
-          background: "transparent",
-          backdrop: "rgba(32, 32, 32, 0.9)",
-          icon: "success",
-          iconColor: "#a091ff",
-          color: "#a091ff",
-          position: "center",
-          animation: true,
-          showConfirmButton: true,
-          confirmButtonText: "Close",
-          confirmButtonColor: "#a091ff",
-          timer: 8000,
-        });
-        sessionStorage.removeItem("token");
-        setStore({ token: null, currentUser: null, role: null });
-        navigate("/");
-      },
-
-      uploadPicture: async (e) => {
-        e.preventDefault();
-        const { picture } = getStore();
-
-        try {
-          let formData = new FormData();
-          formData.append("picture", picture);
-
-          const resp = await fetch(
-            process.env.BACKEND_URL + "/api/private/upload-picture",
-            {
-              method: "PUT",
-              headers: {
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
-              },
-              body: formData,
-            }
-          );
-          const { status, msg, user } = await resp.json();
-          if (status === "failed") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "error",
-              color: "#c61a09",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#c61a09",
-              timer: 8000,
-            });
-          }
-          if (status === "success") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "success",
-              color: "#aeffb9",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#aeffb9",
-              timer: 8000,
-            });
-            setStore({ currentUser: user });
-          }
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-
-      publishProfile: async (e, id) => {
-        e.preventDefault();
-        const { stylesPublish, description, facebook, instagram, twitter } =
-          getStore();
-
-        try {
-          const resp = await fetch(
-            process.env.BACKEND_URL + `/api/private/publish/${id}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
-              },
-              body: JSON.stringify({
-                styles: stylesPublish,
-                description: description,
-                facebook: facebook,
-                instagram: instagram,
-                twitter: twitter,
-              }),
-            }
-          );
-          const { created, status, msg, user } = await resp.json();
-          if (status === "failed") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "error",
-              color: "#c61a09",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#c61a09",
-              timer: 8000,
-            });
-          }
-          if (status === "success") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "success",
-              color: "#aeffb9",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#aeffb9",
-              timer: 8000,
-            });
-            setStore({ created: created, currentUser: user });
-          }
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-
-      handlePicture: (e) => {
-        const { files } = e.target;
-        setStore({ picture: files[0] });
-      },
-
-      deleteProfile: async (navigate) => {
-        try {
-          fetch(process.env.BACKEND_URL + "/api/private", {
-            method: "DELETE",
-            headers: {
-              Authorization: "Bearer " + sessionStorage.getItem("token"),
-            },
-          });
-          const { status, msg } = await resp.json();
-          if (status === "success") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "success",
-              color: "#aeffb9",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#aeffb9",
-              timer: 8000,
-            });
-            sessionStorage.removeItem("token", token);
-            setStore({ token: null, currentUser: null });
-            navigate("/");
-          }
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-
       authGoogle: async (user) => {
         try {
           const resp = await fetch(
@@ -460,6 +205,295 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      logout: (navigate) => {
+        Swal.fire({
+          title: "See you next time!",
+          width: 720,
+          padding: "5em",
+          background: "transparent",
+          backdrop: "rgba(32, 32, 32, 0.9)",
+          icon: "success",
+          iconColor: "#a091ff",
+          color: "#a091ff",
+          position: "center",
+          animation: true,
+          showConfirmButton: true,
+          confirmButtonText: "Close",
+          confirmButtonColor: "#a091ff",
+          timer: 8000,
+        });
+        sessionStorage.removeItem("token");
+        setStore({ token: null, currentUser: null, role: null });
+        navigate("/");
+      },
+
+      loadProfile: async (e) => {
+        e.preventDefault();
+        const {
+          role,
+          username,
+          email,
+          name,
+          lastname,
+          phonenumber,
+          facebook,
+          instagram,
+          twitter,
+        } = getStore();
+
+        try {
+          const resp = await fetch(process.env.BACKEND_URL + "/api/private", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+              role: role,
+              username: username,
+              email: email,
+              name: name,
+              lastname: lastname,
+              phonenumber: phonenumber,
+              facebook: facebook,
+              instagram: instagram,
+              twitter: twitter,
+            }),
+          });
+          const { status, msg, user } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "error",
+              color: "#c61a09",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            setStore({ currentUser: user });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      uploadPicture: async (e) => {
+        e.preventDefault();
+        const { picture } = getStore();
+
+        try {
+          let formData = new FormData();
+          formData.append("picture", picture);
+
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/private/upload-picture",
+            {
+              method: "PUT",
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
+              body: formData,
+            }
+          );
+          const { status, msg, user } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "error",
+              color: "#c61a09",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            setStore({ currentUser: user });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      handlePicture: (e) => {
+        const { files } = e.target;
+        setStore({ picture: files[0] });
+      },
+
+      publishProfile: async (e, id) => {
+        e.preventDefault();
+        const { stylesPublish, description, facebook, instagram, twitter } =
+          getStore();
+
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + `/api/private/publish/${id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
+              body: JSON.stringify({
+                styles: stylesPublish,
+                description: description,
+                facebook: facebook,
+                instagram: instagram,
+                twitter: twitter,
+              }),
+            }
+          );
+          const { created, status, msg, user } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "error",
+              color: "#c61a09",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            setStore({ created: created, currentUser: user });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      uploadMultipleFiles: async (e, id) => {
+        e.preventDefault();
+        const { multipleFiles } = getStore();
+
+        try {
+          let formData = new FormData();
+          formData.append("files", multipleFiles);
+
+          const resp = await fetch(
+            process.env.BACKEND_URL + `/api/private/publish/${id}/multiple-files`,
+            {
+              method: "PUT",
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
+              },
+              body: formData,
+            }
+          );
+          const { status, msg, user } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "error",
+              color: "#c61a09",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            setStore({ currentUser: user });
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+      handleFiles: (e) => {
+        const { files } = e.target;
+        setStore({ multipleFiles: files });
+      },
+
       passwordRecovery: async (e, navigate) => {
         e.preventDefault();
         const { email } = getStore();
@@ -518,6 +552,40 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      deleteProfile: async (navigate) => {
+        try {
+          fetch(process.env.BACKEND_URL + "/api/private", {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          });
+          const { status, msg } = await resp.json();
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            sessionStorage.removeItem("token", token);
+            setStore({ token: null, currentUser: null });
+            navigate("/");
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
       loadStyles: () => {
         fetch(process.env.BACKEND_URL + "/api/styles")
           .then((response) => response.json())
@@ -525,13 +593,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadSingleStyle: (id) => {
-        fetch(process.env.BACKEND_URL + `/api/styles/private/${id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + sessionStorage.getItem("token"),
-          },
-        })
+        fetch(
+          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        )
           .then((response) => response.json())
           .then((data) => setStore({ privateStyle: data }));
       },
@@ -571,9 +642,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadPrices: () => {
-        fetch(process.env.BACKEND_URL + "/api/prices/")
+        fetch(process.env.BACKEND_URL + "/api/prices")
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
+      },
+
+      loadExperts: () => {
+        const store = getStore()
+        fetch(process.env.BACKEND_URL + "/api/experts", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ experts: [...store.experts, data.full_expert] }));
       },
 
       handleChange: (e) => {
