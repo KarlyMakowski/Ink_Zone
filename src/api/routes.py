@@ -81,7 +81,6 @@ def signup():
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-
     user = User.query.filter_by(email=email).first()
 
     if not email:
@@ -296,14 +295,14 @@ def create_expert(id):
 
     else:
         return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
-    
-    
+
+
 @api.route('/private/publish/<id>/multiple-files', methods=['PUT'])
 @jwt_required()
 def multiple_upload(id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    
+
     if user.role == "Expert":
         expert = Publish.query.filter_by(user_id=user.id).first()
 

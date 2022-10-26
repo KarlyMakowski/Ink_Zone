@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       currentUser: null,
       experts: [],
       stylesPublish: [],
+      searchStyle: [],
       multipleFiles: [],
       styles: [],
       privateStyle: [],
@@ -439,7 +440,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           formData.append("files", multipleFiles);
 
           const resp = await fetch(
-            process.env.BACKEND_URL + `/api/private/publish/${id}/multiple-files`,
+            process.env.BACKEND_URL +
+              `/api/private/publish/${id}/multiple-files`,
             {
               method: "PUT",
               headers: {
@@ -648,14 +650,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadExperts: () => {
-        const store = getStore()
+        const store = getStore();
         fetch(process.env.BACKEND_URL + "/api/experts", {
           headers: {
             "Content-Type": "application/json",
           },
         })
           .then((response) => response.json())
-          .then((data) => setStore({ experts: [...store.experts, data.full_expert] }));
+          .then((data) =>
+            setStore({ experts: [...store.experts, data.full_expert] })
+          );
       },
 
       handleChange: (e) => {
@@ -672,6 +676,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .join(",");
         setStore({ stylesPublish: stringedStyles });
+      },
+
+      handleSearch: () => {
+        const store = getStore();
+        const search = store.experts.filter(
+          (item) =>
+            item.styles.toLowerCase().includes(styles.toLowerCase())
+        );
+        console.log(styles);
+        console.log(search);
+        setStore({ searchStyle: search });
       },
     },
   };
