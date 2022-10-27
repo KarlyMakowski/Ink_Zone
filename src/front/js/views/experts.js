@@ -6,14 +6,15 @@ import "../../styles/experts.css";
 import { SelectStyle } from "../component/select";
 
 export const Experts = () => {
-  const { actions, store } = useContext(Context);
+  const { store } = useContext(Context);
 
   return (
     <>
       <div className="pricing-title">
         <h1>Experts</h1>
         <div className="select-style">
-          <SelectStyle />
+
+          <SelectStyle experts={true} />
         </div>
       </div>
       {store.experts.map((singleExpert, i) => {
@@ -41,7 +42,8 @@ export const Experts = () => {
               >
                 Gallery
               </button>
-{/*               <div
+
+               <div
                 className="modal fade"
                 id="exampleModal"
                 tabIndex="-1"
@@ -61,7 +63,8 @@ export const Experts = () => {
                     <div className="modal-body">...</div>
                   </div>
                 </div>
-              </div> */}
+              </div> 
+
               <div className="experts-bottom">
                 <p>{singleExpert.description}</p>
                 <span className="badge rounded-pill text-bg-light">

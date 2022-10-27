@@ -330,14 +330,9 @@ def multiple_upload(id):
 def get_experts():
     expert = User.query.filter_by(role="Expert").first()
     expert_published = Publish.query.filter_by(user_id=expert.id).first()
-    """ experts_list = list(
-        map(lambda expert: expert.serialize(), expert_published)) """
     print(expert_published.serialize())
 
-    """ full_expert = experts_list + [expert.serialize()] """
     full_expert = expert.serialize() | expert_published.serialize()
-    #full_expert = experts_list.extend(expert)
-    #full_expert = {**expert.serialize(), **experts_list}
 
     response_body = {
         "full_expert": full_expert

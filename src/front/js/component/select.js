@@ -5,7 +5,7 @@ import Select from "react-select";
 
 import "../../styles/profile.css";
 
-export const SelectStyle = () => {
+export const SelectStyle = ({experts}) => {
   const { actions } = useContext(Context);
 
   const options = [
@@ -75,7 +75,7 @@ export const SelectStyle = () => {
       name="stylesPublish"
       options={options}
       styles={colourStyles}
-      onChange={(e) => actions.handleSelect(e)}
+      onChange={experts == true ? (e) => actions.handleSearch(e) : (e) => actions.handleSelect(e)}
       isMulti
     />
   );

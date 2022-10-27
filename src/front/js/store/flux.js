@@ -7,7 +7,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       currentUser: null,
       experts: [],
       stylesPublish: [],
-      searchStyle: [],
       multipleFiles: [],
       styles: [],
       privateStyle: [],
@@ -494,6 +493,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       handleFiles: (e) => {
         const { files } = e.target;
         setStore({ multipleFiles: files });
+        console.log(files)
       },
 
       passwordRecovery: async (e, navigate) => {
@@ -678,15 +678,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ stylesPublish: stringedStyles });
       },
 
-      handleSearch: () => {
+      handleSearch: (e) => {
         const store = getStore();
+        const stringedStyles = Array.prototype.map
+          .call(e, function (item) {
+            return item.value;
+          })
+          .join(",");
+        setStore({ stylesPublish: stringedStyles });
         const search = store.experts.filter(
           (item) =>
-            item.styles.toLowerCase().includes(styles.toLowerCase())
+            item.styles.toLowerCase().includes(store.stylesPublish.toLowerCase())
         );
-        console.log(styles);
         console.log(search);
-        setStore({ searchStyle: search });
+        setStore({ experts: search });
       },
     },
   };
