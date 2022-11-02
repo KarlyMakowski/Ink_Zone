@@ -523,13 +523,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadStyles: () => {
-        fetch(process.env.BACKEND_URL + "/api/styles")
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/styles"/* process.env.BACKEND_URL + "/api/styles" */)
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
 
       loadSingleStyle: (id) => {
-        fetch(process.env.BACKEND_URL + `/api/styles/private/${id}`, {
+        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/styles/private/${id}` /* process.env.BACKEND_URL + `/api/styles/private/${id}` */, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -575,14 +575,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadPrices: () => {
-        fetch(process.env.BACKEND_URL + "/api/prices")
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/prices"/* process.env.BACKEND_URL + "/api/prices" */)
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
       },
 
       loadExperts: () => {
         const store = getStore();
-        fetch(process.env.BACKEND_URL + "/api/experts", {
+        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/experts"/* process.env.BACKEND_URL + "/api/experts" */, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -620,7 +620,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         const search = store.experts.filter((item) =>
           item.styles.toLowerCase().includes(store.stylesPublish.toLowerCase())
         );
-        console.log(search);
         setStore({ experts: search });
       },
     },

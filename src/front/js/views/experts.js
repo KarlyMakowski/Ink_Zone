@@ -22,6 +22,9 @@ export const Experts = () => {
     <>
       <div className="pricing-title">
         <h1>Experts</h1>
+        <div className="select-style">
+          <SelectStyle experts={true} />
+        </div>
       </div>
       {store.experts.map((singleExpert, i) => {
         return (
