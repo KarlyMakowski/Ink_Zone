@@ -5,6 +5,7 @@ import "../../styles/tattoo-styles.css";
 import { TattooStyles } from "../component/tattoo-styles";
 
 export const StylesPublic = () => {
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   });

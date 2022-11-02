@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/chat.css";
+import "../../../styles/chat.css";
 
 import { Message } from "./chat-message";
 
@@ -17,5 +17,5 @@ export const Messages = () => {
       <Message />
       <Message />
     </div>
-  )
-}
+  );
+};

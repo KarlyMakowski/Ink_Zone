@@ -75,7 +75,11 @@ export const SelectStyle = ({ experts }) => {
       name="stylesPublish"
       options={options}
       styles={colourStyles}
-      onChange={experts == true ? (e) => actions.handleSearch(e) : (e) => actions.handleSelect(e)}
+      onChange={
+        experts == true
+          ? (e) => actions.handleSearch(e)
+          : (e) => actions.handleSelect(e)
+      }
       isMulti
     />
   );

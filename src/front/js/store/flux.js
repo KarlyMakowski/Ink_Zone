@@ -620,7 +620,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         const search = store.experts.filter((item) =>
           item.styles.toLowerCase().includes(store.stylesPublish.toLowerCase())
         );
-        console.log(search);
         setStore({ experts: search });
       },
     },

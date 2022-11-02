@@ -73,7 +73,6 @@ export const ContactUs = () => {
                   />
                 </div>
               </div>
-
               <div className="row50">
                 <div className="inputBox">
                   <label>Email *</label>
@@ -95,7 +94,6 @@ export const ContactUs = () => {
                   />
                 </div>
               </div>
-
               <div className="row100">
                 <div className="inputBox">
                   <label className="contact-message">Message *</label>
@@ -107,7 +105,6 @@ export const ContactUs = () => {
                   ></textarea>
                 </div>
               </div>
-
               <div className="row100">
                 <div className="inputBox">
                   <input type="submit" value="Send" onClick={emailSuccess} />
@@ -116,7 +113,6 @@ export const ContactUs = () => {
             </div>
           </form>
         </div>
-
         {/* Info box */}
         <div className="contact contact-info">
           <h3>Contact Info</h3>
@@ -162,7 +158,6 @@ export const ContactUs = () => {
             </ul>
           </div>
         </div>
-
         {/* Map */}
         <div className="contact contact-map">
           <iframe
