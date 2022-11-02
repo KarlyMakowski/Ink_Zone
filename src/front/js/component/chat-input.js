@@ -10,10 +10,10 @@ export const Input = () => {
     <div className="chat-input">
       <input type="text" placeholder="Write a message here..." />
       <div className="send">
-        <MdAttachFile className="send-icons"/>
+        <MdAttachFile className="send-icons" />
         <input type="file" style={{ display: "none" }} id="file" />
         <label htmlFor="file">
-          <BsImageFill className="send-icons"/>
+          <BsImageFill className="send-icons" />
         </label>
         <button>Send</button>
       </div>

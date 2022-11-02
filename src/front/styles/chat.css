@@ -1,216 +1,216 @@
 .firebase-chat {
-    height: 94vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 94vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .firebase-chat-container {
-    border: 1px solid white;
-    border-radius: 10px;
-    width: 85em;
-    height: 50em;
-    display: flex;
-    overflow: hidden;
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 85em;
+  height: 50em;
+  display: flex;
+  overflow: hidden;
 }
 
 .firebase-chat-sidebar {
-    width: 23em;
-    background-color: #3e3c61;
+  width: 23em;
+  background-color: #3e3c61;
 }
 
 .chat-navbar {
-    display: flex;
-    align-items: center;
-    background-color: #2f2d52;
-    height: 5em;
-    padding: 1em;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  background-color: #2f2d52;
+  height: 5em;
+  padding: 1em;
+  justify-content: space-between;
 }
 
 .chat-navbar-logo {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .user-chats {
-    display: flex;
-    gap: 1em;
+  display: flex;
+  gap: 1em;
 }
 
 .user-chats img {
-    background-color: #ddddf7;
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    object-fit: cover;
+  background-color: #ddddf7;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-chats button {
-    width: 2.5em;
-    background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
-    padding: 1px;
-    font-size: 0.8em;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+  width: 2.5em;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  padding: 1px;
+  font-size: 0.8em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .search-form {
-    padding: 0.5em 1em;
-    border-bottom: 1px solid grey;
+  padding: 0.5em 1em;
+  border-bottom: 1px solid grey;
 }
 
 .search-form input {
-    background-color: transparent;
-    border: none;
-    color: white;
-    outline: none;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
 }
 
 .search-form input::placeholder {
-    color: lightgrey
+  color: lightgrey;
 }
 
 .user-list img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  object-fit: cover;
 }
 
 .user-list {
-    padding: 1em;
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    cursor: pointer;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  cursor: pointer;
 }
 
 .user-list:hover {
-    background-color: #2f2d52;
+  background-color: #2f2d52;
 }
 
 .user-info span {
-    font-size: 1.3em;
-    font-weight: 500;
+  font-size: 1.3em;
+  font-weight: 500;
 }
 
 .user-info p {
-    font-size: 0.8em;
-    color: lightgrey;
-    margin: 0;
+  font-size: 0.8em;
+  color: lightgrey;
+  margin: 0;
 }
 
 .chat-info {
-    width: 62em;
-    height: 5em;
-    background-color: #5d5b8d;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1em;
+  width: 62em;
+  height: 5em;
+  background-color: #5d5b8d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
 }
 
 .chat-icons {
-    display: flex;
-    gap: 1em;
-    cursor: pointer;
+  display: flex;
+  gap: 1em;
+  cursor: pointer;
 }
 
 .messages {
-    background-color: #ddddf7;
-    padding: 1em;
-    height: calc(100% - 8.5em);
-    overflow-y: scroll;
+  background-color: #ddddf7;
+  padding: 1em;
+  height: calc(100% - 8.5em);
+  overflow-y: scroll;
 }
 
 .chat-input {
-    height: 3.5em;
-    background-color: white;
-    color: black;
-    padding: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  height: 3.5em;
+  background-color: white;
+  color: black;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .chat-input input {
-    width: 100%;
-    border: none;
-    outline: none;
-    color: #2f2d52;
-    font-size: 1em;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: #2f2d52;
+  font-size: 1em;
 }
 
-.chat-input input::placeholder{
-    color: lightgray;
+.chat-input input::placeholder {
+  color: lightgray;
 }
 
 .send {
-    display: flex;
-    align-items: center;
-    gap: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
 .send-icons {
-    height: 1.5em;
-    width: 1.5em;
-    color: gray;
-    cursor: pointer;
+  height: 1.5em;
+  width: 1.5em;
+  color: gray;
+  cursor: pointer;
 }
 
 .send button {
-    background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
-    border: none;
-    border-radius: 6px;
-    padding: 0.3em;
-    width: 4em;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  border: none;
+  border-radius: 6px;
+  padding: 0.3em;
+  width: 4em;
 }
 
 .message {
-    display: flex;
-    gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
 .message-info {
-    display: flex;
-    flex-direction: column;
-    color: gray;
-    font-weight: 300;
-    margin-bottom: 1.2em;
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  font-weight: 300;
+  margin-bottom: 1.2em;
 }
 
 .message-info img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .message-content {
-    max-width: 80%;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .message-content img {
-    width: 50%;
+  width: 50%;
 }
 
 .message-content p {
-    background-color: white;
-    color: grey;
-    padding: 0.7em 0.9em;
-    border-radius: 0 10px 10px 10px;
+  background-color: white;
+  color: grey;
+  padding: 0.7em 0.9em;
+  border-radius: 0 10px 10px 10px;
 }
 
 .owner {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 .owner p {
-    background-color: #8da4f1;
-    color: white;
-    border-radius: 10px 0 10px 10px;
+  background-color: #8da4f1;
+  color: white;
+  border-radius: 10px 0 10px 10px;
 }

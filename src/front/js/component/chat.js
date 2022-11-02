@@ -13,9 +13,9 @@ export const Chat = () => {
       <div className="chat-info">
         <span>Brandom</span>
         <div className="chat-icons">
-          <MdVideocam style={{ height: "24px", width: "35px" }}/>
-          <MdPersonAddAlt1 style={{ height: "24px", width: "35px" }}/>
-          <MdOutlineMoreHoriz style={{ height: "24px", width: "35px" }}/>
+          <MdVideocam style={{ height: "24px", width: "35px" }} />
+          <MdPersonAddAlt1 style={{ height: "24px", width: "35px" }} />
+          <MdOutlineMoreHoriz style={{ height: "24px", width: "35px" }} />
         </div>
       </div>
       <Messages />

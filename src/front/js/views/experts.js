@@ -53,7 +53,7 @@ export const Experts = () => {
                   {singleExpert.description}
                 </p>
                 <span className="badge rounded-pill text-bg-light">
-                    # {singleExpert.styles}
+                  # {singleExpert.styles}
                 </span>
               </div>
             </div>

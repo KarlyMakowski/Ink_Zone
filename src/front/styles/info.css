@@ -1,18 +1,18 @@
 .learn-more {
-    background: rgba(24, 23, 23, .9);
-    border: 0;
-    border-radius: 6px;
-    width: 250px;
-    height: 45px;
-    color: #fff;
-    font-size: 1.5rem;
-    font-family: "Rajdhani", sans-serif;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all .3s ease;
+  background: rgba(24, 23, 23, 0.9);
+  border: 0;
+  border-radius: 6px;
+  width: 250px;
+  height: 45px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .learn-more:hover {
-    background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
-    color: #000;
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+  color: #000;
 }

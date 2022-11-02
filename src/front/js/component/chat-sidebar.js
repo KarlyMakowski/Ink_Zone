@@ -6,12 +6,12 @@ import { ChatNavbar } from './chat-navbar';
 import { Search } from "./chat-search";
 import { Chats } from "./chats";
 
-export const Sidebar = () =>{
-    return (
-        <div className="firebase-chat-sidebar">
-            <ChatNavbar />
-            <Search />
-            <Chats />
-        </div>
-    )
+export const Sidebar = () => {
+  return (
+    <div className="firebase-chat-sidebar">
+      <ChatNavbar />
+      <Search />
+      <Chats />
+    </div>
+  )
 }

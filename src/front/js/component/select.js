@@ -5,7 +5,7 @@ import Select from "react-select";
 
 import "../../styles/profile.css";
 
-export const SelectStyle = ({experts}) => {
+export const SelectStyle = ({ experts }) => {
   const { actions } = useContext(Context);
 
   const options = [
