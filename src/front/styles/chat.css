@@ -1,5 +1,5 @@
 .chat-icon-container {
-  position: fixed; 
+  position: fixed;
   bottom: 50px;
   right: 50px;
   cursor: pointer;
@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   height: 100%;
   color: white;
 }

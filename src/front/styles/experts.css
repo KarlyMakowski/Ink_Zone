@@ -173,3 +173,10 @@
   opacity: 1;
   z-index: -1;
 }
+
+@media(max-width: 3000px) {
+  .experts-container {
+   padding-bottom: 225px;
+   padding-top: 55px;
+  }
+}

@@ -2,8 +2,8 @@ import React from "react";
 
 import "../../styles/chat.css";
 
-import { Sidebar } from "../component/chat-sidebar";
-import { Chat } from "../component/chat";
+import { Sidebar } from "../component/chat/chat-sidebar";
+import { Chat } from "../component/chat/chat";
 
 export const FirebaseChat = () => {
   return (

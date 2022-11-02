@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/chat.css";
+import "../../../styles/chat.css";
 
 import { MdAttachFile } from "react-icons/md";
 import { BsImageFill } from "react-icons/bs";

@@ -1,8 +1,12 @@
 import React from "react";
 
-import "../../styles/chat.css";
+import "../../../styles/chat.css";
 
-import { MdVideocam, MdPersonAddAlt1, MdOutlineMoreHoriz } from "react-icons/md";
+import {
+  MdVideocam,
+  MdPersonAddAlt1,
+  MdOutlineMoreHoriz,
+} from "react-icons/md";
 
 import { Messages } from "./chat-messages";
 import { Input } from "./chat-input";

@@ -17,7 +17,7 @@ import { Publish } from "./views/publish";
 import { Footer } from "./component/footer";
 import { Experts } from "./views/experts";
 import { FirebaseChat } from "./views/firebase-chat";
-import { ChatButton } from "./component/chat-button";
+import { ChatButton } from "./component/chat/chat-button";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";

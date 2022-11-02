@@ -33,7 +33,7 @@
   grid-gap: 5rem;
   text-align: center;
   margin-left: 70px;
-  margin-bottom: 160px;
+  margin-bottom: 90px;
 }
 
 .pricing-container .pricing-card {
@@ -108,6 +108,18 @@
   font-weight: bold;
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
   border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.clarification {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
 }
 
 /* Responsive */

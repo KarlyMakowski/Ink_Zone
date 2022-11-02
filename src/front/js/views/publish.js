@@ -24,7 +24,9 @@ export const Publish = () => {
         <div className="col-md-8 profile-card publish-card">
           <form key={store.currentUser?.id}>
             <div className="form_box_input mt-0">
-              <label htmlFor="basic-multi-select">Choose the styles that you specialize on</label>
+              <label htmlFor="basic-multi-select">
+                Choose the styles that you specialize on
+              </label>
               <SelectStyle />
             </div>
             <div className="form_box_input mt-3">

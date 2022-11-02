@@ -77,16 +77,6 @@
 }
 
 /* Responsive */
-@media(max-width: 1024px) {
-  .styles-grid {
-    margin-left: 100px;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 380px));
-  }
-  .styles-title {
-    margin-left: 100px;
-  }
-}
-
 @media(max-height: 1024px) {
   .styles-grid {
     margin-left: 100px;

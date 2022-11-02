@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { ModalGallery } from "../component/modal-gallery";
 
 import "../../styles/experts.css";
 
 import { SelectStyle } from "../component/select";
+import { ModalGallery } from "../component/modal-gallery";
 
 export const Experts = () => {
   const { store } = useContext(Context);
@@ -32,7 +32,6 @@ export const Experts = () => {
             <div className="experts-box">
               <img src={singleExpert.picture} className="experts-pic" />
               <h3>{singleExpert.username}</h3>
-
               <div className="experts-social-icons">
                 <a href="#" className="experts-social experts-social-instagram">
                   <i className="fab fa-instagram"></i>
@@ -44,24 +43,23 @@ export const Experts = () => {
                   <i className="fab fa-facebook-f"></i>
                 </a>
               </div>
-
-              <button type="button" className="text-bg-light" onClick={handleShow}>
+              <button
+                type="button"
+                className="text-bg-light"
+                onClick={handleShow}
+              >
                 Gallery
               </button>
-
               <ModalGallery show={show} handleClose={handleClose} />
-
               <div className="experts-bottom">
-                <p>
-                  {singleExpert.description}
-                </p>
+                <p>{singleExpert.description}</p>
                 <span className="badge rounded-pill text-bg-light">
                   # {singleExpert.styles}
                 </span>
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </>
   );
