@@ -1,0 +1,30 @@
+.chat-icon-container {
+  position: fixed; 
+  bottom: 50px;
+  right: 50px;
+  cursor: pointer;
+  z-index: 20;
+  border-radius: 50%;
+  box-shadow: 5px 5px 20px #fff;
+}
+
+.chat-icon-container:hover {
+  box-shadow: 8px 8px 20px #fff;
+}
+
+.chat-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  outline: 2px solid rgb(255, 255, 255);
+  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
+}
+
+.chat-button i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  height: 100%;
+  color: white;
+}

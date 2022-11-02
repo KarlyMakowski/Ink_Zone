@@ -16,6 +16,7 @@ import { Profile } from "./views/profile";
 import { Publish } from "./views/publish";
 import { Footer } from "./component/footer";
 import { Experts } from "./views/experts";
+import { ChatButton } from "./component/chat-button";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -24,6 +25,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <Navbar />
+        <ChatButton />
         <Routes>
           <Route element={<Home />} exact path="/" />
           <Route element={<StylesPublic />} path="/styles" />

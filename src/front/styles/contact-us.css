@@ -125,7 +125,7 @@
 }
 
 .inputBox input[type="submit"] {
-  width: 50%;
+  width: 300px;
   margin: 2rem auto;
   font-size: 1.2rem;
   font-weight: bold;
