@@ -1,15 +1,21 @@
+.select-style {
+  width: 25%;
+  margin: auto 200px 50px;
+  text-align: start;
+}
+
 .experts-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 10rem;
+  padding-bottom: 11rem;
   font-family: "Rajdhani", sans-serif;
   font-size: 1.5rem;
 }
 
 .experts-box {
-  width: 500px;
+  width: 400px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(2px);
   text-align: center;

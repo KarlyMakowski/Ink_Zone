@@ -33,7 +33,7 @@ export const Home = () => {
           <h1>Ink Zone</h1>
           <p>Find the perfect tattoo</p>
           <div>
-            <Link to="/styles" className="home-btn">
+            <Link to="/chat" className="home-btn">
               Styles
             </Link>
             <Link to="/experts" className="home-btn home-btn-light">

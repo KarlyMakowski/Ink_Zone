@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-import Select from "react-select";
 import { PublishFiles } from "../component/publish-files";
+import { SelectStyle } from "../component/select";
 
 import "../../styles/profile.css";
 
@@ -15,66 +15,6 @@ export const Publish = () => {
 
   const params = useParams();
 
-  const options = [
-    { value: "Old School", label: "Old School", color: "black" },
-    { value: "New School", label: "New School", color: "black" },
-    { value: "Neo Traditional", label: "Neo Traditional", color: "black" },
-    { value: "Realism", label: "Realism", color: "black" },
-    { value: "Surrealism", label: "Surrealism", color: "black" },
-    { value: "Black Work", label: "Black Work", color: "black" },
-    { value: "Dot Work", label: "Dot Work", color: "black" },
-    { value: "Sketch", label: "Sketch", color: "black" },
-    { value: "Watercolor", label: "Watercolor", color: "black" },
-    { value: "Japanese", label: "Japanese", color: "black" },
-  ];
-
-  const colorStyles = {
-    control: (styles) => ({
-      ...styles,
-      backgroundColor: "rgba(255, 255, 255, 0.15)",
-      minHeight: "60px",
-      borderColor: "rgba(255, 255, 255, 0.5)",
-      borderRadius: "6px",
-      boxShadow: "0 0 1px rgba(255, 255, 255, 0.5)",
-      ":hover": { borderColor: "rgba(255, 255, 255, 0.5)" },
-      fontSize: "1.3em",
-      fontWeight: "bold",
-    }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      return {
-        ...styles,
-        color: data.color,
-        fontSize: "1.3em",
-        fontWeight: "bold",
-      };
-    },
-    multiValue: (styles, { data }) => {
-      return {
-        ...styles,
-        backgroundImage:
-          "linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%)",
-        borderRadius: "6px",
-        color: "black",
-        fontSize: "1.1em",
-      };
-    },
-    multiValueLabel: (styles, { data }) => {
-      return {
-        ...styles,
-        color: "black",
-      };
-    },
-    multiValueRemove: (styles, { data }) => {
-      return {
-        ...styles,
-        cursor: "pointer",
-        ":hover": {
-          color: "#fff",
-        },
-      };
-    },
-  };
-
   return (
     <div className="form">
       <div className="pricing-title">
@@ -85,15 +25,7 @@ export const Publish = () => {
           <form key={store.currentUser?.id}>
             <div className="form_box_input mt-0">
               <label htmlFor="basic-multi-select">Choose the styles that you specialize on</label>
-              <Select
-                className="basic-multi-select mt-1"
-                classNamePrefix="select"
-                name="stylesPublish"
-                options={options}
-                styles={colorStyles}
-                onChange={(e) => actions.handleSelect(e)}
-                isMulti
-              />
+              <SelectStyle />
             </div>
             <div className="form_box_input mt-3">
               <label htmlFor="form-control">Add your description</label>

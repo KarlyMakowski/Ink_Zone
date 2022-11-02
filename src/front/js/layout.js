@@ -16,6 +16,7 @@ import { Profile } from "./views/profile";
 import { Publish } from "./views/publish";
 import { Footer } from "./component/footer";
 import { Experts } from "./views/experts";
+import { FirebaseChat } from "./views/firebase-chat";
 import { ChatButton } from "./component/chat-button";
 
 const Layout = () => {
@@ -39,6 +40,7 @@ const Layout = () => {
           <Route element={<Publish />} path="/publish-expert/:id" />
           <Route element={<Profile />} path="/profile" />
           <Route element={<Experts />} path="/experts" />
+          <Route element={<FirebaseChat />} path="/chat" />
           {/* <Route element={<h1>Not found!</h1>} /> */}
         </Routes>
         <Footer />

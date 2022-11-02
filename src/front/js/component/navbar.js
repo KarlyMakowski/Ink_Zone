@@ -7,10 +7,9 @@ import "../../styles/navbar.css";
 import logo from "../../img/ink-zone.png";
 
 import { FaHome } from "react-icons/fa";
-import { IoIosColorPalette } from "react-icons/io";
 import { HiCurrencyEuro, HiQuestionMarkCircle, HiUserCircle } from "react-icons/hi";
 import { RiWechatFill, RiUploadCloud2Fill } from "react-icons/ri";
-import { GiChewedSkull, GiTripleSkulls } from "react-icons/gi";
+import { GiChewedSkull } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
 
 export const Navbar = () => {

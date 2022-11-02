@@ -4,6 +4,8 @@ import { ModalGallery } from "../component/modal-gallery";
 
 import "../../styles/experts.css";
 
+import { SelectStyle } from "../component/select";
+
 export const Experts = () => {
   const { store } = useContext(Context);
 
@@ -25,10 +27,7 @@ export const Experts = () => {
         return (
           <div className="experts-container" key={i}>
             <div className="experts-box">
-              <img
-                src={singleExpert.picture}
-                className="experts-pic"
-              />
+              <img src={singleExpert.picture} className="experts-pic" />
               <h3>{singleExpert.username}</h3>
 
               <div className="experts-social-icons">
@@ -54,7 +53,7 @@ export const Experts = () => {
                   {singleExpert.description}
                 </p>
                 <span className="badge rounded-pill text-bg-light">
-                  {singleExpert.styles}
+                    # {singleExpert.styles}
                 </span>
               </div>
             </div>

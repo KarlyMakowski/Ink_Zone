@@ -59,6 +59,7 @@ export const PublishFiles = () => {
       <div className="uploaded-files-list">
         {uploadedFiles &&
           uploadedFiles.map((file, index) => {
+            console.log(file)
             return (
               <div key={index} className="uploaded-file">
                 <img src={file} alt={"image-" + index} className="publish-image" />
