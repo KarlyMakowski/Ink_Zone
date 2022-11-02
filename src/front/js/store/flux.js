@@ -430,72 +430,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      uploadMultipleFiles: async (e, id) => {
-        e.preventDefault();
-        const { multipleFiles } = getStore();
-
-        try {
-          let formData = new FormData();
-          formData.append("files", multipleFiles);
-
-          const resp = await fetch(
-            process.env.BACKEND_URL +
-              `/api/private/publish/${id}/multiple-files`,
-            {
-              method: "PUT",
-              headers: {
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
-              },
-              body: formData,
-            }
-          );
-          const { status, msg, user } = await resp.json();
-          if (status === "failed") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "error",
-              color: "#c61a09",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#c61a09",
-              timer: 8000,
-            });
-          }
-          if (status === "success") {
-            Swal.fire({
-              title: msg,
-              width: 720,
-              padding: "5em",
-              background: "transparent",
-              backdrop: "rgba(32, 32, 32, 0.9)",
-              icon: "success",
-              color: "#aeffb9",
-              position: "center",
-              animation: true,
-              showConfirmButton: true,
-              confirmButtonText: "Close",
-              confirmButtonColor: "#aeffb9",
-              timer: 8000,
-            });
-            setStore({ currentUser: user });
-          }
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-
-      handleFiles: (e) => {
-        const { files } = e.target;
-        setStore({ multipleFiles: files });
-        console.log(files)
-      },
-
       passwordRecovery: async (e, navigate) => {
         e.preventDefault();
         const { email } = getStore();
@@ -595,16 +529,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadSingleStyle: (id) => {
-        fetch(
-          `https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu70.gitpod.io/api/styles/private/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + sessionStorage.getItem("token"),
-            },
-          }
-        )
+        fetch(process.env.BACKEND_URL + `/api/styles/private/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        })
           .then((response) => response.json())
           .then((data) => setStore({ privateStyle: data }));
       },
@@ -686,9 +617,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .join(",");
         setStore({ stylesPublish: stringedStyles });
-        const search = store.experts.filter(
-          (item) =>
-            item.styles.toLowerCase().includes(store.stylesPublish.toLowerCase())
+        const search = store.experts.filter((item) =>
+          item.styles.toLowerCase().includes(store.stylesPublish.toLowerCase())
         );
         console.log(search);
         setStore({ experts: search });

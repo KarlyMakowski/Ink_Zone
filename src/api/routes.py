@@ -6,7 +6,6 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 import random
 import string
-
 import re
 import datetime
 import cloudinary
@@ -295,35 +294,6 @@ def create_expert(id):
 
     else:
         return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
-
-
-@api.route('/private/publish/<id>/multiple-files', methods=['PUT'])
-@jwt_required()
-def multiple_upload(id):
-    current_user = get_jwt_identity()
-    user = User.query.filter_by(email=current_user).first()
-
-    if user.role == "Expert":
-        expert = Publish.query.filter_by(user_id=user.id).first()
-
-        if "files" in request.files:
-            multiple_upload = cloudinary.uploader.upload(
-                request.files.getlist("files []"), folder="Ink Zone")
-
-            if not multiple_upload:
-                return jsonify({"status": "failed", "msg": "There was an error during upload!", "user": None}), 400
-
-            expert.files = multiple_upload["secure_url"]
-
-            db.session.commit()
-
-            response_body = {
-                "status": "success",
-                "msg": "Files published",
-                "user": user.serialize()
-            }
-
-            return jsonify(response_body), 200
 
 
 @api.route('/experts', methods=['GET'])
