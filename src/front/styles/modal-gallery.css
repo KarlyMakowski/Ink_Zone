@@ -1,5 +1,22 @@
+.modal {
+  backdrop-filter: blur(5px);
+}
+
+.modal-dialog {
+  --bs-modal-width: 800px;
+}
+
+.modal-header {
+  padding: 1rem 1.5rem;
+}
+
+.carousel-inner {
+  border-bottom-left-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
+}
+
 .carousel-item {
-  width: 100%;
+  width: 800px;
   height: 700px;
 }
 

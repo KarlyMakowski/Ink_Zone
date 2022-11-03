@@ -21,7 +21,7 @@ export const Pricing = () => {
         </div>
       </div>
       <p className="clarification">
-        * These prices may change depending on tattooer rates
+        * Prices may change depending on tattooer rates
       </p>
     </>
   );

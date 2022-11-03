@@ -2,10 +2,13 @@ import React from "react";
 
 import "../../../styles/chat.css";
 
+import { BiSearchAlt } from "react-icons/bi";
+
 export const Search = () => {
   return (
     <div className="user-search">
       <div className="search-form">
+        <BiSearchAlt />
         <input type="text" placeholder="Find an expert..." />
       </div>
       <div className="user-list">
@@ -14,7 +17,7 @@ export const Search = () => {
           alt=""
         />
         <div className="user-info">
-          <span>Brandom</span>
+          <span>Brandon</span>
         </div>
       </div>
     </div>

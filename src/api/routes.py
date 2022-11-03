@@ -359,7 +359,7 @@ def recover_password():
         msg.body = "Hello " + user.username + \
             ", this is your new password: " + new_password + "."
         msg.html = "<h1>INK ZONE</h1><h2> Hello " + user.username + "</h2> <p>Your new password is: <b> " + new_password + \
-            "</b></p><p>If you did not make this request then please ignore this email.</p><p>This email has been automatically generated. Please do not reply to this email.</p>"
+            "</b></p><p>If you did not make this request then please ignore this message.</p><p>This email has been automatically generated. Please do not reply to this email.</p>"
         mail.send(msg)
 
         response_body = {
