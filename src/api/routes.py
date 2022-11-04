@@ -298,14 +298,20 @@ def create_expert(id):
 
 @api.route('/experts', methods=['GET'])
 def get_experts():
-    expert = User.query.filter_by(role="Expert").first()
-    expert_published = Publish.query.filter_by(user_id=expert.id).first()
-    print(expert_published.serialize())
+    expert = User.query.filter_by(role="Expert").all()
+    experts = list(map(lambda expert: expert.serialize(), expert))
+    experts_list = []
 
-    full_expert = expert.serialize() | expert_published.serialize()
+    for all_experts in experts:
+        expert_published = Publish.query.filter_by(
+            id=all_experts['id']).first()
+        print(all_experts['id'])
+        print(expert_published.serialize())
+        full_expert = all_experts | expert_published.serialize()
+        experts_list.append(full_expert)
 
     response_body = {
-        "full_expert": full_expert
+        "full_expert": experts_list
     }
 
     return jsonify(response_body), 200
@@ -358,8 +364,8 @@ def recover_password():
                       recipients=[user.email])
         msg.body = "Hello " + user.username + \
             ", this is your new password: " + new_password + "."
-        msg.html = "<h1>INK ZONE</h1><h2> Hello " + user.username + "</h2> <p>Your new password is: <b> " + new_password + \
-            "</b></p><p>If you did not make this request then please ignore this email.</p><p>This email has been automatically generated. Please do not reply to this email.</p>"
+        msg.html = "<h1>INK ZONE</h1><h2> Hey " + user.username + "</h2> <p>You asked and we delivered! Let's get you a new password here: <b> " + new_password + \
+            "</b></p><p>If you did not make this request then please ignore this email.</p>"
         mail.send(msg)
 
         response_body = {

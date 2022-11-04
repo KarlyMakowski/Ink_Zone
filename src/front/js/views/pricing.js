@@ -5,7 +5,6 @@ import "../../styles/pricing.css";
 import { Prices } from "../component/prices";
 
 export const Pricing = () => {
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -21,7 +20,7 @@ export const Pricing = () => {
         </div>
       </div>
       <p className="clarification">
-        * These prices may change depending on tattooer rates
+        * Prices may change depending on tattooer rates
       </p>
     </>
   );

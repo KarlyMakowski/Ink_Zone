@@ -69,25 +69,17 @@
 
 .user-chats {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1em;
 }
 
 .user-chats img {
   background-color: #ddddf7;
-  height: 24px;
-  width: 24px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.user-chats button {
-  width: 2.5em;
-  background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
-  padding: 1px;
-  font-size: 0.8em;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 .search-form {

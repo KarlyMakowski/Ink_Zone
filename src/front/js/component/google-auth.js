@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleButton from "react-google-button";
+import { getFirestore } from "firebase/firestore"; // *******************PARA EL CHAT??
 
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
@@ -18,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+export const db = getFirestore(app); // ***************PARA EL CHAT??
 
 export const GoogleAuth = () => {
   const { store, actions } = useContext(Context);

@@ -1,83 +1,58 @@
-import React, { useState, useContext } from "react";
-import { Context } from "../store/appContext";
+import React, { useState } from "react";
 
 import "../../styles/publish-files.css";
 
-const MAX_COUNT = 5;
-
 export const PublishFiles = () => {
-  const { store, actions } = useContext(Context);
-
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [fileLimit, setFileLimit] = useState(false);
 
-  const handleUploadFiles = (files) => {
-    const uploaded = [...uploadedFiles];
-    const limitExceeded = false;
-
-    files.some((file) => {
-      if (uploaded.findIndex((f) => f.name === file.name) === -1) {
-        uploaded.push(file);
-        if (uploaded.length === MAX_COUNT) setFileLimit(true);
-        if (uploaded.length > MAX_COUNT) {
-          setFileLimit(false);
-          limitExceeded = true;
-          return true;
-        }
-      }
-    });
-    if (!limitExceeded) setUploadedFiles(uploaded);
+  const handleUploadFiles = (e) => {
+    if (e.target.files) {
+      const filesArr = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+      setUploadedFiles((prevImages) => prevImages.concat(filesArr));
+      Array.from(e.target.files).map((file) => URL.revokeObjectURL(file));
+    }
   };
 
-  const handleFileEvent = (e) => {
-    const chosenFiles = Array.prototype.slice.call(e.target.files);
-    handleUploadFiles(chosenFiles);
+  const renderFiles = (source) => {
+    return source.map((image, index) => {
+      return (
+        <div key={image} className="uploaded-file">
+          <img
+            src={image}
+            alt={"image-" + index}
+            className="publish-image"
+            style={{ width: "15rem", height: "15rem" }}
+          />
+          <button
+            onClick={() =>
+              setUploadedFiles(uploadedFiles.filter((e) => e !== image))
+            }
+          >
+            Delete image
+          </button>
+        </div>
+      );
+    });
   };
 
   return (
-    <>
-      <div className="publish-box">
-        <h5>Post your Art</h5>
-        <div className="input-box">
-          <input
-            type="file"
-            id="files"
-            className="hidden"
-            onChange={handleFileEvent}
-            disabled={fileLimit}
-            multiple
-          />
-          <label htmlFor="files">Select files</label>
-          <input
-            type="submit"
-            value="Upload"
-            name="multipleFiles"
-            className={`${!fileLimit ? "" : "disabled"}`}
-          />
-        </div>
+    <div className="publish-box">
+      <h5>Post your Art</h5>
+      <div className="input-box">
+        <input
+          type="file"
+          id="files"
+          className="hidden"
+          onChange={handleUploadFiles}
+          disabled={uploadedFiles.length === 5}
+          multiple
+        />
+        <label htmlFor="files">Select files</label>
+        <input type="submit" value="Upload" name="multipleFiles" />
       </div>
-      <div className="uploaded-files-list">
-        {uploadedFiles &&
-          uploadedFiles.map((file, index) => {
-            console.log(file);
-            return (
-              <div key={index} className="uploaded-file">
-                <img
-                  src={file}
-                  alt={"image-" + index}
-                  className="publish-image"
-                />
-                <button
-                  onClick={() =>
-                    setUploadedFiles(uploadedFiles.filter((e) => e !== file))
-                  }
-                >
-                  Delete image
-                </button>
-              </div>
-            );
-          })}
-      </div>
-    </>
+      <div className="uploaded-files-list">{renderFiles(uploadedFiles)}</div>
+    </div>
   );
 };
