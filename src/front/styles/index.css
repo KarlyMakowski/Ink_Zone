@@ -24,7 +24,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-image: linear-gradient(to bottom right, #aeffb9 0%, #a091ff 100%);
-  opacity: 0.5;
 }
 
 ::-webkit-scrollbar-track {

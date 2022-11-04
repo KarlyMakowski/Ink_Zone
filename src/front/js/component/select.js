@@ -25,7 +25,7 @@ export const SelectStyle = ({ experts }) => {
     control: (styles) => ({
       ...styles,
       backgroundColor: "rgba(255, 255, 255, 0.15)",
-      minHeight: "60px",
+      minHeight: "50px",
       borderColor: "rgba(255, 255, 255, 0.5)",
       borderRadius: "6px",
       boxShadow: "0 0 1px rgba(255, 255, 255, 0.5)",

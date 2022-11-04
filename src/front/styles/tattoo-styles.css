@@ -87,12 +87,6 @@
   }
 }
 
-@media(max-height: 700px) {
-  .styles-grid {
-    grid-template-columns: repeat(auto-fit, minmax(60px, 320px));
-  }
-}
-
 @media (max-width: 600px) {
   .styles-grid {
     margin: auto;

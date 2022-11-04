@@ -10,10 +10,10 @@ export const Message = () => {
           src="https://images.pexels.com/photos/14169804/pexels-photo-14169804.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
           alt=""
         />
-        <span>just now</span>
+        <span>12:15</span>
       </div>
       <div className="message-content">
-        <p>hello</p>
+        <p>Hello</p>
         {/* <img src="https://images.pexels.com/photos/14169804/pexels-photo-14169804.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""/> */}
       </div>
     </div>

@@ -1,6 +1,6 @@
 .select-style {
   width: 25%;
-  margin: auto 200px 50px;
+  margin: 20px 200px;
   text-align: start;
 }
 
@@ -12,6 +12,7 @@
   padding-bottom: 11rem;
   font-family: "Rajdhani", sans-serif;
   font-size: 1.5rem;
+  gap: 5rem;
 }
 
 .experts-box {
@@ -29,7 +30,7 @@
 .experts-box h3 {
   font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
   margin-top: 20px;
 }
 
@@ -57,8 +58,8 @@
 .experts-social {
   width: 55px;
   height: 55px;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1.1rem;
+  margin-bottom: 1.6rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -176,6 +177,5 @@
 @media(max-width: 3000px) {
   .experts-container {
    padding-bottom: 225px;
-   padding-top: 55px;
   }
 }
