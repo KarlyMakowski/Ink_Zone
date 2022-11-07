@@ -78,13 +78,21 @@
 }
 
 @-webkit-keyframes in {
-  from   { -webkit-transform: translateY(-20px); }
-  to { -webkit-transform: translateY(0);}
+  from {
+    -webkit-transform: translateY(-20px);
+  }
+  to {
+    -webkit-transform: translateY(0);
+  }
 }
 
 @-webkit-keyframes out {
-  0%   { -webkit-transform: translateY(0); }
-  100% { -webkit-transform: translateY(-20px); }
+  0% {
+    -webkit-transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-20px);
+  }
 }
 
 .about-us-container {

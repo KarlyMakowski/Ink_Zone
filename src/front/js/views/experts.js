@@ -6,6 +6,8 @@ import "../../styles/experts.css";
 import { SelectStyle } from "../component/select";
 import { ModalGallery } from "../component/modal-gallery";
 
+import skull from "../../img/skull-profile.png";
+
 export const Experts = () => {
   const { store } = useContext(Context);
 
@@ -26,41 +28,59 @@ export const Experts = () => {
           <SelectStyle experts={true} />
         </div>
       </div>
-      {store.experts.map((singleExpert, i) => {
-        return (
-          <div className="experts-container" key={i}>
-            <div className="experts-box">
-              <img src={singleExpert.picture} className="experts-pic" />
-              <h3>{singleExpert.username}</h3>
-              <div className="experts-social-icons">
-                <a href="#" className="experts-social experts-social-instagram">
-                  <i className="fab fa-instagram"></i>
-                </a>
-                <a href="#" className="experts-social experts-social-twitter">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className="experts-social experts-social-facebook">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-              </div>
-              <button
-                type="button"
-                className="text-bg-light"
-                onClick={handleShow}
-              >
-                Gallery
-              </button>
-              <ModalGallery show={show} handleClose={handleClose} />
-              <div className="experts-bottom">
-                <p>{singleExpert.description}</p>
-                <span className="badge rounded-pill text-bg-light">
-                  # {singleExpert.styles}
-                </span>
+      <div className="experts-grid">
+        {store.experts.map((singleExpert, i) => {
+          return (
+            <div className="experts-container" key={i}>
+              <div className="experts-box">
+                <img
+                  src={
+                    singleExpert?.picture == undefined
+                      ? skull
+                      : singleExpert?.picture
+                  }
+                  className="experts-pic"
+                />
+                <h3>{singleExpert?.username}</h3>
+                <div className="experts-social-icons">
+                  <a
+                    href={`https://www.instagram.com/${singleExpert?.instagram}`}
+                    className="experts-social experts-social-instagram"
+                  >
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                  <a
+                    href={`https://twitter.com/${singleExpert?.twitter}`}
+                    className="experts-social experts-social-twitter"
+                  >
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                  <a
+                    href={`https://www.facebook.com/${singleExpert?.facebook}`}
+                    className="experts-social experts-social-facebook"
+                  >
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  className="text-bg-light"
+                  onClick={handleShow}
+                >
+                  Gallery
+                </button>
+                <ModalGallery show={show} handleClose={handleClose} />
+                <div className="experts-bottom">
+                  <p>{singleExpert?.description}</p>
+                  <span className="badge rounded-pill text-bg-light">
+                    # {singleExpert?.styles}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </>
   );
 };

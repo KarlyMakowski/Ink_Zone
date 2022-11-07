@@ -368,9 +368,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       publishProfile: async (e, id) => {
         e.preventDefault();
-        const { stylesPublish, description, facebook, instagram, twitter } =
-          getStore();
-
+        const {
+          currentUser,
+          stylesPublish,
+          description,
+          multipleFiles,
+          facebook,
+          instagram,
+          twitter,
+        } = getStore();
         try {
           const resp = await fetch(
             process.env.BACKEND_URL + `/api/private/publish/${id}`,
@@ -381,8 +387,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
               body: JSON.stringify({
+                username: currentUser.username,
+                picture: currentUser.picture,
                 styles: stylesPublish,
                 description: description,
+                multipleFiles: multipleFiles,
                 facebook: facebook,
                 instagram: instagram,
                 twitter: twitter,
@@ -523,13 +532,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadStyles: () => {
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/styles"/* process.env.BACKEND_URL + "/api/styles" */)
+        fetch(process.env.BACKEND_URL + "/api/styles")
           .then((response) => response.json())
           .then((data) => setStore({ styles: data }));
       },
 
       loadSingleStyle: (id) => {
-        fetch(`https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/styles/private/${id}` /* process.env.BACKEND_URL + `/api/styles/private/${id}` */, {
+        fetch(process.env.BACKEND_URL + `/api/styles/private/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -575,22 +584,19 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadPrices: () => {
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/prices"/* process.env.BACKEND_URL + "/api/prices" */)
+        fetch(process.env.BACKEND_URL + "/api/prices")
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
       },
 
       loadExperts: () => {
-        const store = getStore();
-        fetch("https://3001-karlymakowski-inkzone-zq7v7zda3xq.ws-eu73.gitpod.io/api/experts"/* process.env.BACKEND_URL + "/api/experts" */, {
+        fetch(process.env.BACKEND_URL + "/api/experts", {
           headers: {
             "Content-Type": "application/json",
           },
         })
           .then((response) => response.json())
-          .then((data) =>
-            setStore({ experts: [...store.experts, data.full_expert] })
-          );
+          .then((data) => setStore({ experts: data }));
       },
 
       handleChange: (e) => {
@@ -605,7 +611,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .call(e, function (item) {
             return item.value;
           })
-          .join(",");
+          .join(", ");
         setStore({ stylesPublish: stringedStyles });
       },
 
@@ -615,7 +621,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .call(e, function (item) {
             return item.value;
           })
-          .join(",");
+          .join(", ");
         setStore({ stylesPublish: stringedStyles });
         const search = store.experts.filter((item) =>
           item.styles.toLowerCase().includes(store.stylesPublish.toLowerCase())

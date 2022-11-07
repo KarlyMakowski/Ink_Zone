@@ -4,12 +4,17 @@
   text-align: start;
 }
 
+.experts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  justify-content: center;
+  grid-gap: 2.8rem;
+}
+
 .experts-container {
   width: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 11rem;
   font-family: "Rajdhani", sans-serif;
   font-size: 1.5rem;
   gap: 5rem;
@@ -68,10 +73,7 @@
   color: #fff;
   border-radius: 50%;
   outline: 2px solid rgba(255, 255, 255, 0.5);
-  transition-property: 
-  outline-offset,
-  outline-color,
-  background-color;
+  transition-property: outline-offset, outline-color, background-color;
   transition-duration: 0.25s;
 }
 
@@ -174,8 +176,8 @@
   z-index: -1;
 }
 
-@media(max-width: 3000px) {
+@media (max-width: 3000px) {
   .experts-container {
-   padding-bottom: 225px;
+    padding-bottom: 225px;
   }
 }

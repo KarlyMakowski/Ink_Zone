@@ -8,7 +8,6 @@ import { Messages } from "./chat-messages";
 import { Input } from "./chat-input";
 
 export const Chat = () => {
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   });

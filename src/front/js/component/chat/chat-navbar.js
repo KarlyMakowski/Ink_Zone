@@ -7,8 +7,8 @@ import skull from "../../../img/skull-profile.png";
 import { GoPrimitiveDot } from "react-icons/go";
 
 export const ChatNavbar = () => {
-  const { store, actions } = useContext(Context);
-  
+  const { store } = useContext(Context);
+
   return (
     <div className="chat-navbar">
       <div className="user-chats">

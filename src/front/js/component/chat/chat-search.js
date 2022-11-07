@@ -10,17 +10,12 @@ import { BiSearchAlt } from "react-icons/bi";
 export const Search = () => {
   const { actions, store } = useContext(Context);
 
-  const [user] = useState("");
-  const [currentUser, setCurrentUser] = useState(null);
+  /*   const [username, setUsername] = useState(""); // FOR THE INPUT(SEARCH USER)
+  const [currentUser, setCurrentUser] = useState(null); // CURRENT USER
   const [error, setError] = useState(false);
 
-  const handleKey = (e) => {
-    e.code === "Enter" && handleExpert();
-  };
-
-  const handleExpert = async () => {
-    const q = query(collection(db, "experts"), where("username", "==", expert));
-
+  const searchUser = async () => {
+    const q = query(collection(db, "users"), where("username", "==", username));
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -31,15 +26,21 @@ export const Search = () => {
     }
   };
 
+  const handleKey = (e) => {
+    e.code === "Enter" && searchUser();
+  };
+
+ */
+
   return (
     <div className="user-search">
       <div className="search-form">
         <BiSearchAlt />
         <input
           type="text"
-          placeholder="Find an expert..."
-          onKeyDown={handleKey}
-          onChange={(e) => actions.handleChange(e)}
+          placeholder="Find an user..."
+          //onKeyDown={handleKey}
+          //onChange={e => setUsername(e.target.value)} // onChange={(e) => actions.handleChange(e)}
         />
       </div>
       <div className="user-list">
@@ -51,15 +52,15 @@ export const Search = () => {
           <span>Brandon</span>
         </div>
       </div>
-      {error && <span>Expert not found</span>}
-      {expert && (
+      {/* {error && <span>User not found</span>}
+      {user && (
         <div className="user-list">
-          <img src={expert.picture} alt="" />
+          <img src={user.picture} alt="" />
           <div className="user-info">
-            <span>{expert.username}</span>
+            <span>{user.username}</span>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 6b0d0f4ec477
+Revision ID: fa225a07d999
 Revises: 
-Create Date: 2022-10-26 11:32:03.800914
+Create Date: 2022-11-06 20:39:50.482609
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6b0d0f4ec477'
+revision = 'fa225a07d999'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -70,6 +70,8 @@ def upgrade():
     )
     op.create_table('publish',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('username', sa.String(length=50), nullable=False),
+    sa.Column('picture', sa.String(length=500), nullable=True),
     sa.Column('styles', sa.String(length=50), nullable=True),
     sa.Column('description', sa.String(length=1200), nullable=True),
     sa.Column('files', sa.String(length=500), nullable=True),
@@ -78,7 +80,8 @@ def upgrade():
     sa.Column('twitter', sa.String(length=80), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('username')
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),

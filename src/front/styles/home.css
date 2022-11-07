@@ -1,5 +1,5 @@
 #video {
-/*   position: fixed; */
+  /*   position: fixed; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -82,7 +82,7 @@
   .home-content h1 {
     font-size: 3rem;
   }
-  
+
   .home-content p {
     font-size: 1.4rem;
     margin-bottom: 1.6rem;

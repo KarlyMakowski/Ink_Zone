@@ -154,6 +154,47 @@ def logout():
     return jsonify({"msg": "Token successfully revoked"})
 
 
+@api.route('/password-recovery', methods=['POST'])
+def recover_password():
+    body = json.loads(request.data)
+    email = body["email"]
+
+    new_password = "".join(random.choice(
+        string.ascii_uppercase + string.digits) for x in range(10))
+    pw_hash = current_app.bcrypt.generate_password_hash(
+        new_password).decode("utf-8")
+
+    user = User.query.filter_by(email=email).first()
+
+    if user != None:
+        user.password = pw_hash
+        db.session.commit()
+
+        mail = Mail()
+        msg = Message("Password Recovery", sender="Ink-Zone",
+                      recipients=[user.email])
+        msg.body = "Hello " + user.username + \
+            ", this is your new password: " + new_password + "."
+        msg.html = "<h1>INK ZONE</h1><h2> Hey " + user.username + "</h2> <p>You asked and we delivered! Let's get you a new password here: <b> " + new_password + \
+            "</b></p><p>If you did not make this request then please ignore this email.</p>"
+        mail.send(msg)
+
+        response_body = {
+            "status": "success",
+            "msg": "Email sent!"
+        }
+
+        return jsonify(response_body), 200
+
+    else:
+        response_body = {
+            "status": "failed",
+            "msg": "This email does not exist"
+        }
+
+        return jsonify(response_body), 400
+
+
 @api.route('/private', methods=['PUT'])
 @jwt_required()
 def private_update():
@@ -250,17 +291,21 @@ def create_expert(id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
 
+    username = request.json.get("username", None)
+    picture = request.json.get("picture", None)
     styles = request.json.get("styles", None)
     description = request.json.get("description", None)
+    files = request.json.get("multipleFiles", None)
     facebook = request.json.get("facebook", None)
     instagram = request.json.get("instagram", None)
     twitter = request.json.get("twitter", None)
+    print(files)
 
     if user != None:
         expert = Publish.query.filter_by(user_id=user.id).first()
 
         if expert == None:
-            create_expert = Publish(user_id=user.id, styles=styles, description=description,
+            create_expert = Publish(user_id=user.id, username=username, picture=picture, styles=styles, description=description, files=files,
                                     facebook=facebook, instagram=instagram, twitter=twitter)
 
             db.session.add(create_expert)
@@ -276,8 +321,11 @@ def create_expert(id):
             return jsonify(response_body), 200
 
         else:
+            expert.username = username
+            expert.picture = picture
             expert.styles = styles
             expert.description = description
+            expert.files = files
             expert.facebook = facebook
             expert.instagram = instagram
             expert.twitter = twitter
@@ -294,36 +342,6 @@ def create_expert(id):
 
     else:
         return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
-
-
-@api.route('/experts', methods=['GET'])
-def get_experts():
-    expert = User.query.filter_by(role="Expert").all()
-    experts = list(map(lambda expert: expert.serialize(), expert))
-    experts_list = []
-
-    for all_experts in experts:
-        expert_published = Publish.query.filter_by(
-            id=all_experts['id']).first()
-        print(all_experts['id'])
-        print(expert_published.serialize())
-        full_expert = all_experts | expert_published.serialize()
-        experts_list.append(full_expert)
-
-    response_body = {
-        "full_expert": experts_list
-    }
-
-    return jsonify(response_body), 200
-
-
-@api.route('/experts-search', methods=['POST', 'GET'])
-def search_expert():
-    response_body = User.query.filter_by(
-        role="Expert").order_by(User.username).all()
-    response_body = [user.serialize() for user in response_body]
-
-    return json.dumps(response_body), 200
 
 
 @api.route('/private', methods=['DELETE'])
@@ -343,45 +361,22 @@ def delete_profile():
     return jsonify(response_body), 200
 
 
-@api.route('/password-recovery', methods=['POST'])
-def recover_password():
-    body = json.loads(request.data)
-    email = body["email"]
+@api.route('/experts', methods=['GET'])
+def get_experts():
+    experts = Publish.query.all()
+    experts_list = list(map(lambda experts: experts.serialize(), experts))
+    print(experts_list)
 
-    new_password = "".join(random.choice(
-        string.ascii_uppercase + string.digits) for x in range(10))
-    pw_hash = current_app.bcrypt.generate_password_hash(
-        new_password).decode("utf-8")
+    return jsonify(experts_list), 200
 
-    user = User.query.filter_by(email=email).first()
 
-    if user != None:
-        user.password = pw_hash
-        db.session.commit()
+@api.route('/experts-search', methods=['POST', 'GET'])
+def search_expert():
+    response_body = User.query.filter_by(
+        role="Expert").order_by(User.username).all()
+    response_body = [user.serialize() for user in response_body]
 
-        mail = Mail()
-        msg = Message("Password Recovery", sender="Ink-Zone",
-                      recipients=[user.email])
-        msg.body = "Hello " + user.username + \
-            ", this is your new password: " + new_password + "."
-        msg.html = "<h1>INK ZONE</h1><h2> Hey " + user.username + "</h2> <p>You asked and we delivered! Let's get you a new password here: <b> " + new_password + \
-            "</b></p><p>If you did not make this request then please ignore this email.</p>"
-        mail.send(msg)
-
-        response_body = {
-            "status": "success",
-            "msg": "Email sent!"
-        }
-
-        return jsonify(response_body), 200
-
-    else:
-        response_body = {
-            "status": "failed",
-            "msg": "This email does not exist"
-        }
-
-        return jsonify(response_body), 400
+    return json.dumps(response_body), 200
 
 
 @api.route('/styles', methods=['GET'])

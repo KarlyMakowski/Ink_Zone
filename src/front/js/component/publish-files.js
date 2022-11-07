@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 
 import "../../styles/publish-files.css";
 
 export const PublishFiles = () => {
+  const { store, actions } = useContext(Context);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const handleUploadFiles = (e) => {
@@ -13,6 +15,11 @@ export const PublishFiles = () => {
       setUploadedFiles((prevImages) => prevImages.concat(filesArr));
       Array.from(e.target.files).map((file) => URL.revokeObjectURL(file));
     }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("console log", uploadedFiles);
   };
 
   const renderFiles = (source) => {
@@ -50,7 +57,12 @@ export const PublishFiles = () => {
           multiple
         />
         <label htmlFor="files">Select files</label>
-        <input type="submit" value="Upload" name="multipleFiles" />
+        <input
+          type="submit"
+          value="Upload"
+          name="files"
+          onClick={handleClick}
+        />
       </div>
       <div className="uploaded-files-list">{renderFiles(uploadedFiles)}</div>
     </div>

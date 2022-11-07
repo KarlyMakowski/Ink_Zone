@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 5rem;  
+  height: 5rem;
   padding: 1.2rem;
   background-color: #2f2d52;
   background: rgba(255, 255, 255, 0.1);
@@ -121,7 +121,7 @@
 .search-form svg {
   font-size: 1.7rem;
   margin-left: 0.5rem;
-/*   margin-right: 1rem; */
+  /*   margin-right: 1rem; */
   margin-right: 0.5rem;
 }
 
@@ -129,7 +129,7 @@
   width: 270px;
   height: 40px;
   background-color: transparent;
-/*   border: 1px solid rgba(255, 255, 255, 0.5); */  
+  /*   border: 1px solid rgba(255, 255, 255, 0.5); */
   border: none;
   border-radius: 0.5rem;
   color: white;
@@ -210,8 +210,8 @@
   border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.chat-input input[type=file],
-.chat-input input[type=text] {
+.chat-input input[type="file"],
+.chat-input input[type="text"] {
   width: 100%;
   padding-left: 1rem;
   margin-left: 1rem;
@@ -231,7 +231,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .attachments svg {
@@ -312,4 +311,10 @@
   background: rgba(255, 255, 255, 0.4);
   color: white;
   border-radius: 10px 0 10px 10px;
+}
+
+@media (max-width: 3000px) {
+  .firebase-chat {
+    padding: 200px;
+  }
 }

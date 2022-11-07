@@ -45,6 +45,8 @@ class User(db.Model):
 
 class Publish(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    picture = db.Column(db.String(500), nullable=True)
     styles = db.Column(db.String(50), default="")
     description = db.Column(db.String(1200), default="")
     files = db.Column(db.String(500), default="")
@@ -60,13 +62,15 @@ class Publish(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "username": self.username,
+            "picture": self.picture,
             "styles": self.styles,
             "description": self.description,
             "files": self.files,
             "facebook": self.facebook,
             "instagram": self.instagram,
             "twitter": self.twitter,
-            "user_id": self.user_id
+            "user_id": self.user_id,
         }
 
 
