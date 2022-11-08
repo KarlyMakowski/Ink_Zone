@@ -1,32 +1,36 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+
 import Carousel from "react-bootstrap/Carousel";
 
 import "../../styles/modal-gallery.css";
 
 export const ModalCarousel = () => {
+  const { store, actions } = useContext(Context);
+
+  const params = useParams();
+
+  useEffect(() => {
+    actions.getArt(params.id);
+  });
+
+  //   const toBase64 = file => new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = error => reject(error);
+  // });
+
   return (
     <Carousel>
-      <Carousel.Item className="carousel-item">
-        <img
-          className="d-block w-100"
-          src="https://logiabarcelona.com/wp-content/uploads/2021/02/imagen_home_javier_arcia.jpg"
-          alt="First slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://i.pinimg.com/originals/1a/26/2f/1a262fcfaa408bde72a35136e93f0299.jpg"
-          alt="Second slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://i.pinimg.com/originals/50/9a/cb/509acb3c65a64d834cf300cda0a1c3ef.jpg"
-          alt="Third slide"
-        />
-      </Carousel.Item>
+      {store.multipleFiles.map((files, i) => {
+        return (
+          <Carousel.Item key={i} className="carousel-item">
+            <img className="d-block w-100" src={files} alt={console.log()} />
+          </Carousel.Item>
+        );
+      })}
     </Carousel>
   );
 };

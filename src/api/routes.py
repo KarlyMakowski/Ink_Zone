@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint, json, current_app
-from api.models import db, User, Publish, Styles, Prices, Reviews, Favourites, BlackList
+from api.models import db, User, Publish, Styles, Prices, Reviews, Favourites, BlackList, File
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt_header
 from flask_bcrypt import Bcrypt
@@ -295,18 +295,17 @@ def create_expert(id):
     picture = request.json.get("picture", None)
     styles = request.json.get("styles", None)
     description = request.json.get("description", None)
-    files = request.json.get("multipleFiles", None)
+    files = request.json.get("files", None)
     facebook = request.json.get("facebook", None)
     instagram = request.json.get("instagram", None)
     twitter = request.json.get("twitter", None)
-    print(files)
 
     if user != None:
         expert = Publish.query.filter_by(user_id=user.id).first()
 
         if expert == None:
-            create_expert = Publish(user_id=user.id, username=username, picture=picture, styles=styles, description=description, files=files,
-                                    facebook=facebook, instagram=instagram, twitter=twitter)
+            create_expert = Publish(user_id=user.id, username=username, picture=picture, styles=styles,
+                                    description=description, facebook=facebook, instagram=instagram, twitter=twitter)
 
             db.session.add(create_expert)
             db.session.commit()
@@ -315,7 +314,8 @@ def create_expert(id):
                 "created": True,
                 "status": "success",
                 "msg": "Successfully published",
-                "user": user.serialize()
+                "expert": expert.serialize(),
+
             }
 
             return jsonify(response_body), 200
@@ -326,22 +326,58 @@ def create_expert(id):
             expert.styles = styles
             expert.description = description
             expert.files = files
-            expert.facebook = facebook
-            expert.instagram = instagram
-            expert.twitter = twitter
+            expert.facebook = user.facebook
+            expert.instagram = user.instagram
+            expert.twitter = user.twitter
 
             db.session.commit()
 
             response_body = {
                 "status": "success",
                 "msg": "Successfully modified your info",
-                "user": user.serialize()
+                "expert": expert.serialize()
             }
 
             return jsonify(response_body), 200
 
     else:
         return jsonify({"status": "failed", "msg": "Your info could not be saved"}), 400
+
+
+@api.route('/private/multiple-upload', methods=['PUT'])
+@jwt_required()
+def multiple_upload():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    expert = Publish.query.filter_by(user_id=user.id).first()
+
+    if "files" in request.files:
+        files = request.files.getlist("files")
+
+        for file in files:
+            multiple_upload = cloudinary.uploader.upload(
+                file, folder="Ink Zone")
+
+            if not multiple_upload:
+                return jsonify({"status": "failed", "msg": "There was an error during upload!", "user": None}), 400
+
+            new_file = File(publish_id=expert.id,
+                            url=multiple_upload["secure_url"])
+
+            db.session.add(new_file)
+
+        db.session.commit()
+
+        files = File.query.filter_by(publish_id=expert.id).all()
+        files_list = list(map(lambda files: files.serialize(), files))
+
+        response_body = {
+            "status": "success",
+            "msg": "Files updated",
+            "files": files_list
+        }
+
+        return jsonify(response_body), 200
 
 
 @api.route('/private', methods=['DELETE'])
@@ -365,9 +401,16 @@ def delete_profile():
 def get_experts():
     experts = Publish.query.all()
     experts_list = list(map(lambda experts: experts.serialize(), experts))
-    print(experts_list)
 
     return jsonify(experts_list), 200
+
+
+@api.route('/experts-art-work/<id>', methods=['GET'])
+def get_art(id):
+    art = File.query.filter_by(publish_id=id)
+    art_work = list(map(lambda art: art.serialize(), art))
+
+    return jsonify(art_work), 200
 
 
 @api.route('/experts-search', methods=['POST', 'GET'])

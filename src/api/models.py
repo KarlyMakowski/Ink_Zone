@@ -49,12 +49,12 @@ class Publish(db.Model):
     picture = db.Column(db.String(500), nullable=True)
     styles = db.Column(db.String(50), default="")
     description = db.Column(db.String(1200), default="")
-    files = db.Column(db.String(500), default="")
     facebook = db.Column(db.String(80), default="")
     instagram = db.Column(db.String(80), default="")
     twitter = db.Column(db.String(80), default="")
     user_id = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete="CASCADE"), nullable=True)
+    files_publish = db.relationship('File')
 
     def __repr__(self):
         f'<Publish %r>' % self.id
@@ -66,11 +66,27 @@ class Publish(db.Model):
             "picture": self.picture,
             "styles": self.styles,
             "description": self.description,
-            "files": self.files,
             "facebook": self.facebook,
             "instagram": self.instagram,
             "twitter": self.twitter,
             "user_id": self.user_id,
+        }
+
+
+class File(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    url = db.Column(db.String(500), default="")
+    publish_id = db.Column(db.Integer, db.ForeignKey(
+        'publish.id', ondelete="CASCADE"), nullable=True)
+
+    def __repr__(self):
+        f'<File %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "url": self.url,
+            "publish_id": self.publish_id
         }
 
 

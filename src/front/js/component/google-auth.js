@@ -29,13 +29,9 @@ export const GoogleAuth = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      try {
-        const idToken = await user.getIdToken(/* forceRefresh */ true);
-        store.token = idToken;
-        sessionStorage.getItem("token");
-      } catch (error) {
-        console.error({ error });
-      }
+      const idToken = await user.getIdToken(/* forceRefresh */ true);
+      store.token = idToken;
+      sessionStorage.getItem("token");
       actions.authGoogle(user);
       store.currentUser = {
         name: user.displayName,
@@ -45,6 +41,7 @@ export const GoogleAuth = () => {
       };
       navigate("/profile");
     } catch (error) {
+      console.error(error);
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.customData.email;

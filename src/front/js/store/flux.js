@@ -227,6 +227,64 @@ const getState = ({ getStore, getActions, setStore }) => {
         navigate("/");
       },
 
+      passwordRecovery: async (e, navigate) => {
+        e.preventDefault();
+        const { email } = getStore();
+
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/password-recovery",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+              }),
+            }
+          );
+          const { status, msg } = await resp.json();
+          if (status === "failed") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "error",
+              color: "#c61a09",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#c61a09",
+              timer: 8000,
+            });
+          }
+          if (status === "success") {
+            Swal.fire({
+              title: msg,
+              width: 720,
+              padding: "5em",
+              background: "transparent",
+              backdrop: "rgba(32, 32, 32, 0.9)",
+              icon: "success",
+              color: "#aeffb9",
+              position: "center",
+              animation: true,
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#aeffb9",
+              timer: 8000,
+            });
+            navigate("/sign-in");
+          }
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
       loadProfile: async (e) => {
         e.preventDefault();
         const {
@@ -391,14 +449,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 picture: currentUser.picture,
                 styles: stylesPublish,
                 description: description,
-                multipleFiles: multipleFiles,
+                files: multipleFiles,
                 facebook: facebook,
                 instagram: instagram,
                 twitter: twitter,
               }),
             }
           );
-          const { created, status, msg, user } = await resp.json();
+          const { created, status, msg, expert } = await resp.json();
           if (status === "failed") {
             Swal.fire({
               title: msg,
@@ -432,31 +490,33 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            setStore({ created: created, currentUser: user });
+            setStore({ created: created, experts: expert });
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
       },
 
-      passwordRecovery: async (e, navigate) => {
+      multipleUpload: async (e) => {
         e.preventDefault();
-        const { email } = getStore();
+        const {multipleFiles} = getStore();
+        console.log(multipleFiles)
 
         try {
+          let formData = new FormData();
+          formData.set("files", multipleFiles);
+
           const resp = await fetch(
-            process.env.BACKEND_URL + "/api/password-recovery",
+            process.env.BACKEND_URL + "/api/private/multiple-upload",
             {
-              method: "POST",
+              method: "PUT",
               headers: {
-                "Content-Type": "application/json",
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
               },
-              body: JSON.stringify({
-                email: email,
-              }),
+              body: formData,
             }
           );
-          const { status, msg } = await resp.json();
+          const { status, msg, files } = await resp.json();
           if (status === "failed") {
             Swal.fire({
               title: msg,
@@ -490,7 +550,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            navigate("/sign-in");
+            setStore({ multipleFiles: files });
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
@@ -530,6 +590,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      loadExperts: () => {
+        fetch(process.env.BACKEND_URL + "/api/experts", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ experts: data }));
+      },
+
+      getArt: (id) => {
+        fetch(process.env.BACKEND_URL + `/api/experts-art-work/${id}`)
+          .then((response) => response.json())
+          .then((data) => setStore({ multipleFiles: data }));
+      },
+
+      // setUploadedFiles: (e, files) => {
+      //   e.preventDefault();
+      //   setStore({ multipleFiles: files });
+      // },
 
       loadStyles: () => {
         fetch(process.env.BACKEND_URL + "/api/styles")
@@ -587,16 +668,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/prices")
           .then((response) => response.json())
           .then((data) => setStore({ prices: data }));
-      },
-
-      loadExperts: () => {
-        fetch(process.env.BACKEND_URL + "/api/experts", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => setStore({ experts: data }));
       },
 
       handleChange: (e) => {

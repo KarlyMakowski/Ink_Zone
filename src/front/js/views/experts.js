@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/experts.css";
 
 import { SelectStyle } from "../component/select";
-import { ModalGallery } from "../component/modal-gallery";
+import { ModalGallery } from "../component/modal-gallery"; 
 
 import skull from "../../img/skull-profile.png";
 
@@ -29,7 +29,7 @@ export const Experts = () => {
         </div>
       </div>
       <div className="experts-grid">
-        {store.experts.map((singleExpert, i) => {
+        {store.experts?.map((singleExpert, i) => {
           return (
             <div className="experts-container" key={i}>
               <div className="experts-box">
@@ -69,7 +69,7 @@ export const Experts = () => {
                 >
                   Gallery
                 </button>
-                <ModalGallery show={show} handleClose={handleClose} />
+                <ModalGallery show={show} handleClose={handleClose} /> 
                 <div className="experts-bottom">
                   <p>{singleExpert?.description}</p>
                   <span className="badge rounded-pill text-bg-light">
