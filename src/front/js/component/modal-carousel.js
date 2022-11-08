@@ -13,21 +13,14 @@ export const ModalCarousel = () => {
 
   useEffect(() => {
     actions.getArt(params.id);
-  });
-
-  //   const toBase64 = file => new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => resolve(reader.result);
-  //     reader.onerror = error => reject(error);
-  // });
+  }, []);
 
   return (
-    <Carousel>
-      {store.multipleFiles.map((files, i) => {
+    <Carousel key={store.multipleFiles.publish_id}>
+      {Array.from(store.multipleFiles).map((item, index) => {
         return (
-          <Carousel.Item key={i} className="carousel-item">
-            <img className="d-block w-100" src={files} alt={console.log()} />
+          <Carousel.Item key={index} className="carousel-item">
+            <img className="d-block w-100" src={item} alt={console.log()} />
           </Carousel.Item>
         );
       })}

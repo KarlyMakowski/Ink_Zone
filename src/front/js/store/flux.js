@@ -497,14 +497,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      setUploadedFiles: (e) => {
+        e.preventDefault();
+        const { files } = e.target;
+        setStore({ multipleFiles: files });
+      },
+
       multipleUpload: async (e) => {
         e.preventDefault();
-        const {multipleFiles} = getStore();
-        console.log(multipleFiles)
+        const { multipleFiles } = getStore();
 
         try {
           let formData = new FormData();
-          formData.set("files", multipleFiles);
+          Array.from(multipleFiles).forEach((file) =>
+            formData.append("files", file)
+          );
 
           const resp = await fetch(
             process.env.BACKEND_URL + "/api/private/multiple-upload",
@@ -606,11 +613,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => setStore({ multipleFiles: data }));
       },
-
-      // setUploadedFiles: (e, files) => {
-      //   e.preventDefault();
-      //   setStore({ multipleFiles: files });
-      // },
 
       loadStyles: () => {
         fetch(process.env.BACKEND_URL + "/api/styles")
