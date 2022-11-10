@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/experts.css";
 
 import { SelectStyle } from "../component/select";
-import { ModalGallery } from "../component/modal-gallery"; 
+import { ModalGallery } from "../component/modal-gallery";
 
 import skull from "../../img/skull-profile.png";
 
@@ -16,9 +16,16 @@ export const Experts = () => {
   });
 
   const [show, setShow] = useState(false);
+  const [expertShow, setExpertShow] = useState(0);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setExpertShow(0);
+    setShow(false);
+  };
+  const handleShow = (expert_id) => {
+    setExpertShow(expert_id);
+    setShow(true);
+  };
 
   return (
     <>
@@ -65,11 +72,17 @@ export const Experts = () => {
                 <button
                   type="button"
                   className="text-bg-light"
-                  onClick={handleShow}
+                  onClick={(e) => handleShow(singleExpert?.id)}
                 >
                   Gallery
                 </button>
-                <ModalGallery show={show} handleClose={handleClose} /> 
+                <ModalGallery
+                  show={show}
+                  handleClose={handleClose}
+                  expert_id={singleExpert?.id}
+                  files={singleExpert?.files}
+                  expert_show={expertShow}
+                />
                 <div className="experts-bottom">
                   <p>{singleExpert?.description}</p>
                   <span className="badge rounded-pill text-bg-light">

@@ -46,6 +46,7 @@ def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
         token = request.headers.get("Authorization")[7:]
         decoded_token = auth.verify_id_token(token, check_revoked=True)
         uid = decoded_token['uid']
+        custom_token = auth.create_custom_token(uid)
 
         return False
 

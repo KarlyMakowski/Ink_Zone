@@ -4,12 +4,16 @@ import { ModalCarousel } from "./modal-carousel";
 
 import "../../styles/modal-gallery.css";
 
-export const ModalGallery = ({ show, handleClose }) => {
+export const ModalGallery = ({ show, handleClose, expert_id, files, expert_show }) => {
   return (
-    <Modal show={show} onHide={handleClose} centered>
+    <Modal
+      show={show && expert_id == expert_show}
+      onHide={handleClose}
+      centered
+    >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body className="modal-body">
-        <ModalCarousel />
+        <ModalCarousel expert_id={expert_id} files={files} />
       </Modal.Body>
     </Modal>
   );

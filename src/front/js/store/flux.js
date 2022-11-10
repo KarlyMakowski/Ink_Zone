@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { getAuth, signInWithCustomToken } from "firebase/auth";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -8,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       experts: [],
       stylesPublish: [],
       multipleFiles: [],
+      expertFiles: [],
       styles: [],
       privateStyle: [],
       addFav: false,
@@ -94,7 +96,9 @@ const getState = ({ getStore, getActions, setStore }) => {
               password: password,
             }),
           });
-          const { status, msg, user, token } = await resp.json();
+          const { status, msg, user, token, fireToken } = await resp.json();
+          // const auth = getAuth();
+          // console.log(auth)
           if (status === "failed") {
             Swal.fire({
               title: msg,
@@ -128,6 +132,10 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
+            // signInWithCustomToken(auth, fireToken).then((userCredential) => {
+            //   const user = userCredential.user;
+            //   console.log(userCredential.user);
+            // });
             setStore({ currentUser: user, token: token, role: user.role });
             sessionStorage.setItem("token", token);
             navigate("/profile");
@@ -155,8 +163,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               }),
             }
           );
-          const { status, msg, token, username, email, picture } =
-            await resp.json();
+          const { status, msg, token, username, email, picture } = await resp.json();
           if (status === "failed") {
             Swal.fire({
               title: msg,
@@ -430,7 +437,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           currentUser,
           stylesPublish,
           description,
-          multipleFiles,
+          expertFiles,
           facebook,
           instagram,
           twitter,
@@ -449,14 +456,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 picture: currentUser.picture,
                 styles: stylesPublish,
                 description: description,
-                files: multipleFiles,
+                files: expertFiles,
                 facebook: facebook,
                 instagram: instagram,
                 twitter: twitter,
               }),
             }
           );
-          const { created, status, msg, expert } = await resp.json();
+          const { status, msg } = await resp.json();
           if (status === "failed") {
             Swal.fire({
               title: msg,
@@ -490,7 +497,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            setStore({ created: created, experts: expert });
+            getActions().loadExperts();
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
@@ -557,11 +564,22 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            setStore({ multipleFiles: files });
+            setStore({ expertFiles: files });
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
+      },
+
+      deleteFile: (e, deleteIndex) => {
+        e.preventDefault();
+        const { multipleFiles } = getStore();
+        const newMultipleFiles = [...multipleFiles];
+        setStore({
+          multipleFiles: newMultipleFiles.filter(
+            (item, index) => index !== deleteIndex
+          ),
+        });
       },
 
       deleteProfile: async (navigate) => {
@@ -606,12 +624,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => response.json())
           .then((data) => setStore({ experts: data }));
-      },
-
-      getArt: (id) => {
-        fetch(process.env.BACKEND_URL + `/api/experts-art-work/${id}`)
-          .then((response) => response.json())
-          .then((data) => setStore({ multipleFiles: data }));
       },
 
       loadStyles: () => {

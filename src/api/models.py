@@ -60,12 +60,16 @@ class Publish(db.Model):
         f'<Publish %r>' % self.id
 
     def serialize(self):
+        expert_files = list(
+            map(lambda files: files.serialize(), self.files_publish))
+
         return {
             "id": self.id,
             "username": self.username,
             "picture": self.picture,
             "styles": self.styles,
             "description": self.description,
+            "files": expert_files,
             "facebook": self.facebook,
             "instagram": self.instagram,
             "twitter": self.twitter,

@@ -11,6 +11,7 @@ import datetime
 import cloudinary
 import cloudinary.api
 from cloudinary.uploader import upload
+from firebase_admin import auth
 
 
 api = Blueprint('api', __name__)
@@ -100,6 +101,7 @@ def create_token():
                 "status": "success",
                 "msg": "Successfully logged in",
                 "token": token,
+                # "fireToken": auth.create_custom_token(email),
                 "user": user.serialize()
             }
 
@@ -403,14 +405,6 @@ def get_experts():
     experts_list = list(map(lambda experts: experts.serialize(), experts))
 
     return jsonify(experts_list), 200
-
-
-@api.route('/experts-art-work/<id>', methods=['GET'])
-def get_art(id):
-    art = File.query.filter_by(publish_id=id)
-    art_work = list(map(lambda art: art.serialize(), art))
-
-    return jsonify(art_work), 200
 
 
 @api.route('/experts-search', methods=['POST', 'GET'])
