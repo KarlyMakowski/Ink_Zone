@@ -1,6 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "../google-auth";
 
 import "../../../styles/chat.css";
@@ -15,11 +25,15 @@ export const Search = () => {
   const [err, setErr] = useState(false);
 
   const searchUser = async () => {
-    const q = query(collection(db, "chats"), where("username", "==", username));
+    const q = query(
+      collection(db, "users"),
+      where("displayName", "==", username)
+    );
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
+        console.log(doc.id, "=>", doc.data());
       });
     } catch (err) {
       setErr(true);
@@ -27,7 +41,39 @@ export const Search = () => {
   };
 
   const handleKey = (e) => {
-    e.code === "Enter" && searchUser();
+    e.key === "Enter" && searchUser();
+  };
+
+  const selectUser = async () => {
+    const combinedId =
+      store.currentUser.uid > user.uid
+        ? store.currentUser.uid + user.uid
+        : user.uid + store.currentUser.uid;
+    try {
+      const res = await getDoc(doc(db, "chats", combinedId));
+      if (!res.exists()) {
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+
+        await updateDoc(doc(db, "userChats", store.currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: store.currentUser.id,
+            displayName: store.currentUser.username,
+            photoURL: store.currentUser.picture,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+    } catch (err) {
+      console.log("Error loading message from backend", err);
+    }
   };
 
   return (
@@ -43,10 +89,10 @@ export const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="user-list">
-          <img src={user.picture} alt="user-picture" />
+        <div className="user-list" onClick={selectUser}>
+          <img src={user.photoURL} alt="user-picture" />
           <div className="user-info">
-            <span>{user.username}</span>
+            <span>{user.displayName}</span>
           </div>
         </div>
       )}

@@ -19,6 +19,8 @@ export const SelectStyle = ({ experts }) => {
     { value: "Sketch", label: "Sketch", color: "black" },
     { value: "Watercolor", label: "Watercolor", color: "black" },
     { value: "Japanese", label: "Japanese", color: "black" },
+    { value: "Glitter", label: "Glitter", color: "black" },
+    { value: "Kawaii Culture", label: "Kawaii Culture", color: "black" },
   ];
 
   const colourStyles = {

@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
+import { db } from "../component/google-auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -96,9 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               password: password,
             }),
           });
-          const { status, msg, user, token, fireToken } = await resp.json();
-          // const auth = getAuth();
-          // console.log(auth)
+          const { status, msg, token, user, firebaseToken } = await resp.json();
           if (status === "failed") {
             Swal.fire({
               title: msg,
@@ -132,10 +132,19 @@ const getState = ({ getStore, getActions, setStore }) => {
               confirmButtonColor: "#aeffb9",
               timer: 8000,
             });
-            // signInWithCustomToken(auth, fireToken).then((userCredential) => {
-            //   const user = userCredential.user;
-            //   console.log(userCredential.user);
-            // });
+            const auth = getAuth();
+            const res = await signInWithCustomToken(auth, firebaseToken);
+            try {
+              await setDoc(doc(db, "users", res.user.uid), {
+                uid: res.user.uid,
+                displayName: user.username,
+                email: user.email,
+                photoURL: user.picture,
+              });
+              await setDoc(doc(db, "userChats", res.user.uid), {})
+            } catch (error) {
+              console.log("Error loading message from backend", error);
+            }
             setStore({ currentUser: user, token: token, role: user.role });
             sessionStorage.setItem("token", token);
             navigate("/profile");
@@ -163,7 +172,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               }),
             }
           );
-          const { status, msg, token, username, email, picture } = await resp.json();
+          const { status, msg, token, username, email, picture } =
+            await resp.json();
           if (status === "failed") {
             Swal.fire({
               title: msg,

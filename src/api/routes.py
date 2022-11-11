@@ -96,12 +96,13 @@ def create_token():
             token_expiration = datetime.timedelta(days=1)
             token = create_access_token(
                 identity=email, expires_delta=token_expiration)
+            firebaseToken = auth.create_custom_token(email)
 
             response_body = {
                 "status": "success",
                 "msg": "Successfully logged in",
                 "token": token,
-                # "fireToken": auth.create_custom_token(email),
+                "firebaseToken": firebaseToken.decode('utf-8'),
                 "user": user.serialize()
             }
 
@@ -110,7 +111,7 @@ def create_token():
     return jsonify({"status": "failed", "msg": "Wrong credentials!"}), 401
 
 
-@api.route('/token/google', methods=['POST'])
+@api.route('/token/google', methods=['POST']) # AUTHENTICATION GOOGLE
 def auth_google():
     username = request.json.get("username", None)
     email = request.json.get("email", None)
