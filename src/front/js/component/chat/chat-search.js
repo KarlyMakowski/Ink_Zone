@@ -64,7 +64,7 @@ export const Search = () => {
         });
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
-            uid: store.currentUser.id,
+            uid: store.currentUser.uid,
             displayName: store.currentUser.username,
             photoURL: store.currentUser.picture,
           },
@@ -74,6 +74,8 @@ export const Search = () => {
     } catch (err) {
       console.log("Error loading message from backend", err);
     }
+    setUser(null);
+    setUsername("")
   };
 
   return (

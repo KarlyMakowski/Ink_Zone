@@ -56,9 +56,11 @@ def signup():
             return jsonify({"created": False, "status": "failed", "msg": "Username already exists!"}), 409
 
         else:
+            uid = "".join(random.choice(
+                string.ascii_letters + string.digits) for x in range(118))
             pw_hash = current_app.bcrypt.generate_password_hash(
                 password).decode('utf-8')
-            new_user = User(username=username, email=email,
+            new_user = User(uid=uid, username=username, email=email,
                             password=pw_hash, role=role)
 
             db.session.add(new_user)
@@ -81,6 +83,7 @@ def signup():
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    uid = request.json.get("uid", None)
     user = User.query.filter_by(email=email).first()
 
     if not email:
@@ -96,13 +99,13 @@ def create_token():
             token_expiration = datetime.timedelta(days=1)
             token = create_access_token(
                 identity=email, expires_delta=token_expiration)
-            firebaseToken = auth.create_custom_token(email)
+            firebaseToken = auth.create_custom_token(user.uid)
 
             response_body = {
                 "status": "success",
                 "msg": "Successfully logged in",
                 "token": token,
-                "firebaseToken": firebaseToken.decode('utf-8'),
+                "firebaseToken": firebaseToken.decode("utf-8"),
                 "user": user.serialize()
             }
 
@@ -111,7 +114,7 @@ def create_token():
     return jsonify({"status": "failed", "msg": "Wrong credentials!"}), 401
 
 
-@api.route('/token/google', methods=['POST']) # AUTHENTICATION GOOGLE
+@api.route('/token/google', methods=['POST'])  # AUTHENTICATION GOOGLE
 def auth_google():
     username = request.json.get("username", None)
     email = request.json.get("email", None)
