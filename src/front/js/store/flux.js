@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       currentUser: null,
+      chatId: null,
       experts: [],
       stylesPublish: [],
       multipleFiles: [],
@@ -141,7 +142,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 email: user.email,
                 photoURL: user.picture,
               });
-              await setDoc(doc(db, "userChats", res.user.uid), {})
+              await setDoc(doc(db, "userChats", res.user.uid), {});
             } catch (error) {
               console.log("Error loading message from backend", error);
             }
@@ -152,6 +153,28 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
+      },
+
+      chatContext: () => {
+      const { currentUser } = getStore();
+        const chatReducer = (currentUser, payload) => {
+          const INITIAL_STATE = {
+            chatId: "null",
+            user: {},
+          };
+          switch (action.type) {
+            case "CHANGE_USER":
+              return {
+                user: action.payload,
+                chatId:
+                  state.store.currentUser > action.payload.uid
+                    ? state.store.currentUser.uid + action.payload.uid
+                    : action.payload.uid + state.store.currentUser.uid,
+              };
+            default:
+              return state;
+          }
+        };
       },
 
       authGoogle: async (user) => {

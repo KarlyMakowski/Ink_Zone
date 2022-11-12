@@ -18,7 +18,7 @@ import "../../../styles/chat.css";
 import { BiSearchAlt } from "react-icons/bi";
 
 export const Search = () => {
-  const { actions, store } = useContext(Context);
+  const { store } = useContext(Context);
 
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -75,7 +75,7 @@ export const Search = () => {
       console.log("Error loading message from backend", err);
     }
     setUser(null);
-    setUsername("")
+    setUsername("");
   };
 
   return (
@@ -87,9 +87,10 @@ export const Search = () => {
           placeholder="Find an user..."
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
+          value={username}
         />
       </div>
-      {err && <span>User not found!</span>}
+      {err ? <span>User not found!</span> : null}
       {user && (
         <div className="user-list" onClick={selectUser}>
           <img src={user.photoURL} alt="user-picture" />

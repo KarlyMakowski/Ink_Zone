@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { Context } from "../../store/appContext";
 
 import "../../../styles/chat.css";
 
@@ -8,6 +9,8 @@ import { Messages } from "./chat-messages";
 import { Input } from "./chat-input";
 
 export const Chat = () => {
+  const { store, actions } = useContext(Context)
+
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -15,7 +18,7 @@ export const Chat = () => {
   return (
     <div className="chat-view">
       <div className="chat-info">
-        <span>Brandon</span>
+        <span>Brando</span>
         <div className="chat-icons">
           <MdVideocam />
           <MdPersonAddAlt1 />
