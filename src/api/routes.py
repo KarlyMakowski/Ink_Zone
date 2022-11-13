@@ -411,13 +411,11 @@ def get_experts():
     return jsonify(experts_list), 200
 
 
-@api.route('/experts-search', methods=['POST', 'GET'])
-def search_expert():
-    response_body = User.query.filter_by(
-        role="Expert").order_by(User.username).all()
-    response_body = [user.serialize() for user in response_body]
+@api.route('/user-search/<username>', methods=['GET'])
+def search_user(username):
+    users = User.query.filter_by(username=username).first()
 
-    return json.dumps(response_body), 200
+    return jsonify(users.serialize()), 200
 
 
 @api.route('/styles', methods=['GET'])

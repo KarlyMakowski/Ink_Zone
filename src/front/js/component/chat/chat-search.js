@@ -18,7 +18,7 @@ import "../../../styles/chat.css";
 import { BiSearchAlt } from "react-icons/bi";
 
 export const Search = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -33,7 +33,6 @@ export const Search = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
-        console.log(doc.id, "=>", doc.data());
       });
     } catch (err) {
       setErr(true);
@@ -44,13 +43,13 @@ export const Search = () => {
     e.key === "Enter" && searchUser();
   };
 
-  const selectUser = async () => {
-    const combinedId =
-      store.currentUser.uid > user.uid
-        ? store.currentUser.uid + user.uid
-        : user.uid + store.currentUser.uid;
+  const selectUser = async () => {  
+    actions.getUser(username);
+    const combinedId = store.currentUser.uid + user.uid;
+
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
+
       if (!res.exists()) {
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 

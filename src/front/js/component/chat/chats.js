@@ -9,6 +9,7 @@ export const Chats = () => {
   const { store } = useContext(Context);
 
   const [chats, setChats] = useState([]);
+  console.log('store', store)
 
   useEffect(() => {
     const getChats = () => {
@@ -25,7 +26,11 @@ export const Chats = () => {
     store.currentUser.uid && getChats();
   }, [store.currentUser.uid]);
 
-  console.log(chats)
+  console.log('chats', chats)
+
+  const startConver = (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
 
   return (
     <div className="chats">

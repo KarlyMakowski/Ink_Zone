@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       currentUser: null,
+      user: {},
       chatId: null,
       experts: [],
       stylesPublish: [],
@@ -21,6 +22,17 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
+      getUser: (username) => {
+        fetch(process.env.BACKEND_URL + `/api/user-search/${username}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => setStore({ user: data }));
+      },
+
       signup: async (e, navigate) => {
         e.preventDefault();
         const { username, email, password, confirmPassword, role } = getStore();
@@ -156,7 +168,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       chatContext: () => {
-      const { currentUser } = getStore();
+        const { currentUser } = getStore();
         const chatReducer = (currentUser, payload) => {
           const INITIAL_STATE = {
             chatId: "null",
