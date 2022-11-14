@@ -1,19 +1,7 @@
-// import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 import { db } from "../google-auth";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-  updateDoc,
-  serverTimestamp,
-  getDoc,
-  onSnapshot
-} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 import "../../../styles/chat.css";
 
@@ -59,12 +47,8 @@ export const Chats = () => {
   //   store.currentUser.uid && getChats();
   // }, [store.currentUser.uid]);
 
-  const selectChat = (payload, chat) => {
-    console.group('selectChat')
-    console.log('chat', chat)
-    console.log('payload', payload)
-    console.groupEnd()
-    actions.toggleChat(payload)
+  const selectChat = () => {
+    // actions.handleChat()
   };
   return (
     <div className="chats">
@@ -72,7 +56,7 @@ export const Chats = () => {
         <div
           className="user-list"
           key={chat[0]}
-          onClick={() => selectChat({ chatId: chat[0], userInfo: chat[1].userInfo }, chat)}
+          onClick={() => selectChat(chat[1].userInfo)}
         >
           <img src={chat[1].userInfo.photoURL} alt="user-picture" />
           <div className="user-info">

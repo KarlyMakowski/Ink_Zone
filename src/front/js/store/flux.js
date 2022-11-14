@@ -1,7 +1,16 @@
 import Swal from "sweetalert2";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import { db } from "../component/google-auth";
-import { doc, getDoc, setDoc, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  getDocs,
+  query,
+  collection,
+  where,
+  orderBy,
+} from "firebase/firestore";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -25,15 +34,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
     actions: {
       getUser: async (username) => {
-        const response = await fetch(process.env.BACKEND_URL + `/api/user-search/${username}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        const user = await response.json()
-        getActions().populateChat(user)
+        console.log(username);
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/user-search/${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const user = await response.json();
+        console.log("user", user);
         setStore({ user });
+        getActions().loadChat(user);
+      },
+
+      loadChat: async (user) => {
+        const { currentUser } = getStore();
+        const q = query(
+          collection(db, "chats"),
+          where("senderId", "==", currentUser.uid),
+          where("receiverId", "==", user.uid)
+          // orderBy('dateTime', 'asc')
+        );
+        const querySnapshot = await getDocs(q);
+        let chat = [];
+        querySnapshot.forEach((doc) => {
+          chat = [...chat, doc.data()];
+        });
+        console.log("chat", chat);
+        setStore({ chat });
       },
 
       signup: async (e, navigate) => {
@@ -170,32 +201,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
-      },
-
-      populateChat: async (user) => {
-        const { currentUser } = getStore();
-        const q = query(
-          collection(db, "chats"),
-          where("fromId", "==", currentUser.uid),
-          where("toId", "==", user.uid)
-        );
-        try {
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-            console.log('populateChat doc.data()', doc.data())
-            setStore({ chat: doc.data() });
-          });
-        } catch (err) {
-          setErr(true);
-        }
-      },
-
-      toggleChat: async (payload) => {
-        const { chatId, userInfo } = payload
-        console.log('payload', payload)
-        // const { user, chatId } = getStore();
-        // const res = await getDoc(doc(db, "userChats", res.chatId.uid),)
-        setStore({ chatId, user: userInfo });
       },
 
       authGoogle: async (user) => {
@@ -552,7 +557,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               timer: 8000,
             });
             getActions().loadExperts();
-            setStore({ loading: true })
+            setStore({ loading: true });
           }
         } catch (error) {
           console.log("Error loading message from backend", error);

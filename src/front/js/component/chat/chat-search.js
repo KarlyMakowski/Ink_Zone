@@ -10,6 +10,7 @@ import {
   updateDoc,
   serverTimestamp,
   getDoc,
+  orderBy,
 } from "firebase/firestore";
 import { db } from "../google-auth";
 
@@ -45,35 +46,7 @@ export const Search = () => {
 
   const selectUser = async () => {
     actions.getUser(username);
-    // const combinedId = store.currentUser.uid + user.uid;
-
-    // try {
-    //   const res = await getDoc(doc(db, "chats", combinedId));
-
-    //   if (!res.exists()) {
-    //     await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
-    // await updateDoc(doc(db, "userChats", store.currentUser.uid), {
-    //   [combinedId + ".userInfo"]: {
-    //     uid: user.uid,
-    //     displayName: user.displayName,
-    //     photoURL: user.photoURL,
-    //   },
-    //   [combinedId + ".date"]: serverTimestamp(),
-    // });
-    // await updateDoc(doc(db, "userChats", user.uid), {
-    //   [combinedId + ".userInfo"]: {
-    //     uid: store.currentUser.uid,
-    //     displayName: store.currentUser.username,
-    //     photoURL: store.currentUser.picture,
-    //   },
-    //   [combinedId + ".date"]: serverTimestamp(),
-    // });
-    // }
-    // } catch (err) {
-    //   console.log("Error loading message from backend", err);
-    // }
-    // setUser(null);
+    
     setUsername("");
   };
 
@@ -89,7 +62,6 @@ export const Search = () => {
           value={username}
         />
       </div>
-      {err ? <span>User not found!</span> : null}
       {user && (
         <div className="user-list" onClick={selectUser}>
           <img src={user.photoURL} alt="user-picture" />

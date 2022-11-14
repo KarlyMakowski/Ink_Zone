@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useRef, useContext, useEffect } from "react";
+import { Context } from "../../store/appContext";
 
 import "../../../styles/chat.css";
 
 export const Message = (props) => {
-  console.log(props)
+  const ref = useRef();
+  const { senderId, text, dateTime } = props
+  const { store: { currentUser, user } } = useContext(Context);
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [props]);
+
   return (
-    <div className="message owner">
-      <div className="message-info">
-        <img src={props.img} alt="" />
-        <span>{props.dateTime}</span>
+    <div
+      ref={ref}
+      className={`message ${senderId === currentUser.uid && "owner"}`}
+    >
+      <div className="messageInfo">
+        <img
+          src={
+            senderId === currentUser.uid
+              ? currentUser.photoURL
+              : user.photoURL
+          }
+          alt=""
+        />
+        <span>{dateTime.seconds}</span>
       </div>
-      <div className="message-content">
-        <p>{props.text}</p>
-        {/* <img src="https://images.pexels.com/photos/14169804/pexels-photo-14169804.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""/> */}
+      <div className="messageContent">
+        <p>{text}</p>
       </div>
     </div>
   );
