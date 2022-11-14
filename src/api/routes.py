@@ -239,9 +239,6 @@ def private_update():
     if twitter == "" or twitter == None:
         twitter = user.twitter
 
-    if user.role == "Expert":
-        publish = Publish.query.filter_by(user_id=user.id).first()
-
     user.username = username
     user.email = email
     user.name = name
@@ -250,9 +247,9 @@ def private_update():
     user.facebook = facebook
     user.instagram = instagram
     user.twitter = twitter
-    publish.facebook = facebook
-    publish.instagram = instagram
-    publish.twitter = twitter
+    user.facebook = facebook
+    user.instagram = instagram
+    user.twitter = twitter
 
     db.session.commit()
 
@@ -332,9 +329,9 @@ def create_expert(id):
             expert.styles = styles
             expert.description = description
             expert.files = files
-            expert.facebook = user.facebook
-            expert.instagram = user.instagram
-            expert.twitter = user.twitter
+            expert.facebook = facebook
+            expert.instagram = instagram
+            expert.twitter = twitter
 
             db.session.commit()
 

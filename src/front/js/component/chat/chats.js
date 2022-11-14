@@ -6,10 +6,9 @@ import { db } from "../google-auth";
 import "../../../styles/chat.css";
 
 export const Chats = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
   const [chats, setChats] = useState([]);
-  console.log('store', store)
 
   useEffect(() => {
     const getChats = () => {
@@ -26,20 +25,24 @@ export const Chats = () => {
     store.currentUser.uid && getChats();
   }, [store.currentUser.uid]);
 
-  console.log('chats', chats)
+  console.log("chats", chats);
 
-  const startConver = (u) => {
-    dispatch({ type: "CHANGE_USER", payload: u });
+  const selectChat = () => {
+    // actions.handleChat()
   };
 
   return (
     <div className="chats">
       {Object.entries(chats)?.map((chat) => (
-        <div className="user-list" key={chat[0]} onClick={() => startConver(chat[1].userInfo)}>
-          <img src={chat[1].userInfo.photoURL} alt="user-picture" />
+        <div
+          className="user-list"
+          key={chat[0]}
+          onClick={() => selectChat(chat[2].userInfo)}
+        >
+          <img src={chat[2].userInfo.photoURL} alt="user-picture" />
           <div className="user-info">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].userInfo.lastMessage?.text}</p>
+            <span>{chat[2].userInfo.displayName}</span>
+            <p>{chat[2].userInfo.lastMessage?.text}</p>
           </div>
         </div>
       ))}

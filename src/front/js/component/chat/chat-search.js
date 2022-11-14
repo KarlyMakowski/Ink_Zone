@@ -61,14 +61,14 @@ export const Search = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-        await updateDoc(doc(db, "userChats", user.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: store.currentUser.uid,
-            displayName: store.currentUser.username,
-            photoURL: store.currentUser.picture,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
+        // await updateDoc(doc(db, "userChats", user.uid), {
+        //   [combinedId + ".userInfo"]: {
+        //     uid: store.currentUser.uid,
+        //     displayName: store.currentUser.username,
+        //     photoURL: store.currentUser.picture,
+        //   },
+        //   [combinedId + ".date"]: serverTimestamp(),
+        // });
       }
     } catch (err) {
       console.log("Error loading message from backend", err);

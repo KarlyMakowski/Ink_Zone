@@ -3,13 +3,17 @@ import { Context } from "../../store/appContext";
 
 import "../../../styles/chat.css";
 
-import { MdVideocam, MdPersonAddAlt1, MdOutlineMoreHoriz } from "react-icons/md";
+import {
+  MdVideocam,
+  MdPersonAddAlt1,
+  MdOutlineMoreHoriz,
+} from "react-icons/md";
 
 import { Messages } from "./chat-messages";
 import { Input } from "./chat-input";
 
 export const Chat = () => {
-  const { store, actions } = useContext(Context)
+  const { store, actions } = useContext(Context);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,7 +22,7 @@ export const Chat = () => {
   return (
     <div className="chat-view">
       <div className="chat-info">
-        <span>Brando</span>
+        <span>Brandom</span>
         <div className="chat-icons">
           <MdVideocam />
           <MdPersonAddAlt1 />

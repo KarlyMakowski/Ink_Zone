@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import { db } from "../component/google-auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       currentUser: null,
       user: {},
       chatId: null,
+      messages: [],
       experts: [],
       stylesPublish: [],
       multipleFiles: [],
@@ -167,26 +168,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      chatContext: () => {
-        const { currentUser } = getStore();
-        const chatReducer = (currentUser, payload) => {
-          const INITIAL_STATE = {
-            chatId: "null",
-            user: {},
-          };
-          switch (action.type) {
-            case "CHANGE_USER":
-              return {
-                user: action.payload,
-                chatId:
-                  state.store.currentUser > action.payload.uid
-                    ? state.store.currentUser.uid + action.payload.uid
-                    : action.payload.uid + state.store.currentUser.uid,
-              };
-            default:
-              return state;
-          }
-        };
+      handleChat: async () => {
+        const { user, chatId } = getStore();
+        const res = await getDoc(doc(db, "userChats", res.chatId.uid), )
+        setStore({})
       },
 
       authGoogle: async (user) => {
@@ -543,6 +528,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               timer: 8000,
             });
             getActions().loadExperts();
+            setStore({loading: true})
           }
         } catch (error) {
           console.log("Error loading message from backend", error);
