@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../store/appContext";
 
 import "../../../styles/chat.css";
 
 import { Message } from "./chat-message";
 
 export const Messages = () => {
+  const { store, actions } = useContext(Context);
+  console.log('store.chat', store.chat)
   const [chat, setChat] = useState([
     {
       text: "Hola, que hase",

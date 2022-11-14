@@ -1,9 +1,9 @@
 import React from "react";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 import "../../../styles/chat.css";
 
 export const Message = (props) => {
+  console.log(props)
   return (
     <div className="message owner">
       <div className="message-info">

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
 import {
   collection,
@@ -43,37 +43,37 @@ export const Search = () => {
     e.key === "Enter" && searchUser();
   };
 
-  const selectUser = async () => {  
+  const selectUser = async () => {
     actions.getUser(username);
-    const combinedId = store.currentUser.uid + user.uid;
+    // const combinedId = store.currentUser.uid + user.uid;
 
-    try {
-      const res = await getDoc(doc(db, "chats", combinedId));
+    // try {
+    //   const res = await getDoc(doc(db, "chats", combinedId));
 
-      if (!res.exists()) {
-        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+    //   if (!res.exists()) {
+    //     await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
-        await updateDoc(doc(db, "userChats", store.currentUser.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-        // await updateDoc(doc(db, "userChats", user.uid), {
-        //   [combinedId + ".userInfo"]: {
-        //     uid: store.currentUser.uid,
-        //     displayName: store.currentUser.username,
-        //     photoURL: store.currentUser.picture,
-        //   },
-        //   [combinedId + ".date"]: serverTimestamp(),
-        // });
-      }
-    } catch (err) {
-      console.log("Error loading message from backend", err);
-    }
-    setUser(null);
+    // await updateDoc(doc(db, "userChats", store.currentUser.uid), {
+    //   [combinedId + ".userInfo"]: {
+    //     uid: user.uid,
+    //     displayName: user.displayName,
+    //     photoURL: user.photoURL,
+    //   },
+    //   [combinedId + ".date"]: serverTimestamp(),
+    // });
+    // await updateDoc(doc(db, "userChats", user.uid), {
+    //   [combinedId + ".userInfo"]: {
+    //     uid: store.currentUser.uid,
+    //     displayName: store.currentUser.username,
+    //     photoURL: store.currentUser.picture,
+    //   },
+    //   [combinedId + ".date"]: serverTimestamp(),
+    // });
+    // }
+    // } catch (err) {
+    //   console.log("Error loading message from backend", err);
+    // }
+    // setUser(null);
     setUsername("");
   };
 

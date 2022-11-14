@@ -37,7 +37,7 @@ export const GoogleAuth = () => {
         name: user.displayName,
         username: user.email.split("@")[0],
         email: user.email,
-        picture: user.photoURL,
+        picture: user.photoURL
       };
       navigate("/profile");
     } catch (error) {
