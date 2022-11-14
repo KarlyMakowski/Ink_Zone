@@ -19,18 +19,22 @@ export const Chat = () => {
     window.scrollTo(0, 0);
   });
 
-  return (
-    <div className="chat-view">
-      <div className="chat-info">
-        <span>Brandom</span>
-        <div className="chat-icons">
-          <MdVideocam />
-          <MdPersonAddAlt1 />
-          <MdOutlineMoreHoriz />
+  if (store.user.uid) {
+    return (
+      <div className="chat-view">
+        <div className="chat-info">
+          <span>{store.user.displayName}</span>
+          <div className="chat-icons">
+            <MdVideocam />
+            <MdPersonAddAlt1 />
+            <MdOutlineMoreHoriz />
+          </div>
         </div>
+        <Messages />
+        <Input />
       </div>
-      <Messages />
-      <Input />
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };
