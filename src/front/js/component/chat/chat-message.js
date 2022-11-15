@@ -5,8 +5,8 @@ import "../../../styles/chat.css";
 
 export const Message = (props) => {
   const ref = useRef();
-  const { senderId, text, dateTime } = props
-  const { store: { currentUser, user } } = useContext(Context);
+  const { senderId, text, dateTime } = props;
+  const { store } = useContext(Context);
 
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
@@ -15,18 +15,24 @@ export const Message = (props) => {
   return (
     <div
       ref={ref}
-      className={`message ${senderId === currentUser.uid && "owner"}`}
+      className={`message ${senderId === store.currentUser.uid && "owner"}`}
     >
       <div className="messageInfo">
         <img
           src={
-            senderId === currentUser.uid
-              ? currentUser.photoURL
-              : user.photoURL
+            senderId === store.currentUser.uid
+              ? store.currentUser.picture
+              : store.user.photoURL
           }
           alt=""
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
         />
-        <span>{dateTime.seconds}</span>
+        {/* <span>Just now</span> */}
       </div>
       <div className="messageContent">
         <p>{text}</p>

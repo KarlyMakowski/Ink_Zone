@@ -1,17 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-  updateDoc,
-  serverTimestamp,
-  getDoc,
-  orderBy,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../google-auth";
 
 import "../../../styles/chat.css";
@@ -19,7 +8,7 @@ import "../../../styles/chat.css";
 import { BiSearchAlt } from "react-icons/bi";
 
 export const Search = () => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -44,9 +33,8 @@ export const Search = () => {
     e.key === "Enter" && searchUser();
   };
 
-  const selectUser = async () => {  
+  const selectUser = async () => {
     actions.getUser(username);
-    
     setUsername("");
   };
 
