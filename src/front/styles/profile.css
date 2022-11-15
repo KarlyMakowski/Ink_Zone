@@ -24,8 +24,9 @@
 
 .profile-card-body img {
   margin-top: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
   border-radius: 50%;
+  outline: 5px solid rgba(255, 255, 255, 0.5);
   object-fit: cover;
   width: 200px;
   height: 200px;

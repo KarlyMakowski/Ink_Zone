@@ -6,7 +6,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import "../../../styles/chat.css";
 
 export const Chats = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   const [chats, setChats] = useState([]);
 

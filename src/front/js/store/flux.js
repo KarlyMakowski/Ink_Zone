@@ -19,8 +19,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       currentUser: null,
       user: {},
-      chatId: null,
-      messages: [],
       experts: [],
       stylesPublish: [],
       multipleFiles: [],
@@ -33,40 +31,6 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
-      getUser: async (username) => {
-        console.log(username);
-        const response = await fetch(
-          process.env.BACKEND_URL + `/api/user-search/${username}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const user = await response.json();
-        console.log("user", user);
-        setStore({ user });
-        getActions().loadChat(user);
-      },
-
-      loadChat: async (user) => {
-        const { currentUser } = getStore();
-        const q = query(
-          collection(db, "chats"),
-          where("senderId", "==", currentUser.uid),
-          where("receiverId", "==", user.uid)
-          // orderBy('dateTime', 'asc')
-        );
-        const querySnapshot = await getDocs(q);
-        let chat = [];
-        querySnapshot.forEach((doc) => {
-          chat = [...chat, doc.data()];
-        });
-        console.log("chat", chat);
-        setStore({ chat });
-      },
-
       signup: async (e, navigate) => {
         e.preventDefault();
         const { username, email, password, confirmPassword, role } = getStore();
@@ -672,6 +636,40 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log("Error loading message from backend", error);
         }
+      },
+
+      getUser: async (username) => {
+        console.log(username);
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/user-search/${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const user = await response.json();
+        console.log("user", user);
+        setStore({ user });
+        getActions().loadChat(user);
+      },
+
+      loadChat: async (user) => {
+        const { currentUser } = getStore();
+        const q = query(
+          collection(db, "chats"),
+          where("senderId", "==", currentUser.uid),
+          where("receiverId", "==", user.uid)
+          // orderBy('dateTime', 'asc')
+        );
+        const querySnapshot = await getDocs(q);
+        let chat = [];
+        querySnapshot.forEach((doc) => {
+          chat = [...chat, doc.data()];
+        });
+        console.log("chat", chat);
+        setStore({ chat });
       },
 
       loadExperts: () => {

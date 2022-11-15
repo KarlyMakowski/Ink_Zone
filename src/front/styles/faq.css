@@ -156,7 +156,13 @@
 
 @media (min-width: 1300px) {
   .faq-container {
-    margin: auto;
+    margin: 7rem auto 0;
     padding-bottom: 29em;
   }
+}
+
+@media (max-width: 3000px) {
+  .faq-container {
+    padding-bottom: 34rem;
+  }  
 }

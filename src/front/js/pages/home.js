@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
 
@@ -8,8 +7,6 @@ import { AboutUs } from "../component/about-us";
 import video from "-!file-loader!../../img/tattoo-bg.mp4";
 
 export const Home = () => {
-  const { actions, store } = useContext(Context);
-
   const videoEl = useRef(video);
 
   useEffect(() => {

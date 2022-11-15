@@ -349,3 +349,11 @@
     font-size: 2.1em;
   }
 }
+
+@media (max-width: 3000px) {
+  .contact-us {
+    width: 70%;
+    margin: auto;
+    padding-bottom: 14rem;
+  }
+}

@@ -17,7 +17,7 @@ export const Message = (props) => {
       ref={ref}
       className={`message ${senderId === store.currentUser.uid && "owner"}`}
     >
-      <div className="messageInfo">
+      <div className="message-info">
         <img
           src={
             senderId === store.currentUser.uid
@@ -25,16 +25,10 @@ export const Message = (props) => {
               : store.user.photoURL
           }
           alt=""
-          style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
         />
         {/* <span>Just now</span> */}
       </div>
-      <div className="messageContent">
+      <div className="message-content">
         <p>{text}</p>
       </div>
     </div>
